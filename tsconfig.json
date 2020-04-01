@@ -6,6 +6,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
+    "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "esModuleInterop": true

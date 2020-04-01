@@ -14,17 +14,17 @@ A [storybook](https://storybook.js.org/) developer companion to help better unde
 
 ```bash
 # yarn
-yarn add @atlaskit/storybook-addon-performance --dev
+yarn add storybook-addon-performance --dev
 
 # npm
-npm install @atlaskit/storybook-addon-performance --save-dev
+npm install storybook-addon-performance --save-dev
 ```
 
 2. Register the addon in `.storybook/main.js`
 
 ```js
 module.exports = {
-  addons: ['@atlaskit/storybook-addon-performance/register'],
+  addons: ['storybook-addon-performance/register'],
 };
 ```
 
@@ -34,7 +34,7 @@ You can either add the decorator globally to every story in `.storybook/preview.
 
 ```js
 import { addDecorator } from '@storybook/react';
-import { addPerformance } from '@atlaskit/storybook-addon-performance';
+import { addPerformance } from 'storybook-addon-performance';
 
 addDecorator(addPerformance);
 ```
@@ -45,7 +45,7 @@ Or you can add it to individual stories:
 
 ```js
 import MyComponent from './MyComponent';
-import addPerformance from '@atlaskit/storybook-addon-performance/decorator';
+import addPerformance from 'storybook-addon-performance/decorator';
 
 export default {
   title: 'MyComponent',
@@ -58,7 +58,7 @@ export default {
 
 ```js
 import MyComponent from './MyComponent';
-import addPerformance from '@atlaskit/storybook-addon-performance/decorator';
+import addPerformance from 'storybook-addon-performance/decorator';
 
 storiesOf('MyComponent', module)
   .addDecorator(addPerformance)

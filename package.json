@@ -17,12 +17,27 @@
     "/src"
   ],
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "@storybook/addons": "^5.3.18",
+    "@storybook/components": "^5.3.18",
+    "@xstate/react": "^0.8.1",
+    "gzip-js": "^0.3.2",
+    "tiny-invariant": "^1.1.0",
+    "xstate": "^4.8.0"
+  },
   "devDependencies": {
+    "@storybook/react": "^5.3.18",
+    "@types/gzip-js": "^0.3.1",
+    "@types/react": "^16.9.31",
+    "@types/react-dom": "^16.9.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "typescript": "^3.8.3"
   },
   "config": {
     "prettier_target": "src/**/*.{ts,js,jsx,md,json} test/**/*.{ts,js,jsx,md,json}"
   },
-  "scripts": {}
+  "scripts": {
+    "typescript:watch": "tsc --outDir ./dist --watch"
+  }
 }

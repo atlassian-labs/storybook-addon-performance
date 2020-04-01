@@ -36,14 +36,17 @@ export default function Topbar() {
   return (
     <Container>
       <Item>
-        <Button
-          primary
-          small
-          onClick={() => send({ type: 'START_ALL' })}
-          disabled={disabled.start}
-        >
-          START ALL
-        </Button>
+        {
+          // @ts-ignore
+          <Button
+            primary
+            small
+            onClick={() => send({ type: 'START_ALL' })}
+            disabled={disabled.start}
+          >
+            START ALL
+          </Button>
+        }
       </Item>
       <Item>
         {
@@ -91,16 +94,19 @@ export default function Topbar() {
         }
       </Item>
       <Item>
-        <Button
-          secondary
-          small
-          outline
-          disabled={disabled.pin}
-          onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-        >
-          <Icons icon={pinned ? 'unlock' : 'lock'} />
-          {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-        </Button>
+        {
+          // @ts-ignore
+          <Button
+            secondary
+            small
+            outline
+            disabled={disabled.pin}
+            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+          >
+            <Icons icon={pinned ? 'unlock' : 'lock'} />
+            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
+          </Button>
+        }
       </Item>
     </Container>
   );

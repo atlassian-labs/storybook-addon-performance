@@ -1,15 +1,15 @@
 import React from 'react';
 function App() {
-  return <div>My cool component</div>
+  return <div>My cool component</div>;
 }
 
 export default {
   title: 'App',
 };
 
-export const app = () => <App />
+export const app = () => <App />;
 
-button.story = {
+app.story = {
   parameters: {
     performance: {
       interactions: [

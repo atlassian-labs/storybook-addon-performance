@@ -9,7 +9,8 @@
     "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["src/", "test/"]
 }

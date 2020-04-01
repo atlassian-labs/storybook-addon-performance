@@ -34,9 +34,9 @@ You can either add the decorator globally to every story in `.storybook/preview.
 
 ```js
 import { addDecorator } from '@storybook/react';
-import { addPerformance } from 'storybook-addon-performance';
+import { withPerformance } from 'storybook-addon-performance';
 
-addDecorator(addPerformance);
+addDecorator(withPerformance);
 ```
 
 Or you can add it to individual stories:
@@ -45,12 +45,12 @@ Or you can add it to individual stories:
 
 ```js
 import MyComponent from './MyComponent';
-import addPerformance from 'storybook-addon-performance/decorator';
+import { withPerformance } from 'storybook-addon-performance';
 
 export default {
   title: 'MyComponent',
   component: MyComponent,
-  decorators: [addPerformance],
+  decorators: [withPerformance],
 };
 ```
 
@@ -58,10 +58,10 @@ export default {
 
 ```js
 import MyComponent from './MyComponent';
-import addPerformance from 'storybook-addon-performance/decorator';
+import { withPerformance } from 'storybook-addon-performance';
 
 storiesOf('MyComponent', module)
-  .addDecorator(addPerformance)
+  .addDecorator(withPerformance)
   .add('MyComponent', () => <MyComponent />);
 ```
 

@@ -1,0 +1,19 @@
+# editors
+.idea
+.vscode
+
+# library
+node_modules/
+
+# MacOS
+.DS_Store
+
+# generated files
+dist/
+
+# editors
+.idea
+.vscode
+
+# yard
+yarn-error.log

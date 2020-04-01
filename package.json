@@ -1,0 +1,28 @@
+{
+  "name": "storybook-performance-addon",
+  "version": "0.1.0",
+  "description": "A storybook addon to help better understand and debug performance for React components",
+  "main": "dist/storybook-performance-addon.cjs.js",
+  "types": "dist/storybook-performance-addon.d.ts",
+  "module": "dist/storybook-performance-addon.esm.js",
+  "sideEffects": false,
+  "author": "Atlassian Pty Ltd",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexreardon/memoize-one.git"
+  },
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "config": {
+    "prettier_target": "src/**/*.{ts,js,jsx,md,json} test/**/*.{ts,js,jsx,md,json}"
+  },
+  "scripts": {}
+}

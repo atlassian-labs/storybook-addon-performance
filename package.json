@@ -51,11 +51,12 @@
     "typescript:watch": "tsc --outDir ./dist --watch",
     "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
+    "typescript:check": "yarn tsc --noEmit",
+    "typescript:build": "tsc ./src/index.ts --emitDeclarationOnly --declaration --outDir ./dist",
     "test": "yarn jest",
-    "build": "yarn build:clean && yarn build:dist && yarn build:typescript",
+    "build": "yarn build:clean && yarn build:dist && yarn typescript:build",
     "build:clean": "rimraf dist",
     "build:dist": "rollup -c",
-    "build:typescript": "tsc ./src/index.ts --emitDeclarationOnly --declaration --outDir ./dist",
     "prepublishOnly": "yarn build"
   }
 }

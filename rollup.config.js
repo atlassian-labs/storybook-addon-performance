@@ -3,7 +3,7 @@ import typescript from 'rollup-plugin-typescript';
 import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
-const input = 'src/storybook-addon-performance.ts';
+const input = 'src/index.ts';
 const umdName = 'storybookAddonPerformance';
 
 export default [

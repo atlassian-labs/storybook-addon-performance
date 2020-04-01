@@ -1,5 +1,5 @@
 function waitForFrame(): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     requestAnimationFrame(() => resolve());
   });
 }

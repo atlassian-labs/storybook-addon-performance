@@ -14,9 +14,7 @@ export function timedTask(args: Omit<TimedTask, 'taskId' | 'type'>): TimedTask {
   };
 }
 
-export function staticTask(
-  args: Omit<StaticTask, 'taskId' | 'type'>,
-): StaticTask {
+export function staticTask(args: Omit<StaticTask, 'taskId' | 'type'>): StaticTask {
   return {
     taskId: getUniqueId(),
     type: 'static',

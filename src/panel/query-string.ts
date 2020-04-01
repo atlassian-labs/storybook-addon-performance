@@ -9,11 +9,7 @@ export function setPinned(pinned: RunContext): void {
     console.error('pinned query string already set!');
     return;
   }
-  history.replaceState(
-    null,
-    '',
-    `${window.location.search}&pinned=${JSON.stringify(pinned)}`,
-  );
+  history.replaceState(null, '', `${window.location.search}&pinned=${JSON.stringify(pinned)}`);
 }
 
 export function getPinned(): Nullable<RunContext> {

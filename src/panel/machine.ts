@@ -30,23 +30,11 @@ export type MachineSchema = {
 
 export type StateType = State<MachineContext, MachineEvents, MachineSchema>;
 
-export type ServiceType = Interpreter<
-  MachineContext,
-  MachineSchema,
-  MachineEvents
->;
+export type ServiceType = Interpreter<MachineContext, MachineSchema, MachineEvents>;
 
-export type MachineType = StateMachine<
-  MachineContext,
-  MachineSchema,
-  MachineEvents
->;
+export type MachineType = StateMachine<MachineContext, MachineSchema, MachineEvents>;
 
-const machine: MachineType = Machine<
-  MachineContext,
-  MachineSchema,
-  MachineEvents
->({
+const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvents>({
   id: 'panel',
   initial: 'idle',
   context: {
@@ -98,7 +86,7 @@ const machine: MachineType = Machine<
           },
           // Doing this syntax as the following gives a typescript error
           // assign({ pinned: () => null })
-          actions: assign(context => {
+          actions: assign((context) => {
             return {
               ...context,
               pinned: null,

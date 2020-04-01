@@ -3,10 +3,7 @@ import runTimedTask from './run-timed-task';
 import { asyncMap } from './async';
 
 function getAverage(values: number[]): number {
-  return (
-    values.reduce((total: number, current: number) => total + current, 0) /
-    values.length
-  );
+  return values.reduce((total: number, current: number) => total + current, 0) / values.length;
 }
 
 function getStandardDeviation(average: number, values: number[]): number {
@@ -14,9 +11,7 @@ function getStandardDeviation(average: number, values: number[]): number {
   // Precomputed
 
   // Step 2: Subtract the average and square the result
-  const squaredDifferences: number[] = values.map(
-    (value: number) => (value - average) ** 2,
-  );
+  const squaredDifferences: number[] = values.map((value: number) => (value - average) ** 2);
 
   // Step 3: Get average of squared differences
   const squareDifferenceAverage: number = getAverage(squaredDifferences);
@@ -68,10 +63,7 @@ export default async function runTimedTaskRepeatedly({
   });
 
   const average: number = getAverage(durations);
-  const { upperPercentage, lowerPercentage } = getUpperAndLower(
-    average,
-    durations,
-  );
+  const { upperPercentage, lowerPercentage } = getUpperAndLower(average, durations);
   const standardDeviation: number = getStandardDeviation(average, durations);
 
   const result: TimedResult = {

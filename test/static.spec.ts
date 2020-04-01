@@ -5,9 +5,7 @@ import { staticTask } from '../../tasks/create';
 it('should run static tests', async () => {
   const ourGetNode = () => null;
   const returnValue: string = 'hello old friend';
-  const runMock = jest
-    .fn()
-    .mockImplementation(() => Promise.resolve(returnValue));
+  const runMock = jest.fn().mockImplementation(() => Promise.resolve(returnValue));
 
   const task: StaticTask = staticTask({
     description: 'task',

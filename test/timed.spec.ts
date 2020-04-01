@@ -1,11 +1,6 @@
-import {
-  TaskGroup,
-  TimedTask,
-  TaskGroupResult,
-  RunTimedTaskArgs,
-} from '../../types';
-import { runAll } from '../../task-runner/runner';
-import { timedTask } from '../../tasks/create';
+import { TaskGroup, TimedTask, TaskGroupResult, RunTimedTaskArgs } from '../src/types';
+import { runAll } from '../src/task-runner/runner';
+import { timedTask } from '../src/tasks/create';
 
 it('should run timed tests', async () => {
   const ourGetNode = () => null;
@@ -14,8 +9,7 @@ it('should run timed tests', async () => {
   const task: TimedTask = timedTask({
     name: 'task',
     description: 'task',
-    run: ({ getElement }: RunTimedTaskArgs) =>
-      Promise.resolve().then(() => mock(getElement)),
+    run: ({ getElement }: RunTimedTaskArgs) => Promise.resolve().then(() => mock(getElement)),
   });
   const group: TaskGroup = {
     groupId: 'group-1',

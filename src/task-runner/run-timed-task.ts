@@ -10,10 +10,7 @@ async function getDuration(fn: () => Promise<void>): Promise<number> {
 
 type TimedArgs = { task: TimedTask; getElement: () => React.ReactElement };
 
-export default async function runTimedTask({
-  task,
-  getElement,
-}: TimedArgs): Promise<number> {
+export default async function runTimedTask({ task, getElement }: TimedArgs): Promise<number> {
   let timedDuration: Nullable<number> = null;
 
   const controls: TimedTaskControls = {

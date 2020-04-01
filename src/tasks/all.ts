@@ -9,12 +9,13 @@ const flatten = <T>(lists: T[][]): T[] => {
   return Array.prototype.concat.apply([], lists);
 };
 
-const tasks: TaskMap = flatten(
-  groups.map(group => [...group.static, ...group.timed]),
-).reduce((acc: TaskMap, item: TimedTask | StaticTask) => {
-  acc[item.taskId] = item;
-  return acc;
-}, {});
+const tasks: TaskMap = flatten(groups.map((group) => [...group.static, ...group.timed])).reduce(
+  (acc: TaskMap, item: TimedTask | StaticTask) => {
+    acc[item.taskId] = item;
+    return acc;
+  },
+  {},
+);
 
 export default {
   groups,

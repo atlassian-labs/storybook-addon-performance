@@ -65,4 +65,18 @@ storiesOf('MyComponent', module)
   .add('MyComponent', () => <MyComponent />);
 ```
 
+## Local addon development
+
+```bash
+# Start the typescript watcher and a local storybook:
+yarn dev
+
+# Start just the typescript watcher
+# This is needed as storybook does not compile addons
+yarn typescript:watch
+
+# Start the local storybook
+yarn storybook:dev
+```
+
 Made with ❤️ by your friends at [Atlassian](https://www.atlassian.com/)

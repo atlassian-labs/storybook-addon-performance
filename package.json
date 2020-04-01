@@ -55,6 +55,7 @@
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:build": "tsc ./src/index.ts --emitDeclarationOnly --declaration --outDir ./dist",
+    "dev": "yarn typescript:watch && yarn storybook:dev",
     "test": "yarn jest",
     "build": "yarn build:clean && yarn build:dist && yarn typescript:build",
     "build:clean": "rimraf dist",

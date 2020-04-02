@@ -20,7 +20,7 @@ function getStandardDeviation(average: number, values: number[]): number {
   return Math.sqrt(squareDifferenceAverage);
 }
 
-function getVarianceFrom(relativeTo: number, target: number): number {
+function getDifferenceFrom(relativeTo: number, target: number): number {
   // we want the raw difference between the base and target
   const diff: number = Math.abs(target - relativeTo);
   return (diff / relativeTo) * 100;
@@ -35,8 +35,8 @@ function getUpperAndLower(
   const highest: number = ordered[ordered.length - 1];
 
   return {
-    lowerPercentage: getVarianceFrom(average, lowest),
-    upperPercentage: getVarianceFrom(average, highest),
+    lowerPercentage: getDifferenceFrom(average, lowest),
+    upperPercentage: getDifferenceFrom(average, highest),
   };
 }
 

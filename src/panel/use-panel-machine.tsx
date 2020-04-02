@@ -69,6 +69,11 @@ export default function usePanelMachine(machine: MachineType) {
       service.send('FINISH', { results });
     }
 
+    function unbindFinishEvents() {
+      channel.off(eventNames.FINISH_ONE, finishOne);
+      channel.off(eventNames.FINISH_ALL, finishAll);
+    }
+
     const unsubscribable = service.subscribe(
       // @ts-ignore: unknown second event argument in type. This is fixed in master
       function next(state: StateType, event: MachineEvents | undefined) {
@@ -83,8 +88,7 @@ export default function usePanelMachine(machine: MachineType) {
 
         // We are effectively aborting these calls
         if (event.type === 'WAIT') {
-          channel.off(eventNames.FINISH_ONE, finishOne);
-          channel.off(eventNames.FINISH_ALL, finishAll);
+          unbindFinishEvents();
           return;
         }
 
@@ -121,7 +125,10 @@ export default function usePanelMachine(machine: MachineType) {
         }
       },
     );
-    return unsubscribable.unsubscribe;
+    return function unsubscribe() {
+      unbindFinishEvents();
+      unsubscribable.unsubscribe();
+    };
   }, [service]);
 
   return { state, send, service };

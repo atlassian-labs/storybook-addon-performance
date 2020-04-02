@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeDecorator } from '@storybook/addons';
-import Runner from './runner';
+import TaskHarness from './task-harness';
 import * as constants from '../addon-constants';
 
 console.log('ADDING PERFORMANCE DECORATOR!');
@@ -18,6 +18,6 @@ export default makeDecorator({
     // setInterval(() => console.log('it\s time'), 1000);
     // we can also add subscriptions here using channel.on('eventName', callback);
 
-    return <Runner getNode={() => getStory(context)} />;
+    return <TaskHarness getNode={() => getStory(context)} />;
   },
 });

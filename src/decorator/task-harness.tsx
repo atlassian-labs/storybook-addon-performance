@@ -31,13 +31,10 @@ function bindAll(channel: Channel, bindings: Binding[]) {
   };
 }
 
-export default function Runner({ getNode }: Props) {
+export default function TaskHarness({ getNode }: Props) {
   // channel will have a stable reference across run
   // @ts-ignore
   const channel: Channel = addons.getChannel();
-  console.log('decorator events', channel.eventNames());
-
-  // console.log('parameter value', value);
 
   useEffect(
     function setup() {

@@ -55,117 +55,133 @@ const initial: MachineContext = {
   pinned: null,
 };
 
-const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvents>({
-  id: 'panel',
-  initial: 'waiting',
-  context: initial,
-  states: {
-    waiting: {
-      // always reset to initial context
-      entry: assign(() => initial),
-      on: {
-        LOADED: {
-          target: 'active',
-          actions: assign(
-            (context, event): MachineContext => {
-              const message: Nullable<string> = event.pinned
-                ? `Loaded pinned result for story: ${event.storyName}`
-                : null;
-              return {
-                ...context,
-                message,
-                pinned: event.pinned,
-                storyName: event.storyName,
-                current: event.pinned || context.current,
-              };
-            },
-          ),
-        },
-      },
-    },
-    active: {
-      id: 'active',
-      initial: 'idle',
-      on: {
-        WAIT: '#panel.waiting',
-      },
-      states: {
-        idle: {
-          on: {
-            // TODO
-            // LOAD: 'idle',
-            START_ALL: 'running',
-            START_ONE: 'running',
-            SET_VALUES: {
-              internal: true,
-              target: 'idle',
-              cond: (context): boolean => {
-                return context.pinned == null;
-              },
-              actions: assign({
-                current: (context, event) => {
-                  return {
-                    // clearing results as they are now invalid
-                    results: null,
-                    storyName: context.storyName,
-                    samples: event.samples,
-                    copies: event.copies,
-                  };
-                },
-              }),
-            },
-            PIN: {
-              internal: true,
-              target: 'idle',
-              // Only allow pinning when there are results
-              cond: (context): boolean => {
-                return context.current.results != null;
-              },
-              actions: assign((context) => {
+const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvents>(
+  {
+    id: 'panel',
+    initial: 'waiting',
+    context: initial,
+    states: {
+      waiting: {
+        // always reset to initial context
+        entry: assign(() => initial),
+        on: {
+          LOADED: {
+            target: 'active',
+            actions: assign(
+              (context, event): MachineContext => {
+                const message: Nullable<string> = event.pinned
+                  ? `Loaded pinned result for story: ${event.storyName}`
+                  : null;
                 return {
                   ...context,
-                  pinned: context.current,
-                  message: 'Result pinned',
+                  message,
+                  pinned: event.pinned,
+                  storyName: event.storyName,
+                  current: event.pinned || context.current,
                 };
-              }),
-            },
-            UNPIN: {
-              internal: true,
-              target: 'idle',
-              cond: (context): boolean => {
-                return context.pinned != null;
               },
-              // Doing this syntax as the following gives a typescript error
-              // assign({ pinned: () => null })
-              actions: assign((context) => {
-                return {
-                  ...context,
-                  pinned: null,
-                  message: 'Pinned result removed',
-                };
-              }),
-            },
+            ),
           },
         },
-        running: {
-          on: {
-            FINISH: {
-              target: 'idle',
-              actions: assign({
-                current: (context, event): RunContext => {
-                  const current: RunContext = {
-                    ...context.current,
-                    results: event.results,
-                  };
-                  return current;
+      },
+      active: {
+        id: 'active',
+        initial: 'idle',
+        on: {
+          WAIT: '#panel.waiting',
+        },
+        states: {
+          idle: {
+            exit: 'clearMessage',
+            on: {
+              // TODO
+              // LOAD: 'idle',
+              START_ALL: 'running',
+              START_ONE: 'running',
+              SET_VALUES: {
+                internal: true,
+                target: 'idle',
+                cond: (context): boolean => {
+                  return context.pinned == null;
                 },
-              }),
+                actions: [
+                  'clearMessage',
+                  assign({
+                    current: (context, event) => {
+                      return {
+                        // clearing results as they are now invalid
+                        results: null,
+                        storyName: context.storyName,
+                        samples: event.samples,
+                        copies: event.copies,
+                      };
+                    },
+                  }),
+                ],
+              },
+              PIN: {
+                internal: true,
+                target: 'idle',
+                // Only allow pinning when there are results
+                cond: (context): boolean => {
+                  return context.current.results != null;
+                },
+                actions: assign((context) => {
+                  return {
+                    ...context,
+                    pinned: context.current,
+                    message: 'Result pinned',
+                  };
+                }),
+              },
+              UNPIN: {
+                internal: true,
+                target: 'idle',
+                cond: (context): boolean => {
+                  return context.pinned != null;
+                },
+                // Doing this syntax as the following gives a typescript error
+                // assign({ pinned: () => null })
+                actions: assign((context) => {
+                  return {
+                    ...context,
+                    pinned: null,
+                    message: 'Pinned result removed',
+                  };
+                }),
+              },
+            },
+          },
+          running: {
+            on: {
+              FINISH: {
+                target: 'idle',
+                actions: assign({
+                  current: (context, event): RunContext => {
+                    const current: RunContext = {
+                      ...context.current,
+                      results: event.results,
+                    };
+                    return current;
+                  },
+                }),
+              },
             },
           },
         },
       },
     },
   },
-});
+  {
+    actions: {
+      clearMessage: assign((context) => {
+        return {
+          ...context,
+          message: null,
+        };
+      }),
+    },
+  },
+);
 
 export default machine;

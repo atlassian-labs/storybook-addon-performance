@@ -60,7 +60,6 @@ const Name = styled.h4`
   flex-shrink: 1;
   font-weight: bold;
 
-  /* TODO: this is currently not working */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

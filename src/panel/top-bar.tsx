@@ -11,10 +11,19 @@ import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 const Container = styled.div`
   display: flex;
   align-items: center;
+
+  > * {
+    margin: var(--halfGrid) !important;
+    flex-shrink: 0;
+  }
 `;
 
-const Item = styled.div`
-  margin: var(--halfGrid);
+const Message = styled.small`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 1;
+  flex-grow: 1;
 `;
 
 type BooleanMap = {
@@ -38,82 +47,67 @@ export default function Topbar() {
 
   return (
     <Container>
-      <Item>
-        {
-          // @ts-ignore
-          <Button
-            primary
-            small
-            onClick={() => send({ type: 'START_ALL' })}
-            disabled={!enabled.start}
+      {
+        // @ts-ignore
+        <Button primary small onClick={() => send({ type: 'START_ALL' })} disabled={!enabled.start}>
+          START ALL
+        </Button>
+      }
+      {
+        // @ts-ignore
+        <Form.Select
+          disabled={!enabled.change}
+          value={current.copies}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+            const values = {
+              samples: current.samples,
+              copies: Number(event.target.value),
+            };
+            send('SET_VALUES', values);
+          }}
+        >
+          {sizes.map((size: number) => (
+            <option key={size} value={size}>
+              {size} {pluraliseCopies(size)}
+            </option>
+          ))}
+        </Form.Select>
+      }
+      {
+        // @ts-ignore
+        <Form.Select
+          disabled={!enabled.change}
+          value={current.samples}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+            const values = {
+              copies: current.copies,
+              samples: Number(event.target.value),
+            };
+            send('SET_VALUES', values);
+          }}
+        >
           >
-            START ALL
-          </Button>
-        }
-      </Item>
-      <Item>
-        {
-          // @ts-ignore
-          <Form.Select
-            disabled={!enabled.change}
-            value={current.copies}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              const values = {
-                samples: current.samples,
-                copies: Number(event.target.value),
-              };
-              send('SET_VALUES', values);
-            }}
-          >
-            {sizes.map((size: number) => (
-              <option key={size} value={size}>
-                {size} {pluraliseCopies(size)}
-              </option>
-            ))}
-          </Form.Select>
-        }
-      </Item>
-      <Item>
-        {
-          // @ts-ignore
-          <Form.Select
-            disabled={!enabled.change}
-            value={current.samples}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              const values = {
-                copies: current.copies,
-                samples: Number(event.target.value),
-              };
-              send('SET_VALUES', values);
-            }}
-          >
-            >
-            {sizes.map((size: number) => (
-              <option key={size} value={size}>
-                {size} {pluraliseSamples(size)}
-              </option>
-            ))}
-          </Form.Select>
-        }
-      </Item>
-      <Item>
-        {
-          // @ts-ignore
-          <Button
-            secondary
-            small
-            outline
-            disabled={!enabled.pin}
-            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-          >
-            <Icons icon={pinned ? 'unlock' : 'lock'} />
-            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-          </Button>
-        }
-      </Item>
-      <Item>
-        <small>{state.context.message}</small>
-      </Item>
+          {sizes.map((size: number) => (
+            <option key={size} value={size}>
+              {size} {pluraliseSamples(size)}
+            </option>
+          ))}
+        </Form.Select>
+      }
+      {
+        // @ts-ignore
+        <Button
+          secondary
+          small
+          outline
+          disabled={!enabled.pin}
+          onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+        >
+          <Icons icon={pinned ? 'unlock' : 'lock'} />
+          {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
+        </Button>
+      }
+      <Message>{state.context.message}</Message>
     </Container>
   );
 }

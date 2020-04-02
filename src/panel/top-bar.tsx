@@ -10,6 +10,7 @@ import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Item = styled.div`
@@ -27,11 +28,15 @@ export default function Topbar() {
   const pinned: Nullable<RunContext> = state.context.pinned;
   const sizes: number[] = state.context.sizes;
 
-  const disabled: BooleanMap = {
-    start: state.matches('running'),
-    change: state.matches('running') || Boolean(pinned),
-    pin: state.matches('running') || current.results == null,
+  console.log('pinned', pinned);
+
+  const enabled: BooleanMap = {
+    start: state.matches('idle'),
+    change: state.matches('idle') && pinned == null,
+    pin: state.matches('idle') && current.results != null,
   };
+
+  console.log('enabled', enabled);
 
   return (
     <Container>
@@ -42,7 +47,7 @@ export default function Topbar() {
             primary
             small
             onClick={() => send({ type: 'START_ALL' })}
-            disabled={disabled.start}
+            disabled={!enabled.start}
           >
             START ALL
           </Button>
@@ -52,7 +57,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Form.Select
-            disabled={disabled.change}
+            disabled={!enabled.change}
             value={current.copies}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const values = {
@@ -74,7 +79,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Form.Select
-            disabled={disabled.change}
+            disabled={!enabled.change}
             value={current.samples}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const values = {
@@ -100,13 +105,16 @@ export default function Topbar() {
             secondary
             small
             outline
-            disabled={disabled.pin}
+            disabled={!enabled.pin}
             onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
           >
             <Icons icon={pinned ? 'unlock' : 'lock'} />
             {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
           </Button>
         }
+      </Item>
+      <Item>
+        <small>{state.context.message}</small>
       </Item>
     </Container>
   );

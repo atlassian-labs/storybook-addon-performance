@@ -1,10 +1,13 @@
 import addons from '@storybook/addons';
-import { useStorybookApi } from '@storybook/api';
+import { useStorybookState } from '@storybook/api';
+// import { useStorybookApi } from '@storybook/api';
 import { useMachine } from '@xstate/react';
 import { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import { MachineType, StateType, MachineEvents } from './machine';
+import * as coreEvents from '@storybook/core-events';
+import { savePinned, clearPinned, getPinned } from './pinned-storage';
 
 type MergeArgs = {
   existing: TaskGroupResult[];
@@ -40,9 +43,14 @@ function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupRes
 
 export default function usePanelMachine(machine: MachineType) {
   const [state, send, service] = useMachine(machine);
-  const api = useStorybookApi();
-  // const service: Interpreter<MachineContext, MachineSchema, MachineEvents> =
-  //   output[2];
+
+  const channel = addons.getChannel();
+
+  useEffect(() => {
+    channel.on(coreEvents.STORY_RENDERED, (storyName: string) => {
+      service.send('LOAD', { storyName, pinned: getPinned(storyName) });
+    });
+  }, [channel]);
 
   useEffect(() => {
     const unsubscribable = service.subscribe(
@@ -52,12 +60,15 @@ export default function usePanelMachine(machine: MachineType) {
           return;
         }
         if (event.type === 'PIN') {
-          console.log('ON PIN: setting query params');
+          savePinned(state.context.storyName, state.context.current);
           // api.setQueryParams is currently not working https://github.com/storybookjs/storybook/issues/8600
           return;
         }
+        if (event.type === 'UNPIN') {
+          clearPinned(state.context.storyName);
+          return;
+        }
 
-        const channel = addons.getChannel();
         const { samples, copies } = state.context.current;
 
         if (state.value === 'running' && event.type === 'START_ALL') {

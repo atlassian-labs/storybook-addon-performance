@@ -55,6 +55,20 @@ export default function usePanelMachine(machine: MachineType) {
   }, [channel]);
 
   useEffect(() => {
+    function finishAll({ results }: RunAll['Results']) {
+      service.send('FINISH', { results });
+    }
+
+    function finishOne({ taskId, result }: RunOne['Result']) {
+      const results: TaskGroupResult[] = mergeWithResults({
+        // we are using a state machine guard to prevent this
+        existing: service.state.context.current.results!,
+        result,
+        taskId,
+      });
+      service.send('FINISH', { results });
+    }
+
     const unsubscribable = service.subscribe(
       // @ts-ignore: unknown second event argument in type. This is fixed in master
       function next(state: StateType, event: MachineEvents | undefined) {
@@ -66,6 +80,13 @@ export default function usePanelMachine(machine: MachineType) {
           return;
         }
         const { current, storyName } = state.context;
+
+        // We are effectively aborting these calls
+        if (event.type === 'WAIT') {
+          channel.off(eventNames.FINISH_ONE, finishOne);
+          channel.off(eventNames.FINISH_ALL, finishAll);
+          return;
+        }
 
         if (event.type === 'PIN') {
           savePinned(storyName, current);
@@ -81,9 +102,7 @@ export default function usePanelMachine(machine: MachineType) {
 
         if (state.matches('active.running')) {
           if (event.type === 'START_ALL') {
-            channel.once(eventNames.FINISH_ALL, ({ results }: RunAll['Results']) => {
-              service.send('FINISH', { results, storyName });
-            });
+            channel.once(eventNames.FINISH_ALL, finishAll);
             channel.emit(eventNames.START_ALL, {
               samples,
               copies,
@@ -92,15 +111,7 @@ export default function usePanelMachine(machine: MachineType) {
           }
 
           if (event.type === 'START_ONE') {
-            channel.once(eventNames.FINISH_ONE, ({ taskId, result }: RunOne['Result']) => {
-              const results: TaskGroupResult[] = mergeWithResults({
-                // we are using a state machine guard to prevent this
-                existing: current.results!,
-                result,
-                taskId,
-              });
-              service.send('FINISH', { results, storyName });
-            });
+            channel.once(eventNames.FINISH_ONE, finishOne);
             channel.emit(eventNames.START_ONE, {
               taskId: event.taskId,
               samples,

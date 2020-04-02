@@ -12,7 +12,6 @@ export default makeDecorator({
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
     // const channel = addons.getChannel();
-    console.log('WRAP THIS! 2');
 
     // Our API above sets the notes parameter to a string,
     // which we send to the channel

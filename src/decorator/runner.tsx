@@ -24,9 +24,7 @@ function bind(channel: Channel, binding: Binding) {
 }
 
 function bindAll(channel: Channel, bindings: Binding[]) {
-  const unbinds: Function[] = bindings.map((binding: Binding) =>
-    bind(channel, binding),
-  );
+  const unbinds: Function[] = bindings.map((binding: Binding) => bind(channel, binding));
 
   return function unbindAll() {
     unbinds.forEach((unbind: Function) => unbind());
@@ -57,11 +55,7 @@ export default function Runner({ getNode }: Props) {
         },
         {
           eventName: eventNames.START_ONE,
-          fn: async function onStartOne({
-            taskId,
-            copies,
-            samples,
-          }: RunOne['Params']) {
+          fn: async function onStartOne({ taskId, copies, samples }: RunOne['Params']) {
             const task = all.tasks[taskId];
             if (task == null) {
               throw new Error(`Could not find task with id: ${taskId}`);

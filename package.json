@@ -19,6 +19,7 @@
   "keywords": [],
   "dependencies": {
     "@storybook/addons": "^5.3.18",
+    "@storybook/api": "^5.3.18",
     "@storybook/components": "^5.3.18",
     "@storybook/theming": "^5.3.18",
     "@xstate/react": "1.0.0-rc.3",

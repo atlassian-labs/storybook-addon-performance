@@ -4,7 +4,7 @@
 <h1 align="center">storybook-addon-performance</h1>
 <div align="center">
 
-A [storybook](https://storybook.js.org/) developer companion to help better understand and debug performance for `React` components.
+A [storybook](https://storybook.js.org/) addon to help better understand and debug performance for `React` components.
 
 </div>
 

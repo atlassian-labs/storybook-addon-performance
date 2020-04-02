@@ -48,15 +48,21 @@ export default function usePanelMachine(machine: MachineType) {
 
   useEffect(() => {
     channel.on(coreEvents.STORY_RENDERED, (storyName: string) => {
-      service.send('LOAD', { storyName, pinned: getPinned(storyName) });
+      service.send('LOADED', { storyName, pinned: getPinned(storyName) });
     });
+
+    channel.on(coreEvents.STORY_CHANGED, () => service.send('WAIT'));
   }, [channel]);
 
   useEffect(() => {
     const unsubscribable = service.subscribe(
       // @ts-ignore: unknown second event argument in type. This is fixed in master
-      function next(state: StateType, event: MachineEvents) {
+      function next(state: StateType, event: MachineEvents | undefined) {
         if (!state.changed) {
+          return;
+        }
+        // This can happen on startup
+        if (!event) {
           return;
         }
         if (event.type === 'PIN') {
@@ -71,32 +77,34 @@ export default function usePanelMachine(machine: MachineType) {
 
         const { samples, copies } = state.context.current;
 
-        if (state.value === 'running' && event.type === 'START_ALL') {
-          channel.once(eventNames.FINISH_ALL, ({ results }: RunAll['Results']) =>
-            service.send('FINISH', { results }),
-          );
-          channel.emit(eventNames.START_ALL, {
-            samples,
-            copies,
-          });
-          return;
-        }
-
-        if (state.value === 'running' && event.type === 'START_ONE') {
-          channel.once(eventNames.FINISH_ONE, ({ taskId, result }: RunOne['Result']) => {
-            const results: TaskGroupResult[] = mergeWithResults({
-              // we are using a state machine guard to prevent this
-              existing: state.context.current.results!,
-              result,
-              taskId,
+        if (state.matches('active.running')) {
+          if (event.type === 'START_ALL') {
+            channel.once(eventNames.FINISH_ALL, ({ results }: RunAll['Results']) =>
+              service.send('FINISH', { results }),
+            );
+            channel.emit(eventNames.START_ALL, {
+              samples,
+              copies,
             });
-            service.send('FINISH', { results });
-          });
-          channel.emit(eventNames.START_ONE, {
-            taskId: event.taskId,
-            samples,
-            copies,
-          });
+            return;
+          }
+
+          if (event.type === 'START_ONE') {
+            channel.once(eventNames.FINISH_ONE, ({ taskId, result }: RunOne['Result']) => {
+              const results: TaskGroupResult[] = mergeWithResults({
+                // we are using a state machine guard to prevent this
+                existing: state.context.current.results!,
+                result,
+                taskId,
+              });
+              service.send('FINISH', { results });
+            });
+            channel.emit(eventNames.START_ONE, {
+              taskId: event.taskId,
+              samples,
+              copies,
+            });
+          }
         }
       },
     );

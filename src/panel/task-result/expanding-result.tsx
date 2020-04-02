@@ -38,7 +38,7 @@ const HeaderButton = styled.button<{ isExpanded: boolean }>`
   font-weight: bold;
   border-radius: var(--result-border-radius);
 
-  background-color: ${props => props.theme.background.content};
+  background-color: ${(props) => props.theme.background.content};
 
   display: flex;
   align-items: center;
@@ -81,9 +81,7 @@ function ExpandIcon({ isExpanded }: ExpandedArgs) {
 
 export function ExpandingResult({ taskId, name, result, getExpanded }: Props) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const toggle = useCallback(() => setIsExpanded(value => !value), [
-    setIsExpanded,
-  ]);
+  const toggle = useCallback(() => setIsExpanded((value) => !value), [setIsExpanded]);
   const service = useRequiredContext(ServiceContext);
   const [state, send] = useService(service);
 
@@ -104,13 +102,12 @@ export function ExpandingResult({ taskId, name, result, getExpanded }: Props) {
             <Button
               secondary
               small
-              disabled={state.matches('running')}
+              disabled={state.matches('active.running')}
               onClick={() => send({ type: 'START_ONE', taskId })}
             >
               Run task{' '}
               <small>
-                ({copies} {pluraliseCopies(copies)}, {samples}{' '}
-                {pluraliseSamples(samples)})
+                ({copies} {pluraliseCopies(copies)}, {samples} {pluraliseSamples(samples)})
               </small>
             </Button>
           }

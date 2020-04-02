@@ -28,15 +28,13 @@ export default function Topbar() {
   const pinned: Nullable<RunContext> = state.context.pinned;
   const sizes: number[] = state.context.sizes;
 
-  console.log('pinned', pinned);
+  const isIdle: boolean = state.matches('active.idle');
 
   const enabled: BooleanMap = {
-    start: state.matches('idle'),
-    change: state.matches('idle') && pinned == null,
-    pin: state.matches('idle') && current.results != null,
+    start: isIdle,
+    change: isIdle && pinned == null,
+    pin: isIdle && current.results != null,
   };
-
-  console.log('enabled', enabled);
 
   return (
     <Container>

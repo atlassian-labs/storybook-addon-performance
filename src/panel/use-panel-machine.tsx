@@ -65,23 +65,25 @@ export default function usePanelMachine(machine: MachineType) {
         if (!event) {
           return;
         }
+        const { current, storyName } = state.context;
+
         if (event.type === 'PIN') {
-          savePinned(state.context.storyName, state.context.current);
+          savePinned(storyName, current);
           // api.setQueryParams is currently not working https://github.com/storybookjs/storybook/issues/8600
           return;
         }
         if (event.type === 'UNPIN') {
-          clearPinned(state.context.storyName);
+          clearPinned(storyName);
           return;
         }
 
-        const { samples, copies } = state.context.current;
+        const { samples, copies } = current;
 
         if (state.matches('active.running')) {
           if (event.type === 'START_ALL') {
-            channel.once(eventNames.FINISH_ALL, ({ results }: RunAll['Results']) =>
-              service.send('FINISH', { results }),
-            );
+            channel.once(eventNames.FINISH_ALL, ({ results }: RunAll['Results']) => {
+              service.send('FINISH', { results, storyName });
+            });
             channel.emit(eventNames.START_ALL, {
               samples,
               copies,
@@ -93,11 +95,11 @@ export default function usePanelMachine(machine: MachineType) {
             channel.once(eventNames.FINISH_ONE, ({ taskId, result }: RunOne['Result']) => {
               const results: TaskGroupResult[] = mergeWithResults({
                 // we are using a state machine guard to prevent this
-                existing: state.context.current.results!,
+                existing: current.results!,
                 result,
                 taskId,
               });
-              service.send('FINISH', { results });
+              service.send('FINISH', { results, storyName });
             });
             channel.emit(eventNames.START_ONE, {
               taskId: event.taskId,

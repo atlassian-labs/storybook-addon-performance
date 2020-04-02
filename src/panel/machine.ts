@@ -6,7 +6,7 @@ export type MachineEvents =
   | { type: 'LOADED'; storyName: string; pinned: Nullable<RunContext> }
   | { type: 'START_ALL' }
   | { type: 'START_ONE'; taskId: string }
-  | { type: 'FINISH'; results: TaskGroupResult[] }
+  | { type: 'FINISH'; results: TaskGroupResult[]; storyName: string }
   | { type: 'PIN' }
   | { type: 'UNPIN' }
   | { type: 'SET_VALUES'; copies: number; samples: number };
@@ -151,6 +151,10 @@ const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvent
           on: {
             FINISH: {
               target: 'idle',
+              cond: (context, event): boolean => {
+                // a finish event might come back after the story has already changed
+                return event.storyName === context.storyName;
+              },
               actions: assign({
                 current: (context, event): RunContext => {
                   const current: RunContext = {

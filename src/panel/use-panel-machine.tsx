@@ -1,11 +1,13 @@
 import addons from '@storybook/addons';
 import { useMachine } from '@xstate/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { Channel } from '@storybook/channels';
 import eventNames, { RunAll, RunOne } from '../events';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import { MachineType, StateType, MachineEvents } from './machine';
 import * as coreEvents from '@storybook/core-events';
 import { savePinned, clearPinned, getPinned } from './pinned-storage';
+import { bindAll } from '../util/bind-channel-events';
 
 type MergeArgs = {
   existing: TaskGroupResult[];
@@ -42,15 +44,28 @@ function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupRes
 export default function usePanelMachine(machine: MachineType) {
   const [state, send, service] = useMachine(machine);
 
-  const channel = addons.getChannel();
+  // @ts-ignore: Channel is being typed wrong
+  const channel: Channel = addons.getChannel();
 
-  useEffect(() => {
-    channel.on(coreEvents.STORY_RENDERED, (storyName: string) => {
-      service.send('LOADED', { storyName, pinned: getPinned(storyName) });
-    });
+  useEffect(
+    function bindChannelEvents() {
+      const unsubscribe = bindAll(channel, [
+        {
+          eventName: coreEvents.STORY_RENDERED,
+          fn: (storyName: string) => {
+            service.send('LOADED', { storyName, pinned: getPinned(storyName) });
+          },
+        },
+        {
+          eventName: coreEvents.STORY_CHANGED,
+          fn: () => service.send('WAIT'),
+        },
+      ]);
 
-    channel.on(coreEvents.STORY_CHANGED, () => service.send('WAIT'));
-  }, [service, channel]);
+      return unsubscribe;
+    },
+    [service, channel],
+  );
 
   useEffect(() => {
     function finishAll({ results }: RunAll['Results']) {

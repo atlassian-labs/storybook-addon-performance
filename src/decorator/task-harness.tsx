@@ -6,30 +6,11 @@ import { runAll, runOneStatic, runOneTimed } from '../task-runner/runner';
 import all from '../tasks/all';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import getElement from '../task-runner/get-element';
+import { bindAll } from '../util/bind-channel-events';
 
 type Props = {
   getNode: () => React.ReactNode;
 };
-
-type Binding = {
-  eventName: string;
-  fn: (...args: any[]) => void;
-};
-
-function bind(channel: Channel, binding: Binding) {
-  channel.on(binding.eventName, binding.fn);
-  return function unbind() {
-    channel.off(binding.eventName, binding.fn);
-  };
-}
-
-function bindAll(channel: Channel, bindings: Binding[]) {
-  const unbinds: Function[] = bindings.map((binding: Binding) => bind(channel, binding));
-
-  return function unbindAll() {
-    unbinds.forEach((unbind: Function) => unbind());
-  };
-}
 
 export default function TaskHarness({ getNode }: Props) {
   // This is a stable reference between renders

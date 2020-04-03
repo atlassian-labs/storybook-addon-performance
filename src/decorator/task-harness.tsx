@@ -26,6 +26,8 @@ export default function TaskHarness({ getNode }: Props) {
         }
         channel.emit(name, args);
       }
+      // this is how we store the state of the bindings
+      // we cannot publish the finish events after this has already been disguarded
       safeEmit.isEnabled = true;
 
       const unbindAll = bindAll(channel, [

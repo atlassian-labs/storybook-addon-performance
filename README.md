@@ -6,9 +6,9 @@
 
 A [storybook](https://storybook.js.org/) addon to help better understand and debug performance for `React` components.
 
-</div>
-
 > ⚠️ This addon is **experimental** and a **work in progress**. We are not on stable versions yet
+
+</div>
 
 ## Installation
 

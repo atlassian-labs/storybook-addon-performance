@@ -8,6 +8,8 @@ A [storybook](https://storybook.js.org/) addon to help better understand and deb
 
 </div>
 
+> ⚠️ This addon is **experimental** and a **work in progress**. We are not on stable versions yet
+
 ## Installation
 
 1. Install `storybook-addon-performance`

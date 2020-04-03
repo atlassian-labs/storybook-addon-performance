@@ -20,6 +20,14 @@ export default function TaskHarness({ getNode }: Props) {
 
   useEffect(
     function setup() {
+      function safeEmit(name: string, args: Record<string, any>) {
+        if (!safeEmit.isEnabled) {
+          return;
+        }
+        channel.emit(name, args);
+      }
+      safeEmit.isEnabled = true;
+
       const unbindAll = bindAll(channel, [
         {
           eventName: eventNames.START_ALL,
@@ -30,7 +38,7 @@ export default function TaskHarness({ getNode }: Props) {
               samples,
               copies,
             });
-            channel.emit(eventNames.FINISH_ALL, { results });
+            safeEmit(eventNames.FINISH_ALL, { results });
           },
         },
         {
@@ -48,7 +56,7 @@ export default function TaskHarness({ getNode }: Props) {
                 samples,
                 copies,
               });
-              channel.emit(eventNames.FINISH_ONE, { taskId, result });
+              safeEmit(eventNames.FINISH_ONE, { taskId, result });
               return;
             }
             if (task.type === 'static') {
@@ -57,14 +65,17 @@ export default function TaskHarness({ getNode }: Props) {
                 getNode,
                 copies,
               });
-              channel.emit(eventNames.FINISH_ONE, { taskId, result });
+              safeEmit(eventNames.FINISH_ONE, { taskId, result });
               return;
             }
           },
         },
       ]);
 
-      return unbindAll;
+      return function unbind() {
+        unbindAll();
+        safeEmit.isEnabled = false;
+      };
     },
     [channel, getNode],
   );

@@ -82,10 +82,10 @@ export default function usePanelMachine(machine: MachineType) {
       service.send('FINISH', { results });
     }
 
-    function unbindFinishEvents() {
-      channel.off(eventNames.FINISH_ONE, finishOne);
-      channel.off(eventNames.FINISH_ALL, finishAll);
-    }
+    const unbindChannel = bindAll(channel, [
+      { eventName: eventNames.FINISH_ALL, fn: finishAll },
+      { eventName: eventNames.FINISH_ONE, fn: finishOne },
+    ]);
 
     const unsubscribable = service.subscribe(
       // @ts-ignore: unknown second event argument in type. This is fixed in master
@@ -98,12 +98,6 @@ export default function usePanelMachine(machine: MachineType) {
           return;
         }
         const { current, storyName } = state.context;
-
-        // We are effectively aborting these calls
-        if (event.type === 'WAIT') {
-          unbindFinishEvents();
-          return;
-        }
 
         if (event.type === 'PIN') {
           savePinned(storyName, current);
@@ -119,7 +113,6 @@ export default function usePanelMachine(machine: MachineType) {
 
         if (state.matches('active.running')) {
           if (event.type === 'START_ALL') {
-            channel.once(eventNames.FINISH_ALL, finishAll);
             channel.emit(eventNames.START_ALL, {
               samples,
               copies,
@@ -128,7 +121,6 @@ export default function usePanelMachine(machine: MachineType) {
           }
 
           if (event.type === 'START_ONE') {
-            channel.once(eventNames.FINISH_ONE, finishOne);
             channel.emit(eventNames.START_ONE, {
               taskId: event.taskId,
               samples,
@@ -139,7 +131,7 @@ export default function usePanelMachine(machine: MachineType) {
       },
     );
     return function unsubscribe() {
-      unbindFinishEvents();
+      unbindChannel();
       unsubscribable.unsubscribe();
     };
   }, [service, channel]);

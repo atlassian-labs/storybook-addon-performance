@@ -81,4 +81,10 @@ yarn typescript:watch
 yarn storybook:dev
 ```
 
+## Thanks
+
 Made with ❤️ by your friends at [Atlassian](https://www.atlassian.com/)
+
+- Alex Reardon [@alexandereardon](https://twitter.com/alexandereardon)
+- Andrew Campbell [@hey_AndrewC](https://twitter.com/hey_AndrewC)
+- Daniel Del Core [@danieldelcore](https://twitter.com/danieldelcore)

@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "sideEffects": false,
-  "author": "Atlassian Pty Ltd",
+  "author": "Alex Reardon <areardon@atlassian.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

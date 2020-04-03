@@ -3,8 +3,6 @@ import { makeDecorator } from '@storybook/addons';
 import TaskHarness from './task-harness';
 import * as constants from '../addon-constants';
 
-console.log('ADDING PERFORMANCE DECORATOR!');
-
 export default makeDecorator({
   name: constants.decoratorKey,
   parameterName: constants.paramKey,

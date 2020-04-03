@@ -6,13 +6,15 @@ import * as Parts from './parts';
 
 const warningIcon = <span>⚠️</span>;
 
-function DiffToPinned({
-  result,
-  pinned,
-}: {
-  result: TimedResult;
-  pinned: Nullable<TimedResult>;
-}) {
+function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {
+  if (!pinned) {
+    return 0;
+  }
+
+  return toFixed(1 - pinned.averageMs / result.averageMs);
+}
+
+function DiffToPinned({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {
   if (pinned == null) {
     return null;
   }
@@ -26,17 +28,13 @@ function DiffToPinned({
             <tr>
               <Parts.TitleCell>Pinned value</Parts.TitleCell>
               <Parts.ValueCell>
-                <Parts.ValueLozenge type="raw">
-                  {toFixed(pinned.averageMs, 1)}ms
-                </Parts.ValueLozenge>
+                <Parts.ValueLozenge type="raw">{toFixed(pinned.averageMs, 1)}ms</Parts.ValueLozenge>
               </Parts.ValueCell>
             </tr>
             <tr>
               <Parts.TitleCell>Current value</Parts.TitleCell>
               <Parts.ValueCell>
-                <Parts.ValueLozenge type="raw">
-                  {toFixed(result.averageMs, 1)}ms
-                </Parts.ValueLozenge>
+                <Parts.ValueLozenge type="raw">{toFixed(result.averageMs, 1)}ms</Parts.ValueLozenge>
               </Parts.ValueCell>
             </tr>
             <tr>
@@ -63,17 +61,15 @@ function Variance({ result }: { result: TimedResult }) {
     <>
       <Parts.Heading>Variance</Parts.Heading>
       <Parts.Note>
-        When doing multiple runs the can be differences between the runs. The
-        lower the variance, the higher confidence you can have
+        When doing multiple runs the can be differences between the runs. The lower the variance,
+        the higher confidence you can have
       </Parts.Note>
       <Parts.Table>
         <tbody>
           <tr>
             <Parts.TitleCell>Samples</Parts.TitleCell>
             <Parts.ValueCell>
-              <Parts.ValueLozenge type="info">
-                {result.samples}
-              </Parts.ValueLozenge>
+              <Parts.ValueLozenge type="info">{result.samples}</Parts.ValueLozenge>
             </Parts.ValueCell>
           </tr>
           <tr>
@@ -132,20 +128,6 @@ type TimedProps = {
   pinned: Nullable<TimedResult>;
 };
 
-function getDiff({
-  result,
-  pinned,
-}: {
-  result: TimedResult;
-  pinned: Nullable<TimedResult>;
-}) {
-  if (!pinned) {
-    return 0;
-  }
-
-  return toFixed(1 - pinned.averageMs / result.averageMs);
-}
-
 function DiffLozenge({ diff }: { diff: number }) {
   const type = (() => {
     if (diff > 1) {
@@ -176,9 +158,7 @@ export default function Timed({ task, pinned, result }: TimedProps) {
       name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>
-        isExpanded ? (
-          <Expanded task={task} result={result} pinned={pinned} />
-        ) : null
+        isExpanded ? <Expanded task={task} result={result} pinned={pinned} /> : null
       }
     />
   );

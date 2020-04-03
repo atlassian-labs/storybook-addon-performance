@@ -32,7 +32,8 @@ function bindAll(channel: Channel, bindings: Binding[]) {
 }
 
 export default function TaskHarness({ getNode }: Props) {
-  // channel will have a stable reference across run
+  // This is a stable reference between renders
+  // When a story changes, it will remount this harness
   // @ts-ignore
   const channel: Channel = addons.getChannel();
 

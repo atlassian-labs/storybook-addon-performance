@@ -36,7 +36,11 @@
     "@types/jest": "^25.1.4",
     "@types/react": "^16.9.31",
     "@types/react-dom": "^16.9.6",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "jest": "^25.2.4",
     "prettier": "^2.0.2",
     "react": "^16.13.1",
@@ -48,7 +52,7 @@
     "typescript": "^3.8.3"
   },
   "config": {
-    "prettier_target": "src/**/*.{ts,js,jsx,md,json} test/**/*.{ts,js,jsx,md,json}"
+    "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json}"
   },
   "scripts": {
     "storybook:dev": "yarn start-storybook",
@@ -57,6 +61,8 @@
     "typescript:build": "tsc",
     "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
+    "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0",
+    "validate": "yarn typescript:check && yarn prettier:check && yarn eslint:check",
     "dev": "yarn typescript:watch && yarn storybook:dev",
     "test": "yarn jest",
     "build:clean": "rimraf dist",

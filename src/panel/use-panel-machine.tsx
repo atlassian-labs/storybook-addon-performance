@@ -1,8 +1,6 @@
 import addons from '@storybook/addons';
-import { useStorybookState } from '@storybook/api';
-// import { useStorybookApi } from '@storybook/api';
 import { useMachine } from '@xstate/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import { MachineType, StateType, MachineEvents } from './machine';
@@ -52,7 +50,7 @@ export default function usePanelMachine(machine: MachineType) {
     });
 
     channel.on(coreEvents.STORY_CHANGED, () => service.send('WAIT'));
-  }, [channel]);
+  }, [service, channel]);
 
   useEffect(() => {
     function finishAll({ results }: RunAll['Results']) {
@@ -129,7 +127,7 @@ export default function usePanelMachine(machine: MachineType) {
       unbindFinishEvents();
       unsubscribable.unsubscribe();
     };
-  }, [service]);
+  }, [service, channel]);
 
   return { state, send, service };
 }

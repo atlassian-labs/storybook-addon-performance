@@ -1,4 +1,4 @@
 import { addDecorator } from '@storybook/react';
-import { addPerformance } from '../src';
+import { withPerformance } from '../src';
 
-addDecorator(addPerformance);
+addDecorator(withPerformance);

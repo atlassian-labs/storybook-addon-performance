@@ -1,1 +1,1 @@
-export { default as addPerformance } from './decorator/decorator';
+export { default as withPerformance } from './decorator/decorator';

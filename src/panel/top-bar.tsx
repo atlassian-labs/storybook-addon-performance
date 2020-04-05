@@ -4,7 +4,7 @@ import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
 import ServiceContext from './service-context';
 import { useService } from '@xstate/react';
-import { RunContext } from './machine';
+import { RunContext, MachineEvents } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 
@@ -30,6 +30,11 @@ type BooleanMap = {
   [key: string]: boolean;
 };
 
+// A little wrapping function that improves type safety
+function nextEventsInclude(name: MachineEvents['type'], events: string[]): boolean {
+  return events.includes(name);
+}
+
 export default function Topbar() {
   const service = useRequiredContext(ServiceContext);
   const [state, send] = useService(service);
@@ -37,12 +42,11 @@ export default function Topbar() {
   const pinned: Nullable<RunContext> = state.context.pinned;
   const sizes: number[] = state.context.sizes;
 
-  const isIdle: boolean = state.matches('active.idle');
-
   const enabled: BooleanMap = {
-    start: isIdle,
-    change: isIdle && pinned == null,
-    pin: isIdle && current.results != null,
+    start: nextEventsInclude('START_ALL', state.nextEvents),
+    change: nextEventsInclude('SET_VALUES', state.nextEvents) && pinned == null,
+    pin: nextEventsInclude('PIN', state.nextEvents) && current.results != null,
+    unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
   return (
@@ -100,7 +104,7 @@ export default function Topbar() {
           secondary
           small
           outline
-          disabled={!enabled.pin}
+          disabled={pinned ? !enabled.unpin : !enabled.pin}
           onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
         >
           <Icons icon={pinned ? 'unlock' : 'lock'} />

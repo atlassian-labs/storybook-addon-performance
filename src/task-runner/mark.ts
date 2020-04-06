@@ -7,6 +7,6 @@ export default async function mark<T>(taskName: string, fn: () => Promise<T>): P
   performance.mark(startMark);
   const result: T = await fn();
   performance.mark(endMark);
-  performance.measure(`🚀 (${taskName})`, startMark, endMark);
+  performance.measure(`🚀 (Task: ${taskName})`, startMark, endMark);
   return result;
 }

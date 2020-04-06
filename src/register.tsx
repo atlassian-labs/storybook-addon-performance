@@ -10,7 +10,8 @@ addons.register(constants.addonKey, (/*api*/) => {
     title: constants.panelTitle,
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
-        <Panel />
+        {/* sadly need to add cast for storybook ts-loader */}
+        <Panel channel={addons.getChannel() as any} />
       </AddonPanel>
     ),
     paramKey: constants.paramKey,

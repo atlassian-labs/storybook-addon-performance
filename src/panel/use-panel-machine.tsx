@@ -41,11 +41,8 @@ function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupRes
   });
 }
 
-export default function usePanelMachine(machine: MachineType) {
+export default function usePanelMachine(machine: MachineType, channel: Channel) {
   const [state, send, service] = useMachine(machine);
-
-  // @ts-ignore: Channel is being typed wrong
-  const channel: Channel = addons.getChannel();
 
   useEffect(
     function bindChannelEvents() {

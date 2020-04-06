@@ -10,14 +10,10 @@ import { bindAll } from '../util/bind-channel-events';
 
 type Props = {
   getNode: () => React.ReactNode;
+  channel: Channel;
 };
 
-export default function TaskHarness({ getNode }: Props) {
-  // This is a stable reference between renders
-  // When a story changes, it will remount this harness
-  // @ts-ignore
-  const channel: Channel = addons.getChannel();
-
+export default function TaskHarness({ getNode, channel }: Props) {
   useEffect(
     function setup() {
       function safeEmit(name: string, args: Record<string, any>) {

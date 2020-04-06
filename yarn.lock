@@ -1336,7 +1336,7 @@
     global "^4.3.2"
     telejson "^3.2.0"
 
-"@storybook/channels@5.3.18":
+"@storybook/channels@5.3.18", "@storybook/channels@^5.3.18":
   version "5.3.18"
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-5.3.18.tgz#490c9eaa8292b0571c0f665052b12addf7c35f21"
   integrity sha512-scP/6td/BJSEOgfN+qaYGDf3E793xye7tIw6W+sYqwg+xdMFO39wVXgVZNpQL6sLEwpJZTaPywCjC6p6ksErqQ==

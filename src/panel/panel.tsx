@@ -1,6 +1,7 @@
 import { styled } from '@storybook/theming';
 import React from 'react';
 import all from '../tasks/all';
+import { Channel } from '@storybook/channels';
 import { Nullable, TaskGroup, TaskGroupResult } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
@@ -23,10 +24,7 @@ const GroupContainer = styled.div`
   padding: 0 var(--halfGrid);
 `;
 
-function findResult(
-  group: TaskGroup,
-  context: Nullable<RunContext>,
-): Nullable<TaskGroupResult> {
+function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<TaskGroupResult> {
   if (!context || !context.results) {
     return null;
   }
@@ -47,8 +45,8 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
   return result;
 }
 
-export default function Panel() {
-  const { state, service } = usePanelMachine(machine);
+export default function Panel({ channel }: { channel: Channel }) {
+  const { state, service } = usePanelMachine(machine, channel);
 
   return (
     <ServiceContext.Provider value={service}>

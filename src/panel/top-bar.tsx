@@ -7,6 +7,7 @@ import { useService } from '@xstate/react';
 import { RunContext, MachineEvents } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
+import nextEventsInclude from './next-events-include';
 
 const Container = styled.div`
   display: flex;
@@ -29,11 +30,6 @@ const Message = styled.small`
 type BooleanMap = {
   [key: string]: boolean;
 };
-
-// A little wrapping function that improves type safety
-function nextEventsInclude(name: MachineEvents['type'], events: string[]): boolean {
-  return events.includes(name);
-}
 
 export default function Topbar() {
   const service = useRequiredContext(ServiceContext);

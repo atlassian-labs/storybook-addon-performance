@@ -6,6 +6,7 @@ import { useService } from '@xstate/react';
 import useRequiredContext from '../../use-required-context';
 import ServiceContext from '../service-context';
 import { pluraliseCopies, pluraliseSamples } from '../../util/pluralise';
+import nextEventsInclude from '../next-events-include';
 
 export type ExpandedArgs = {
   isExpanded: boolean;
@@ -101,7 +102,7 @@ export function ExpandingResult({ taskId, name, result, getExpanded }: Props) {
             <Button
               secondary
               small
-              disabled={state.matches('active.running')}
+              disabled={!nextEventsInclude('START_ONE', state.nextEvents)}
               onClick={() => send({ type: 'START_ONE', taskId })}
             >
               Run task{' '}

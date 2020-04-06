@@ -56,7 +56,7 @@
   },
   "scripts": {
     "storybook:dev": "yarn start-storybook",
-    "storybook:prod": "yarn build-storybook",
+    "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:watch": "tsc --watch",
     "typescript:build": "tsc",

@@ -1,4 +1,4 @@
-import { runOneTimed } from '../src/task-runner/runner';
+import { runOneTimed } from '../src/task-runner';
 import { timedTask } from '../src/tasks/create';
 import { RunTimedTaskArgs, TimedResult, TimedTask } from '../src/types';
 

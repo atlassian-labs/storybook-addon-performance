@@ -2,7 +2,7 @@ import { addons } from '@storybook/addons';
 import { Channel } from '@storybook/channels';
 import React, { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
-import { runAll, runOneStatic, runOneTimed } from '../task-runner/runner';
+import { runAll, runOneStatic, runOneTimed } from '../task-runner';
 import all from '../tasks/all';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import getElement from '../task-runner/get-element';

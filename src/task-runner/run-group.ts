@@ -10,13 +10,7 @@ import {
 import { asyncMap } from './async';
 import runStaticTask from './run-static-task';
 import runTimedTaskRepeatedly from './run-timed-task-repeatedly';
-
-function toMap<T extends { taskId: string }>(list: T[]): Record<string, T> {
-  return list.reduce((acc: Record<string, T>, item: T) => {
-    acc[item.taskId] = item;
-    return acc;
-  }, {});
-}
+import toResultMap from '../util/to-result-map';
 
 type RunGroupArgs = {
   group: TaskGroup;
@@ -57,8 +51,8 @@ export default async function runGroup({
 
   const results: TaskGroupResult = {
     groupId: group.groupId,
-    timed: toMap(timedResults),
-    static: toMap(staticResults),
+    timed: toResultMap(timedResults),
+    static: toResultMap(staticResults),
   };
 
   return results;

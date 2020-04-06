@@ -1,5 +1,5 @@
 import { staticTask } from '../src/tasks/create';
-import { runOneStatic } from '../src/task-runner/runner';
+import { runOneStatic } from '../src/task-runner';
 import { StaticResult, StaticTask } from '../src/types';
 
 it('should run static tests', async () => {

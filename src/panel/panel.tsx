@@ -45,15 +45,22 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
   return result;
 }
 
+var allTasks = all
+
 export default function Panel({ channel }: { channel: Channel }) {
   const { state, service } = usePanelMachine(machine, channel);
+
+  channel.on("allTasks", (channelAll) => {
+    allTasks = channelAll;
+    console.log("Tasks and groups fetched from channel");
+  })
 
   return (
     <ServiceContext.Provider value={service}>
       <Container>
         <Topbar />
         <GroupContainer>
-          {all.groups.map((group: TaskGroup) => {
+          {allTasks.groups.map((group: TaskGroup) => {
             if (state.context.current.results == null) {
               return null;
             }

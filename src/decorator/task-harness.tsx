@@ -31,10 +31,12 @@ export default function TaskHarness({ getNode, channel, interactions }: Props) {
       // we cannot publish the finish events after this has already been disguarded
       safeEmit.isEnabled = true;
 
-      // Add any interaction tasks to list of tasks
+      // Add any interaction tasks to list of tasks and add to channel
       const all = interactions ?
         getAll(AddInteractionTasks(interactions)) :
         getAll();
+      channel.emit('allTasks', all);
+
 
       const unbindAll = bindAll(channel, [
         {

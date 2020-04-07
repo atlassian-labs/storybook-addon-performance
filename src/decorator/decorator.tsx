@@ -12,7 +12,6 @@ export default makeDecorator({
   wrapper: (getStory, context, { parameters }) => {
 
     const interactions: InteractionTaskBase[] = parameters && parameters.interactions;
-    console.log("interactions", interactions);
 
     // Sadly need to add cast for storybook ts-loader
     return <TaskHarness getNode={() => getStory(context)} channel={addons.getChannel() as any} interactions={interactions} />;

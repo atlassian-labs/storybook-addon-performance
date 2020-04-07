@@ -1,7 +1,6 @@
 import { TaskGroup, TaskMap, StaticTask, TimedTask } from './../types';
 import serverSide from './server-side';
 import initialMount from './client';
-import group from './server-side';
 
 const groups: TaskGroup[] = [serverSide, initialMount];
 

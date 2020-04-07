@@ -30,6 +30,10 @@
     "tiny-invariant": "^1.1.0",
     "xstate": "^4.8.0"
   },
+  "peerDependencies": {
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@storybook/react": "6.0.0-alpha.30",

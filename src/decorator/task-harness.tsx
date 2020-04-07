@@ -3,17 +3,22 @@ import { Channel } from '@storybook/channels';
 import React, { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { runAll, runOneStatic, runOneTimed } from '../task-runner';
-import all from '../tasks/all';
-import { StaticResult, TaskGroupResult, TimedResult } from '../types';
+import { getAll as getAll } from '../tasks/all';
+import { AddInteractionTasks } from '../tasks/interactions';
+import { StaticResult, TaskGroupResult, TimedResult, InteractionTaskBase } from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
+
 
 type Props = {
   getNode: () => React.ReactNode;
   channel: Channel;
+  interactions?: InteractionTaskBase[];
+
 };
 
-export default function TaskHarness({ getNode, channel }: Props) {
+export default function TaskHarness({ getNode, channel, interactions }: Props) {
+
   useEffect(
     function setup() {
       function safeEmit(name: string, args: Record<string, any>) {
@@ -25,6 +30,11 @@ export default function TaskHarness({ getNode, channel }: Props) {
       // this is how we store the state of the bindings
       // we cannot publish the finish events after this has already been disguarded
       safeEmit.isEnabled = true;
+
+      // Add any interaction tasks to list of tasks
+      const all = interactions ?
+        getAll(AddInteractionTasks(interactions)) :
+        getAll();
 
       const unbindAll = bindAll(channel, [
         {

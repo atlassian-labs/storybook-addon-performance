@@ -34,6 +34,13 @@ export type TimedTaskControls = {
   time: (fn: () => Promise<void>) => Promise<void>;
 };
 
+export type InteractionTaskBase = {
+  name: string;
+  description?: string;
+  dependencies: {};
+  run: (args: RunTimedTaskArgs) => Promise<void>;
+};
+
 export type TaskGroup = {
   groupId: string;
   name: string;

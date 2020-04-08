@@ -1,15 +1,7 @@
+import { findByText, fireEvent } from '@testing-library/dom';
 import React from 'react';
-import invariant from 'tiny-invariant';
 import Select from 'react-select';
-import {
-  waitFor,
-  getByText,
-  findByPlaceholderText,
-  getByPlaceholderText,
-  fireEvent,
-  findByText,
-  getByTestId,
-} from '@testing-library/dom';
+import invariant from 'tiny-invariant';
 import { InteractionTaskArgs, Nullable } from '../src/types';
 
 export default {

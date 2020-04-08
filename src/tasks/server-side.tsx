@@ -8,7 +8,7 @@ import {
   RunTimedTaskArgs,
 } from '../types';
 import { bytesToKiloBytes } from '../util/convert-bytes-to';
-import { timedTask, staticTask } from './create';
+import { timedTask, staticTask, taskGroup } from './create';
 
 const renderToString: TimedTask = timedTask({
   name: 'Render to string',
@@ -87,7 +87,7 @@ const getGzipStaticMarkupSizeInKB: StaticTask = staticTask({
   },
 });
 
-const group: TaskGroup = {
+const group: TaskGroup = taskGroup({
   name: 'Server',
   timed: [renderToString, renderToStaticMarkup],
   static: [
@@ -96,6 +96,6 @@ const group: TaskGroup = {
     getRawStaticMarkupSizeInKB,
     getGzipStaticMarkupSizeInKB,
   ],
-};
+});
 
 export default group;

@@ -1,6 +1,6 @@
 import { staticTask } from '../src/tasks/create';
 import { runOneStatic } from '../src/task-runner';
-import { StaticResult, StaticTask, TaskGroup } from '../src/types';
+import { StaticResult, StaticTask } from '../src/types';
 
 it('should run static tests', async () => {
   const ourGetNode = () => null;
@@ -12,22 +12,15 @@ it('should run static tests', async () => {
     name: 'task',
     run: runMock,
   });
-  const group: TaskGroup = {
-    name: 'Test Group',
-    timed: [],
-    static: [],
-  };
 
   const results: StaticResult = await runOneStatic({
     task,
-    group,
     getNode: ourGetNode,
     copies: 1,
   });
 
   const expected: StaticResult = {
-    taskName: task.name,
-    groupName: group.name,
+    taskId: task.taskId,
     value: returnValue,
   };
 

@@ -27,7 +27,7 @@ export default async function runTimedTask({ task, getElement }: TimedArgs): Pro
   if (task.name === 'interaction_test') {
     wholeTaskDuration = await mark(task.name, () =>
       // @ts-ignore
-      getDuration(() => task.run({ getElement, controls, container })),
+      getDuration(() => task.run({ getElement, controls, container: document.body })),
     );
   } else {
     wholeTaskDuration = await mark(task.name, () =>

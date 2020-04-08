@@ -1,5 +1,5 @@
 import React from 'react';
-import { StaticResult, StaticTask, Nullable, TaskGroup } from '../../types';
+import { StaticResult, StaticTask, Nullable } from '../../types';
 import * as Parts from './parts';
 import { ExpandingResult } from './expanding-result';
 
@@ -69,12 +69,10 @@ function Expanded({
 
 export default function Static({
   task,
-  group,
   result,
   pinned,
 }: {
   task: StaticTask;
-  group: TaskGroup;
   result: StaticResult;
   pinned: Nullable<StaticResult>;
 }) {
@@ -93,8 +91,8 @@ export default function Static({
 
   return (
     <ExpandingResult
-      taskName={task.name}
-      groupName={group.name}
+      taskId={task.taskId}
+      name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>
         isExpanded ? (

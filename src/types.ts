@@ -1,6 +1,7 @@
 export type Nullable<T> = T | null;
 
 type BaseTask = {
+  taskId: string;
   name: string;
   description: string;
 };
@@ -38,6 +39,7 @@ export type PublicTimedTask = {
 };
 
 export type TaskGroup = {
+  groupId: string;
   name: string;
   timed: TimedTask[];
   static: StaticTask[];
@@ -50,33 +52,31 @@ export type Variance = {
 };
 
 export type TimedResult = {
-  taskName: string;
-  groupName: string;
+  taskId: string;
   averageMs: number;
   samples: number;
   variance: Variance;
 };
 
 export type StaticResult = {
-  taskName: string;
-  groupName: string;
+  taskId: string;
   value: string;
 };
 
 export type TimedResultMap = {
-  [taskName: string]: TimedResult;
+  [taskId: string]: TimedResult;
 };
 
 export type StaticResultMap = {
-  [taskName: string]: StaticResult;
+  [taskId: string]: StaticResult;
 };
 
 export type TaskMap = {
-  [taskName: string]: TimedTask | StaticTask;
+  [taskId: string]: TimedTask | StaticTask;
 };
 
 export type TaskGroupResult = {
-  groupName: string;
+  groupId: string;
   timed: TimedResultMap;
   static: StaticResultMap;
 };

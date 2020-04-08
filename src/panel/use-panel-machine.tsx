@@ -11,33 +11,30 @@ import { bindAll } from '../util/bind-channel-events';
 
 type MergeArgs = {
   existing: TaskGroupResult[];
-  taskName: string;
-  groupName: string;
+  taskId: string;
   result: TimedResult | StaticResult;
 };
 
-function mergeWithResults({ existing, taskName, groupName, result }: MergeArgs): TaskGroupResult[] {
+function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupResult[] {
   return existing.map((groupResult: TaskGroupResult) => {
-    if (groupResult.groupName === groupName) {
-      if (groupResult.static[taskName]) {
-        return {
-          ...groupResult,
-          static: {
-            ...groupResult.static,
-            [taskName]: result as StaticResult,
-          },
-        };
-      }
+    if (groupResult.static[taskId]) {
+      return {
+        ...groupResult,
+        static: {
+          ...groupResult.static,
+          [taskId]: result as StaticResult,
+        },
+      };
+    }
 
-      if (groupResult.timed[taskName]) {
-        return {
-          ...groupResult,
-          timed: {
-            ...groupResult.timed,
-            [taskName]: result as TimedResult,
-          },
-        };
-      }
+    if (groupResult.timed[taskId]) {
+      return {
+        ...groupResult,
+        timed: {
+          ...groupResult.timed,
+          [taskId]: result as TimedResult,
+        },
+      };
     }
 
     return groupResult;
@@ -72,13 +69,12 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
       service.send('FINISH', { results });
     }
 
-    function finishOne({ taskName, groupName, result }: RunOne['Result']) {
+    function finishOne({ taskId, result }: RunOne['Result']) {
       const results: TaskGroupResult[] = mergeWithResults({
         // we are using a state machine guard to prevent this
         existing: service.state.context.current.results!,
         result,
-        taskName,
-        groupName
+        taskId,
       });
       service.send('FINISH', { results });
     }
@@ -123,8 +119,7 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
 
           if (event.type === 'START_ONE') {
             channel.emit(eventNames.START_ONE, {
-              taskName: event.taskName,
-              groupName: event.groupName,
+              taskId: event.taskId,
               samples,
               copies,
             });

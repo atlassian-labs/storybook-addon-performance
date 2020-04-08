@@ -13,8 +13,8 @@ export type ExpandedArgs = {
 };
 
 type Props = {
-  taskName: string;
-  groupName: string;
+  taskId: string;
+  name: string;
   result: React.ReactNode;
   getExpanded: (args: ExpandedArgs) => React.ReactNode;
 };
@@ -79,7 +79,7 @@ function ExpandIcon({ isExpanded }: ExpandedArgs) {
   );
 }
 
-export function ExpandingResult({ taskName, groupName, result, getExpanded }: Props) {
+export function ExpandingResult({ taskId, name, result, getExpanded }: Props) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const toggle = useCallback(() => setIsExpanded((value) => !value), [setIsExpanded]);
   const service = useRequiredContext(ServiceContext);
@@ -92,7 +92,7 @@ export function ExpandingResult({ taskName, groupName, result, getExpanded }: Pr
     <Container>
       <HeaderButton onClick={toggle} isExpanded={isExpanded}>
         <ExpandIcon isExpanded={isExpanded} />
-        <Name>{taskName}</Name>
+        <Name>{name}</Name>
         {result}
       </HeaderButton>
       {isExpanded ? (
@@ -103,7 +103,7 @@ export function ExpandingResult({ taskName, groupName, result, getExpanded }: Pr
               secondary
               small
               disabled={!nextEventsInclude('START_ONE', state.nextEvents)}
-              onClick={() => send({ type: 'START_ONE', taskName, groupName })}
+              onClick={() => send({ type: 'START_ONE', taskId })}
             >
               Run task{' '}
               <small>

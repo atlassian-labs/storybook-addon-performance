@@ -1,4 +1,4 @@
-import { TimedTask, TimedResult, TaskGroup } from '../types';
+import { TimedTask, TimedResult } from '../types';
 import runTimedTask from './run-timed-task';
 import { asyncMap } from './async';
 
@@ -42,14 +42,12 @@ function getUpperAndLower(
 
 type RepeatArgs = {
   task: TimedTask;
-  group: TaskGroup;
   getElement: () => React.ReactElement;
   samples: number;
 };
 
 export default async function runTimedTaskRepeatedly({
   task,
-  group,
   getElement,
   samples,
 }: RepeatArgs): Promise<TimedResult> {
@@ -69,8 +67,7 @@ export default async function runTimedTaskRepeatedly({
   const standardDeviation: number = getStandardDeviation(average, durations);
 
   const result: TimedResult = {
-    taskName: task.name,
-    groupName: group.name,
+    taskId: task.taskId,
     averageMs: average,
     samples,
     variance: {

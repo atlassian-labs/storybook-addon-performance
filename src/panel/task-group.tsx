@@ -46,7 +46,7 @@ export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
         const value: StaticResult | TimedResult | undefined = result.map[task.taskId];
 
         // This can happen when jumping between stories briefly before any storybook events fire
-        // So lame!!!
+        // https://github.com/storybookjs/storybook/issues/10352
         if (value == null) {
           return null;
         }

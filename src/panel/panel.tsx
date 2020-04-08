@@ -1,7 +1,7 @@
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
 import { Channel } from '@storybook/channels';
-import { Nullable, TimedTask, TaskGroup, TaskGroupResult, PublicTimedTask } from '../types';
+import { Nullable, TimedTask, TaskGroup, TaskGroupResult, PublicInteractionTask } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
@@ -53,7 +53,7 @@ export default function Panel({ channel }: { channel: Channel }) {
 
   const parameters = useParameter(paramKey, { interactions: [] });
   // Note: this will keep a consistant reference between renders
-  const interactions: PublicTimedTask[] = parameters.interactions;
+  const interactions: PublicInteractionTask[] = parameters.interactions;
 
   const groups: TaskGroup[] = useMemo(
     function merge() {

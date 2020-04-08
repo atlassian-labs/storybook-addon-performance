@@ -8,7 +8,7 @@ import {
   StaticResult,
   TaskGroupResult,
   TimedResult,
-  PublicTimedTask,
+  PublicInteractionTask,
   TaskGroup,
   TaskMap,
 } from '../types';
@@ -20,7 +20,7 @@ import getTaskMap from '../tasks/get-tasks-map';
 type Props = {
   getNode: () => React.ReactNode;
   channel: Channel;
-  interactions: PublicTimedTask[] | undefined;
+  interactions: PublicInteractionTask[] | undefined;
 };
 
 export default function TaskHarness({ getNode, channel, interactions = [] }: Props) {

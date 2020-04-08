@@ -1,8 +1,8 @@
-import { PublicTimedTask, TimedTask, TaskGroup } from '../types';
+import { PublicInteractionTask, TimedTask, TaskGroup } from '../types';
 
-export function getInteractionGroup(interactions: PublicTimedTask[]): TaskGroup {
+export function getInteractionGroup(interactions: PublicInteractionTask[]): TaskGroup {
   const timed: TimedTask[] = interactions.map(
-    (item: PublicTimedTask, index: number): TimedTask => {
+    (item: PublicInteractionTask, index: number): TimedTask => {
       return {
         ...item,
         type: 'timed',

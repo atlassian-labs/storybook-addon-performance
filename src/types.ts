@@ -32,11 +32,16 @@ export type TimedTaskControls = {
   time: (fn: () => Promise<void>) => Promise<void>;
 };
 
-export type PublicTimedTask = {
-  name: string;
-  description?: string;
-  run: (args: RunTimedTaskArgs) => Promise<void>;
+export type InteractionTask = TimedTask & {
+  type: 'interaction';
 };
+
+// This is what is provided as interactions to the addon by a consumer
+export type PublicInteractionTask = Omit<InteractionTask, 'taskId' | 'description'> & {
+  description?: string;
+};
+
+export type Task = TimedTask | StaticTask | InteractionTask;
 
 export type TaskGroup = {
   uniqueName: string;
@@ -71,7 +76,7 @@ export type StaticResultMap = {
 };
 
 export type TaskMap = {
-  [taskId: string]: TimedTask | StaticTask;
+  [taskId: string]: Task;
 };
 
 export type TaskGroupResult = {

@@ -29,8 +29,3 @@ export function getAll(interactionGroup?: TaskGroup) {
     tasks: newTasks,
   };
 }
-
-export default {
-  groups,
-  tasks,
-};

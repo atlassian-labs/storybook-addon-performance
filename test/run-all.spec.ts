@@ -2,8 +2,10 @@ import { StaticResultMap, StaticResult, StaticTask, TimedResultMap } from './../
 import { runOneTimed, runAll } from '../src/task-runner';
 import { timedTask } from '../src/tasks/create';
 import { RunTimedTaskArgs, TimedResult, TimedTask, TaskGroupResult, TaskGroup } from '../src/types';
-import all from '../src/tasks/all';
+import { getAll } from '../src/tasks/all';
 import toResultMap from '../src/util/to-result-map';
+
+const all = getAll();
 
 it('should run all the standard tests', async () => {
   const result = await runAll({

@@ -1,13 +1,16 @@
 import { styled } from '@storybook/theming';
-import React from 'react';
-import all from '../tasks/all';
+import React, { useMemo } from 'react';
+import { getAll } from '../tasks/all';
 import { Channel } from '@storybook/channels';
-import { Nullable, TaskGroup, TaskGroupResult } from '../types';
+import { Nullable, TimedTask, TaskGroup, TaskGroupResult } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
+import { useParameter } from '@storybook/api';
+import { paramKey } from '../addon-constants';
+import { getInterationGroup } from '../tasks/interactions';
 
 const Container = styled.div`
   --grid: 10px;
@@ -45,22 +48,23 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
   return result;
 }
 
-var allTasks = all
-
 export default function Panel({ channel }: { channel: Channel }) {
   const { state, service } = usePanelMachine(machine, channel);
 
-  channel.on("allTasks", (channelAll) => {
-    allTasks = channelAll;
-    console.log("Tasks and groups fetched from channel");
-  })
+  const parameters = useParameter(paramKey, { interactions: [] });
+  // Note: this will keep a consistant reference between renders
+  const interactions: TimedTask[] = parameters.interactions;
+
+  const all = useMemo(function merge() {
+    return interactions.length ? getAll(getInterationGroup(interactions)) : getAll();
+  }, [interactions])
 
   return (
     <ServiceContext.Provider value={service}>
       <Container>
         <Topbar />
         <GroupContainer>
-          {allTasks.groups.map((group: TaskGroup) => {
+          {all.groups.map((group: TaskGroup) => {
             if (state.context.current.results == null) {
               return null;
             }

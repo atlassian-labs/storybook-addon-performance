@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type Nullable<T> = T | null;
 
 type BaseTask = {
@@ -34,10 +32,9 @@ export type TimedTaskControls = {
   time: (fn: () => Promise<void>) => Promise<void>;
 };
 
-export type InteractionTaskBase = {
+export type PublicTimedTask = {
   name: string;
   description?: string;
-  dependencies: {};
   run: (args: RunTimedTaskArgs) => Promise<void>;
 };
 

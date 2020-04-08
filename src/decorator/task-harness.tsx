@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { runAll, runOneStatic, runOneTimed } from '../task-runner';
 import { getAll as getAll } from '../tasks/all';
-import { AddInteractionTasks } from '../tasks/interactions';
-import { StaticResult, TaskGroupResult, TimedResult, InteractionTaskBase } from '../types';
+import { getInterationGroup } from '../tasks/interactions';
+import { StaticResult, TaskGroupResult, TimedResult, PublicTimedTask } from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
 
@@ -13,7 +13,7 @@ import { bindAll } from '../util/bind-channel-events';
 type Props = {
   getNode: () => React.ReactNode;
   channel: Channel;
-  interactions?: InteractionTaskBase[];
+  interactions?: PublicTimedTask[];
 
 };
 
@@ -33,9 +33,8 @@ export default function TaskHarness({ getNode, channel, interactions }: Props) {
 
       // Add any interaction tasks to list of tasks and add to channel
       const all = interactions ?
-        getAll(AddInteractionTasks(interactions)) :
+        getAll(getInterationGroup(interactions)) :
         getAll();
-      channel.emit('allTasks', all);
 
 
       const unbindAll = bindAll(channel, [
@@ -87,7 +86,7 @@ export default function TaskHarness({ getNode, channel, interactions }: Props) {
         safeEmit.isEnabled = false;
       };
     },
-    [channel, getNode],
+    [channel, getNode, interactions],
   );
 
   return getElement(getNode)();

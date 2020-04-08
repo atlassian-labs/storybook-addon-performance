@@ -23,14 +23,19 @@
     "register.js"
   ],
   "dependencies": {
+    "@atlaskit/button": "^13.3.9",
+    "@atlaskit/modal-dialog": "^10.5.5",
     "@storybook/addons": "^5.3.18",
     "@storybook/api": "^5.3.18",
     "@storybook/channels": "^5.3.18",
     "@storybook/components": "^5.3.18",
     "@storybook/core-events": "^5.3.18",
     "@storybook/theming": "^5.3.18",
+    "@testing-library/dom": "^7.2.1",
+    "@testing-library/jest-dom": "^5.3.0",
     "@xstate/react": "1.0.0-rc.3",
     "gzip-js": "^0.3.2",
+    "styled-components": "^5.1.0",
     "tiny-invariant": "^1.1.0",
     "xstate": "^4.8.0"
   },

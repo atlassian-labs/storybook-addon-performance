@@ -1,14 +1,8 @@
 import ReactDOMServer from 'react-dom/server';
 import gzip from 'gzip-js';
-import {
-  StaticTask,
-  TimedTask,
-  TaskGroup,
-  RunStaticTaskArgs,
-  RunTimedTaskArgs,
-} from '../types';
-import { bytesToKiloBytes } from '../util/convert-bytes-to';
-import { timedTask, staticTask, taskGroup } from './create';
+import { StaticTask, TimedTask, TaskGroup, RunStaticTaskArgs, RunTimedTaskArgs } from '../../types';
+import { bytesToKiloBytes } from '../../util/convert-bytes-to';
+import { timedTask, staticTask } from './create';
 
 const renderToString: TimedTask = timedTask({
   name: 'Render to string',
@@ -87,8 +81,8 @@ const getGzipStaticMarkupSizeInKB: StaticTask = staticTask({
   },
 });
 
-const group: TaskGroup = taskGroup({
-  name: 'Server',
+const group: TaskGroup = {
+  uniqueName: 'Server',
   timed: [renderToString, renderToStaticMarkup],
   static: [
     getRawStringSizeInKB,
@@ -96,6 +90,6 @@ const group: TaskGroup = taskGroup({
     getRawStaticMarkupSizeInKB,
     getGzipStaticMarkupSizeInKB,
   ],
-});
+};
 
 export default group;

@@ -1,12 +1,6 @@
 import { styled } from '@storybook/theming';
 import React from 'react';
-import {
-  StaticTask,
-  TaskGroup,
-  TaskGroupResult,
-  TimedTask,
-  Nullable,
-} from '../types';
+import { StaticTask, TaskGroup, TaskGroupResult, TimedTask, Nullable } from '../types';
 import Timed from './task-result/timed-result';
 import Static from './task-result/static-result';
 
@@ -28,7 +22,7 @@ type Props = {
 export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
   return (
     <Container>
-      <Title>{group.name}</Title>
+      <Title>{group.uniqueName}</Title>
       {group.timed.map((task: TimedTask) => {
         return (
           <Timed

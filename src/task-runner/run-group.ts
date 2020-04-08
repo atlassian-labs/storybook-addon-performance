@@ -50,7 +50,7 @@ export default async function runGroup({
   });
 
   const results: TaskGroupResult = {
-    groupId: group.groupId,
+    groupName: group.uniqueName,
     timed: toResultMap(timedResults),
     static: toResultMap(staticResults),
   };

@@ -22,9 +22,18 @@ export default async function runTimedTask({ task, getElement }: TimedArgs): Pro
   const container: HTMLElement = document.createElement('div');
   document.body.appendChild(container);
 
-  const wholeTaskDuration: number = await mark(task.name, () =>
-    getDuration(() => task.run({ getElement, controls, container })),
-  );
+  let wholeTaskDuration: number;
+
+  if (task.name === 'interaction_test') {
+    wholeTaskDuration = await mark(task.name, () =>
+      // @ts-ignore
+      getDuration(() => task.run({ getElement, controls, container: document.body })),
+    );
+  } else {
+    wholeTaskDuration = await mark(task.name, () =>
+      getDuration(() => task.run({ getElement, controls, container })),
+    );
+  }
 
   if (document.body.contains(container)) {
     document.body.removeChild(container);

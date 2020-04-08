@@ -1,19 +1,37 @@
 import { addons } from '@storybook/addons';
 import { Channel } from '@storybook/channels';
-import React, { useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { runAll, runOneStatic, runOneTimed } from '../task-runner';
-import all from '../tasks/all';
-import { StaticResult, TaskGroupResult, TimedResult } from '../types';
+import { getInteractionGroup } from '../tasks/interactions';
+import {
+  StaticResult,
+  TaskGroupResult,
+  TimedResult,
+  PublicTimedTask,
+  TaskGroup,
+  TaskMap,
+} from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
+import preset from '../tasks/preset';
+import getTaskMap from '../tasks/get-tasks-map';
 
 type Props = {
   getNode: () => React.ReactNode;
   channel: Channel;
+  interactions: PublicTimedTask[] | undefined;
 };
 
-export default function TaskHarness({ getNode, channel }: Props) {
+export default function TaskHarness({ getNode, channel, interactions = [] }: Props) {
+  const groups: TaskGroup[] = useMemo(
+    function merge() {
+      return [...preset, getInteractionGroup(interactions)];
+    },
+    [interactions],
+  );
+  const tasks: TaskMap = useMemo(() => getTaskMap(groups), [groups]);
+
   useEffect(
     function setup() {
       function safeEmit(name: string, args: Record<string, any>) {
@@ -31,7 +49,7 @@ export default function TaskHarness({ getNode, channel }: Props) {
           eventName: eventNames.START_ALL,
           fn: async function onStartAll({ copies, samples }: RunAll['Params']) {
             const results: TaskGroupResult[] = await runAll({
-              groups: all.groups,
+              groups,
               getNode,
               samples,
               copies,
@@ -42,7 +60,7 @@ export default function TaskHarness({ getNode, channel }: Props) {
         {
           eventName: eventNames.START_ONE,
           fn: async function onStartOne({ taskId, copies, samples }: RunOne['Params']) {
-            const task = all.tasks[taskId];
+            const task = tasks[taskId];
             if (task == null) {
               throw new Error(`Could not find task with id: ${taskId}`);
             }
@@ -75,7 +93,7 @@ export default function TaskHarness({ getNode, channel }: Props) {
         safeEmit.isEnabled = false;
       };
     },
-    [channel, getNode],
+    [channel, getNode, interactions, groups, tasks],
   );
 
   return getElement(getNode)();

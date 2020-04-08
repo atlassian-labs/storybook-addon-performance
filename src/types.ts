@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type Nullable<T> = T | null;
 
 type BaseTask = {
@@ -34,9 +32,14 @@ export type TimedTaskControls = {
   time: (fn: () => Promise<void>) => Promise<void>;
 };
 
-export type TaskGroup = {
-  groupId: string;
+export type PublicTimedTask = {
   name: string;
+  description?: string;
+  run: (args: RunTimedTaskArgs) => Promise<void>;
+};
+
+export type TaskGroup = {
+  uniqueName: string;
   timed: TimedTask[];
   static: StaticTask[];
 };
@@ -72,7 +75,7 @@ export type TaskMap = {
 };
 
 export type TaskGroupResult = {
-  groupId: string;
+  groupName: string;
   timed: TimedResultMap;
   static: StaticResultMap;
 };

@@ -1,4 +1,3 @@
-import { staticTask } from '../src/tasks/create';
 import { runOneStatic } from '../src/task-runner';
 import { StaticResult, StaticTask } from '../src/types';
 
@@ -7,11 +6,13 @@ it('should run static tests', async () => {
   const returnValue: string = 'hello old friend';
   const runMock = jest.fn().mockImplementation(() => Promise.resolve(returnValue));
 
-  const task: StaticTask = staticTask({
+  const task: StaticTask = {
+    taskId: 'task',
+    type: 'static',
     description: 'task',
     name: 'task',
     run: runMock,
-  });
+  };
 
   const results: StaticResult = await runOneStatic({
     task,

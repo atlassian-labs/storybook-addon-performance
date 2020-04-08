@@ -4,6 +4,7 @@ export default async function withContainer<T>(
 ): Promise<T> {
   const container: HTMLElement = document.createElement('div');
   container.setAttribute(`data-${packageName}-managed-container`, 'true');
+  container.style.visibility = 'invisible';
   document.body.appendChild(container);
 
   const result: T = await fn(container);

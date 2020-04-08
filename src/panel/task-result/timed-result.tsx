@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nullable, TimedResult, TimedTask } from '../../types';
+import { Nullable, TimedResult, TimedTask, InteractionTask } from '../../types';
 import toFixed from '../../util/to-fixed';
 import { ExpandingResult } from './expanding-result';
 import * as Parts from './parts';
@@ -108,7 +108,7 @@ function Expanded({
   result,
   pinned,
 }: {
-  task: TimedTask;
+  task: TimedTask | InteractionTask;
   result: TimedResult;
   pinned: Nullable<TimedResult>;
 }) {
@@ -123,7 +123,7 @@ function Expanded({
 }
 
 type TimedProps = {
-  task: TimedTask;
+  task: TimedTask | InteractionTask;
   result: TimedResult;
   pinned: Nullable<TimedResult>;
 };

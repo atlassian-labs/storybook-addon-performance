@@ -3,7 +3,7 @@ import { Channel } from '@storybook/channels';
 import React, { useMemo, useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { runAll, runOneStatic, runOneTimed } from '../task-runner';
-import { getInteractionGroup } from '../tasks/interactions';
+import { getInteractionGroup } from '../tasks/get-interaction-group';
 import {
   StaticResult,
   TaskGroupResult,

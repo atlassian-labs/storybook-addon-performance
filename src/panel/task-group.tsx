@@ -13,6 +13,7 @@ import {
 } from '../types';
 import Timed from './task-result/timed-result';
 import Static from './task-result/static-result';
+import { interactionGroupName } from '../tasks/get-interaction-group';
 
 const Title = styled.h3`
   font-weight: bold;
@@ -29,17 +30,33 @@ type Props = {
   pinned: Nullable<TaskGroupResult>;
 };
 
+function EmptyGroupMessage({ group }: { group: TaskGroup }) {
+  if (group.uniqueName === interactionGroupName && !group.tasks.length) {
+    return <small>No interactions defined</small>;
+  }
+  return null;
+}
+
 export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
   return (
     <Container>
       <Title>{group.uniqueName}</Title>
+      <EmptyGroupMessage group={group} />
       {group.tasks.map((task: Task) => {
+        const value: StaticResult | TimedResult | undefined = result.map[task.taskId];
+
+        // This can happen when jumping between stories briefly before any storybook events fire
+        // So lame!!!
+        if (value == null) {
+          return null;
+        }
+
         if (task.type === 'timed') {
           return (
             <Timed
               key={task.taskId}
               task={task}
-              result={result.map[task.taskId] as TimedResult}
+              result={value as TimedResult}
               pinned={pinned ? (pinned.map[task.taskId] as TimedResult) : null}
             />
           );
@@ -50,19 +67,16 @@ export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
             <Static
               key={task.taskId}
               task={task}
-              result={result.map[task.taskId] as StaticResult}
+              result={value as StaticResult}
               pinned={pinned ? (pinned.map[task.taskId] as StaticResult) : null}
             />
           );
         }
-
-        // interaction
-        // TODO
         return (
           <Timed
             key={task.taskId}
-            task={task as any}
-            result={result.map[task.taskId] as TimedResult}
+            task={task}
+            result={value as TimedResult}
             pinned={pinned ? (pinned.map[task.taskId] as TimedResult) : null}
           />
         );

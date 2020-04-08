@@ -32,17 +32,19 @@ select.story = {
     performance: {
       interactions: [
         {
-          name: 'Select item',
-          run: async ({ container, controls }: InteractionTaskArgs): Promise<void> => {
+          name: 'Display dropdown',
+          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
             const element: Nullable<HTMLElement> = container.querySelector(
               '.addon__dropdown-indicator',
             );
             invariant(element);
             fireEvent.mouseDown(element);
-            await findByText(document.body, 'option 5', undefined, { timeout: 20000 });
+            await findByText(container, 'Option 5', undefined, { timeout: 20000 });
           },
         },
       ],
     },
   },
 };
+
+export const noInteractions = () => <p>A story with no interactions 👋</p>;

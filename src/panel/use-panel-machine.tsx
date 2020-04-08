@@ -1,13 +1,12 @@
-import addons from '@storybook/addons';
+import { Channel } from '@storybook/channels';
+import * as coreEvents from '@storybook/core-events';
 import { useMachine } from '@xstate/react';
 import { useEffect } from 'react';
-import { Channel } from '@storybook/channels';
 import eventNames, { RunAll, RunOne } from '../events';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
-import { MachineType, StateType, MachineEvents } from './machine';
-import * as coreEvents from '@storybook/core-events';
-import { savePinned, clearPinned, getPinned } from './pinned-storage';
 import { bindAll } from '../util/bind-channel-events';
+import { MachineEvents, MachineType, StateType } from './machine';
+import { clearPinned, getPinned, savePinned } from './pinned-storage';
 
 type MergeArgs = {
   existing: TaskGroupResult[];

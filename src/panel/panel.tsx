@@ -9,7 +9,7 @@ import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
 import { useParameter } from '@storybook/api';
 import { paramKey } from '../addon-constants';
-import { getInteractionGroup } from '../tasks/interactions';
+import { getInteractionGroup } from '../tasks/get-interaction-group';
 import preset from '../tasks/preset';
 
 const Container = styled.div`

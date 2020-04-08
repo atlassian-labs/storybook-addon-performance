@@ -56,7 +56,7 @@ export default async function runTaskRepeatedly({
     source: Array.from({ length: samples }),
     map: async function map(): Promise<number> {
       if (task.type === 'timed') {
-        return await runTimedTask({
+        return runTimedTask({
           task,
           getElement,
         });

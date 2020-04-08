@@ -21,6 +21,7 @@ it('should run static tests', async () => {
   });
 
   const expected: StaticResult = {
+    type: 'static',
     taskId: task.taskId,
     value: returnValue,
   };

@@ -71,27 +71,13 @@ button.story = {
     performance: {
       interactions: [
         {
-          name: 'interaction_test',
+          name: 'Promise task',
           description: 'An initial test',
           run: async ({ container }: InteractionTaskArgs): Promise<void> => {
-            console.log('starting');
-            setTimeout(async () => {
-              getByText(container, 'hello world').click();
-              await waitFor(() => getByText(container, 'HELLO WORLD'));
-              getByText(container, 'HELLO WORLD').click();
-              await waitFor(() => getByText(container, 'hello world'));
-            });
-          },
-        },
-        {
-          name: 'test 2',
-          description: 'A follow-up test',
-          run: async (): Promise<void> => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve();
-              });
-            });
+            getByText(container, 'hello world').click();
+            await waitFor(() => getByText(container, 'HELLO WORLD'));
+            getByText(container, 'HELLO WORLD').click();
+            await waitFor(() => getByText(container, 'hello world'));
           },
         },
       ],
@@ -108,8 +94,16 @@ modal.story = {
           description: 'An initial test',
           run: async ({ container }: InteractionTaskArgs): Promise<void> => {
             getByText(container, 'Open Modal').click();
-            await new Promise((r) => setTimeout(r, 100));
-            await waitFor(() => getByText(container, 'Close').click());
+            await new Promise((resolve) =>
+              setTimeout(() => {
+                console.log('timeout finished');
+                resolve();
+              }, 100),
+            );
+            await waitFor(() => {
+              console.log('checking for container', container);
+              return getByText(document.body, 'Close').click();
+            });
           },
         },
       ],

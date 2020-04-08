@@ -25,17 +25,6 @@ export default async function runGroup({
   getElement,
   samples,
 }: RunGroupArgs): Promise<TaskGroupResult> {
-  const timedResults: TimedResult[] = await asyncMap({
-    source: group.tasks.filter((task: Task) => task.type === 'timed') as TimedTask[],
-    map: async function map(task: TimedTask): Promise<TimedResult> {
-      return await runTaskRepeatedly({
-        task,
-        getElement,
-        samples,
-      });
-    },
-  });
-
   const staticResults: StaticResult[] = await asyncMap({
     source: group.tasks.filter((task: Task) => task.type === 'static') as StaticTask[],
     map: async function map(task: StaticTask): Promise<StaticResult> {
@@ -51,11 +40,20 @@ export default async function runGroup({
       return result;
     },
   });
-
+  const timedResults: TimedResult[] = await asyncMap({
+    source: group.tasks.filter((task: Task) => task.type === 'timed') as TimedTask[],
+    map: async function map(task: TimedTask): Promise<TimedResult> {
+      return runTaskRepeatedly({
+        task,
+        getElement,
+        samples,
+      });
+    },
+  });
   const interactionResults: TimedResult[] = await asyncMap({
     source: group.tasks.filter((task: Task) => task.type === 'interaction') as InteractionTask[],
     map: async function map(task: InteractionTask): Promise<TimedResult> {
-      return await runTaskRepeatedly({
+      return runTaskRepeatedly({
         task,
         getElement,
         samples,

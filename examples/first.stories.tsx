@@ -1,109 +1,53 @@
-import React, { useState } from 'react';
-import { waitFor, getByText } from '@testing-library/dom';
-import { TimedControls, InteractionTaskArgs } from '../src/types';
-import Button from '@atlaskit/button';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import React from 'react';
+import invariant from 'tiny-invariant';
+import Select from 'react-select';
+import {
+  waitFor,
+  getByText,
+  findByPlaceholderText,
+  getByPlaceholderText,
+  fireEvent,
+  findByText,
+  getByTestId,
+} from '@testing-library/dom';
+import { InteractionTaskArgs, Nullable } from '../src/types';
 
 export default {
-  title: 'Buttons',
+  title: 'Examples',
 };
 
-const FlippingButton = () => {
-  const [buttonText, setButtonText] = useState('hello world');
+const options = Array.from({ length: 1000 }, (_, k) => ({
+  value: `option ${k}`,
+  label: `option ${k}`,
+}));
 
-  const onClick = () => {
-    setButtonText(
-      buttonText === buttonText.toUpperCase() ? buttonText.toLowerCase() : buttonText.toUpperCase(),
-    );
-    console.log(buttonText);
-  };
-
+function SelectExample() {
   return (
-    <button id="1" onClick={onClick}>
-      {buttonText}
-    </button>
+    <Select
+      placeholder={`Select with ${options.length} items`}
+      classNamePrefix="addon"
+      options={options}
+      instanceId="stable"
+    />
   );
-};
-
-export const button = () => <FlippingButton />;
-
-export const button2 = () => <button>Hello other world</button>;
-
-interface State {
-  isOpen: boolean;
-}
-class DefaultModal extends React.PureComponent<{}, State> {
-  state: State = { isOpen: false };
-
-  open = () => this.setState({ isOpen: true });
-
-  close = () => this.setState({ isOpen: false });
-
-  secondaryAction = ({ target }: any) => console.log(target.innerText);
-
-  render() {
-    const { isOpen } = this.state;
-    const actions = [
-      { text: 'Close', onClick: this.close },
-      { text: 'Secondary Action', onClick: this.secondaryAction },
-    ];
-
-    return (
-      <div>
-        <Button onClick={this.open}>Open Modal</Button>
-
-        <ModalTransition>
-          {isOpen && (
-            <Modal actions={actions} onClose={this.close} heading="Modal Title">
-              some great text
-            </Modal>
-          )}
-        </ModalTransition>
-      </div>
-    );
-  }
 }
 
-export const modal = () => <DefaultModal />;
+export const select = () => <SelectExample />;
 
-button.story = {
+select.story = {
+  name: 'React select',
   parameters: {
     performance: {
       interactions: [
         {
-          name: 'Promise task',
-          description: 'An initial test',
-          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
-            getByText(container, 'hello world').click();
-            await waitFor(() => getByText(container, 'HELLO WORLD'));
-            getByText(container, 'HELLO WORLD').click();
-            await waitFor(() => getByText(container, 'hello world'));
-          },
-        },
-      ],
-    },
-  },
-};
-
-modal.story = {
-  parameters: {
-    performance: {
-      interactions: [
-        {
-          name: 'interaction_test',
-          description: 'An initial test',
-          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
-            getByText(container, 'Open Modal').click();
-            await new Promise((resolve) =>
-              setTimeout(() => {
-                console.log('timeout finished');
-                resolve();
-              }, 100),
+          name: 'Select item',
+          run: async ({ container, controls }: InteractionTaskArgs): Promise<void> => {
+            const element: Nullable<HTMLElement> = container.querySelector(
+              '.addon__dropdown-indicator',
             );
-            await waitFor(() => {
-              console.log('checking for container', container);
-              return getByText(document.body, 'Close').click();
-            });
+            invariant(element);
+            fireEvent.mouseDown(element);
+            await findByText(document.body, 'option 5', undefined, { timeout: 20000 });
           },
         },
       ],

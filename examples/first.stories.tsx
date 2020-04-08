@@ -2,7 +2,7 @@ import { findByText, fireEvent } from '@testing-library/dom';
 import React, { useState } from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
-import { InteractionTaskArgs, Nullable } from '../src/types';
+import { InteractionTaskArgs } from '../src';
 
 export default {
   title: 'Examples',
@@ -34,7 +34,7 @@ select.story = {
         {
           name: 'Display dropdown',
           run: async ({ container }: InteractionTaskArgs): Promise<void> => {
-            const element: Nullable<HTMLElement> = container.querySelector(
+            const element: HTMLElement | null = container.querySelector(
               '.addon__dropdown-indicator',
             );
             invariant(element);

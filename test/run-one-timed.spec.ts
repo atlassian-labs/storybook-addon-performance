@@ -1,16 +1,17 @@
 import { runOneTimed } from '../src/task-runner';
-import { timedTask } from '../src/tasks/create';
 import { RunTimedTaskArgs, TimedResult, TimedTask } from '../src/types';
 
 it('should run one timed task', async () => {
   const ourGetNode = () => null;
   const mock = jest.fn();
 
-  const task: TimedTask = timedTask({
+  const task: TimedTask = {
     name: 'task',
+    type: 'timed',
+    taskId: 'task',
     description: 'task',
     run: ({ getElement }: RunTimedTaskArgs) => Promise.resolve().then(() => mock(getElement())),
-  });
+  };
   const samples: number = 3;
 
   const results: TimedResult = await runOneTimed({

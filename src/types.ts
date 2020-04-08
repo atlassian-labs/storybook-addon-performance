@@ -39,8 +39,7 @@ export type PublicTimedTask = {
 };
 
 export type TaskGroup = {
-  groupId: string;
-  name: string;
+  uniqueName: string;
   timed: TimedTask[];
   static: StaticTask[];
 };
@@ -76,7 +75,7 @@ export type TaskMap = {
 };
 
 export type TaskGroupResult = {
-  groupId: string;
+  groupName: string;
   timed: TimedResultMap;
   static: StaticResultMap;
 };

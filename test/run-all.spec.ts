@@ -1,21 +1,18 @@
-import { StaticResultMap, StaticResult, StaticTask, TimedResultMap } from './../src/types';
-import { runOneTimed, runAll } from '../src/task-runner';
-import { timedTask } from '../src/tasks/create';
-import { RunTimedTaskArgs, TimedResult, TimedTask, TaskGroupResult, TaskGroup } from '../src/types';
-import { getAll } from '../src/tasks/all';
+import { runAll } from '../src/task-runner';
+import preset from '../src/tasks/preset';
+import { TaskGroup, TaskGroupResult, TimedResult, TimedTask } from '../src/types';
 import toResultMap from '../src/util/to-result-map';
-
-const all = getAll();
+import { StaticResult, StaticResultMap, StaticTask, TimedResultMap } from './../src/types';
 
 it('should run all the standard tests', async () => {
   const result = await runAll({
-    groups: all.groups,
+    groups: preset,
     getNode: () => 'hey',
     samples: 3,
     copies: 4,
   });
 
-  const expected: TaskGroupResult[] = all.groups.map(
+  const expected: TaskGroupResult[] = preset.map(
     (group: TaskGroup): TaskGroupResult => {
       const staticResults: StaticResultMap = toResultMap(
         group.static.map(
@@ -45,7 +42,7 @@ it('should run all the standard tests', async () => {
       );
 
       return {
-        groupId: group.groupId,
+        groupName: group.uniqueName,
         timed: timedResults,
         static: staticResults,
       };

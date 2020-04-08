@@ -1,13 +1,7 @@
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import {
-  RunStaticTaskArgs,
-  RunTimedTaskArgs,
-  StaticTask,
-  TaskGroup,
-  TimedTask,
-} from '../types';
-import { staticTask, taskGroup, timedTask } from './create';
+import { RunStaticTaskArgs, RunTimedTaskArgs, StaticTask, TaskGroup, TimedTask } from '../../types';
+import { staticTask, timedTask } from './create';
 
 const render: TimedTask = timedTask({
   name: 'Initial render',
@@ -26,11 +20,7 @@ const hydrate: TimedTask = timedTask({
       the HTML and building up it's internal virtual model. After hydration React
       is able to take over the HTML as if it had done the original render on the client.
   `,
-  run: async ({
-    getElement,
-    controls,
-    container,
-  }: RunTimedTaskArgs): Promise<void> => {
+  run: async ({ getElement, controls, container }: RunTimedTaskArgs): Promise<void> => {
     // Not using ReactDOM.render so that React cannot cache the result
     const html: string = ReactDOMServer.renderToString(getElement());
     container.innerHTML = html;
@@ -48,11 +38,7 @@ const reRender: TimedTask = timedTask({
       Note: You can improve this score quickly by using React.memo near the top of your
       component tree.
   `,
-  run: async ({
-    getElement,
-    controls,
-    container,
-  }: RunTimedTaskArgs): Promise<void> => {
+  run: async ({ getElement, controls, container }: RunTimedTaskArgs): Promise<void> => {
     ReactDOM.render(getElement(), container);
 
     await controls.time(async function mount() {
@@ -66,10 +52,7 @@ const domElementCount: StaticTask = staticTask({
   description: `
     The more DOM element your component creates, the more work the browser needs to do
   `,
-  run: async ({
-    getElement,
-    container,
-  }: RunStaticTaskArgs): Promise<string> => {
+  run: async ({ getElement, container }: RunStaticTaskArgs): Promise<string> => {
     ReactDOM.render(getElement(), container);
 
     const allChildren: Element[] = Array.from(container.querySelectorAll('*'));
@@ -116,10 +99,10 @@ const domElementCount: StaticTask = staticTask({
 //   },
 // });
 
-const group: TaskGroup = taskGroup({
-  name: 'Client',
+const group: TaskGroup = {
+  uniqueName: 'Client',
   timed: [render, reRender, hydrate],
   static: [domElementCount /*memoryUsage*/],
-});
+};
 
 export default group;

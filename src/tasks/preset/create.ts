@@ -1,9 +1,9 @@
-import { TimedTask, StaticTask, TaskGroup } from './../types';
+import { StaticTask, TimedTask } from '../../types';
 
 let count: number = 0;
 
-export function getUniqueId(): string {
-  return `unique-id:${count++}`;
+function getUniqueId(): string {
+  return `preset::unique-id:${count++}`;
 }
 
 export function timedTask(args: Omit<TimedTask, 'taskId' | 'type'>): TimedTask {
@@ -18,13 +18,6 @@ export function staticTask(args: Omit<StaticTask, 'taskId' | 'type'>): StaticTas
   return {
     taskId: getUniqueId(),
     type: 'static',
-    ...args,
-  };
-}
-
-export function taskGroup(args: Omit<TaskGroup, 'groupId'>): TaskGroup {
-  return {
-    groupId: getUniqueId(),
     ...args,
   };
 }

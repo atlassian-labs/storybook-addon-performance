@@ -1,5 +1,5 @@
 import { findByText, fireEvent } from '@testing-library/dom';
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
 import { InteractionTaskArgs, Nullable } from '../src/types';
@@ -48,3 +48,20 @@ select.story = {
 };
 
 export const noInteractions = () => <p>A story with no interactions 👋</p>;
+
+function burnCpu() {
+  const start = performance.now();
+  while (performance.now() - start < 200) {}
+}
+
+function Slow() {
+  // burnCpu();
+
+  return (
+    <>
+      A <strong>slow</strong> component
+    </>
+  );
+}
+
+export const slow = () => <Slow />;

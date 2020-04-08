@@ -1,14 +1,23 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/2182637/78120940-78263200-7456-11ea-9953-8ca5285af518.png" alt="storybook-addon-performance logo" width="100px" />
+  <img src="https://user-images.githubusercontent.com/2182637/78120940-78263200-7456-11ea-9953-8ca5285af518.png" alt="storybook-addon-performance logo" width="80px" />
 </p>
 <h1 align="center">storybook-addon-performance</h1>
-<div align="center">
+<p align="center">
 
 A [storybook](https://storybook.js.org/) addon to help better understand and debug performance for `React` components.
 
+</p>
+
+<p>
+  <img src="https://user-images.githubusercontent.com/2182637/78786875-c904d000-79ec-11ea-9d49-1e253129f450.gif"
+  alt="storybook-addon-performance demo"  />
+</p>
+
+<p align="center">
+
 🚧 This addon is **experimental** and a **work in progress**. We are not on stable versions yet 🚧
 
-</div>
+</p>
 
 ## Installation
 
@@ -66,6 +75,10 @@ storiesOf('MyComponent', module)
   .addDecorator(withPerformance)
   .add('MyComponent', () => <MyComponent />);
 ```
+
+## Usage: interactions
+
+[TODO]
 
 ## Local addon development
 

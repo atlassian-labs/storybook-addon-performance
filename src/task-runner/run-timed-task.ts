@@ -1,5 +1,6 @@
 import { TimedTask, TimedTaskControls, Nullable } from '../types';
 import mark from './mark';
+import withContainer from './with-container';
 
 async function getDuration(fn: () => Promise<void>): Promise<number> {
   const start: number = performance.now();
@@ -19,25 +20,12 @@ export default async function runTimedTask({ task, getElement }: TimedArgs): Pro
     },
   };
 
-  const container: HTMLElement = document.createElement('div');
-  document.body.appendChild(container);
-
-  let wholeTaskDuration: number;
-
-  if (task.name === 'interaction_test') {
-    wholeTaskDuration = await mark(task.name, () =>
-      // @ts-ignore
-      getDuration(() => task.run({ getElement, controls, container: document.body })),
-    );
-  } else {
-    wholeTaskDuration = await mark(task.name, () =>
+  const wholeTaskDuration: number = await withContainer(async (container: HTMLElement) => {
+    const duration: number = await mark(task.name, () =>
       getDuration(() => task.run({ getElement, controls, container })),
     );
-  }
-
-  if (document.body.contains(container)) {
-    document.body.removeChild(container);
-  }
+    return duration;
+  });
 
   return timedDuration != null ? timedDuration : wholeTaskDuration;
 }

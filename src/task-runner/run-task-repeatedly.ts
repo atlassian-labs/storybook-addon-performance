@@ -1,6 +1,7 @@
-import { TimedTask, TimedResult } from '../types';
+import { TimedTask, TimedResult, InteractionTask } from '../types';
 import runTimedTask from './run-timed-task';
 import { asyncMap } from './async';
+import runInteractionTask from './run-interaction-task';
 
 function getAverage(values: number[]): number {
   return values.reduce((total: number, current: number) => total + current, 0) / values.length;
@@ -41,12 +42,12 @@ function getUpperAndLower(
 }
 
 type RepeatArgs = {
-  task: TimedTask;
+  task: TimedTask | InteractionTask;
   getElement: () => React.ReactElement;
   samples: number;
 };
 
-export default async function runTimedTaskRepeatedly({
+export default async function runTaskRepeatedly({
   task,
   getElement,
   samples,
@@ -54,11 +55,16 @@ export default async function runTimedTaskRepeatedly({
   const durations: number[] = await asyncMap({
     source: Array.from({ length: samples }),
     map: async function map(): Promise<number> {
-      const duration: number = await runTimedTask({
+      if (task.type === 'timed') {
+        return await runTimedTask({
+          task,
+          getElement,
+        });
+      }
+      return runInteractionTask({
         task,
         getElement,
       });
-      return duration;
     },
   });
 
@@ -67,6 +73,7 @@ export default async function runTimedTaskRepeatedly({
   const standardDeviation: number = getStandardDeviation(average, durations);
 
   const result: TimedResult = {
+    type: 'timed',
     taskId: task.taskId,
     averageMs: average,
     samples,

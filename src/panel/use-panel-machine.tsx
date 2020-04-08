@@ -17,27 +17,13 @@ type MergeArgs = {
 
 function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupResult[] {
   return existing.map((groupResult: TaskGroupResult) => {
-    if (groupResult.static[taskId]) {
-      return {
-        ...groupResult,
-        static: {
-          ...groupResult.static,
-          [taskId]: result as StaticResult,
-        },
-      };
-    }
-
-    if (groupResult.timed[taskId]) {
-      return {
-        ...groupResult,
-        timed: {
-          ...groupResult.timed,
-          [taskId]: result as TimedResult,
-        },
-      };
-    }
-
-    return groupResult;
+    return {
+      ...groupResult,
+      map: {
+        ...groupResult.map,
+        [taskId]: result,
+      },
+    };
   });
 }
 

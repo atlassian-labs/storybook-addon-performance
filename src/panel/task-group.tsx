@@ -1,6 +1,16 @@
 import { styled } from '@storybook/theming';
-import React from 'react';
-import { StaticTask, TaskGroup, TaskGroupResult, TimedTask, Nullable } from '../types';
+import React, { ReactNode } from 'react';
+import {
+  StaticTask,
+  TaskGroup,
+  TaskGroupResult,
+  TimedTask,
+  Nullable,
+  Task,
+  ResultMap,
+  StaticResult,
+  TimedResult,
+} from '../types';
 import Timed from './task-result/timed-result';
 import Static from './task-result/static-result';
 
@@ -23,23 +33,37 @@ export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
   return (
     <Container>
       <Title>{group.uniqueName}</Title>
-      {group.timed.map((task: TimedTask) => {
+      {group.tasks.map((task: Task) => {
+        if (task.type === 'timed') {
+          return (
+            <Timed
+              key={task.taskId}
+              task={task}
+              result={result.map[task.taskId] as TimedResult}
+              pinned={pinned ? (pinned.map[task.taskId] as TimedResult) : null}
+            />
+          );
+        }
+
+        if (task.type === 'static') {
+          return (
+            <Static
+              key={task.taskId}
+              task={task}
+              result={result.map[task.taskId] as StaticResult}
+              pinned={pinned ? (pinned.map[task.taskId] as StaticResult) : null}
+            />
+          );
+        }
+
+        // interaction
+        // TODO
         return (
           <Timed
             key={task.taskId}
-            task={task}
-            result={result.timed[task.taskId]}
-            pinned={pinned ? pinned.timed[task.taskId] : null}
-          />
-        );
-      })}
-      {group.static.map((task: StaticTask) => {
-        return (
-          <Static
-            key={task.taskId}
-            task={task}
-            result={result.static[task.taskId]}
-            pinned={pinned ? pinned.static[task.taskId] : null}
+            task={task as any}
+            result={result.map[task.taskId] as TimedResult}
+            pinned={pinned ? (pinned.map[task.taskId] as TimedResult) : null}
           />
         );
       })}

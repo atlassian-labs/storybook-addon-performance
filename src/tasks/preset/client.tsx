@@ -101,8 +101,7 @@ const domElementCount: StaticTask = staticTask({
 
 const group: TaskGroup = {
   uniqueName: 'Client',
-  timed: [render, reRender, hydrate],
-  static: [domElementCount /*memoryUsage*/],
+  tasks: [render, reRender, hydrate, domElementCount],
 };
 
 export default group;

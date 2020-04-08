@@ -65,7 +65,7 @@ export default function TaskHarness({ getNode, channel, interactions = [] }: Pro
               throw new Error(`Could not find task with id: ${taskId}`);
             }
 
-            if (task.type === 'timed') {
+            if (task.type === 'timed' || task.type === 'interaction') {
               const result: TimedResult = await runOneTimed({
                 task,
                 getNode,

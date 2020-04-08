@@ -1,10 +1,10 @@
-import { TimedTask, StaticTask, TimedResult, StaticResult } from '../types';
+import { TimedTask, StaticTask, TimedResult, StaticResult, InteractionTask } from '../types';
 import React from 'react';
 import { TaskGroup, TaskGroupResult } from '../types';
 import repeatElement from './repeat-element';
 import runGroup from './run-group';
 import runStaticTask from './run-static-task';
-import runTimedTaskRepeatedly from './run-timed-task-repeatedly';
+import runTaskRepeatedly from './run-task-repeatedly';
 
 type RunAllArgs = {
   groups: TaskGroup[];
@@ -34,7 +34,7 @@ export async function runAll({
 }
 
 type RunOneTimedTaskArgs = {
-  task: TimedTask;
+  task: TimedTask | InteractionTask;
   getNode: () => React.ReactNode;
   copies: number;
   samples: number;
@@ -46,7 +46,7 @@ export async function runOneTimed({
   copies,
   samples,
 }: RunOneTimedTaskArgs): Promise<TimedResult> {
-  const result = await runTimedTaskRepeatedly({
+  const result = await runTaskRepeatedly({
     task,
     getElement: () => repeatElement(getNode, copies),
     samples,
@@ -72,6 +72,7 @@ export async function runOneStatic({
   });
 
   const result: StaticResult = {
+    type: 'static',
     taskId: task.taskId,
     value: output,
   };

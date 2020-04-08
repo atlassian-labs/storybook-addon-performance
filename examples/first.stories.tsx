@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
 import { waitFor, getByText } from '@testing-library/dom';
-import { TimedTaskControls, RunTimedTaskArgs } from '../src/types'
+import { TimedControls, InteractionTaskArgs } from '../src/types';
 import Button from '@atlaskit/button';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-
 
 export default {
   title: 'Buttons',
 };
 
 const FlippingButton = () => {
-
-  const [buttonText, setButtonText] = useState("hello world");
+  const [buttonText, setButtonText] = useState('hello world');
 
   const onClick = () => {
-    setButtonText((buttonText === buttonText.toUpperCase()) ?
-      buttonText.toLowerCase() : buttonText.toUpperCase());
+    setButtonText(
+      buttonText === buttonText.toUpperCase() ? buttonText.toLowerCase() : buttonText.toUpperCase(),
+    );
     console.log(buttonText);
-  }
+  };
 
-  return (<button id="1" onClick={onClick}>{buttonText}</button>);
+  return (
+    <button id="1" onClick={onClick}>
+      {buttonText}
+    </button>
+  );
 };
 
-export const button = () => <FlippingButton />
+export const button = () => <FlippingButton />;
 
 export const button2 = () => <button>Hello other world</button>;
 
@@ -61,8 +64,7 @@ class DefaultModal extends React.PureComponent<{}, State> {
   }
 }
 
-export const modal = () => <DefaultModal />
-
+export const modal = () => <DefaultModal />;
 
 button.story = {
   parameters: {
@@ -71,19 +73,15 @@ button.story = {
         {
           name: 'interaction_test',
           description: 'An initial test',
-          run: async ({ getElement, controls, container }: RunTimedTaskArgs): Promise<void> => {
-
+          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
+            console.log('starting');
             setTimeout(async () => {
               getByText(container, 'hello world').click();
-              await waitFor(() =>
-                getByText(container, 'HELLO WORLD')
-              )
+              await waitFor(() => getByText(container, 'HELLO WORLD'));
               getByText(container, 'HELLO WORLD').click();
-              await waitFor(() =>
-                getByText(container, 'hello world')
-              )
-            })
-          }
+              await waitFor(() => getByText(container, 'hello world'));
+            });
+          },
         },
         {
           name: 'test 2',
@@ -95,8 +93,8 @@ button.story = {
               });
             });
           },
-        }
-      ]
+        },
+      ],
     },
   },
 };
@@ -108,17 +106,13 @@ modal.story = {
         {
           name: 'interaction_test',
           description: 'An initial test',
-          run: async ({ getElement, controls, container }: RunTimedTaskArgs): Promise<void> => {
-            await controls.time(async () => {
-              getByText(container, 'Open Modal').click();
-              await new Promise(r => setTimeout(r, 100));
-              await waitFor(() =>
-                getByText(container, 'Close').click()
-              )
-            })
-          }
+          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
+            getByText(container, 'Open Modal').click();
+            await new Promise((r) => setTimeout(r, 100));
+            await waitFor(() => getByText(container, 'Close').click());
+          },
         },
-      ]
+      ],
     },
   },
 };

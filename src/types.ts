@@ -50,8 +50,7 @@ export type Task = TimedTask | StaticTask | InteractionTask;
 
 export type TaskGroup = {
   uniqueName: string;
-  timed: TimedTask[];
-  static: StaticTask[];
+  tasks: Task[];
 };
 
 export type Variance = {
@@ -61,6 +60,7 @@ export type Variance = {
 };
 
 export type TimedResult = {
+  type: 'timed';
   taskId: string;
   averageMs: number;
   samples: number;
@@ -68,16 +68,13 @@ export type TimedResult = {
 };
 
 export type StaticResult = {
+  type: 'static';
   taskId: string;
   value: string;
 };
 
-export type TimedResultMap = {
-  [taskId: string]: TimedResult;
-};
-
-export type StaticResultMap = {
-  [taskId: string]: StaticResult;
+export type ResultMap = {
+  [taskId: string]: TimedResult | StaticResult;
 };
 
 export type TaskMap = {
@@ -86,6 +83,5 @@ export type TaskMap = {
 
 export type TaskGroupResult = {
   groupName: string;
-  timed: TimedResultMap;
-  static: StaticResultMap;
+  map: ResultMap;
 };

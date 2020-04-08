@@ -1,16 +1,18 @@
 import React from 'react';
 import {
+  InteractionTask,
   StaticResult,
   StaticTask,
+  Task,
   TaskGroup,
   TaskGroupResult,
   TimedResult,
   TimedTask,
 } from '../types';
+import toResultMap from '../util/to-result-map';
 import { asyncMap } from './async';
 import runStaticTask from './run-static-task';
-import runTimedTaskRepeatedly from './run-timed-task-repeatedly';
-import toResultMap from '../util/to-result-map';
+import runTaskRepeatedly from './run-task-repeatedly';
 
 type RunGroupArgs = {
   group: TaskGroup;
@@ -24,9 +26,9 @@ export default async function runGroup({
   samples,
 }: RunGroupArgs): Promise<TaskGroupResult> {
   const timedResults: TimedResult[] = await asyncMap({
-    source: group.timed,
+    source: group.tasks.filter((task: Task) => task.type === 'timed') as TimedTask[],
     map: async function map(task: TimedTask): Promise<TimedResult> {
-      return await runTimedTaskRepeatedly({
+      return await runTaskRepeatedly({
         task,
         getElement,
         samples,
@@ -35,13 +37,14 @@ export default async function runGroup({
   });
 
   const staticResults: StaticResult[] = await asyncMap({
-    source: group.static,
+    source: group.tasks.filter((task: Task) => task.type === 'static') as StaticTask[],
     map: async function map(task: StaticTask): Promise<StaticResult> {
       const value: string = await runStaticTask({
         task,
         getElement,
       });
       const result: StaticResult = {
+        type: 'static',
         taskId: task.taskId,
         value,
       };
@@ -49,10 +52,20 @@ export default async function runGroup({
     },
   });
 
+  const interactionResults: TimedResult[] = await asyncMap({
+    source: group.tasks.filter((task: Task) => task.type === 'interaction') as InteractionTask[],
+    map: async function map(task: InteractionTask): Promise<TimedResult> {
+      return await runTaskRepeatedly({
+        task,
+        getElement,
+        samples,
+      });
+    },
+  });
+
   const results: TaskGroupResult = {
     groupName: group.uniqueName,
-    timed: toResultMap(timedResults),
-    static: toResultMap(staticResults),
+    map: toResultMap([...timedResults, ...staticResults, ...interactionResults]),
   };
 
   return results;

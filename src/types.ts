@@ -16,10 +16,13 @@ export type StaticTask = BaseTask & {
   type: 'static';
   run: (args: RunStaticTaskArgs) => Promise<string>;
 };
+export type TimedControls = {
+  time: (fn: () => Promise<void>) => Promise<void>;
+};
 
 export type RunTimedTaskArgs = {
   getElement: () => React.ReactElement;
-  controls: TimedTaskControls;
+  controls: TimedControls;
   container: HTMLElement;
 };
 
@@ -28,12 +31,14 @@ export type TimedTask = BaseTask & {
   run: (args: RunTimedTaskArgs) => Promise<void>;
 };
 
-export type TimedTaskControls = {
-  time: (fn: () => Promise<void>) => Promise<void>;
+export type InteractionTaskArgs = {
+  controls: TimedControls;
+  container: HTMLElement;
 };
 
-export type InteractionTask = TimedTask & {
+export type InteractionTask = BaseTask & {
   type: 'interaction';
+  run: (args: InteractionTaskArgs) => Promise<void>;
 };
 
 // This is what is provided as interactions to the addon by a consumer

@@ -1,4 +1,5 @@
-import { TimedTask, TimedControls, Nullable } from '../types';
+import ReactDOM from 'react-dom';
+import { TimedControls, Nullable, InteractionTask } from '../types';
 import mark from './mark';
 import withContainer from './with-container';
 
@@ -9,9 +10,9 @@ async function getDuration(fn: () => Promise<void>): Promise<number> {
   return finish - start;
 }
 
-type TimedArgs = { task: TimedTask; getElement: () => React.ReactElement };
+type Args = { task: InteractionTask; getElement: () => React.ReactElement };
 
-export default async function runTimedTask({ task, getElement }: TimedArgs): Promise<number> {
+export default async function runInteractionTask({ task, getElement }: Args): Promise<number> {
   let timedDuration: Nullable<number> = null;
 
   const controls: TimedControls = {
@@ -21,9 +22,15 @@ export default async function runTimedTask({ task, getElement }: TimedArgs): Pro
   };
 
   const wholeTaskDuration: number = await withContainer(async (container: HTMLElement) => {
+    // We render the component into a container before we start timing
+    ReactDOM.render(getElement(), container);
+
     const duration: number = await mark(task.name, () =>
-      getDuration(() => task.run({ getElement, controls, container })),
+      getDuration(() => task.run({ controls, container })),
     );
+
+    ReactDOM.unmountComponentAtNode(container);
+
     return duration;
   });
 

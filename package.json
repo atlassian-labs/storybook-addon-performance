@@ -69,7 +69,7 @@
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json}"
   },
   "scripts": {
-    "storybook:dev": "yarn start-storybook",
+    "storybook:dev": "yarn start-storybook --port 9003",
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:watch": "tsc --watch",

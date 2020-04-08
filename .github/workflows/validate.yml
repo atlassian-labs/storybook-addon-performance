@@ -23,8 +23,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
     - run: yarn install --frozen-lockfile
-    - run: yarn prettier:check
-    - run: yarn eslint:check
-    - run: yarn typescript:check
+    - run: yarn validate
       env:
         CI: true

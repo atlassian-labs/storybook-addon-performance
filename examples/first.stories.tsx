@@ -9,8 +9,8 @@ export default {
 };
 
 const options = Array.from({ length: 1000 }, (_, k) => ({
-  value: `option ${k}`,
-  label: `option ${k}`,
+  value: `Option ${k}`,
+  label: `Option ${k}`,
 }));
 
 function SelectExample() {

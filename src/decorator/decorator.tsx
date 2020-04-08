@@ -7,7 +7,7 @@ import * as constants from '../addon-constants';
 export default makeDecorator({
   name: constants.decoratorKey,
   parameterName: constants.paramKey,
-  // We are enabling the addon fo r all stories
+  // We are enabling the addon for all stories
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
 

@@ -32,20 +32,22 @@ export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
       {group.timed.map((task: TimedTask) => {
         return (
           <Timed
-            key={task.taskId}
+            key={task.name}
             task={task}
-            result={result.timed[task.taskId]}
-            pinned={pinned ? pinned.timed[task.taskId] : null}
+            group={group}
+            result={result.timed[task.name]}
+            pinned={pinned ? pinned.timed[task.name] : null}
           />
         );
       })}
       {group.static.map((task: StaticTask) => {
         return (
           <Static
-            key={task.taskId}
+            key={task.name}
             task={task}
-            result={result.static[task.taskId]}
-            pinned={pinned ? pinned.static[task.taskId] : null}
+            group={group}
+            result={result.static[task.name]}
+            pinned={pinned ? pinned.static[task.name] : null}
           />
         );
       })}

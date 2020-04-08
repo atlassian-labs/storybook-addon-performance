@@ -1,6 +1,6 @@
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
-import { getAll } from '../tasks/all';
+import allGroups from '../tasks/all';
 import { Channel } from '@storybook/channels';
 import { Nullable, TimedTask, TaskGroup, TaskGroupResult } from '../types';
 import machine, { RunContext } from './machine';
@@ -33,7 +33,7 @@ function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<T
   }
 
   const result: TaskGroupResult | undefined = context.results.find(
-    (item: TaskGroupResult) => item.groupId === group.groupId,
+    (item: TaskGroupResult) => item.groupName === group.name,
   );
 
   return result || null;
@@ -56,7 +56,7 @@ export default function Panel({ channel }: { channel: Channel }) {
   const interactions: TimedTask[] = parameters.interactions;
 
   const all = useMemo(function merge() {
-    return interactions.length ? getAll(getInterationGroup(interactions)) : getAll();
+    return interactions.length ? allGroups.concat(getInterationGroup(interactions)) : allGroups;
   }, [interactions])
 
   return (
@@ -64,13 +64,13 @@ export default function Panel({ channel }: { channel: Channel }) {
       <Container>
         <Topbar />
         <GroupContainer>
-          {all.groups.map((group: TaskGroup) => {
+          {all.map((group: TaskGroup) => {
             if (state.context.current.results == null) {
               return null;
             }
             return (
               <TaskGroupPanel
-                key={group.groupId}
+                key={group.name}
                 group={group}
                 result={getResult(group, state.context.current)}
                 pinned={findResult(group, state.context.pinned)}

@@ -5,7 +5,7 @@ export type MachineEvents =
   | { type: 'WAIT' }
   | { type: 'LOADED'; storyName: string; pinned: Nullable<RunContext> }
   | { type: 'START_ALL' }
-  | { type: 'START_ONE'; taskId: string }
+  | { type: 'START_ONE'; taskName: string; groupName: string }
   | { type: 'FINISH'; results: TaskGroupResult[] }
   | { type: 'PIN' }
   | { type: 'UNPIN' }

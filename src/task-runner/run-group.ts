@@ -28,6 +28,7 @@ export default async function runGroup({
     map: async function map(task: TimedTask): Promise<TimedResult> {
       return await runTimedTaskRepeatedly({
         task,
+        group,
         getElement,
         samples,
       });
@@ -42,7 +43,8 @@ export default async function runGroup({
         getElement,
       });
       const result: StaticResult = {
-        taskId: task.taskId,
+        taskName: task.name,
+        groupName: group.name,
         value,
       };
       return result;
@@ -50,7 +52,7 @@ export default async function runGroup({
   });
 
   const results: TaskGroupResult = {
-    groupId: group.groupId,
+    groupName: group.name,
     timed: toResultMap(timedResults),
     static: toResultMap(staticResults),
   };

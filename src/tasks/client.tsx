@@ -7,7 +7,7 @@ import {
   TaskGroup,
   TimedTask,
 } from '../types';
-import { staticTask, taskGroup, timedTask } from './create';
+import { staticTask, timedTask } from './create';
 
 const render: TimedTask = timedTask({
   name: 'Initial render',
@@ -116,10 +116,10 @@ const domElementCount: StaticTask = staticTask({
 //   },
 // });
 
-const group: TaskGroup = taskGroup({
+const group: TaskGroup = {
   name: 'Client',
   timed: [render, reRender, hydrate],
   static: [domElementCount /*memoryUsage*/],
-});
+};
 
 export default group;

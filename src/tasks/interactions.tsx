@@ -1,15 +1,15 @@
-import { TimedTask, TaskGroup, PublicTimedTask } from '../types';
-import { timedTask, taskGroup } from './create';
+import { PublicTimedTask, TaskGroup } from '../types';
+import { timedTask } from './create';
 
-export function getInterationGroup(interactions: PublicTimedTask[]) {
+export function getInterationGroup(interactions: PublicTimedTask[]): TaskGroup {
   const timed = interactions.map(interaction => timedTask({
     ...interaction,
     description: interaction.description || '(None provided)'
   }));
 
-  return taskGroup({
+  return {
     name: 'Interactions',
     timed: timed,
     static: [],
-  })
+  }
 };

@@ -35,6 +35,7 @@ export async function runAll({
 
 type RunOneTimedTaskArgs = {
   task: TimedTask;
+  group: TaskGroup;
   getNode: () => React.ReactNode;
   copies: number;
   samples: number;
@@ -42,12 +43,14 @@ type RunOneTimedTaskArgs = {
 
 export async function runOneTimed({
   task,
+  group,
   getNode,
   copies,
   samples,
 }: RunOneTimedTaskArgs): Promise<TimedResult> {
   const result = await runTimedTaskRepeatedly({
     task,
+    group,
     getElement: () => repeatElement(getNode, copies),
     samples,
   });
@@ -57,12 +60,14 @@ export async function runOneTimed({
 
 type RunOneStaticTaskArgs = {
   task: StaticTask;
+  group: TaskGroup;
   getNode: () => React.ReactNode;
   copies: number;
 };
 
 export async function runOneStatic({
   task,
+  group,
   getNode,
   copies,
 }: RunOneStaticTaskArgs): Promise<StaticResult> {
@@ -72,7 +77,8 @@ export async function runOneStatic({
   });
 
   const result: StaticResult = {
-    taskId: task.taskId,
+    taskName: task.name,
+    groupName: group.name,
     value: output,
   };
   return result;

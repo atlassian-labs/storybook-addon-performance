@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nullable, TimedResult, TimedTask } from '../../types';
+import { Nullable, TimedResult, TimedTask, TaskGroup } from '../../types';
 import toFixed from '../../util/to-fixed';
 import { ExpandingResult } from './expanding-result';
 import * as Parts from './parts';
@@ -124,6 +124,7 @@ function Expanded({
 
 type TimedProps = {
   task: TimedTask;
+  group: TaskGroup;
   result: TimedResult;
   pinned: Nullable<TimedResult>;
 };
@@ -142,7 +143,7 @@ function DiffLozenge({ diff }: { diff: number }) {
   return <Parts.ValueLozenge type={type}>{diff}%</Parts.ValueLozenge>;
 }
 
-export default function Timed({ task, pinned, result }: TimedProps) {
+export default function Timed({ task, group, pinned, result }: TimedProps) {
   const diff: number = getDiff({ result, pinned });
   const resultNode = (
     <>
@@ -154,8 +155,8 @@ export default function Timed({ task, pinned, result }: TimedProps) {
 
   return (
     <ExpandingResult
-      taskId={task.taskId}
-      name={task.name}
+      taskName={task.name}
+      groupName={group.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>
         isExpanded ? <Expanded task={task} result={result} pinned={pinned} /> : null

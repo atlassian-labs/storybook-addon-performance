@@ -1,27 +1,25 @@
 import { StaticResultMap, StaticResult, StaticTask, TimedResultMap } from './../src/types';
-import { runOneTimed, runAll } from '../src/task-runner';
-import { timedTask } from '../src/tasks/create';
-import { RunTimedTaskArgs, TimedResult, TimedTask, TaskGroupResult, TaskGroup } from '../src/types';
-import { getAll } from '../src/tasks/all';
+import { runAll } from '../src/task-runner';
+import { TimedResult, TimedTask, TaskGroupResult, TaskGroup } from '../src/types';
+import allGroups from '../src/tasks/all';
 import toResultMap from '../src/util/to-result-map';
-
-const all = getAll();
 
 it('should run all the standard tests', async () => {
   const result = await runAll({
-    groups: all.groups,
+    groups: allGroups,
     getNode: () => 'hey',
     samples: 3,
     copies: 4,
   });
 
-  const expected: TaskGroupResult[] = all.groups.map(
+  const expected: TaskGroupResult[] = allGroups.map(
     (group: TaskGroup): TaskGroupResult => {
       const staticResults: StaticResultMap = toResultMap(
         group.static.map(
           (task: StaticTask): StaticResult => {
             return {
-              taskId: task.taskId,
+              taskName: task.name,
+              groupName: group.name,
               value: expect.any(String) as string,
             };
           },
@@ -31,7 +29,8 @@ it('should run all the standard tests', async () => {
         group.timed.map(
           (task: TimedTask): TimedResult => {
             return {
-              taskId: task.taskId,
+              taskName: task.name,
+              groupName: group.name,
               averageMs: expect.any(Number) as number,
               samples: 3,
               variance: {
@@ -45,7 +44,7 @@ it('should run all the standard tests', async () => {
       );
 
       return {
-        groupId: group.groupId,
+        groupName: group.name,
         timed: timedResults,
         static: staticResults,
       };

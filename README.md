@@ -77,9 +77,69 @@ storiesOf('MyComponent', module)
   .add('MyComponent', () => <MyComponent />);
 ```
 
-## Usage: interactions
+## Usage: Interactions
 
-[TODO]
+Interaction tasks are a task type that can be defined and run on a story-by-story basis. They are useful for timing the interactive performance of your components.
+
+To define your interaction tasks, first create an array of objects, each containing the `name` and `description` (optional) of the task, and a `run` function that performs whatever tasks you'd like to measure:
+
+```js
+import { InteractionTaskArgs, PublicInteractionTask } from 'storybook-addon-performance';
+import { findByText, fireEvent } from '@testing-library/dom';
+
+// ...
+
+const interactionTasks: PublicInteractionTask[] = [
+  {
+    name: 'Display dropdown',
+    description: 'Open the dropdown and wait for Option 5 to load',
+    run: async ({ container }: InteractionTaskArgs): Promise<void> => {
+      const element: HTMLElement | null = container.querySelector('.addon__dropdown-indicator');
+      invariant(element);
+      fireEvent.mouseDown(element);
+      await findByText(container, 'Option 5', undefined, { timeout: 20000 });
+    },
+  },
+];
+```
+
+The `run` function in each task object takes two arguments:
+
+- `container`: an HTMLElement container that contains a rendered instance of the story component
+- `controls`: contains an async timing function that can be optionally called to specify when to start and finish measurements; otherwise the time taken to complete the entire `run` function is measured. Useful when a task involves some set-up work.
+
+  To use, wrap the operations in question with `controls.time` as shown below:
+
+  ```js
+  run: async ({ container }: InteractionTaskArgs): Promise<void> => {
+    // setup
+    await controls.time(async () => {
+      // interaction task you'd like to measure
+    });
+  };
+  ```
+
+Note that you can use whatever libraries you'd like to perform these interaction tests – the example above uses `@testing-library/dom` to open the select in the example and wait for a specific item.
+
+You can then include the array of interaction tasks inside the `performance` parameters of your story, with the key `interactions`:
+
+```js
+select.story = {
+  name: 'React select',
+  parameters: {
+    performance: {
+      interactions: interactionTasks,
+    },
+  },
+};
+```
+
+### Supplied types
+
+As seen above, the plugin exports two type definitions to assist with creating your own interaction tasks:
+
+- `PublicInteractionTask`: defines the object structure for an interaction task; pass an array of these tasks as a parameter to storybook, as shown above.
+- `InteractionTaskArgs`: the arguments for an interaction task's `run` function
 
 ## Local addon development
 
@@ -100,5 +160,5 @@ yarn storybook:dev
 Made with ❤️ by your friends at [Atlassian](https://www.atlassian.com/)
 
 - Alex Reardon [@alexandereardon](https://twitter.com/alexandereardon)
-- Andrew Campbell [@hey_AndrewC](https://twitter.com/hey_AndrewC)
+- Andrew Campbell [@andrewcampb_ll](https://twitter.com/andrewcampb_ll)
 - Daniel Del Core [@danieldelcore](https://twitter.com/danieldelcore)

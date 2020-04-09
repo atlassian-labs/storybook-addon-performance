@@ -42,7 +42,7 @@ export type InteractionTask = BaseTask & {
 };
 
 // This is what is provided as interactions to the addon by a consumer
-export type PublicInteractionTask = Omit<InteractionTask, 'taskId' | 'description'> & {
+export type PublicInteractionTask = Omit<InteractionTask, 'taskId' | 'description' | 'type'> & {
   description?: string;
 };
 

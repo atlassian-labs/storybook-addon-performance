@@ -1,8 +1,8 @@
 import { findByText, fireEvent } from '@testing-library/dom';
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
-import { InteractionTaskArgs } from '../src';
+import { InteractionTaskArgs, PublicInteractionTask } from '../src';
 
 export default {
   title: 'Examples',
@@ -26,23 +26,27 @@ function SelectExample() {
 
 export const select = () => <SelectExample />;
 
+
+const interactionTasks: PublicInteractionTask[] = [
+  {
+    name: 'Display dropdown',
+    description: 'Open the dropdown and wait for Option 5 to load',
+    run: async ({ container, controls }: InteractionTaskArgs): Promise<void> => {
+      const element: HTMLElement | null = container.querySelector(
+        '.addon__dropdown-indicator',
+      );
+      invariant(element);
+      fireEvent.mouseDown(element);
+      await findByText(container, 'Option 5', undefined, { timeout: 20000 });
+    },
+  },
+]
+
 select.story = {
   name: 'React select',
   parameters: {
     performance: {
-      interactions: [
-        {
-          name: 'Display dropdown',
-          run: async ({ container }: InteractionTaskArgs): Promise<void> => {
-            const element: HTMLElement | null = container.querySelector(
-              '.addon__dropdown-indicator',
-            );
-            invariant(element);
-            fireEvent.mouseDown(element);
-            await findByText(container, 'Option 5', undefined, { timeout: 20000 });
-          },
-        },
-      ],
+      interactions: interactionTasks
     },
   },
 };
@@ -51,7 +55,7 @@ export const noInteractions = () => <p>A story with no interactions 👋</p>;
 
 function burnCpu() {
   const start = performance.now();
-  while (performance.now() - start < 200) {}
+  while (performance.now() - start < 200) { }
 }
 
 function Slow() {

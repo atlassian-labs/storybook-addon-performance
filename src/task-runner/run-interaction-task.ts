@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { TimedControls, Nullable, InteractionTask } from '../types';
+import { InteractionTask, TimedControls } from '../types';
 import mark from './mark';
 import withContainer from './with-container';
 import withDuration from './with-duration';

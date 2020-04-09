@@ -55,7 +55,7 @@ function burnCpu() {
 }
 
 function Slow() {
-  // burnCpu();
+  burnCpu();
 
   return (
     <>

@@ -8,6 +8,9 @@ A [storybook](https://storybook.js.org/) addon to help better understand and deb
 
 🚧 This addon is **experimental** and a **work in progress**. We are not on stable versions yet 🚧
 
+[📺 Project overview](https://www.youtube.com/watch?v=AknVkHeYqqg&feature=youtu.be&t=283) by
+[Jack Herrington](https://twitter.com/jherr)
+
 </div>
 
 ## Highlights 🌟

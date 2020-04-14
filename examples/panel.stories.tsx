@@ -1,23 +1,21 @@
-import React, { useMemo, useEffect } from 'react';
 import { Channel } from '@storybook/channels';
+import { STORY_RENDERED } from '@storybook/core-events';
 import {
+  background,
+  color,
   convert,
+  createGlobal,
+  Global,
   ThemeProvider,
   themes,
-  Global,
-  createGlobal,
-  color,
   typography,
-  background,
 } from '@storybook/theming';
-import { STORY_RENDERED } from '@storybook/core-events';
-import Panel from '../src/panel/panel';
+import React, { useEffect, useMemo } from 'react';
 import eventNames from '../src/events';
+import Panel from '../src/panel/panel';
+import { savePinned } from '../src/panel/pinned-storage';
 import { bindAll } from '../src/util/bind-channel-events';
 import * as mocks from './mocks';
-import { Nullable } from '../src/types';
-import invariant from 'tiny-invariant';
-import { savePinned } from '../src/panel/pinned-storage';
 
 export default {
   title: 'Panel',
@@ -58,7 +56,3 @@ function ManagedPanel() {
 }
 
 export const panel = () => <ManagedPanel />;
-
-panel.story = {
-  title: 'Pinned result',
-};

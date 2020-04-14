@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const GroupContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   min-height: 100%;
   padding: 0 var(--halfGrid);
 `;

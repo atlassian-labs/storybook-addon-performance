@@ -12,11 +12,7 @@ import nextEventsInclude from './next-events-include';
 const Container = styled.div`
   display: flex;
   align-items: center;
-
-  > * {
-    margin: var(--halfGrid) !important;
-    flex-shrink: 0;
-  }
+  flex-wrap: wrap;
 `;
 
 const Message = styled.small`
@@ -25,6 +21,23 @@ const Message = styled.small`
   white-space: nowrap;
   flex-shrink: 1;
   flex-grow: 1;
+`;
+
+const Segment = styled.div`
+  display: flex;
+  align-items: center;
+
+  > * {
+    margin: var(--halfGrid) !important;
+    flex-shrink: 0;
+  }
+`;
+
+// Setting a width so we have a consistent wrap point
+// Setting a min-width so the message can collapse in tight scenarios
+const CollapseSegment = styled(Segment)`
+  width: 500px;
+  min-width: 0;
 `;
 
 type BooleanMap = {
@@ -47,67 +60,76 @@ export default function Topbar() {
 
   return (
     <Container>
-      {
-        // @ts-ignore
-        <Button primary small onClick={() => send({ type: 'START_ALL' })} disabled={!enabled.start}>
-          START ALL
-        </Button>
-      }
-      {
-        // @ts-ignore
-        <Form.Select
-          disabled={!enabled.change}
-          value={current.copies}
-          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-            const values = {
-              samples: current.samples,
-              copies: Number(event.target.value),
-            };
-            send('SET_VALUES', values);
-          }}
-        >
-          {sizes.map((size: number) => (
-            <option key={size} value={size}>
-              {size} {pluraliseCopies(size)}
-            </option>
-          ))}
-        </Form.Select>
-      }
-      {
-        // @ts-ignore
-        <Form.Select
-          disabled={!enabled.change}
-          value={current.samples}
-          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-            const values = {
-              copies: current.copies,
-              samples: Number(event.target.value),
-            };
-            send('SET_VALUES', values);
-          }}
-        >
+      <Segment>
+        {
+          // @ts-ignore
+          <Button
+            primary
+            small
+            onClick={() => send({ type: 'START_ALL' })}
+            disabled={!enabled.start}
           >
-          {sizes.map((size: number) => (
-            <option key={size} value={size}>
-              {size} {pluraliseSamples(size)}
-            </option>
-          ))}
-        </Form.Select>
-      }
-      {
-        // @ts-ignore
-        <Button
-          secondary
-          small
-          outline
-          disabled={pinned ? !enabled.unpin : !enabled.pin}
-          onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-        >
-          <Icons icon={pinned ? 'unlock' : 'lock'} />
-          {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-        </Button>
-      }
-      <Message>{state.context.message}</Message>
+            START ALL
+          </Button>
+        }
+        {
+          // @ts-ignore
+          <Form.Select
+            disabled={!enabled.change}
+            value={current.copies}
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+              const values = {
+                samples: current.samples,
+                copies: Number(event.target.value),
+              };
+              send('SET_VALUES', values);
+            }}
+          >
+            {sizes.map((size: number) => (
+              <option key={size} value={size}>
+                {size} {pluraliseCopies(size)}
+              </option>
+            ))}
+          </Form.Select>
+        }
+        {
+          // @ts-ignore
+          <Form.Select
+            disabled={!enabled.change}
+            value={current.samples}
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+              const values = {
+                copies: current.copies,
+                samples: Number(event.target.value),
+              };
+              send('SET_VALUES', values);
+            }}
+          >
+            >
+            {sizes.map((size: number) => (
+              <option key={size} value={size}>
+                {size} {pluraliseSamples(size)}
+              </option>
+            ))}
+          </Form.Select>
+        }
+      </Segment>
+      <CollapseSegment>
+        {
+          // @ts-ignore
+          <Button
+            secondary
+            small
+            outline
+            disabled={pinned ? !enabled.unpin : !enabled.pin}
+            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+          >
+            <Icons icon={pinned ? 'unlock' : 'lock'} />
+            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
+          </Button>
+        }
+        <Message>{state.context.message}</Message>
+      </CollapseSegment>
     </Container>
   );
 }

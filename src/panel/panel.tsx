@@ -1,16 +1,14 @@
+import { Channel } from '@storybook/channels';
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
-import { Channel } from '@storybook/channels';
-import { Nullable, TimedTask, TaskGroup, TaskGroupResult, PublicInteractionTask } from '../types';
+import { getInteractionGroup } from '../tasks/get-interaction-group';
+import preset from '../tasks/preset';
+import { Nullable, PublicInteractionTask, TaskGroup, TaskGroupResult } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
-import { useParameter } from '@storybook/api';
-import { paramKey } from '../addon-constants';
-import { getInteractionGroup } from '../tasks/get-interaction-group';
-import preset from '../tasks/preset';
 
 const Container = styled.div`
   --grid: 10px;
@@ -48,12 +46,14 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
   return result;
 }
 
-export default function Panel({ channel }: { channel: Channel }) {
+export default function Panel({
+  channel,
+  interactions,
+}: {
+  channel: Channel;
+  interactions: PublicInteractionTask[];
+}) {
   const { state, service } = usePanelMachine(machine, channel);
-
-  const parameters = useParameter(paramKey, { interactions: [] });
-  // Note: this will keep a consistant reference between renders
-  const interactions: PublicInteractionTask[] = parameters.interactions;
 
   const groups: TaskGroup[] = useMemo(
     function merge() {

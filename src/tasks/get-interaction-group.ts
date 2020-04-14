@@ -16,6 +16,7 @@ export function getInteractionGroup(interactions: PublicInteractionTask[]): Task
 
   return {
     uniqueName: interactionGroupName,
+    displayName: 'Interactions 🕹',
     tasks,
   };
 }

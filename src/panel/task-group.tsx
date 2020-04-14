@@ -32,7 +32,15 @@ type Props = {
 
 function EmptyGroupMessage({ group }: { group: TaskGroup }) {
   if (group.uniqueName === interactionGroupName && !group.tasks.length) {
-    return <small>No interactions defined</small>;
+    return (
+      <small>
+        No{' '}
+        <a href="https://github.com/atlassian-labs/storybook-addon-performance#usage-interactions">
+          interactions
+        </a>{' '}
+        defined.
+      </small>
+    );
   }
   return null;
 }
@@ -40,7 +48,7 @@ function EmptyGroupMessage({ group }: { group: TaskGroup }) {
 export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
   return (
     <Container>
-      <Title>{group.uniqueName}</Title>
+      <Title>{group.displayName}</Title>
       <EmptyGroupMessage group={group} />
       {group.tasks.map((task: Task) => {
         const value: StaticResult | TimedResult | undefined = result.map[task.taskId];

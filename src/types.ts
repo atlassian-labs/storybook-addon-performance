@@ -50,6 +50,7 @@ export type Task = TimedTask | StaticTask | InteractionTask;
 
 export type TaskGroup = {
   uniqueName: string;
+  displayName: string;
   tasks: Task[];
 };
 

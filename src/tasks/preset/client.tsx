@@ -101,6 +101,7 @@ const domElementCount: StaticTask = staticTask({
 
 const group: TaskGroup = {
   uniqueName: 'Client',
+  displayName: 'Client 👩‍💻',
   tasks: [render, reRender, hydrate, domElementCount],
 };
 

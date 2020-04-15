@@ -52,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-loader": "^8.1.0",
+    "cypress": "^4.4.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "jest": "^25.2.4",
@@ -69,6 +70,7 @@
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
   },
   "scripts": {
+    "cypress:open": "yarn cypress open",
     "storybook:dev": "yarn start-storybook --port 9003",
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",

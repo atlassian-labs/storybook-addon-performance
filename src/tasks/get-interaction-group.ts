@@ -1,6 +1,6 @@
 import { PublicInteractionTask, TaskGroup, InteractionTask } from '../types';
 
-export const interactionGroupName: string = 'Interactions';
+export const interactionGroupId: string = 'Interactions';
 
 export function getInteractionGroup(interactions: PublicInteractionTask[]): TaskGroup {
   const tasks: InteractionTask[] = interactions.map(
@@ -15,7 +15,7 @@ export function getInteractionGroup(interactions: PublicInteractionTask[]): Task
   );
 
   return {
-    uniqueName: interactionGroupName,
+    groupId: interactionGroupId,
     displayName: 'Interactions 🕹',
     tasks,
   };

@@ -31,7 +31,7 @@ function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<T
   }
 
   const result: TaskGroupResult | undefined = context.results.find(
-    (item: TaskGroupResult) => item.groupName === group.uniqueName,
+    (item: TaskGroupResult) => item.groupName === group.groupId,
   );
 
   return result || null;
@@ -41,7 +41,7 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
   const result: Nullable<TaskGroupResult> = findResult(group, context);
   // Cannot use invariant as we are not at a high enough typescript version
   if (!result) {
-    throw new Error(`Could not find group(${group.uniqueName}) in result`);
+    throw new Error(`Could not find group(${group.groupId}) in result`);
   }
   return result;
 }
@@ -73,7 +73,7 @@ export default function Panel({
             }
             return (
               <TaskGroupPanel
-                key={group.uniqueName}
+                key={group.groupId}
                 group={group}
                 result={getResult(group, state.context.current)}
                 pinned={findResult(group, state.context.pinned)}

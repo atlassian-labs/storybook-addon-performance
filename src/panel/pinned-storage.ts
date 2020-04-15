@@ -1,6 +1,6 @@
 import { RunContext } from './machine';
 import { packageName } from '../addon-constants';
-import { Nullable } from '../types';
+import { Nullable, TaskGroupResult, Combine } from '../types';
 
 function getKey(storyName: string) {
   return `${packageName}-${storyName}`;

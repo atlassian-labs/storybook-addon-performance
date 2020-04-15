@@ -13,7 +13,7 @@ import {
 } from '../types';
 import Timed from './task-result/timed-result';
 import Static from './task-result/static-result';
-import { interactionGroupName } from '../tasks/get-interaction-group';
+import { interactionGroupId } from '../tasks/get-interaction-group';
 
 const Title = styled.h3`
   font-weight: bold;
@@ -31,7 +31,7 @@ type Props = {
 };
 
 function EmptyGroupMessage({ group }: { group: TaskGroup }) {
-  if (group.uniqueName === interactionGroupName && !group.tasks.length) {
+  if (group.groupId === interactionGroupId && !group.tasks.length) {
     return (
       <small>
         No{' '}

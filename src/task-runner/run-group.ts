@@ -62,7 +62,7 @@ export default async function runGroup({
   });
 
   const results: TaskGroupResult = {
-    groupName: group.uniqueName,
+    groupName: group.groupId,
     map: toResultMap([...timedResults, ...staticResults, ...interactionResults]),
   };
 

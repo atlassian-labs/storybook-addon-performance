@@ -82,7 +82,7 @@ const getGzipStaticMarkupSizeInKB: StaticTask = staticTask({
 });
 
 const group: TaskGroup = {
-  uniqueName: 'Server',
+  groupId: 'Server',
   displayName: 'Server ☁️',
   tasks: [
     renderToString,

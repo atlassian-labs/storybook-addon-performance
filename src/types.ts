@@ -1,4 +1,8 @@
 export type Nullable<T> = T | null;
+// Similiar to {...A, ...B}
+// 1. Remove all overlapping types from First
+// 2. Add properties from Second
+export type Combine<First, Second> = Omit<First, keyof Second> & Second;
 
 type BaseTask = {
   taskId: string;
@@ -49,7 +53,7 @@ export type PublicInteractionTask = Omit<InteractionTask, 'taskId' | 'descriptio
 export type Task = TimedTask | StaticTask | InteractionTask;
 
 export type TaskGroup = {
-  uniqueName: string;
+  groupId: string;
   displayName: string;
   tasks: Task[];
 };
@@ -83,6 +87,9 @@ export type TaskMap = {
 };
 
 export type TaskGroupResult = {
+  // TODO: convert this to groupId
+  // Not doing this right now as we would need to handle the difference
+  // inside of our pinning logic
   groupName: string;
   map: ResultMap;
 };

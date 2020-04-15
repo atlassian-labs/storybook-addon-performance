@@ -1,8 +1,8 @@
 import { runAll } from '../src/task-runner';
 import preset from '../src/tasks/preset';
-import { TaskGroup, TaskGroupResult, TimedResult, TimedTask } from '../src/types';
+import { Task, TaskGroup, TaskGroupResult, TimedResult } from '../src/types';
 import toResultMap from '../src/util/to-result-map';
-import { StaticResult, StaticTask } from './../src/types';
+import { StaticResult } from './../src/types';
 
 it('should run all the standard tests', async () => {
   const result = await runAll({
@@ -17,7 +17,7 @@ it('should run all the standard tests', async () => {
       const staticResults: StaticResult[] = group.tasks
         .filter((t) => t.type === 'static')
         .map(
-          (task: StaticTask): StaticResult => {
+          (task: Task): StaticResult => {
             return {
               type: 'static',
               taskId: task.taskId,
@@ -28,7 +28,7 @@ it('should run all the standard tests', async () => {
       const timedResults: TimedResult[] = group.tasks
         .filter((t) => t.type === 'timed')
         .map(
-          (task: TimedTask): TimedResult => {
+          (task: Task): TimedResult => {
             return {
               type: 'timed',
               taskId: task.taskId,
@@ -44,7 +44,7 @@ it('should run all the standard tests', async () => {
         );
 
       return {
-        groupName: group.uniqueName,
+        groupId: group.groupId,
         map: toResultMap([...staticResults, ...timedResults]),
       };
     },

@@ -7,7 +7,7 @@ export const copies: number = 10;
 
 export const groupResults: TaskGroupResult[] = [
   {
-    groupName: 'Server',
+    groupId: 'Server',
     map: {
       'preset::unique-id:0': {
         type: 'timed',
@@ -38,7 +38,7 @@ export const groupResults: TaskGroupResult[] = [
     },
   },
   {
-    groupName: 'Client',
+    groupId: 'Client',
     map: {
       'preset::unique-id:6': {
         type: 'timed',
@@ -77,7 +77,7 @@ export const groupResults: TaskGroupResult[] = [
     },
   },
   {
-    groupName: 'Interactions',
+    groupId: 'Interactions',
     map: {
       'interaction::(index:0)(name:Display dropdown)': {
         type: 'timed',

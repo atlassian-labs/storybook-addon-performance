@@ -31,7 +31,7 @@ function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<T
   }
 
   const result: TaskGroupResult | undefined = context.results.find(
-    (item: TaskGroupResult) => item.groupName === group.groupId,
+    (item: TaskGroupResult) => item.groupId === group.groupId,
   );
 
   return result || null;

@@ -87,9 +87,6 @@ export type TaskMap = {
 };
 
 export type TaskGroupResult = {
-  // TODO: convert this to groupId
-  // Not doing this right now as we would need to handle the difference
-  // inside of our pinning logic
-  groupName: string;
+  groupId: string;
   map: ResultMap;
 };

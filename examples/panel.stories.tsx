@@ -46,6 +46,8 @@ function ManagedPanel() {
     savePinned(mocks.storyName, mocks.runContext);
 
     channel.emit(STORY_RENDERED, mocks.storyName);
+
+    return unsubscribe;
   }, [channel]);
 
   return (

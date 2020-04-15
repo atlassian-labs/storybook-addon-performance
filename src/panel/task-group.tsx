@@ -35,7 +35,11 @@ function EmptyGroupMessage({ group }: { group: TaskGroup }) {
     return (
       <small>
         No{' '}
-        <a href="https://github.com/atlassian-labs/storybook-addon-performance#usage-interactions">
+        <a
+          href="https://github.com/atlassian-labs/storybook-addon-performance#usage-interactions"
+          target="_blank"
+          rel="noopener"
+        >
           interactions
         </a>{' '}
         defined.

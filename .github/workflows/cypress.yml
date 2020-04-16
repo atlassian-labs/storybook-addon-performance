@@ -21,8 +21,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      # Install yarn + our dependencies
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
+      # Build the addon so it can be used
+      - run: yarn build
+      # Okay, finally start cypress
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:

@@ -1,8 +1,8 @@
-import { runAll } from '../src/task-runner';
-import preset from '../src/tasks/preset';
-import { Task, TaskGroup, TaskGroupResult, TimedResult } from '../src/types';
-import toResultMap from '../src/util/to-result-map';
-import { StaticResult } from './../src/types';
+import { runAll } from '../../src/task-runner';
+import preset from '../../src/tasks/preset';
+import { Task, TaskGroup, TaskGroupResult, TimedResult } from '../../src/types';
+import toResultMap from '../../src/util/to-result-map';
+import { StaticResult } from '../../src/types';
 
 it('should run all the standard tests', async () => {
   const result = await runAll({

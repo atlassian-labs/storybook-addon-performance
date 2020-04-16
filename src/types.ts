@@ -54,7 +54,7 @@ export type Task = TimedTask | StaticTask | InteractionTask;
 
 export type TaskGroup = {
   groupId: string;
-  displayName: string;
+  name: string;
   tasks: Task[];
 };
 

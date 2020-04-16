@@ -16,7 +16,7 @@ export function getInteractionGroup(interactions: PublicInteractionTask[]): Task
 
   return {
     groupId: interactionGroupId,
-    displayName: 'Interactions 🕹',
+    name: 'Interactions 🕹',
     tasks,
   };
 }

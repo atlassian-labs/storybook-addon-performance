@@ -8,6 +8,7 @@ import { RunContext, MachineEvents } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 import nextEventsInclude from './next-events-include';
+import * as selectors from '../selectors';
 
 const Container = styled.div`
   display: flex;
@@ -68,6 +69,7 @@ export default function Topbar() {
             small
             onClick={() => send({ type: 'START_ALL' })}
             disabled={!enabled.start}
+            id={selectors.startAllButtonId}
           >
             START ALL
           </Button>
@@ -75,6 +77,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Form.Select
+            id={selectors.copySelectId}
             disabled={!enabled.change}
             value={current.copies}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
@@ -95,6 +98,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Form.Select
+            id={selectors.sampleSelectId}
             disabled={!enabled.change}
             value={current.samples}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
@@ -118,6 +122,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Button
+            id={selectors.pinButtonId}
             secondary
             small
             outline

@@ -9,6 +9,7 @@ import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
+import { panelId } from '../selectors';
 
 const Container = styled.div`
   --grid: 10px;
@@ -64,7 +65,7 @@ export default function Panel({
 
   return (
     <ServiceContext.Provider value={service}>
-      <Container>
+      <Container id={panelId}>
         <Topbar />
         <GroupContainer>
           {groups.map((group: TaskGroup) => {

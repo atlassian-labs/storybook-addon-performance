@@ -19,15 +19,17 @@ it('should support story functions that return components (default)', async () =
     return <div>{count}</div>;
   }
 
-  await runOneStatic({
+  const result: StaticResult = await runOneStatic({
     task,
     getNode: () => <App />,
     copies: 1,
   });
+
+  expect(result.value).toBe('<div>0</div>');
 });
 
 it('should support story functions that have hooks', async () => {
-  await runOneStatic({
+  const result: StaticResult = await runOneStatic({
     task,
     getNode: () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -36,6 +38,8 @@ it('should support story functions that have hooks', async () => {
     },
     copies: 1,
   });
+
+  expect(result.value).toBe('<div>0</div>');
 });
 
 it('should support story functions are just components', async () => {
@@ -51,4 +55,14 @@ it('should support story functions are just components', async () => {
   });
 
   expect(result.value).toBe('<div>0</div>');
+});
+
+it('should support a story function that returns null', async () => {
+  const result: StaticResult = await runOneStatic({
+    task,
+    getNode: () => null,
+    copies: 1,
+  });
+
+  expect(result.value).toBe('');
 });

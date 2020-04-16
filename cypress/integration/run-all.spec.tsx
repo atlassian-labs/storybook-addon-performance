@@ -24,7 +24,5 @@ describe('run all', () => {
         // initially collapsed
         .should('match', '[aria-expanded="false"]');
     });
-
-    cy.get('this should fail');
   });
 });

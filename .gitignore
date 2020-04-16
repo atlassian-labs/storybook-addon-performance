@@ -11,6 +11,8 @@ node_modules/
 # generated files
 dist/
 storybook-static/
+cypress/screenshots/
+cypress/videos/
 
 # editors
 .idea

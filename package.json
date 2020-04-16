@@ -71,6 +71,7 @@
   },
   "scripts": {
     "cypress:open": "yarn cypress open",
+    "cypress:run": "yarn cypress run",
     "storybook:dev": "yarn start-storybook --port 9003",
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",

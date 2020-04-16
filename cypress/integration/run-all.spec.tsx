@@ -5,7 +5,7 @@ import flatten from '../../src/util/flatten';
 import { wait } from '../custom/guards';
 
 describe('run all', () => {
-  it('run all tests when asked', () => {
+  it('be able to run all tasks', () => {
     // start the tasks
     cy.get('@startAllButton').click();
 

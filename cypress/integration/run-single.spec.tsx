@@ -5,7 +5,7 @@ import { wait } from '../custom/guards';
 const task: Task = preset[0].tasks[0];
 
 describe('run single', () => {
-  it('run all tests when asked', () => {
+  it('should be able to run a single task', () => {
     // Having a larger sample so there is a bit more time for the test running
     // This will give us a longer test run (at least 10 animation frames)
     // We are doing this so we can get in to assert the disabled behaviour

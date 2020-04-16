@@ -1,4 +1,4 @@
-import { startAllButtonId, copySelectId, sampleSelectId } from './../../src/selectors';
+import { startAllButtonId, copySelectId, sampleSelectId, pinButtonId } from './../../src/selectors';
 import { panelId } from '../../src/selectors';
 import { wait } from '../custom/guards';
 
@@ -21,6 +21,7 @@ beforeEach(() => {
   cy.get(`#${startAllButtonId}`).as('startAllButton');
   cy.get(`#${copySelectId}`).as('copySelect');
   cy.get(`#${sampleSelectId}`).as('sampleSelect');
+  cy.get(`#${pinButtonId}`).as('pinButton');
 
   wait.topbarEnabled();
 });

@@ -122,6 +122,7 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Button
+            id={selectors.pinButtonId}
             secondary
             small
             outline

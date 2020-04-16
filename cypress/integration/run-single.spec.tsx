@@ -1,6 +1,6 @@
 import preset from '../../src/tasks/preset';
 import { Task } from '../../src/types';
-import { topbarIsEnabledGuard } from '../custom/topbar-guard';
+import { wait } from '../custom/guards';
 
 const task: Task = preset[0].tasks[0];
 
@@ -11,14 +11,9 @@ describe('run single', () => {
     // We are doing this so we can get in to assert the disabled behaviour
     cy.get('@sampleSelect').select('10 samples').should('have.value', '10');
 
-    cy.get('@startAllButton')
-      // start all tests
-      .click()
-      // button now disabled
-      .should('be.disabled');
+    cy.get('@startAllButton').click();
 
-    // Finished running: when the button to become enabled again
-    cy.get('@startAllButton').should('be.enabled');
+    wait.forResults();
 
     // Task is currently closed
     cy.get('@panel')
@@ -38,12 +33,9 @@ describe('run single', () => {
       .click()
       .should('be.disabled');
 
-    // Second run: checking the topbar is disabled
-    topbarIsEnabledGuard({ isEnabled: true });
-    cy.get('@runButton').should('be.enabled').click();
-    // topbar disabled while task is running
-    topbarIsEnabledGuard({ isEnabled: false });
-    // topbar enabled when task is finished
-    topbarIsEnabledGuard({ isEnabled: true });
+    wait.forResults();
+
+    // run button enabled after results
+    cy.get('@runButton').should('be.enabled');
   });
 });

@@ -1,5 +1,6 @@
 import { startAllButtonId, copySelectId, sampleSelectId } from './../../src/selectors';
 import { panelId } from '../../src/selectors';
+import { wait } from '../custom/guards';
 
 beforeEach(() => {
   cy.visit('/?path=/story/examples--select');
@@ -15,8 +16,11 @@ beforeEach(() => {
 
   // start all button should now be visible
   cy.get(`#${panelId}`).as('panel').should('be.visible');
-  // Wait for the start all button to be enabled
-  cy.get(`#${startAllButtonId}`).as('startAllButton').should('be.enabled');
-  cy.get(`#${copySelectId}`).as('copySelect').should('be.enabled');
-  cy.get(`#${sampleSelectId}`).as('sampleSelect').should('be.enabled');
+
+  // Create some nice aliases
+  cy.get(`#${startAllButtonId}`).as('startAllButton');
+  cy.get(`#${copySelectId}`).as('copySelect');
+  cy.get(`#${sampleSelectId}`).as('sampleSelect');
+
+  wait.topbarEnabled();
 });

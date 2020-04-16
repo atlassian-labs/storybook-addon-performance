@@ -2,18 +2,15 @@ import { startAllButtonId } from '../../src/selectors';
 import preset from '../../src/tasks/preset';
 import { Task, TaskGroup } from '../../src/types';
 import flatten from '../../src/util/flatten';
-import { topbarIsEnabledGuard } from '../custom/topbar-guard';
+import { wait } from '../custom/guards';
 
 describe('run all', () => {
   it('run all tests when asked', () => {
-    topbarIsEnabledGuard({ isEnabled: true });
     // start the tasks
     cy.get('@startAllButton').click();
 
-    topbarIsEnabledGuard({ isEnabled: false });
-
     // topbar will be enabled when task is done
-    topbarIsEnabledGuard({ isEnabled: true });
+    wait.forResults();
 
     preset.forEach((group: TaskGroup) => {
       cy.get('@panel').should('contain', group.name);

@@ -10,6 +10,9 @@ import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
 import eventNames from '../../src/events';
 
+beforeAll(() => localStorage.clear());
+afterEach(() => localStorage.clear());
+
 it('should prevent modifiers being changed when a result is pinned', () => {
   const channel: Channel = new Channel({ async: false });
   const { container } = render(

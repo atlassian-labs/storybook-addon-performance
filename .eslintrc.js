@@ -8,6 +8,7 @@ module.exports = {
   rules: {
     'no-async-promise-executor': 'error',
     'no-console': 'error',
+    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',

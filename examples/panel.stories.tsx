@@ -5,8 +5,8 @@ import eventNames from '../src/events';
 import Panel from '../src/panel/panel';
 import { savePinned } from '../src/panel/pinned-storage';
 import { bindAll } from '../src/util/bind-channel-events';
-import WithStorybookTheme from '../storybook-util/with-storybook-theme';
-import * as mocks from './mocks';
+import WithStorybookTheme from '../test-util/with-storybook-theme';
+import * as mocks from '../test-util/mocks';
 
 export default {
   title: 'Panel',

@@ -1,4 +1,4 @@
-import { startAllButtonId } from './../../src/selectors';
+import { startAllButtonId, copySelectId, sampleSelectId } from './../../src/selectors';
 import { panelId } from '../../src/selectors';
 
 beforeEach(() => {
@@ -15,6 +15,8 @@ beforeEach(() => {
 
   // start all button should now be visible
   cy.get(`#${panelId}`).as('panel').should('be.visible');
-  // wait for the start all button to be enabled
-  cy.get(`#${startAllButtonId}:enabled`);
+  // Wait for the start all button to be enabled
+  cy.get(`#${startAllButtonId}`).as('startAllButton').should('be.enabled');
+  cy.get(`#${copySelectId}`).as('copySelect').should('be.enabled');
+  cy.get(`#${sampleSelectId}`).as('sampleSelect').should('be.enabled');
 });

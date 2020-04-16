@@ -1,5 +1,5 @@
-import { runOneStatic } from '../src/task-runner';
-import { StaticResult, StaticTask } from '../src/types';
+import { runOneStatic } from '../../src/task-runner';
+import { StaticResult, StaticTask } from '../../src/types';
 
 it('should run static tests', async () => {
   const ourGetNode = () => null;

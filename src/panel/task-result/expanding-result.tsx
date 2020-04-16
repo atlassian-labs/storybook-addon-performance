@@ -90,7 +90,7 @@ export function ExpandingResult({ taskId, name, result, getExpanded }: Props) {
 
   return (
     <Container>
-      <HeaderButton onClick={toggle} isExpanded={isExpanded}>
+      <HeaderButton onClick={toggle} isExpanded={isExpanded} aria-expanded={isExpanded}>
         <ExpandIcon isExpanded={isExpanded} />
         <Name>{name}</Name>
         {result}

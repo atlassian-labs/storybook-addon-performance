@@ -1,8 +1,5 @@
 import { Task, TaskGroup, TaskMap } from '../types';
-
-function flatten<T>(lists: T[][]): T[] {
-  return Array.prototype.concat.apply([], lists);
-}
+import { flatten } from 'xstate/lib/utils';
 
 export default function getTaskMap(groups: TaskGroup[]): TaskMap {
   return flatten(groups.map((group) => group.tasks)).reduce((acc: TaskMap, item: Task) => {

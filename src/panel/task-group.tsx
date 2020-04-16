@@ -52,7 +52,7 @@ function EmptyGroupMessage({ group }: { group: TaskGroup }) {
 export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
   return (
     <Container>
-      <Title>{group.displayName}</Title>
+      <Title>{group.name}</Title>
       <EmptyGroupMessage group={group} />
       {group.tasks.map((task: Task) => {
         const value: StaticResult | TimedResult | undefined = result.map[task.taskId];

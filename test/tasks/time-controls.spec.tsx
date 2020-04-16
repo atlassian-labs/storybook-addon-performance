@@ -8,7 +8,7 @@ async function wait(ms: number): Promise<void> {
   });
 }
 
-it('should only time the portion of the test that is timed', async () => {
+it('should only time the portion of the task that is timed', async () => {
   {
     const uncontrolled: TimedTask = {
       type: 'timed',

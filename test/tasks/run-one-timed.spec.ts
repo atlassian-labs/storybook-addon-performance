@@ -1,5 +1,5 @@
 import { runOneTimed } from '../../src/task-runner';
-import { RunTimedTaskArgs, TimedResult, TimedTask } from '../../src/types';
+import { RunTimedTaskArgs, TimedResult, TimedTask, ErrorResult } from '../../src/types';
 
 it('should run one timed task', async () => {
   const ourGetNode = () => null;
@@ -14,7 +14,7 @@ it('should run one timed task', async () => {
   };
   const samples: number = 3;
 
-  const results: TimedResult = await runOneTimed({
+  const results: TimedResult | ErrorResult = await runOneTimed({
     task,
     getNode: ourGetNode,
     samples,

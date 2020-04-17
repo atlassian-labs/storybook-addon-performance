@@ -85,8 +85,10 @@ export type ErrorResult = {
   message: Nullable<string>;
 };
 
+export type Result = TimedResult | StaticResult | ErrorResult;
+
 export type ResultMap = {
-  [taskId: string]: TimedResult | StaticResult | ErrorResult;
+  [taskId: string]: Result;
 };
 
 export type TaskMap = {

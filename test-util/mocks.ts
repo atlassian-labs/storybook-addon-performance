@@ -52,15 +52,10 @@ export const groupResults: TaskGroupResult[] = [
         },
       },
       'preset::unique-id:8': {
-        type: 'timed',
+        type: 'error',
         taskId: 'preset::unique-id:8',
-        averageMs: 27.2799999860581,
-        samples,
-        variance: {
-          upperPercentage: 20.36290314721186,
-          lowerPercentage: 10.44721406571074,
-          standardDeviation: 2.6892257134155853,
-        },
+        reason: 'unhandled',
+        message: null,
       },
       'preset::unique-id:7': {
         type: 'timed',

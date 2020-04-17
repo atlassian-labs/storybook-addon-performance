@@ -34,9 +34,7 @@ function DiffToPinned({
             <tr>
               <Parts.TitleCell>Current value</Parts.TitleCell>
               <Parts.ValueCell>
-                <Parts.ValueLozenge
-                  type={pinned.value === result.value ? 'raw' : 'info'}
-                >
+                <Parts.ValueLozenge type={pinned.value === result.value ? 'raw' : 'info'}>
                   {pinned.value}
                   {task.scale}
                 </Parts.ValueLozenge>
@@ -67,7 +65,7 @@ function Expanded({
   );
 }
 
-export default function Static({
+export default function StaticResultView({
   task,
   result,
   pinned,
@@ -95,9 +93,7 @@ export default function Static({
       name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>
-        isExpanded ? (
-          <Expanded task={task} result={result} pinned={pinned} />
-        ) : null
+        isExpanded ? <Expanded task={task} result={result} pinned={pinned} /> : null
       }
     />
   );

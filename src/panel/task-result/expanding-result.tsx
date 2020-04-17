@@ -37,9 +37,10 @@ const HeaderButton = styled.button<{ isExpanded: boolean }>`
   text-align: left;
   font-size: 16px;
   font-weight: bold;
-  border-radius: var(--result-border-radius);
 
+  border-radius: var(--result-border-radius);
   background-color: ${(props) => props.theme.background.content};
+  color: ${(props) => props.theme.color.defaultText};
 
   display: flex;
   align-items: center;

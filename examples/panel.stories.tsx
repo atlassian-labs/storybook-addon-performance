@@ -12,7 +12,7 @@ export default {
   title: 'Panel',
 };
 
-function ManagedPanel() {
+function ManagedPanel({ mode }: { mode: 'dark' | 'normal' }) {
   const channel: Channel = useMemo(() => new Channel({ async: false }), []);
 
   useEffect(() => {
@@ -33,10 +33,11 @@ function ManagedPanel() {
   }, [channel]);
 
   return (
-    <WithStorybookTheme>
+    <WithStorybookTheme mode={mode}>
       <Panel channel={channel} interactions={[]} />
     </WithStorybookTheme>
   );
 }
 
-export const panel = () => <ManagedPanel />;
+export const light = () => <ManagedPanel mode="normal" />;
+export const dark = () => <ManagedPanel mode="dark" />;

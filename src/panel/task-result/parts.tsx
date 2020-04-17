@@ -27,7 +27,7 @@ export const Content = styled.div`` as any;
 export const Note =
   styled.div`
     padding: calc(var(--grid) / 2);
-    background-color: #f1f1f1; /* super light grey */
+    background-color: ${(props) => props.theme.background.hoverable};
     border-radius: var(--result-border-radius);
     font-size: small;
 
@@ -54,7 +54,7 @@ export const ValueLozenge =
   }>`
     padding: calc(var(--grid) / 2) var(--grid);
     border-radius: var(--result-border-radius);
-    color: ${(props) => props.theme.color.inverseText};
+    color: ${(props) => props.theme.color.light};
     font-weight: bold;
     font-size: small;
     background-color: ${({ type, theme }) =>

@@ -1,20 +1,21 @@
-import {
-  background,
-  color,
-  convert,
-  createGlobal,
-  Global,
-  ThemeProvider,
-  themes,
-  typography,
-} from '@storybook/theming';
+import { convert, createGlobal, Global, Theme, ThemeProvider, themes } from '@storybook/theming';
 import React from 'react';
 
-export default function WithStorybookTheme(props: { children: React.ReactNode }) {
+export default function WithStorybookTheme({
+  children,
+  mode = 'normal',
+}: {
+  children: React.ReactNode;
+  mode?: 'normal' | 'dark';
+}) {
+  const theme: Theme = convert(mode === 'dark' ? themes.dark : themes.normal);
+
   return (
     <>
-      <Global styles={createGlobal({ color, typography, background })} />
-      <ThemeProvider theme={convert(themes.normal)}>{props.children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Global styles={createGlobal(theme)} />
+        {children}
+      </ThemeProvider>
     </>
   );
 }

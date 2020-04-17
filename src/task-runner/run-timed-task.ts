@@ -1,8 +1,9 @@
-import { TimedTask, TimedResult, InteractionTask, TimedControls, ErrorResult } from '../types';
+import { ErrorResult, InteractionTask, TimedControls, TimedResult, TimedTask } from '../types';
 import { asyncMap } from './async';
+import getErrorResult from './get-error-result';
+import mark from './mark';
 import runInteractionTask from './run-interaction-task';
 import withContainer from './with-container';
-import mark from './mark';
 import withDuration from './with-duration';
 
 function getAverage(values: number[]): number {
@@ -97,13 +98,7 @@ export async function getResultForTimedTask({
       },
     };
     return result;
-  } catch (e) {
-    const result: ErrorResult = {
-      type: 'error',
-      taskId: task.taskId,
-      reason: 'unhandled',
-      message: null,
-    };
-    return result;
+  } catch (error) {
+    return getErrorResult({ task, error });
   }
 }

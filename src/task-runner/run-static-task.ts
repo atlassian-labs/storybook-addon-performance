@@ -1,4 +1,5 @@
-import { StaticTask, ErrorResult, StaticResult } from '../types';
+import { ErrorResult, StaticResult, StaticTask } from '../types';
+import getErrorResult from './get-error-result';
 import mark from './mark';
 import withContainer from './with-container';
 
@@ -22,13 +23,7 @@ export async function getResultForStaticTask({
       value,
     };
     return result;
-  } catch (e) {
-    const result: ErrorResult = {
-      type: 'error',
-      taskId: task.taskId,
-      reason: 'unhandled',
-      message: null,
-    };
-    return result;
+  } catch (error) {
+    return getErrorResult({ task, error });
   }
 }

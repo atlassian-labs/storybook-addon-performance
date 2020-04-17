@@ -61,7 +61,7 @@ export const groupResults: TaskGroupResult[] = [
         type: 'error',
         taskId: 'preset::unique-id:7',
         reason: 'unsupported',
-        message: null,
+        message: 'document.someFakeAPI is not supported',
       },
       'preset::unique-id:9': { type: 'static', taskId: 'preset::unique-id:9', value: '130' },
     },

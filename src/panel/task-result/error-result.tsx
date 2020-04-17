@@ -4,11 +4,16 @@ import { ExpandingResult } from './expanding-result';
 import * as Parts from './parts';
 
 function ErrorSection({ result }: { result: ErrorResult }) {
+  const message: React.ReactNode = result.message ? (
+    <Parts.Content>Message: {result.message}</Parts.Content>
+  ) : null;
+
   if (result.reason === 'unhandled') {
     return (
       <>
         <Parts.Heading>Error ❌</Parts.Heading>
         <Parts.Content>An unhandled error has occurred while running this task</Parts.Content>
+        {message}
       </>
     );
   }
@@ -16,6 +21,7 @@ function ErrorSection({ result }: { result: ErrorResult }) {
     <>
       <Parts.Heading>Unsupported ⚠️</Parts.Heading>
       <Parts.Content>This task is not supported in the current running environment</Parts.Content>
+      {message}
     </>
   );
 }

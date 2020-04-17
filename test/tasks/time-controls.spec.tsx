@@ -34,7 +34,8 @@ it('should only time the portion of the task that is timed', async () => {
         },
       }),
     );
-    expect((result as TimedResult).averageMs).toBeGreaterThanOrEqual(200);
+    // not waiting the full 200 as sometimes the engine can come in a little early
+    expect((result as TimedResult).averageMs).toBeGreaterThanOrEqual(180);
   }
   {
     const result: TimedResult | ErrorResult = await runOneTimed(

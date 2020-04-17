@@ -12,7 +12,7 @@ type Args = {
   copies: number;
 };
 
-export default function prepareGetNode({ getNode, copies }: Args): React.ReactElement {
+export default function toSafeElement({ getNode, copies }: Args): React.ReactElement {
   const nodes: React.ReactNode[] = Array.from({ length: copies }, (_, key) => (
     <Host key={key}>{getNode}</Host>
   ));

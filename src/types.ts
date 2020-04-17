@@ -78,8 +78,15 @@ export type StaticResult = {
   value: string;
 };
 
+export type ErrorResult = {
+  type: 'error';
+  taskId: string;
+  reason: 'unsupported' | 'unhandled';
+  message: Nullable<string>;
+};
+
 export type ResultMap = {
-  [taskId: string]: TimedResult | StaticResult;
+  [taskId: string]: TimedResult | StaticResult | ErrorResult;
 };
 
 export type TaskMap = {

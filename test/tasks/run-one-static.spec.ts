@@ -1,5 +1,5 @@
 import { runOneStatic } from '../../src/task-runner';
-import { StaticResult, StaticTask } from '../../src/types';
+import { ErrorResult, StaticResult, StaticTask } from '../../src/types';
 
 it('should run static tests', async () => {
   const ourGetNode = () => null;
@@ -14,7 +14,7 @@ it('should run static tests', async () => {
     run: runMock,
   };
 
-  const results: StaticResult = await runOneStatic({
+  const results: StaticResult | ErrorResult = await runOneStatic({
     task,
     getNode: ourGetNode,
     copies: 1,

@@ -1,12 +1,13 @@
+import { ErrorResult } from '../types';
 import { TimedTask, StaticTask, TimedResult, StaticResult, InteractionTask } from '../types';
 import React from 'react';
 import { TaskGroup, TaskGroupResult } from '../types';
 import toSafeElement from './to-safe-element';
 import runGroup from './run-group';
-import runStaticTask from './run-static-task';
-import runTaskRepeatedly from './run-task-repeatedly';
+import { getResultForStaticTask } from './run-static-task';
+import { getResultForTimedTask } from './run-timed-task';
 
-type RunAllArgs = {
+export type RunAllArgs = {
   groups: TaskGroup[];
   getNode: () => React.ReactNode;
   samples: number;
@@ -33,7 +34,7 @@ export async function runAll({
   return value;
 }
 
-type RunOneTimedTaskArgs = {
+export type RunOneTimedTaskArgs = {
   task: TimedTask | InteractionTask;
   getNode: () => React.ReactNode;
   copies: number;
@@ -45,8 +46,8 @@ export async function runOneTimed({
   getNode,
   copies,
   samples,
-}: RunOneTimedTaskArgs): Promise<TimedResult> {
-  const result = await runTaskRepeatedly({
+}: RunOneTimedTaskArgs): Promise<TimedResult | ErrorResult> {
+  const result = await getResultForTimedTask({
     task,
     getElement: () => toSafeElement({ getNode, copies }),
     samples,
@@ -55,7 +56,7 @@ export async function runOneTimed({
   return result;
 }
 
-type RunOneStaticTaskArgs = {
+export type RunOneStaticTaskArgs = {
   task: StaticTask;
   getNode: () => React.ReactNode;
   copies: number;
@@ -65,16 +66,9 @@ export async function runOneStatic({
   task,
   getNode,
   copies,
-}: RunOneStaticTaskArgs): Promise<StaticResult> {
-  const output: string = await runStaticTask({
+}: RunOneStaticTaskArgs): Promise<StaticResult | ErrorResult> {
+  return getResultForStaticTask({
     task,
     getElement: () => toSafeElement({ getNode, copies }),
   });
-
-  const result: StaticResult = {
-    type: 'static',
-    taskId: task.taskId,
-    value: output,
-  };
-  return result;
 }

@@ -2,6 +2,7 @@ import { ErrorResult, InteractionTask, TimedControls, TimedResult, TimedTask } f
 import { asyncMap } from './async';
 import getErrorResult from './get-error-result';
 import mark from './mark';
+import printError from './print-error';
 import runInteractionTask from './run-interaction-task';
 import withContainer from './with-container';
 import withDuration from './with-duration';
@@ -99,6 +100,7 @@ export async function getResultForTimedTask({
     };
     return result;
   } catch (error) {
+    printError({ task, error });
     return getErrorResult({ task, error });
   }
 }

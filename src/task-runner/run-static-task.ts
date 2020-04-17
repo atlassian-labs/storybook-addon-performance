@@ -1,5 +1,6 @@
 import { ErrorResult, StaticResult, StaticTask } from '../types';
 import getErrorResult from './get-error-result';
+import printError from './print-error';
 import mark from './mark';
 import withContainer from './with-container';
 
@@ -24,6 +25,7 @@ export async function getResultForStaticTask({
     };
     return result;
   } catch (error) {
+    printError({ task, error });
     return getErrorResult({ task, error });
   }
 }

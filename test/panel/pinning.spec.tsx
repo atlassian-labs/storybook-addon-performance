@@ -1,14 +1,13 @@
 import { Channel } from '@storybook/channels';
 import { STORY_RENDERED } from '@storybook/core-events';
-import { act, render, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import eventNames from '../../src/events';
 import Panel from '../../src/panel/panel';
 import * as selectors from '../../src/selectors';
 import { getById } from '../../test-util/get-by';
-import { assertTopbar } from '../../test-util/topbar';
-import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
-import eventNames from '../../src/events';
+import WithStorybookTheme from '../../test-util/with-storybook-theme';
 
 beforeAll(() => localStorage.clear());
 afterEach(() => localStorage.clear());

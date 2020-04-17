@@ -8,11 +8,12 @@ import {
   TaskGroupResult,
   TimedResult,
   TimedTask,
+  ErrorResult,
 } from '../types';
 import toResultMap from '../util/to-result-map';
 import { asyncMap } from './async';
-import runStaticTask from './run-static-task';
-import runTaskRepeatedly from './run-task-repeatedly';
+import { getResultForStaticTask } from './run-static-task';
+import { getResultForTimedTask } from './run-timed-task';
 
 type RunGroupArgs = {
   group: TaskGroup;
@@ -25,35 +26,29 @@ export default async function runGroup({
   getElement,
   samples,
 }: RunGroupArgs): Promise<TaskGroupResult> {
-  const staticResults: StaticResult[] = await asyncMap({
+  const staticResults: (StaticResult | ErrorResult)[] = await asyncMap({
     source: group.tasks.filter((task: Task) => task.type === 'static') as StaticTask[],
-    map: async function map(task: StaticTask): Promise<StaticResult> {
-      const value: string = await runStaticTask({
+    map: async function map(task: StaticTask): Promise<StaticResult | ErrorResult> {
+      return getResultForStaticTask({
         task,
         getElement,
       });
-      const result: StaticResult = {
-        type: 'static',
-        taskId: task.taskId,
-        value,
-      };
-      return result;
     },
   });
-  const timedResults: TimedResult[] = await asyncMap({
+  const timedResults: (TimedResult | ErrorResult)[] = await asyncMap({
     source: group.tasks.filter((task: Task) => task.type === 'timed') as TimedTask[],
-    map: async function map(task: TimedTask): Promise<TimedResult> {
-      return runTaskRepeatedly({
+    map: async function map(task: TimedTask): Promise<TimedResult | ErrorResult> {
+      return getResultForTimedTask({
         task,
         getElement,
         samples,
       });
     },
   });
-  const interactionResults: TimedResult[] = await asyncMap({
+  const interactionResults: (TimedResult | ErrorResult)[] = await asyncMap({
     source: group.tasks.filter((task: Task) => task.type === 'interaction') as InteractionTask[],
-    map: async function map(task: InteractionTask): Promise<TimedResult> {
-      return runTaskRepeatedly({
+    map: async function map(task: InteractionTask): Promise<TimedResult | ErrorResult> {
+      return getResultForTimedTask({
         task,
         getElement,
         samples,

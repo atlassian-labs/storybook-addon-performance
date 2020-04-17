@@ -142,7 +142,7 @@ function DiffLozenge({ diff }: { diff: number }) {
   return <Parts.ValueLozenge type={type}>{diff}%</Parts.ValueLozenge>;
 }
 
-export default function Timed({ task, pinned, result }: TimedProps) {
+export default function TimedResultView({ task, pinned, result }: TimedProps) {
   const diff: number = getDiff({ result, pinned });
   const resultNode = (
     <>

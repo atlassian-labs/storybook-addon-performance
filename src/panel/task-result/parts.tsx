@@ -49,7 +49,7 @@ export const ResultScale =
 
 export const ValueLozenge =
   styled.code<{
-    type: 'positive' | 'negative' | 'info' | 'faint' | 'raw';
+    type: 'positive' | 'negative' | 'warning' | 'info' | 'faint' | 'raw';
     width?: 'fill' | 'inherit';
   }>`
     padding: calc(var(--grid) / 2) var(--grid);
@@ -62,6 +62,8 @@ export const ValueLozenge =
         ? theme.color.positive
         : type === 'negative'
         ? theme.color.negative
+        : type === 'warning'
+        ? theme.color.warning
         : type === 'info'
         ? theme.color.seafoam
         : type === 'faint'

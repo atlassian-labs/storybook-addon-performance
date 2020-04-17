@@ -61,44 +61,6 @@ const domElementCount: StaticTask = staticTask({
   },
 });
 
-// type MemoryInfo = {
-//   totalJSHeapSize: number;
-//   usedJSHeapSize: number;
-//   jsHeapSizeLimit: number;
-// };
-
-// const memoryUsage: StaticTask = staticTask({
-//   name: 'Runtime memory usage',
-//   scale: 'mb',
-//   description: `
-//     This task records how much memory your component takes to mount into the dom.
-//     It does not record how much memory the code that drives your component takes up
-//   `,
-//   run: async ({
-//     getElement,
-//     container,
-//   }: RunStaticTaskArgs): Promise<string> => {
-//     // memory is not on the inbuilt type yet
-//     const memory: MemoryInfo | undefined = (performance as any).memory;
-
-//     if (!memory) {
-//       return '?';
-//     }
-
-//     return 'TODO';
-
-//     // const before: number = performance.memory.usedJSHeapSize;
-//     // ReactDOM.render(getElement(), container);
-//     // // const array1 = Array.from({ length: 2000000 }).fill(1);
-//     // const after: number = performance.memory.usedJSHeapSize;
-
-//     // const bytes: number = after - before;
-//     // console.log('bytes', bytes);
-
-//     // return String(bytesToMegaBytes(bytes));
-//   },
-// });
-
 const group: TaskGroup = {
   groupId: 'Client',
   name: 'Client 👩‍💻',

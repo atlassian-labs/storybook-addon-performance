@@ -11,6 +11,7 @@ import {
   PublicInteractionTask,
   TaskGroup,
   TaskMap,
+  ErrorResult,
 } from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
@@ -66,7 +67,7 @@ export default function TaskHarness({ getNode, channel, interactions = [] }: Pro
             }
 
             if (task.type === 'timed' || task.type === 'interaction') {
-              const result: TimedResult = await runOneTimed({
+              const result: TimedResult | ErrorResult = await runOneTimed({
                 task,
                 getNode,
                 samples,
@@ -76,7 +77,7 @@ export default function TaskHarness({ getNode, channel, interactions = [] }: Pro
               return;
             }
             if (task.type === 'static') {
-              const result: StaticResult = await runOneStatic({
+              const result: StaticResult | ErrorResult = await runOneStatic({
                 task,
                 getNode,
                 copies,

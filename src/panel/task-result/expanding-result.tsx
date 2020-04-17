@@ -48,10 +48,6 @@ const HeaderButton = styled.button<{ isExpanded: boolean }>`
   > * {
     margin-left: var(--grid);
     flex-shrink: 0;
-
-    &:first-child {
-      margin-left: 0;
-    }
   }
 `;
 
@@ -67,6 +63,7 @@ const Name = styled.h4`
 `;
 
 const IconContainer = styled.span`
+  margin-left: 0;
   width: var(--grid);
   height: var(--grid);
 `;

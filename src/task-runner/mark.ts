@@ -7,8 +7,14 @@ const endMark: string = `${packageName}-end`;
 // It allows people to narrow down on the work done in a specific task
 export default async function mark<T>(taskName: string, fn: () => Promise<T>): Promise<T> {
   performance.mark(startMark);
-  const result: T = await fn();
-  performance.mark(endMark);
-  performance.measure(`🚀 (Task: ${taskName})`, startMark, endMark);
-  return result;
+  try {
+    const result: T = await fn();
+    performance.mark(endMark);
+    performance.measure(`🚀 (Task: ${taskName})`, startMark, endMark);
+    return result;
+  } catch (e) {
+    performance.mark(endMark);
+    performance.measure(`🚀❌ (Task: ${taskName})`, startMark, endMark);
+    throw e;
+  }
 }

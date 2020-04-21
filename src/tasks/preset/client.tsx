@@ -73,7 +73,7 @@ const domElementCount: StaticTask = staticTask({
 });
 
 const domElementCountWithoutSvg: StaticTask = staticTask({
-  name: 'DOM element count (excluding nested inline svg elements)',
+  name: 'DOM element count (no nested inline svg elements)',
   description: `
     The count of DOM elements excluding inner SVG elements
   `,

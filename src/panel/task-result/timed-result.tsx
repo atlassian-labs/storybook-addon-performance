@@ -10,8 +10,10 @@ function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<Tim
   if (!pinned) {
     return 0;
   }
+  const percentage: number = (pinned.averageMs / result.averageMs) * 100;
+  const diffFromAverage: number = 100 - percentage;
 
-  return toFixed(1 - pinned.averageMs / result.averageMs);
+  return diffFromAverage;
 }
 
 function DiffToPinned({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {
@@ -130,16 +132,23 @@ type TimedProps = {
 
 function DiffLozenge({ diff }: { diff: number }) {
   const type = (() => {
-    if (diff > 1) {
+    const threshold: number = 5;
+    if (diff > threshold) {
       return 'negative';
     }
-    if (diff < -1) {
+    if (diff < -threshold) {
       return 'positive';
     }
     return 'faint';
   })();
+  const sign: string = diff >= 0 ? '+' : '-';
 
-  return <Parts.ValueLozenge type={type}>{diff}%</Parts.ValueLozenge>;
+  return (
+    <Parts.ValueLozenge type={type}>
+      {sign}
+      {toFixed(Math.abs(diff), 1)}%
+    </Parts.ValueLozenge>
+  );
 }
 
 export default function TimedResultView({ task, pinned, result }: TimedProps) {

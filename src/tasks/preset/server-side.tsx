@@ -32,7 +32,7 @@ const getRawStringSizeInKB: StaticTask = staticTask({
   run: async ({ getElement }: RunStaticTaskArgs): Promise<string> => {
     const output: string = ReactDOMServer.renderToString(getElement());
     const blob: Blob = new Blob([output]);
-    return String(bytesToKiloBytes(blob.size));
+    return bytesToKiloBytes(blob.size);
   },
 });
 
@@ -48,7 +48,7 @@ const getGzipStringSizeInKB: StaticTask = staticTask({
     // This is what Jira currently uses
     const bytes: number = gzip.zip(output, { level: 9 }).length;
 
-    return String(bytesToKiloBytes(bytes));
+    return bytesToKiloBytes(bytes);
   },
 });
 
@@ -61,7 +61,7 @@ const getRawStaticMarkupSizeInKB: StaticTask = staticTask({
   run: async ({ getElement }: RunStaticTaskArgs): Promise<string> => {
     const output: string = ReactDOMServer.renderToStaticMarkup(getElement());
     const blob: Blob = new Blob([output]);
-    return String(bytesToKiloBytes(blob.size));
+    return bytesToKiloBytes(blob.size);
   },
 });
 
@@ -77,7 +77,7 @@ const getGzipStaticMarkupSizeInKB: StaticTask = staticTask({
     // This is what Jira currently uses
     const bytes: number = gzip.zip(output, { level: 9 }).length;
 
-    return String(bytesToKiloBytes(bytes));
+    return bytesToKiloBytes(bytes);
   },
 });
 

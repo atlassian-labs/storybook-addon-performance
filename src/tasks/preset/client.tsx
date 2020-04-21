@@ -1,6 +1,13 @@
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import { RunStaticTaskArgs, RunTimedTaskArgs, StaticTask, TaskGroup, TimedTask } from '../../types';
+import {
+  RunStaticTaskArgs,
+  RunTimedTaskArgs,
+  StaticTask,
+  TaskGroup,
+  TimedTask,
+  Nullable,
+} from '../../types';
 import { staticTask, timedTask } from './create';
 
 const render: TimedTask = timedTask({
@@ -47,6 +54,10 @@ const reRender: TimedTask = timedTask({
   },
 });
 
+function getAllChildren(container: HTMLElement): Element[] {
+  return Array.from(container.querySelectorAll('*'));
+}
+
 const domElementCount: StaticTask = staticTask({
   name: 'DOM element count',
   description: `
@@ -55,7 +66,36 @@ const domElementCount: StaticTask = staticTask({
   run: async ({ getElement, container }: RunStaticTaskArgs): Promise<string> => {
     ReactDOM.render(getElement(), container);
 
-    const allChildren: Element[] = Array.from(container.querySelectorAll('*'));
+    const allChildren: Element[] = getAllChildren(container);
+
+    return String(allChildren.length);
+  },
+});
+
+const domElementCountWithoutSvg: StaticTask = staticTask({
+  name: 'DOM element count (no nested inline svg elements)',
+  description: `
+    The count of DOM elements excluding inner SVG elements
+  `,
+  run: async ({ getElement, container }: RunStaticTaskArgs): Promise<string> => {
+    ReactDOM.render(getElement(), container);
+
+    const allChildren: Element[] = getAllChildren(container).filter((el: Element) => {
+      const parent: Nullable<Element> = el.closest('svg');
+
+      // element not inside of a SVG: include
+      if (!parent) {
+        return true;
+      }
+
+      // current element is the SVG (closest can return self): include
+      if (parent === el) {
+        return true;
+      }
+
+      // we can exclude thie one
+      return false;
+    });
 
     return String(allChildren.length);
   },
@@ -64,7 +104,7 @@ const domElementCount: StaticTask = staticTask({
 const group: TaskGroup = {
   groupId: 'Client',
   name: 'Client 👩‍💻',
-  tasks: [render, reRender, hydrate, domElementCount],
+  tasks: [render, reRender, hydrate, domElementCount, domElementCountWithoutSvg],
 };
 
 export default group;

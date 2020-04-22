@@ -10,10 +10,15 @@ function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<Tim
   if (!pinned) {
     return 0;
   }
-  const percentage: number = (pinned.averageMs / result.averageMs) * 100;
-  const diffFromAverage: number = 100 - percentage;
+  // We want to get the % changed from the pinned value.
+  // [Same]  | pinned:10 | result:10 | 0
+  // [Faster]| pinned:10 | result: 9 | -10
+  // [Slower]| pinned:10 | result: 11 | +10
 
-  return diffFromAverage;
+  const resultAsPercentageOfPinned: number = (result.averageMs / pinned.averageMs) * 100;
+  const changeFromPin: number = resultAsPercentageOfPinned - 100;
+
+  return changeFromPin;
 }
 
 function DiffToPinned({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {

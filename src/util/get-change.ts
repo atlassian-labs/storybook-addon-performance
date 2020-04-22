@@ -4,13 +4,13 @@
 // [Slower]| baseline:10 | target:12 | +20
 
 export default function getChange({
-  target,
+  value,
   baseline,
 }: {
-  target: number;
+  value: number;
   baseline: number;
 }): number {
-  const percentageOfBaseline: number = (target / baseline) * 100;
+  const percentageOfBaseline: number = (value / baseline) * 100;
   const changeFromBaseline: number = percentageOfBaseline - 100;
   return changeFromBaseline;
 }

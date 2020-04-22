@@ -14,7 +14,7 @@ function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<Tim
 
   return getChange({
     baseline: pinned.averageMs,
-    target: result.averageMs,
+    value: result.averageMs,
   });
 }
 

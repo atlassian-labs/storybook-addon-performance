@@ -1,7 +1,7 @@
 // We want to get the % changed from the baseline value
-// [Same]  | baseline:10 | target:10 | 0
-// [Faster]| baseline:10 | target:8  | -20
-// [Slower]| baseline:10 | target:12 | +20
+// [Same]  | baseline:10 | value:10 | 0
+// [Faster]| baseline:10 | value:8  | -20
+// [Slower]| baseline:10 | value:12 | +20
 
 export default function getChange({
   value,

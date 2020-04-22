@@ -3,6 +3,7 @@ import { Nullable, TimedResult, TimedTask, InteractionTask } from '../../types';
 import toFixed from '../../util/to-fixed';
 import { ExpandingResult } from './expanding-result';
 import * as Parts from './parts';
+import getChange from '../../util/get-change';
 
 const warningIcon = <span>⚠️</span>;
 
@@ -10,10 +11,11 @@ function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<Tim
   if (!pinned) {
     return 0;
   }
-  const percentage: number = (pinned.averageMs / result.averageMs) * 100;
-  const diffFromAverage: number = 100 - percentage;
 
-  return diffFromAverage;
+  return getChange({
+    baseline: pinned.averageMs,
+    value: result.averageMs,
+  });
 }
 
 function DiffToPinned({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {

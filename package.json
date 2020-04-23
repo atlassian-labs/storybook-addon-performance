@@ -77,7 +77,7 @@
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:watch": "tsc --watch",
-    "typescript:build": "tsc",
+    "typescript:build": "tsc --declaration",
     "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
     "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0",

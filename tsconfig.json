@@ -5,6 +5,7 @@
     "target": "ES2019",
     "module": "ESNext",
     "moduleResolution": "node",
+    "declaration": true,
     "strict": true,
     "jsx": "react",
     "forceConsistentCasingInFileNames": true,

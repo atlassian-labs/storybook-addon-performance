@@ -8,7 +8,7 @@ export default makeDecorator({
   name: constants.decoratorKey,
   parameterName: constants.paramKey,
   // We are enabling the addon for all stories
-  // 'Interactions' need to be prvoided by consumers
+  // 'Interactions' need to be provided by consumers
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
     const interactions: PublicInteractionTask[] | undefined = parameters && parameters.interactions;

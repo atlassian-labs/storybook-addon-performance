@@ -93,7 +93,7 @@ const domElementCountWithoutSvg: StaticTask = staticTask({
         return true;
       }
 
-      // we can exclude thie one
+      // we can exclude this one
       return false;
     });
 

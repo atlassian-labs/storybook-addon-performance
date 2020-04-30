@@ -1,5 +1,5 @@
 export type Nullable<T> = T | null;
-// Similiar to {...A, ...B}
+// Similar to {...A, ...B}
 // 1. Remove all overlapping types from First
 // 2. Add properties from Second
 export type Combine<First, Second> = Omit<First, keyof Second> & Second;

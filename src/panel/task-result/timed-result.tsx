@@ -65,7 +65,7 @@ function Variance({ result }: { result: TimedResult }) {
     <>
       <Parts.Heading>Variance</Parts.Heading>
       <Parts.Note>
-        When doing multiple runs the can be differences between the runs. The lower the variance,
+        When doing multiple runs there can be differences between the runs. The lower the variance,
         the higher confidence you can have
       </Parts.Note>
       <Parts.Table>

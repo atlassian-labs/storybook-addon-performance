@@ -11,18 +11,23 @@ type EnvProps = {
   children: (args: {
     interactions: PublicInteractionTask[];
     channel: Channel;
+    clientOnly: boolean;
   }) => React.ReactElement<any>;
 };
 
 // We create a wrapper to supply all of the storybook stuff so
 // that we can test and display panel without needing any of it
 function Env({ children }: EnvProps) {
-  const parameters = useParameter(constants.paramKey, { interactions: [] });
-  const interactions: PublicInteractionTask[] = parameters.interactions;
+  const parameters = useParameter(constants.paramKey, {
+    interactions: [],
+    clientOnly: false,
+  });
+  const interactions: PublicInteractionTask[] = parameters.interactions || [];
+  const clientOnly = Boolean(parameters.clientOnly);
 
   // sadly need to add cast for storybook ts-loader
   const channel: Channel = addons.getChannel() as any;
-  return children({ channel: channel as any, interactions });
+  return children({ channel: channel as any, interactions, clientOnly });
 }
 
 addons.register(constants.addonKey, () => {
@@ -32,7 +37,9 @@ addons.register(constants.addonKey, () => {
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
         <Env>
-          {({ interactions, channel }) => <Panel channel={channel} interactions={interactions} />}
+          {({ interactions, channel, clientOnly }) => (
+            <Panel channel={channel} interactions={interactions} clientOnly={clientOnly} />
+          )}
         </Env>
       </AddonPanel>
     ),

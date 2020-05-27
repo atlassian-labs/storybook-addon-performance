@@ -165,18 +165,25 @@ const reactFiberNodeCount: StaticTask = staticTask({
   },
 });
 
-const group: TaskGroup = {
-  groupId: 'Client',
-  name: 'Client 👩‍💻',
-  tasks: [
+function getGroup(clientOnly: boolean): TaskGroup {
+  const include = [];
+  if (!clientOnly) {
+    include.push(hydrate);
+  }
+  const tasks = [
     render,
     reRender,
-    hydrate,
+    ...include,
     domElementCount,
     domElementCountWithoutSvg,
     completeRender,
     reactFiberNodeCount,
-  ],
-};
+  ];
+  return {
+    groupId: 'Client',
+    name: 'Client 👩‍💻',
+    tasks,
+  };
+}
 
-export default group;
+export default getGroup;

@@ -1,7 +1,8 @@
 import serverSide from './server-side';
-import initialMount from './client';
+import getGroups from './client';
 import { TaskGroup } from '../../types';
 
-const preset: TaskGroup[] = [serverSide, initialMount];
-
-export default preset;
+export default function getPresets({ clientOnly = false }: { clientOnly: boolean }): TaskGroup[] {
+  const clientGroups = getGroups(clientOnly);
+  return clientOnly ? [clientGroups] : [serverSide, clientGroups];
+}

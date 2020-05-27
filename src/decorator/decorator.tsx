@@ -11,7 +11,8 @@ export default makeDecorator({
   // 'Interactions' need to be provided by consumers
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
-    const interactions: PublicInteractionTask[] | undefined = parameters && parameters.interactions;
+    const interactions: PublicInteractionTask[] = (parameters && parameters.interactions) || [];
+    const clientOnly: boolean = Boolean(parameters && parameters.clientOnly);
 
     // Sadly need to add cast channel for storybook ts-loader
     return (
@@ -19,6 +20,7 @@ export default makeDecorator({
         getNode={() => getStory(context)}
         channel={addons.getChannel() as any}
         interactions={interactions}
+        clientOnly={clientOnly}
       />
     );
   },

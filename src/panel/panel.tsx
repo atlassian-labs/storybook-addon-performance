@@ -2,7 +2,7 @@ import { Channel } from '@storybook/channels';
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
 import { getInteractionGroup } from '../tasks/get-interaction-group';
-import preset from '../tasks/preset';
+import getPresets from '../tasks/preset';
 import { Nullable, PublicInteractionTask, TaskGroup, TaskGroupResult } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
@@ -50,17 +50,20 @@ function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
 export default function Panel({
   channel,
   interactions,
+  clientOnly,
 }: {
   channel: Channel;
   interactions: PublicInteractionTask[];
+  clientOnly: boolean;
 }) {
   const { state, service } = usePanelMachine(machine, channel);
 
   const groups: TaskGroup[] = useMemo(
     function merge() {
+      const preset = getPresets({ clientOnly });
       return [...preset, getInteractionGroup(interactions)];
     },
-    [interactions],
+    [interactions, clientOnly],
   );
 
   return (

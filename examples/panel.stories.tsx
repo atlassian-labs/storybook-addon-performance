@@ -34,7 +34,7 @@ function ManagedPanel({ mode }: { mode: 'dark' | 'normal' }) {
 
   return (
     <WithStorybookTheme mode={mode}>
-      <Panel channel={channel} interactions={[]} />
+      <Panel channel={channel} interactions={[]} clientOnly={false} />
     </WithStorybookTheme>
   );
 }

@@ -9,6 +9,7 @@ import {
   Nullable,
 } from '../../types';
 import { staticTask, timedTask } from './create';
+import { UnsupportedError } from '../../task-runner/custom-errors';
 
 const render: TimedTask = timedTask({
   name: 'Initial render',
@@ -101,10 +102,31 @@ const domElementCountWithoutSvg: StaticTask = staticTask({
   },
 });
 
+const completeRender: TimedTask = timedTask({
+  name: 'Complete render (mount + layout + paint)',
+  description: `
+    Time taken for the CPU to become idle after starting ReactDOM.render.
+    This will include React's time to create the element and mount it into the DOM,
+    as well as subsequent browser layout and painting
+  `,
+  run: async ({ getElement, container }: RunTimedTaskArgs): Promise<void> => {
+    const idle = (window as any).requestIdleCallback;
+
+    if (typeof idle !== 'function') {
+      throw new UnsupportedError('requestIdleCallback is not supported in this browser');
+    }
+
+    ReactDOM.render(getElement(), container);
+    await new Promise((resolve) => {
+      idle(() => resolve());
+    });
+  },
+});
+
 const group: TaskGroup = {
   groupId: 'Client',
   name: 'Client 👩‍💻',
-  tasks: [render, reRender, hydrate, domElementCount, domElementCountWithoutSvg],
+  tasks: [render, reRender, hydrate, domElementCount, domElementCountWithoutSvg, completeRender],
 };
 
 export default group;

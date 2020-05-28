@@ -1,12 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 function noop() {}
-// doesn't exist in jsdom
 
-function fallbackWithNoop(obj: Record<string, any>, key: string) {
+function fallbackWith(obj: Record<string, any>, key: string, fallback: Function) {
   if (!(key in obj)) {
-    obj[key] = noop;
+    obj[key] = fallback;
   }
 }
 
-fallbackWithNoop(performance, 'mark');
-fallbackWithNoop(performance, 'measure');
+// doesn't exist in jsdom
+fallbackWith(performance, 'mark', noop);
+fallbackWith(performance, 'measure', noop);
+
+// close enough
+fallbackWith(window, 'requestIdleCallback', window.requestAnimationFrame);

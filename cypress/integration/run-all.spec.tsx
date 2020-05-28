@@ -1,10 +1,10 @@
 import { startAllButtonId } from '../../src/selectors';
-import getPresets from '../../src/tasks/preset';
+import getPresets, { defaultAllowedGroups } from '../../src/tasks/preset';
 import { Task, TaskGroup } from '../../src/types';
 import flatten from '../../src/util/flatten';
 import { wait } from '../custom/guards';
 
-const preset = getPresets({ clientOnly: false });
+const preset = getPresets({ allowedGroups: defaultAllowedGroups });
 
 describe('run all', () => {
   it('be able to run all tasks', () => {

@@ -12,6 +12,7 @@ import {
   TaskGroup,
   TaskMap,
   ErrorResult,
+  AllowedGroup,
 } from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
@@ -22,16 +23,16 @@ type Props = {
   getNode: () => React.ReactNode;
   channel: Channel;
   interactions: PublicInteractionTask[] | undefined;
-  clientOnly: boolean;
+  allowedGroups: AllowedGroup[];
 };
 
-export default function TaskHarness({ getNode, channel, interactions = [], clientOnly }: Props) {
+export default function TaskHarness({ getNode, channel, interactions = [], allowedGroups }: Props) {
   const groups: TaskGroup[] = useMemo(
     function merge() {
-      const preset = getPresets({ clientOnly });
+      const preset = getPresets({ allowedGroups });
       return [...preset, getInteractionGroup(interactions)];
     },
-    [interactions, clientOnly],
+    [interactions, allowedGroups],
   );
   const tasks: TaskMap = useMemo(() => getTaskMap(groups), [groups]);
 

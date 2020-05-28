@@ -5,13 +5,14 @@ import { AddonPanel } from '@storybook/components';
 import React from 'react';
 import * as constants from './addon-constants';
 import Panel from './panel/panel';
-import { PublicInteractionTask } from './types';
+import { PublicInteractionTask, AllowedGroup } from './types';
+import { defaultAllowedGroups } from './tasks/preset';
 
 type EnvProps = {
   children: (args: {
     interactions: PublicInteractionTask[];
     channel: Channel;
-    clientOnly: boolean;
+    allowedGroups: AllowedGroup[];
   }) => React.ReactElement<any>;
 };
 
@@ -20,14 +21,14 @@ type EnvProps = {
 function Env({ children }: EnvProps) {
   const parameters = useParameter(constants.paramKey, {
     interactions: [],
-    clientOnly: false,
+    allowedGroups: defaultAllowedGroups,
   });
   const interactions: PublicInteractionTask[] = parameters.interactions || [];
-  const clientOnly = Boolean(parameters.clientOnly);
+  const allowedGroups = parameters.allowedGroups || defaultAllowedGroups;
 
   // sadly need to add cast for storybook ts-loader
   const channel: Channel = addons.getChannel() as any;
-  return children({ channel: channel as any, interactions, clientOnly });
+  return children({ channel: channel as any, interactions, allowedGroups });
 }
 
 addons.register(constants.addonKey, () => {
@@ -37,8 +38,8 @@ addons.register(constants.addonKey, () => {
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
         <Env>
-          {({ interactions, channel, clientOnly }) => (
-            <Panel channel={channel} interactions={interactions} clientOnly={clientOnly} />
+          {({ interactions, channel, allowedGroups }) => (
+            <Panel channel={channel} interactions={interactions} allowedGroups={allowedGroups} />
           )}
         </Env>
       </AddonPanel>

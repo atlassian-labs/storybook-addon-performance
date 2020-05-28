@@ -3,6 +3,7 @@ import React from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
 import { InteractionTaskArgs, PublicInteractionTask } from '../src';
+import { AllowedGroup } from '../src/types';
 
 export default {
   title: 'Examples',
@@ -40,7 +41,7 @@ const interactionTasks: PublicInteractionTask[] = [
 ];
 
 select.story = {
-  name: 'React select',
+  name: 'React Select',
   parameters: {
     performance: {
       interactions: interactionTasks,
@@ -66,3 +67,27 @@ function Slow() {
 }
 
 export const slow = () => <Slow />;
+
+export const onlyClientPerformance = () => <p>A story only measuring client-side performance 👩‍💻</p>;
+
+onlyClientPerformance.story = {
+  name: 'Only Client',
+  parameters: {
+    performance: {
+      allowedGroups: [AllowedGroup.Client],
+    },
+  },
+};
+
+export const onlyServerPerformance = () => (
+  <p>A story only measuring server-side performance ‍☁️</p>
+);
+
+onlyServerPerformance.story = {
+  name: 'Only Server',
+  parameters: {
+    performance: {
+      allowedGroups: [AllowedGroup.Server],
+    },
+  },
+};

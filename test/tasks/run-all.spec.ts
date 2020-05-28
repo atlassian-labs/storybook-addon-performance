@@ -1,11 +1,11 @@
 import { runAll } from '../../src/task-runner';
-import getPresets from '../../src/tasks/preset';
-import { Task, TaskGroup, TaskGroupResult, TimedResult } from '../../src/types';
+import getPresets, { defaultAllowedGroups } from '../../src/tasks/preset';
+import { Task, TaskGroup, TaskGroupResult, TimedResult, AllowedGroup } from '../../src/types';
 import toResultMap from '../../src/util/to-result-map';
 import { StaticResult } from '../../src/types';
 
 it('should only include client tasks', () => {
-  const clientPresets = getPresets({ clientOnly: true });
+  const clientPresets = getPresets({ allowedGroups: [AllowedGroup.Client] });
   const groupNames = clientPresets.map((p) => p.name);
   const groupTasks = clientPresets.reduce(
     (acc, curr) => acc.concat(curr.tasks.map((t) => t.name)),
@@ -18,11 +18,12 @@ it('should only include client tasks', () => {
     'Re render',
     'DOM element count',
     'DOM element count (no nested inline svg elements)',
+    'Complete render (mount + layout + paint)',
   ]);
 });
 
 it('should run all the standard tests', async () => {
-  const preset = getPresets({ clientOnly: false });
+  const preset = getPresets({ allowedGroups: defaultAllowedGroups });
   const result = await runAll({
     groups: preset,
     getNode: () => 'hey',

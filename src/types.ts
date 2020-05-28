@@ -106,3 +106,8 @@ export type TaskGroupResult = {
   groupId: string;
   map: ResultMap;
 };
+
+export enum AllowedGroup {
+  Client = 'Client',
+  Server = 'Server',
+}

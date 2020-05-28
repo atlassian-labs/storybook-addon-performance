@@ -1,8 +1,9 @@
 import React from 'react';
 import addons, { makeDecorator } from '@storybook/addons';
 import TaskHarness from './task-harness';
-import { PublicInteractionTask } from '../types';
+import { PublicInteractionTask, AllowedGroup } from '../types';
 import * as constants from '../addon-constants';
+import { defaultAllowedGroups } from '../tasks/preset';
 
 export default makeDecorator({
   name: constants.decoratorKey,
@@ -12,7 +13,8 @@ export default makeDecorator({
   skipIfNoParametersOrOptions: false,
   wrapper: (getStory, context, { parameters }) => {
     const interactions: PublicInteractionTask[] = (parameters && parameters.interactions) || [];
-    const clientOnly: boolean = Boolean(parameters && parameters.clientOnly);
+    const allowedGroups: AllowedGroup[] =
+      (parameters && parameters.allowedGroups) || defaultAllowedGroups;
 
     // Sadly need to add cast channel for storybook ts-loader
     return (
@@ -20,7 +22,7 @@ export default makeDecorator({
         getNode={() => getStory(context)}
         channel={addons.getChannel() as any}
         interactions={interactions}
-        clientOnly={clientOnly}
+        allowedGroups={allowedGroups}
       />
     );
   },

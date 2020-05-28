@@ -8,6 +8,7 @@ import {
   TaskGroup,
   TimedTask,
   Nullable,
+  AllowedGroup,
 } from '../../types';
 import { staticTask, timedTask } from './create';
 import { UnsupportedError } from '../../task-runner/custom-errors';
@@ -165,9 +166,9 @@ const reactFiberNodeCount: StaticTask = staticTask({
   },
 });
 
-function getGroup(clientOnly: boolean): TaskGroup {
+function getGroup(allowedGroups: AllowedGroup[]): TaskGroup {
   const include = [];
-  if (!clientOnly) {
+  if (allowedGroups.includes(AllowedGroup.Server)) {
     include.push(hydrate);
   }
   const tasks = [

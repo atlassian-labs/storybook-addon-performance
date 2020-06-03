@@ -127,6 +127,31 @@ Note that you can use whatever libraries you'd like to perform these interaction
 You can then include the array of interaction tasks inside the `performance` parameters of your story, with the key `interactions`:
 
 ```js
+// Using the Component Story Format (CSF)
+// https://storybook.js.org/docs/formats/component-story-format/
+import { findByText, fireEvent } from '@testing-library/dom';
+import { PublicInteractionTask } from 'storybook-addon-performance';
+import React from 'react';
+import Select from 'react-select';
+import invariant from 'tiny-invariant';
+
+export default {
+  title: 'React select example',
+};
+
+const interactionTasks: PublicInteractionTask[] = [
+  {
+    name: 'Display dropdown',
+    description: 'Open the dropdown and wait for Option 5 to load',
+    run: async ({ container }: InteractionTaskArgs): Promise<void> => {
+      const element: HTMLElement | null = container.querySelector('.addon__dropdown-indicator');
+      invariant(element);
+      fireEvent.mouseDown(element);
+      await findByText(container, 'Option 5', undefined, { timeout: 20000 });
+    },
+  },
+];
+
 select.story = {
   name: 'React select',
   parameters: {

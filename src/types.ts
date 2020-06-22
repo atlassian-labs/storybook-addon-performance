@@ -12,7 +12,8 @@ type BaseTask = {
 
 export type RunStaticTaskArgs = {
   getElement: () => React.ReactElement;
-  container: HTMLElement;
+  // TODO: put this back to HTMLElement, figure out how to access root fiber node
+  container: any;
 };
 
 export type StaticTask = BaseTask & {

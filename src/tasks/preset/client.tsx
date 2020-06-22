@@ -10,6 +10,7 @@ import {
 } from '../../types';
 import { staticTask, timedTask } from './create';
 import { UnsupportedError } from '../../task-runner/custom-errors';
+import { traverse } from '../../util/traverse-react-fiber-tree';
 
 const render: TimedTask = timedTask({
   name: 'Initial render',
@@ -102,6 +103,23 @@ const domElementCountWithoutSvg: StaticTask = staticTask({
   },
 });
 
+const reactFiberNodeCount: StaticTask = staticTask({
+  name: 'React Fiber node count',
+  description: `
+    The number of React Elements or internal objects ("fibers") that hold information about the component tree state.
+  `,
+  run: async ({ getElement, container }: RunStaticTaskArgs): Promise<string> => {
+    ReactDOM.render(getElement(), container);
+
+    const fiberRoot = container?._reactRootContainer?._internalRoot?.current;
+
+    let count = 0;
+    fiberRoot && traverse(fiberRoot, () => count++);
+
+    return String(count);
+  },
+});
+
 const completeRender: TimedTask = timedTask({
   name: 'Complete render (mount + layout + paint)',
   description: `
@@ -126,7 +144,15 @@ const completeRender: TimedTask = timedTask({
 const group: TaskGroup = {
   groupId: 'Client',
   name: 'Client 👩‍💻',
-  tasks: [render, reRender, hydrate, domElementCount, domElementCountWithoutSvg, completeRender],
+  tasks: [
+    render,
+    reRender,
+    hydrate,
+    domElementCount,
+    domElementCountWithoutSvg,
+    reactFiberNodeCount,
+    completeRender,
+  ],
 };
 
 export default group;

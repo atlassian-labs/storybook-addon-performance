@@ -1,5 +1,11 @@
-export function traverse(rootNode: any, callback: (node: any) => void) {
-  function walk(node: any) {
+interface FiberNode {
+  // Singly Linked List Tree Structure. Full type here https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactInternalTypes.js
+  child: FiberNode | null;
+  sibling: FiberNode | null;
+}
+
+export function traverse(rootNode: FiberNode, callback: (node: FiberNode) => void) {
+  function walk(node: FiberNode) {
     // First call the callback on the node.
     callback(node);
 

@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import {
   RunStaticTaskArgs,
+  RunStaticTaskArgsWithReactRoot,
   RunTimedTaskArgs,
   StaticTask,
   TaskGroup,
@@ -108,7 +109,7 @@ const reactFiberNodeCount: StaticTask = staticTask({
   description: `
     The number of React Elements or internal objects ("fibers") that hold information about the component tree state.
   `,
-  run: async ({ getElement, container }: RunStaticTaskArgs): Promise<string> => {
+  run: async ({ getElement, container }: RunStaticTaskArgsWithReactRoot): Promise<string> => {
     ReactDOM.render(getElement(), container);
 
     const fiberRoot = container?._reactRootContainer?._internalRoot?.current;

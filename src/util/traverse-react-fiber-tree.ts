@@ -1,6 +1,6 @@
 export function traverse(rootNode: any, callback: (node: any) => void) {
   function walk(node: any) {
-    // First call the callback on the root node.
+    // First call the callback on the node.
     callback(node);
 
     if (!node.child && !node.sibling) {

@@ -10,16 +10,22 @@ type BaseTask = {
   description: string;
 };
 
+interface Container extends HTMLElement {
+  _reactRootContainer?: any;
+}
+
 export type RunStaticTaskArgs = {
   getElement: () => React.ReactElement;
-  // TODO: put this back to HTMLElement, figure out how to access root fiber node
-  container: any;
+  container: HTMLElement;
 };
-
+export type RunStaticTaskArgsWithReactRoot = {
+  getElement: () => React.ReactElement;
+  container: Container;
+};
 export type StaticTask = BaseTask & {
   scale?: string;
   type: 'static';
-  run: (args: RunStaticTaskArgs) => Promise<string>;
+  run: (args: RunStaticTaskArgs | RunStaticTaskArgsWithReactRoot) => Promise<string>;
 };
 export type TimedControls = {
   time: (fn: () => Promise<void>) => Promise<void>;

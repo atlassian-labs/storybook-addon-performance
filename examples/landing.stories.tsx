@@ -3,7 +3,6 @@ import React from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
 import { InteractionTaskArgs, PublicInteractionTask } from '../src';
-import { AllowedGroup } from '../src/types';
 
 export default {
   title: 'Examples',
@@ -74,7 +73,7 @@ onlyClientPerformance.story = {
   name: 'Only Client',
   parameters: {
     performance: {
-      allowedGroups: [AllowedGroup.Client],
+      allowedGroups: ['client'],
     },
   },
 };
@@ -87,7 +86,7 @@ onlyServerPerformance.story = {
   name: 'Only Server',
   parameters: {
     performance: {
-      allowedGroups: [AllowedGroup.Server],
+      allowedGroups: ['server'],
     },
   },
 };

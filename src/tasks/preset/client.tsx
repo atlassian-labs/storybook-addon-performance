@@ -168,7 +168,7 @@ const reactFiberNodeCount: StaticTask = staticTask({
 
 function getGroup(allowedGroups: AllowedGroup[]): TaskGroup {
   const include = [];
-  if (allowedGroups.includes(AllowedGroup.Server)) {
+  if (allowedGroups.includes('server')) {
     include.push(hydrate);
   }
   const tasks = [

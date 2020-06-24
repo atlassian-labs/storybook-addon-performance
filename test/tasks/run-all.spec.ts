@@ -5,7 +5,7 @@ import toResultMap from '../../src/util/to-result-map';
 import { StaticResult } from '../../src/types';
 
 it('should only include client tasks', () => {
-  const clientPresets = getPresets({ allowedGroups: [AllowedGroup.Client] });
+  const clientPresets = getPresets({ allowedGroups: ['client'] });
   const groupNames = clientPresets.map((p) => p.name);
   const groupTasks = clientPresets.reduce(
     (acc, curr) => acc.concat(curr.tasks.map((t) => t.name)),

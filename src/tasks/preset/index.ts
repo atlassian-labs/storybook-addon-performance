@@ -2,7 +2,8 @@ import serverSide from './server-side';
 import getGroups from './client';
 import { TaskGroup, AllowedGroup } from '../../types';
 
-export const defaultAllowedGroups = [AllowedGroup.Server, AllowedGroup.Client];
+// as const prevents widening to the "string" type
+export const defaultAllowedGroups = ['server' as const, 'client' as const];
 
 export default function getPresets({
   allowedGroups = defaultAllowedGroups,
@@ -11,10 +12,10 @@ export default function getPresets({
 }): TaskGroup[] {
   const clientGroups = getGroups(allowedGroups);
   const groups: TaskGroup[] = [];
-  if (allowedGroups.includes(AllowedGroup.Server)) {
+  if (allowedGroups.includes('server')) {
     groups.push(serverSide);
   }
-  if (allowedGroups.includes(AllowedGroup.Client)) {
+  if (allowedGroups.includes('client')) {
     groups.push(clientGroups);
   }
   return groups;

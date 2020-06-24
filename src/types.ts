@@ -107,7 +107,4 @@ export type TaskGroupResult = {
   map: ResultMap;
 };
 
-export enum AllowedGroup {
-  Client = 'Client',
-  Server = 'Server',
-}
+export type AllowedGroup = 'client' | 'server';

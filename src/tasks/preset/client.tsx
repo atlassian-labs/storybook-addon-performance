@@ -11,7 +11,6 @@ import {
 } from '../../types';
 import { staticTask, timedTask } from './create';
 import { UnsupportedError } from '../../task-runner/custom-errors';
-import { traverse } from '../../util/traverse-react-fiber-tree';
 
 const render: TimedTask = timedTask({
   name: 'Initial render',
@@ -104,23 +103,6 @@ const domElementCountWithoutSvg: StaticTask = staticTask({
   },
 });
 
-const reactFiberNodeCount: StaticTask = staticTask({
-  name: 'React Fiber node count',
-  description: `
-    The number of React Elements or internal objects ("fibers") that hold information about the component tree state.
-  `,
-  run: async ({ getElement, container }: RunStaticTaskArgsWithReactRoot): Promise<string> => {
-    ReactDOM.render(getElement(), container);
-
-    const fiberRoot = container?._reactRootContainer?._internalRoot?.current;
-
-    let count = 0;
-    fiberRoot && traverse(fiberRoot, () => count++);
-
-    return String(count);
-  },
-});
-
 const completeRender: TimedTask = timedTask({
   name: 'Complete render (mount + layout + paint)',
   description: `
@@ -142,6 +124,47 @@ const completeRender: TimedTask = timedTask({
   },
 });
 
+interface Fiber {
+  // Singly Linked List Tree Structure.
+  // Full type here https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactInternalTypes.js
+  child: Fiber | null;
+  sibling: Fiber | null;
+}
+
+export function traverse(rootNode: Fiber, callback: (node: Fiber) => void) {
+  function walk(node: Fiber) {
+    // First call the callback on the node.
+    callback(node);
+
+    if (!node.child && !node.sibling) {
+      return;
+    }
+
+    // Then recursively call the walk function on each child and sibling.
+    node.child && walk(node.child);
+    node.sibling && walk(node.sibling);
+  }
+
+  walk(rootNode);
+}
+
+const reactFiberNodeCount: StaticTask = staticTask({
+  name: 'React Fiber node count',
+  description: `
+    The number of React Elements or internal objects ("fibers") that hold information about the component tree state.
+  `,
+  run: async ({ getElement, container }: RunStaticTaskArgsWithReactRoot): Promise<string> => {
+    ReactDOM.render(getElement(), container);
+
+    const fiberRoot = container?._reactRootContainer?._internalRoot?.current;
+
+    let count = 0;
+    fiberRoot && traverse(fiberRoot, () => count++);
+
+    return String(count);
+  },
+});
+
 const group: TaskGroup = {
   groupId: 'Client',
   name: 'Client 👩‍💻',
@@ -151,8 +174,8 @@ const group: TaskGroup = {
     hydrate,
     domElementCount,
     domElementCountWithoutSvg,
-    reactFiberNodeCount,
     completeRender,
+    reactFiberNodeCount,
   ],
 };
 

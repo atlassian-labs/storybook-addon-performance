@@ -44,11 +44,6 @@ function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<T
   return result || null;
 }
 
-function getResult(group: TaskGroup, context: RunContext): Nullable<TaskGroupResult> {
-  const result: Nullable<TaskGroupResult> = findResult(group, context);
-  return result;
-}
-
 export default function Panel({
   channel,
   interactions,
@@ -81,7 +76,7 @@ export default function Panel({
               <TaskGroupPanel
                 key={group.groupId}
                 group={group}
-                result={getResult(group, state.context.current)}
+                result={findResult(group, state.context.current)}
                 pinned={findResult(group, state.context.pinned)}
               />
             );

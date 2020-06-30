@@ -25,7 +25,7 @@ export type RunStaticTaskArgsWithReactRoot = {
 export type StaticTask = BaseTask & {
   scale?: string;
   type: 'static';
-  run: (args: RunStaticTaskArgs | RunStaticTaskArgsWithReactRoot) => Promise<string>;
+  run: (args: RunStaticTaskArgs) => Promise<string>;
 };
 export type TimedControls = {
   time: (fn: () => Promise<void>) => Promise<void>;

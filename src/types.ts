@@ -10,11 +10,18 @@ type BaseTask = {
   description: string;
 };
 
+interface Container extends HTMLElement {
+  _reactRootContainer?: any;
+}
+
 export type RunStaticTaskArgs = {
   getElement: () => React.ReactElement;
   container: HTMLElement;
 };
-
+export type RunStaticTaskArgsWithReactRoot = {
+  getElement: () => React.ReactElement;
+  container: Container;
+};
 export type StaticTask = BaseTask & {
   scale?: string;
   type: 'static';

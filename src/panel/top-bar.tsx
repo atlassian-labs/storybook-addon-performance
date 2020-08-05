@@ -109,7 +109,6 @@ export default function Topbar() {
               send('SET_VALUES', values);
             }}
           >
-            >
             {sizes.map((size: number) => (
               <option key={size} value={size}>
                 {size} {pluraliseSamples(size)}

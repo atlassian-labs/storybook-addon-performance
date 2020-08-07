@@ -169,9 +169,11 @@ As seen above, the plugin exports two type definitions to assist with creating y
 - `PublicInteractionTask`: defines the object structure for an interaction task; pass an array of these tasks as a parameter to storybook, as shown above.
 - `InteractionTaskArgs`: the arguments for an interaction task's `run` function
 
-## Usage: Allowed Groups
+## Only running some task groups
 
-Allowed Groups allow you to control the performance information to show. The default configuration will show both server-side rendering and client-side mounting performance information. To configure this option, set the `allowedGroups` option as part of a story's parameters.
+Some components are not designed to work in server side rendering, or on the client. To support this we have created a _allowlist_ that you can optionally pass in to only allow the groups to run that you want to. To configure this option, set the `allowedGroups` option as part of a story's parameters.
+
+- default value: `['server', 'client']`
 
 You can add the parameter globally to every story in `.storybook/preview.js`:
 

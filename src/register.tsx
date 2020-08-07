@@ -6,7 +6,7 @@ import React from 'react';
 import * as constants from './addon-constants';
 import Panel from './panel/panel';
 import { PublicInteractionTask, AllowedGroup } from './types';
-import { defaultAllowedGroups } from './tasks/preset';
+import allowAllGroups from './tasks/allow-all-groups';
 
 type EnvProps = {
   children: (args: {
@@ -21,10 +21,10 @@ type EnvProps = {
 function Env({ children }: EnvProps) {
   const parameters = useParameter(constants.paramKey, {
     interactions: [],
-    allowedGroups: defaultAllowedGroups,
+    allowedGroups: allowAllGroups,
   });
   const interactions: PublicInteractionTask[] = parameters.interactions || [];
-  const allowedGroups = parameters.allowedGroups || defaultAllowedGroups;
+  const allowedGroups: AllowedGroup[] = parameters.allowedGroups || allowAllGroups;
 
   // sadly need to add cast for storybook ts-loader
   const channel: Channel = addons.getChannel() as any;

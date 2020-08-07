@@ -1,8 +1,7 @@
-import getPresets, { defaultAllowedGroups } from '../../src/tasks/preset';
+import preset from '../../src/tasks/preset';
 import { Task } from '../../src/types';
 import { wait } from '../custom/guards';
 
-const preset = getPresets({ allowedGroups: defaultAllowedGroups });
 const task: Task = preset[0].tasks[0];
 
 describe('run single', () => {

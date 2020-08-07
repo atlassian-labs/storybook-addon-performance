@@ -3,7 +3,7 @@ import addons, { makeDecorator } from '@storybook/addons';
 import TaskHarness from './task-harness';
 import { PublicInteractionTask, AllowedGroup } from '../types';
 import * as constants from '../addon-constants';
-import { defaultAllowedGroups } from '../tasks/preset';
+import allowAllGroups from '../tasks/allow-all-groups';
 
 export default makeDecorator({
   name: constants.decoratorKey,
@@ -14,7 +14,7 @@ export default makeDecorator({
   wrapper: (getStory, context, { parameters }) => {
     const interactions: PublicInteractionTask[] = (parameters && parameters.interactions) || [];
     const allowedGroups: AllowedGroup[] =
-      (parameters && parameters.allowedGroups) || defaultAllowedGroups;
+      (parameters && parameters.allowedGroups) || allowAllGroups;
 
     // Sadly need to add cast channel for storybook ts-loader
     return (

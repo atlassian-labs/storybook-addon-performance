@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Nullable } from '../src/types';
 import { savePinned, getPinned } from '../src/panel/pinned-storage';
 import * as mock from '../test-util/mocks';

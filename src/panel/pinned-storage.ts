@@ -65,6 +65,7 @@ export function getPinned(storyName: string): Nullable<RunContext> {
 
   const value: any = JSON.parse(raw);
   if (!isValidContext(value)) {
+    // eslint-disable-next-line no-console
     console.warn('Unsupported value found in localStorage. Value cleared');
     clearPinned(storyName);
     return null;

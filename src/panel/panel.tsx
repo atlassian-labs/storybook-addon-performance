@@ -2,8 +2,14 @@ import { Channel } from '@storybook/channels';
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
 import { getInteractionGroup } from '../tasks/get-interaction-group';
-import preset from '../tasks/preset';
-import { Nullable, PublicInteractionTask, TaskGroup, TaskGroupResult } from '../types';
+import getPresets from '../tasks/preset';
+import {
+  Nullable,
+  PublicInteractionTask,
+  TaskGroup,
+  TaskGroupResult,
+  AllowedGroup,
+} from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
@@ -38,29 +44,23 @@ function findResult(group: TaskGroup, context: Nullable<RunContext>): Nullable<T
   return result || null;
 }
 
-function getResult(group: TaskGroup, context: RunContext): TaskGroupResult {
-  const result: Nullable<TaskGroupResult> = findResult(group, context);
-  // Cannot use invariant as we are not at a high enough typescript version
-  if (!result) {
-    throw new Error(`Could not find group(${group.groupId}) in result`);
-  }
-  return result;
-}
-
 export default function Panel({
   channel,
   interactions,
+  allowedGroups,
 }: {
   channel: Channel;
   interactions: PublicInteractionTask[];
+  allowedGroups: AllowedGroup[];
 }) {
   const { state, service } = usePanelMachine(machine, channel);
 
   const groups: TaskGroup[] = useMemo(
     function merge() {
+      const preset = getPresets({ allowedGroups });
       return [...preset, getInteractionGroup(interactions)];
     },
-    [interactions],
+    [interactions, allowedGroups],
   );
 
   return (
@@ -76,7 +76,7 @@ export default function Panel({
               <TaskGroupPanel
                 key={group.groupId}
                 group={group}
-                result={getResult(group, state.context.current)}
+                result={findResult(group, state.context.current)}
                 pinned={findResult(group, state.context.pinned)}
               />
             );

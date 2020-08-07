@@ -1,7 +1,22 @@
 import serverSide from './server-side';
-import initialMount from './client';
-import { TaskGroup } from '../../types';
+import getGroups from './client';
+import { TaskGroup, AllowedGroup } from '../../types';
 
-const preset: TaskGroup[] = [serverSide, initialMount];
+// as const prevents widening to the "string" type
+export const defaultAllowedGroups = ['server' as const, 'client' as const];
 
-export default preset;
+export default function getPresets({
+  allowedGroups = defaultAllowedGroups,
+}: {
+  allowedGroups: AllowedGroup[];
+}): TaskGroup[] {
+  const clientGroups = getGroups(allowedGroups);
+  const groups: TaskGroup[] = [];
+  if (allowedGroups.includes('server')) {
+    groups.push(serverSide);
+  }
+  if (allowedGroups.includes('client')) {
+    groups.push(clientGroups);
+  }
+  return groups;
+}

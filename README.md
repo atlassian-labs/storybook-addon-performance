@@ -169,6 +169,70 @@ As seen above, the plugin exports two type definitions to assist with creating y
 - `PublicInteractionTask`: defines the object structure for an interaction task; pass an array of these tasks as a parameter to storybook, as shown above.
 - `InteractionTaskArgs`: the arguments for an interaction task's `run` function
 
+## Usage: Allowed Groups
+
+Allowed Groups allow you to control the performance information to show. The default configuration will show both server-side rendering and client-side mounting performance information. To configure this option, set the `allowedGroups` option as part of a story's parameters.
+
+You can add the parameter globally to every story in `.storybook/preview.js`:
+
+```js
+import { addDecorator, addParameters } from '@storybook/react';
+import { withPerformance } from 'storybook-addon-performance';
+
+// Only client-side mounting performance will be shown
+addParameters({
+  performance: {
+    allowedGroups: ['client'],
+  },
+});
+
+addDecorator(withPerformance);
+```
+
+Or you can add it to individual stories:
+
+> Using [Component Story Format (CSF)](https://storybook.js.org/docs/formats/component-story-format/)
+
+```js
+export const onlyClient = () => <p>A story only measuring client-side performance 👩‍💻</p>;
+
+onlyClient.story = {
+  parameters: {
+    performance: {
+      allowedGroups: ['client'],
+    },
+  },
+};
+
+export const onlyServer = () => <p>A story only measuring server-side performance ‍☁️</p>;
+
+onlyServer.story = {
+  parameters: {
+    performance: {
+      allowedGroups: ['server'],
+    },
+  },
+};
+```
+
+> Using [StoriesOf API](https://storybook.js.org/docs/formats/storiesof-api/)
+
+```js
+import MyClientComponent from './MyClientComponent';
+import MyServerComponent from './MyServerComponent';
+import { withPerformance } from 'storybook-addon-performance';
+
+storiesOf('MyClientComponent', module)
+  .addDecorator(withPerformance)
+  // applies to all stories for this entire component
+  .addParameters({ performance: { allowedGroups: ['client'] } })
+  .add('MyClientComponent', () => <MyClientComponent />)
+  // applies to this specific story
+  .add('MyServerComponent', () => <MyServerComponent />, {
+    performance: { allowedGroups: ['server'] },
+  });
+```
+
 ## Local addon development
 
 ```bash

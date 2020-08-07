@@ -26,27 +26,24 @@ function SelectExample() {
 
 export const select = () => <SelectExample />;
 
-
 const interactionTasks: PublicInteractionTask[] = [
   {
     name: 'Display dropdown',
     description: 'Open the dropdown and wait for Option 5 to load',
     run: async ({ container, controls }: InteractionTaskArgs): Promise<void> => {
-      const element: HTMLElement | null = container.querySelector(
-        '.addon__dropdown-indicator',
-      );
+      const element: HTMLElement | null = container.querySelector('.addon__dropdown-indicator');
       invariant(element);
       fireEvent.mouseDown(element);
       await findByText(container, 'Option 5', undefined, { timeout: 20000 });
     },
   },
-]
+];
 
 select.story = {
-  name: 'React select',
+  name: 'React Select',
   parameters: {
     performance: {
-      interactions: interactionTasks
+      interactions: interactionTasks,
     },
   },
 };
@@ -55,7 +52,7 @@ export const noInteractions = () => <p>A story with no interactions 👋</p>;
 
 function burnCpu() {
   const start = performance.now();
-  while (performance.now() - start < 200) { }
+  while (performance.now() - start < 200) {}
 }
 
 function Slow() {
@@ -69,3 +66,27 @@ function Slow() {
 }
 
 export const slow = () => <Slow />;
+
+export const onlyClientPerformance = () => <p>A story only measuring client-side performance 👩‍💻</p>;
+
+onlyClientPerformance.story = {
+  name: 'Only Client',
+  parameters: {
+    performance: {
+      allowedGroups: ['client'],
+    },
+  },
+};
+
+export const onlyServerPerformance = () => (
+  <p>A story only measuring server-side performance ‍☁️</p>
+);
+
+onlyServerPerformance.story = {
+  name: 'Only Server',
+  parameters: {
+    performance: {
+      allowedGroups: ['server'],
+    },
+  },
+};

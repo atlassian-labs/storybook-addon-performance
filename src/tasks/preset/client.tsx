@@ -8,6 +8,7 @@ import {
   TaskGroup,
   TimedTask,
   Nullable,
+  AllowedGroup,
 } from '../../types';
 import { staticTask, timedTask } from './create';
 import { UnsupportedError } from '../../task-runner/custom-errors';
@@ -165,18 +166,25 @@ const reactFiberNodeCount: StaticTask = staticTask({
   },
 });
 
-const group: TaskGroup = {
-  groupId: 'Client',
-  name: 'Client 👩‍💻',
-  tasks: [
+function getGroup(allowedGroups: AllowedGroup[]): TaskGroup {
+  const include = [];
+  if (allowedGroups.includes('server')) {
+    include.push(hydrate);
+  }
+  const tasks = [
     render,
     reRender,
-    hydrate,
+    ...include,
     domElementCount,
     domElementCountWithoutSvg,
     completeRender,
     reactFiberNodeCount,
-  ],
-};
+  ];
+  return {
+    groupId: 'Client',
+    name: 'Client 👩‍💻',
+    tasks,
+  };
+}
 
-export default group;
+export default getGroup;

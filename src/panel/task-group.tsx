@@ -16,7 +16,7 @@ const Container = styled.div`
 
 type Props = {
   group: TaskGroup;
-  result: TaskGroupResult;
+  result: Nullable<TaskGroupResult>;
   pinned: Nullable<TaskGroupResult>;
 };
 
@@ -40,6 +40,10 @@ function EmptyGroupMessage({ group }: { group: TaskGroup }) {
 }
 
 export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
+  if (!result) {
+    return null;
+  }
+
   return (
     <Container>
       <Title>{group.name}</Title>

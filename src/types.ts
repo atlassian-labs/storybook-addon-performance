@@ -106,3 +106,5 @@ export type TaskGroupResult = {
   groupId: string;
   map: ResultMap;
 };
+
+export type AllowedGroup = 'client' | 'server';

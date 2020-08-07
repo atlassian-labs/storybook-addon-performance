@@ -7,6 +7,7 @@ import { savePinned } from '../src/panel/pinned-storage';
 import { bindAll } from '../src/util/bind-channel-events';
 import WithStorybookTheme from '../test-util/with-storybook-theme';
 import * as mocks from '../test-util/mocks';
+import { defaultAllowedGroups } from '../src/tasks/preset';
 
 export default {
   title: 'Panel',
@@ -34,7 +35,7 @@ function ManagedPanel({ mode }: { mode: 'dark' | 'normal' }) {
 
   return (
     <WithStorybookTheme mode={mode}>
-      <Panel channel={channel} interactions={[]} />
+      <Panel channel={channel} interactions={[]} allowedGroups={defaultAllowedGroups} />
     </WithStorybookTheme>
   );
 }

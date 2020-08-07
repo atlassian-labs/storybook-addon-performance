@@ -10,7 +10,7 @@ import {
   TimedTask,
   ErrorResult,
 } from '../types';
-import toResultMap from '../util/to-result-map';
+import getResultMap from '../util/get-result-map';
 import { asyncMap } from './async';
 import { getResultForStaticTask } from './run-static-task';
 import { getResultForTimedTask } from './run-timed-task';
@@ -58,7 +58,7 @@ export default async function runGroup({
 
   const results: TaskGroupResult = {
     groupId: group.groupId,
-    map: toResultMap([...timedResults, ...staticResults, ...interactionResults]),
+    map: getResultMap([...timedResults, ...staticResults, ...interactionResults]),
   };
 
   return results;

@@ -7,7 +7,6 @@ it('should run static tests', async () => {
   const runMock = jest.fn().mockImplementation(() => Promise.resolve(returnValue));
 
   const task: StaticTask = {
-    taskId: 'task',
     type: 'static',
     description: 'task',
     name: 'task',
@@ -22,7 +21,7 @@ it('should run static tests', async () => {
 
   const expected: StaticResult = {
     type: 'static',
-    taskId: task.taskId,
+    taskName: task.name,
     value: returnValue,
   };
 

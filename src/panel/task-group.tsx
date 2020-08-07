@@ -51,10 +51,10 @@ export default React.memo(function TaskGroup({ group, result, pinned }: Props) {
       {group.tasks.map((task: Task) => {
         return (
           <TaskResult
-            key={task.taskId}
+            key={task.name}
             task={task}
-            result={result.map[task.taskId] || null}
-            pinned={pinned?.map[task.taskId] || null}
+            result={result.map[task.name] || null}
+            pinned={pinned?.map[task.name] || null}
           />
         );
       })}

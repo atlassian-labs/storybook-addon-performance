@@ -5,7 +5,6 @@ import { ErrorResult, StaticResult, StaticTask, TimedTask, TimedResult } from '.
 it('should list the error as unsupported in an UnsupportedError is thrown (static task)', async () => {
   const message: string = 'My custom unsupported error message';
   const task: StaticTask = {
-    taskId: 'task',
     type: 'static',
     description: 'task',
     name: 'task',
@@ -22,7 +21,7 @@ it('should list the error as unsupported in an UnsupportedError is thrown (stati
 
   const expected: ErrorResult = {
     type: 'error',
-    taskId: task.taskId,
+    taskName: task.name,
     reason: 'unsupported',
     message,
   };
@@ -33,7 +32,6 @@ it('should list the error as unsupported in an UnsupportedError is thrown (stati
 it('should list the error as unsupported in an UnsupportedError is thrown (timed task)', async () => {
   const message: string = 'My custom unsupported error message';
   const task: TimedTask = {
-    taskId: 'task',
     type: 'timed',
     description: 'task',
     name: 'task',
@@ -51,7 +49,7 @@ it('should list the error as unsupported in an UnsupportedError is thrown (timed
 
   const expected: ErrorResult = {
     type: 'error',
-    taskId: task.taskId,
+    taskName: task.name,
     reason: 'unsupported',
     message,
   };

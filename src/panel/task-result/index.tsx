@@ -19,25 +19,24 @@ export default function TaskResult({ task, result, pinned }: ResultProps) {
   }
 
   if (result.type === 'error') {
-    return <ErrorResultView key={task.taskId} task={task} result={result} />;
+    return <ErrorResultView key={task.name} task={task} result={result} />;
   }
 
   if (result.type === 'static') {
     invariant(task.type === 'static', `Unexpected task type: ${task.type}`);
     // Sometimes a pinned value can be an error. We don't want to compare against that
     const pin: Nullable<StaticResult> = pinned && pinned.type === 'static' ? pinned : null;
-    return <StaticResultView key={task.taskId} task={task} result={result} pinned={pin} />;
+    return <StaticResultView key={task.name} task={task} result={result} pinned={pin} />;
   }
 
   if (result.type === 'timed') {
     invariant(
       task.type === 'timed' || task.type === 'interaction',
-      `Mismatched task -> result type
-      (Task [${task.taskId}:${task.type}] : Result [${result.taskId}:${result.type}]`,
+      `Unexpected task type: ${task.type}`,
     );
     // Sometimes a pinned value can be an error. We don't want to compare against that
     const pin: Nullable<TimedResult> = pinned && pinned.type === 'timed' ? pinned : null;
-    return <TimedResultView key={task.taskId} task={task} result={result} pinned={pin} />;
+    return <TimedResultView key={task.name} task={task} result={result} pinned={pin} />;
   }
 
   // eslint-disable-next-line no-console

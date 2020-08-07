@@ -165,7 +165,6 @@ export default function TimedResultView({ task, pinned, result }: TimedProps) {
 
   return (
     <ExpandingResult
-      taskId={task.taskId}
       name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>

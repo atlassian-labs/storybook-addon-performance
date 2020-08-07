@@ -7,7 +7,6 @@ it('should not repeat a timed task if an error occurred in one', async () => {
     type: 'timed',
     name: 'task',
     description: '',
-    taskId: 'task',
     run: async (): Promise<void> => {
       mock();
       throw new Error('boom');

@@ -15,6 +15,8 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     // otherwise need to declare return type for components
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     // giving false positives
     '@typescript-eslint/no-unused-vars': 'off',
     'react-hooks/rules-of-hooks': 'error',

@@ -13,9 +13,9 @@ export function bind(channel: Channel, binding: Binding) {
 }
 
 export function bindAll(channel: Channel, bindings: Binding[]) {
-  const unbinds: Function[] = bindings.map((binding: Binding) => bind(channel, binding));
+  const unbinds: (() => void)[] = bindings.map((binding: Binding) => bind(channel, binding));
 
   return function unbindAll() {
-    unbinds.forEach((unbind: Function) => unbind());
+    unbinds.forEach((unbind) => unbind());
   };
 }

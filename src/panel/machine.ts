@@ -27,11 +27,11 @@ export type MachineContext = {
 
 export type MachineSchema = {
   states: {
-    waiting: {};
+    waiting: Record<string, any>;
     active: {
       states: {
-        idle: {};
-        running: {};
+        idle: Record<string, any>;
+        running: Record<string, any>;
       };
     };
   };

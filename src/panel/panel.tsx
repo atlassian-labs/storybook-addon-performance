@@ -1,21 +1,21 @@
 import { Channel } from '@storybook/channels';
 import { styled } from '@storybook/theming';
 import React, { useMemo } from 'react';
-import { getInteractionGroup } from '../tasks/get-interaction-group';
-import getPresets from '../tasks/preset';
+import { panelId } from '../selectors';
+import { getGroups } from '../tasks/get-groups';
 import {
+  AllowedGroup,
   Nullable,
   PublicInteractionTask,
   TaskGroup,
   TaskGroupResult,
-  AllowedGroup,
 } from '../types';
 import machine, { RunContext } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
-import { panelId } from '../selectors';
+import flatten from '../util/flatten';
 
 const Container = styled.div`
   --grid: 10px;
@@ -55,13 +55,10 @@ export default function Panel({
 }) {
   const { state, service } = usePanelMachine(machine, channel);
 
-  const groups: TaskGroup[] = useMemo(
-    function merge() {
-      const preset = getPresets({ allowedGroups });
-      return [...preset, getInteractionGroup(interactions)];
-    },
-    [interactions, allowedGroups],
-  );
+  const groups: TaskGroup[] = useMemo(() => getGroups({ allowedGroups, interactions }), [
+    interactions,
+    allowedGroups,
+  ]);
 
   return (
     <ServiceContext.Provider value={service}>

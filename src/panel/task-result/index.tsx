@@ -32,7 +32,8 @@ export default function TaskResult({ task, result, pinned }: ResultProps) {
   if (result.type === 'timed') {
     invariant(
       task.type === 'timed' || task.type === 'interaction',
-      `Unexpected task type: ${task.type}`,
+      `Mismatched task -> result type
+      (Task [${task.taskId}:${task.type}] : Result [${result.taskId}:${result.type}]`,
     );
     // Sometimes a pinned value can be an error. We don't want to compare against that
     const pin: Nullable<TimedResult> = pinned && pinned.type === 'timed' ? pinned : null;

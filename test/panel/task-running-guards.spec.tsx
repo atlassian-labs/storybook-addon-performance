@@ -9,13 +9,17 @@ import { assertTopbar } from '../../test-util/topbar';
 import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
 import eventNames from '../../src/events';
+import allowAllGroups from '../../src/tasks/allow-all-groups';
+
+beforeAll(() => localStorage.clear());
+afterEach(() => localStorage.clear());
 
 it('should prevent starting another task when running a task', () => {
   // 1: Initial render
   const channel: Channel = new Channel({ async: false });
   const { container, getByText } = render(
     <WithStorybookTheme>
-      <Panel interactions={[]} channel={channel} />
+      <Panel interactions={[]} channel={channel} allowedGroups={allowAllGroups} />
     </WithStorybookTheme>,
   );
   // topbar starts disabled

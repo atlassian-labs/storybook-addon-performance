@@ -8,6 +8,7 @@ import * as selectors from '../../src/selectors';
 import { getById } from '../../test-util/get-by';
 import * as mocks from '../../test-util/mocks';
 import WithStorybookTheme from '../../test-util/with-storybook-theme';
+import allowAllGroups from '../../src/tasks/allow-all-groups';
 
 beforeAll(() => localStorage.clear());
 afterEach(() => localStorage.clear());
@@ -16,7 +17,7 @@ it('should prevent modifiers being changed when a result is pinned', () => {
   const channel: Channel = new Channel({ async: false });
   const { container } = render(
     <WithStorybookTheme>
-      <Panel interactions={[]} channel={channel} />
+      <Panel interactions={[]} channel={channel} allowedGroups={allowAllGroups} />
     </WithStorybookTheme>,
   );
   act(() => channel.emit(STORY_RENDERED, mocks.storyName));

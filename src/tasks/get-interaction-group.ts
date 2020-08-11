@@ -8,7 +8,7 @@ export function getInteractionGroup(interactions: PublicInteractionTask[]): Task
       return {
         ...item,
         type: 'interaction',
-        taskId: `interaction::(index:${index})(name:${item.name})`,
+        name: item.name,
         description: item.description || '(None provided)',
       };
     },

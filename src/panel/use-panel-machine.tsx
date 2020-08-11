@@ -10,17 +10,16 @@ import { clearPinned, getPinned, savePinned } from './pinned-storage';
 
 type MergeArgs = {
   existing: TaskGroupResult[];
-  taskId: string;
   result: TimedResult | StaticResult;
 };
 
-function mergeWithResults({ existing, taskId, result }: MergeArgs): TaskGroupResult[] {
+function mergeWithResults({ existing, result }: MergeArgs): TaskGroupResult[] {
   return existing.map((groupResult: TaskGroupResult) => {
     return {
       ...groupResult,
       map: {
         ...groupResult.map,
-        [taskId]: result,
+        [result.taskName]: result,
       },
     };
   });
@@ -54,12 +53,11 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
       service.send('FINISH', { results });
     }
 
-    function finishOne({ taskId, result }: RunOne['Result']) {
+    function finishOne({ result }: RunOne['Result']) {
       const results: TaskGroupResult[] = mergeWithResults({
         // we are using a state machine guard to prevent this
         existing: service.state.context.current.results!,
         result,
-        taskId,
       });
       service.send('FINISH', { results });
     }
@@ -104,7 +102,7 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
 
           if (event.type === 'START_ONE') {
             channel.emit(eventNames.START_ONE, {
-              taskId: event.taskId,
+              taskName: event.taskName,
               samples,
               copies,
             });

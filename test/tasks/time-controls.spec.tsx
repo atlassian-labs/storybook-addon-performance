@@ -13,7 +13,6 @@ function getArgs({ run }: { run: TimedTask['run'] }): RunOneTimedTaskArgs {
     type: 'timed',
     name: 'task',
     description: '',
-    taskId: 'task',
     run,
   };
 

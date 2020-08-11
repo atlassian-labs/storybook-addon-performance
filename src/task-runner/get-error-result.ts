@@ -5,14 +5,14 @@ export default function getErrorResult({ task, error }: { task: Task; error: any
   if (error instanceof UnsupportedError) {
     return {
       type: 'error',
-      taskId: task.taskId,
+      taskName: task.name,
       reason: 'unsupported',
       message: error.message,
     };
   }
   return {
     type: 'error',
-    taskId: task.taskId,
+    taskName: task.name,
     reason: 'unhandled',
     message: null,
   };

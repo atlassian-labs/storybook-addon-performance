@@ -1,7 +1,22 @@
-import { PublicInteractionTask, AllowedGroup, TaskGroup } from '../types';
+import { PublicInteractionTask, AllowedGroup, TaskGroup, Task } from '../types';
 import client from './preset/client';
 import server from './preset/server';
 import { getInteractionGroup } from './get-interaction-group';
+import flatten from '../util/flatten';
+import invariant from 'tiny-invariant';
+
+function getDuplicateTaskNames(groups: TaskGroup[]): string[] {
+  const tasks: Task[] = flatten(groups.map((group) => group.tasks));
+  const allNames: string[] = tasks.map((task) => task.name);
+
+  const duplicates: string[] = allNames.filter((name: string) => {
+    return allNames.filter((value) => value === name).length > 1;
+  });
+
+  // duplicates will include two entries for every duplicate
+  // using a Set to trip out the duplicates
+  return [...new Set(duplicates)];
+}
 
 export function getGroups({
   allowedGroups,
@@ -20,6 +35,13 @@ export function getGroups({
   }
 
   result.push(getInteractionGroup(interactions));
+
+  const duplicateNames: string[] = getDuplicateTaskNames(result);
+
+  invariant(
+    !duplicateNames.length,
+    `Tasks found with duplicate names: [${duplicateNames.join(',')}]`,
+  );
 
   return result;
 }

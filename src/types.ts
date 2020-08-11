@@ -5,7 +5,6 @@ export type Nullable<T> = T | null;
 export type Combine<First, Second> = Omit<First, keyof Second> & Second;
 
 type BaseTask = {
-  taskId: string;
   name: string;
   description: string;
 };
@@ -53,7 +52,7 @@ export type InteractionTask = BaseTask & {
 };
 
 // This is what is provided as interactions to the addon by a consumer
-export type PublicInteractionTask = Omit<InteractionTask, 'taskId' | 'description' | 'type'> & {
+export type PublicInteractionTask = Omit<InteractionTask, 'description' | 'type'> & {
   description?: string;
 };
 
@@ -73,7 +72,7 @@ export type Variance = {
 
 export type TimedResult = {
   type: 'timed';
-  taskId: string;
+  taskName: string;
   averageMs: number;
   samples: number;
   variance: Variance;
@@ -81,13 +80,13 @@ export type TimedResult = {
 
 export type StaticResult = {
   type: 'static';
-  taskId: string;
+  taskName: string;
   value: string;
 };
 
 export type ErrorResult = {
   type: 'error';
-  taskId: string;
+  taskName: string;
   reason: 'unsupported' | 'unhandled';
   message: Nullable<string>;
 };
@@ -95,11 +94,11 @@ export type ErrorResult = {
 export type Result = TimedResult | StaticResult | ErrorResult;
 
 export type ResultMap = {
-  [taskId: string]: Result;
+  [taskName: string]: Result;
 };
 
 export type TaskMap = {
-  [taskId: string]: Task;
+  [taskName: string]: Task;
 };
 
 export type TaskGroupResult = {

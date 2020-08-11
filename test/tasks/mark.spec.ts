@@ -9,7 +9,6 @@ beforeEach(() => {
 
 it('should wrap a task in a performance.mark', async () => {
   const task: StaticTask = {
-    taskId: 'task',
     type: 'static',
     description: 'task',
     name: 'task',
@@ -32,7 +31,6 @@ it('should wrap a task in a performance.mark', async () => {
 
 it('should still use performance.mark even when there is an error in the task', async () => {
   const task: StaticTask = {
-    taskId: 'task',
     type: 'static',
     description: 'task',
     name: 'task',

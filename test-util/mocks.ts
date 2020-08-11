@@ -9,102 +9,118 @@ export const groupResults: TaskGroupResult[] = [
   {
     groupId: 'Server',
     map: {
-      'preset::unique-id:7': {
+      'Render to string': {
         type: 'timed',
-        taskId: 'preset::unique-id:7',
-        averageMs: 16.347500003757887,
+        taskName: 'Render to string',
+        averageMs: 18.437499995343387,
         samples: 10,
         variance: {
-          upperPercentage: 23.74980877795315,
-          lowerPercentage: 15.981036783323018,
-          standardDeviation: 2.3455247299536865,
+          upperPercentage: 15.037288040689816,
+          lowerPercentage: 16.474576229128438,
+          standardDeviation: 2.024594097840528,
         },
       },
-      'preset::unique-id:8': {
+      'Render to static markup (cannot be hydrated)': {
         type: 'timed',
-        taskId: 'preset::unique-id:8',
-        averageMs: 14.008499993360601,
+        taskName: 'Render to static markup (cannot be hydrated)',
+        averageMs: 14.930999994976446,
         samples: 10,
         variance: {
-          upperPercentage: 14.39483169140364,
-          lowerPercentage: 7.413356264227891,
-          standardDeviation: 1.011266660364238,
+          upperPercentage: 14.258924315167054,
+          lowerPercentage: 6.43627349358861,
+          standardDeviation: 0.9656339848818386,
         },
       },
-      'preset::unique-id:9': { type: 'static', taskId: 'preset::unique-id:9', value: '14.33' },
-      'preset::unique-id:10': { type: 'static', taskId: 'preset::unique-id:10', value: '0.84' },
-      'preset::unique-id:11': {
+      'String output size': { type: 'static', taskName: 'String output size', value: '14.33' },
+      'String output size (gzip)': {
         type: 'static',
-        taskId: 'preset::unique-id:11',
+        taskName: 'String output size (gzip)',
+        value: '0.84',
+      },
+      'Static markup output size': {
+        type: 'static',
+        taskName: 'Static markup output size',
         value: '14.33',
       },
-      'preset::unique-id:12': { type: 'static', taskId: 'preset::unique-id:12', value: '0.84' },
+      'Static markup output size (gzip)': {
+        type: 'static',
+        taskName: 'Static markup output size (gzip)',
+        value: '0.84',
+      },
     },
   },
   {
     groupId: 'Client',
     map: {
-      'preset::unique-id:0': {
+      'Initial render': {
         type: 'timed',
-        taskId: 'preset::unique-id:0',
-        averageMs: 33.7085000006482,
+        taskName: 'Initial render',
+        averageMs: 45.291499997256324,
         samples: 10,
         variance: {
-          upperPercentage: 53.58144085302733,
-          lowerPercentage: 28.32668317966413,
-          standardDeviation: 9.431718042927884,
+          upperPercentage: 10.39599039861205,
+          lowerPercentage: 11.79360363822285,
+          standardDeviation: 3.5473680738394884,
         },
       },
-      'preset::unique-id:2': {
+      'Re render': {
         type: 'timed',
-        taskId: 'preset::unique-id:2',
-        averageMs: 17.56850000238046,
+        taskName: 'Re render',
+        averageMs: 22.232000005897135,
         samples: 10,
         variance: {
-          upperPercentage: 17.084554688937313,
-          lowerPercentage: 21.450322945551903,
-          standardDeviation: 1.8218507749456447,
+          upperPercentage: 15.486685880162348,
+          lowerPercentage: 12.243612775999072,
+          standardDeviation: 1.7607302461130605,
         },
       },
-      'preset::unique-id:1': {
+      Hydrate: {
         type: 'timed',
-        taskId: 'preset::unique-id:1',
-        averageMs: 24.524500002735294,
+        taskName: 'Hydrate',
+        averageMs: 38.209999998798594,
         samples: 10,
         variance: {
-          upperPercentage: 25.079002564046572,
-          lowerPercentage: 8.703541373848548,
-          standardDeviation: 2.242791172841424,
+          upperPercentage: 5.626799229970686,
+          lowerPercentage: 5.770740636265473,
+          standardDeviation: 1.3656793121343955,
         },
       },
-      'preset::unique-id:5': {
+      'Complete render (mount + layout + paint)': {
         type: 'timed',
-        taskId: 'preset::unique-id:5',
-        averageMs: 36.793999999645166,
+        taskName: 'Complete render (mount + layout + paint)',
+        averageMs: 48.659499996574596,
         samples: 10,
         variance: {
-          upperPercentage: 34.87253360515639,
-          lowerPercentage: 11.656791839848179,
-          standardDeviation: 6.15493493492205,
+          upperPercentage: 3.2480810239156224,
+          lowerPercentage: 2.2390283530976323,
+          standardDeviation: 0.6435621538816768,
         },
       },
-      'preset::unique-id:3': { type: 'static', taskId: 'preset::unique-id:3', value: '130' },
-      'preset::unique-id:4': { type: 'static', taskId: 'preset::unique-id:4', value: '120' },
-      'preset::unique-id:6': { type: 'static', taskId: 'preset::unique-id:6', value: '461' },
+      'DOM element count': { type: 'static', taskName: 'DOM element count', value: '130' },
+      'DOM element count (no nested inline svg elements)': {
+        type: 'static',
+        taskName: 'DOM element count (no nested inline svg elements)',
+        value: '120',
+      },
+      'React Fiber node count': {
+        type: 'static',
+        taskName: 'React Fiber node count',
+        value: '461',
+      },
     },
   },
   {
     groupId: 'Interactions',
     map: {
-      'interaction::(index:0)(name:Display dropdown)': {
+      'Display dropdown': {
         type: 'timed',
-        taskId: 'interaction::(index:0)(name:Display dropdown)',
-        averageMs: 177.05949999799486,
+        taskName: 'Display dropdown',
+        averageMs: 250.1429999974789,
         samples: 10,
         variance: {
-          upperPercentage: 8.810879960011455,
-          lowerPercentage: 7.282580151564158,
-          standardDeviation: 9.851067060814993,
+          upperPercentage: 22.240078670701017,
+          lowerPercentage: 7.624838587831113,
+          standardDeviation: 21.225114623903043,
         },
       },
     },

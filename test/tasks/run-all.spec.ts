@@ -1,7 +1,7 @@
 import { runAll } from '../../src/task-runner';
 import preset from '../../src/tasks/preset';
 import { Task, TaskGroup, TaskGroupResult, TimedResult, AllowedGroup } from '../../src/types';
-import toResultMap from '../../src/util/to-result-map';
+import getResultMap from '../../src/util/get-result-map';
 import { StaticResult } from '../../src/types';
 
 it('should run all the standard tests', async () => {
@@ -20,7 +20,7 @@ it('should run all the standard tests', async () => {
           (task: Task): StaticResult => {
             return {
               type: 'static',
-              taskId: task.taskId,
+              taskName: task.name,
               value: expect.any(String) as string,
             };
           },
@@ -31,7 +31,7 @@ it('should run all the standard tests', async () => {
           (task: Task): TimedResult => {
             return {
               type: 'timed',
-              taskId: task.taskId,
+              taskName: task.name,
               averageMs: expect.any(Number) as number,
               samples: 3,
               variance: {
@@ -45,7 +45,7 @@ it('should run all the standard tests', async () => {
 
       return {
         groupId: group.groupId,
-        map: toResultMap([...staticResults, ...timedResults]),
+        map: getResultMap([...staticResults, ...timedResults]),
       };
     },
   );

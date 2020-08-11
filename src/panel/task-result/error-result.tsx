@@ -45,7 +45,6 @@ export default function ErrorResultView({ task, result }: { task: Task; result: 
 
   return (
     <ExpandingResult
-      taskId={task.taskId}
       name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>

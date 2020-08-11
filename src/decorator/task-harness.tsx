@@ -66,10 +66,10 @@ export default function TaskHarness({ getNode, channel, interactions, allowedGro
         },
         {
           eventName: eventNames.START_ONE,
-          fn: async function onStartOne({ taskId, copies, samples }: RunOne['Params']) {
-            const task = tasks[taskId];
+          fn: async function onStartOne({ taskName, copies, samples }: RunOne['Params']) {
+            const task = tasks[taskName];
             if (task == null) {
-              throw new Error(`Could not find task with id: ${taskId}`);
+              throw new Error(`Could not find task with id: ${taskName}`);
             }
 
             if (task.type === 'timed' || task.type === 'interaction') {
@@ -79,7 +79,7 @@ export default function TaskHarness({ getNode, channel, interactions, allowedGro
                 samples,
                 copies,
               });
-              safeEmit(eventNames.FINISH_ONE, { taskId, result });
+              safeEmit(eventNames.FINISH_ONE, { taskName, result });
               return;
             }
             if (task.type === 'static') {
@@ -88,7 +88,7 @@ export default function TaskHarness({ getNode, channel, interactions, allowedGro
                 getNode,
                 copies,
               });
-              safeEmit(eventNames.FINISH_ONE, { taskId, result });
+              safeEmit(eventNames.FINISH_ONE, { taskName, result });
               return;
             }
           },

@@ -8,7 +8,6 @@ it('should run one timed task', async () => {
   const task: TimedTask = {
     name: 'task',
     type: 'timed',
-    taskId: 'task',
     description: 'task',
     run: ({ getElement }: RunTimedTaskArgs) => Promise.resolve().then(() => mock(getElement())),
   };
@@ -22,7 +21,7 @@ it('should run one timed task', async () => {
   });
 
   const expected: TimedResult = {
-    taskId: task.taskId,
+    taskName: task.name,
     type: 'timed',
     averageMs: expect.any(Number) as number,
     samples,

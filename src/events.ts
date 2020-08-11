@@ -8,8 +8,8 @@ export default {
 };
 
 export type RunOne = {
-  Params: { taskId: string; copies: number; samples: number };
-  Result: { taskId: string; result: TimedResult | StaticResult };
+  Params: { taskName: string; copies: number; samples: number };
+  Result: { taskName: string; result: TimedResult | StaticResult };
 };
 
 export type RunAll = {

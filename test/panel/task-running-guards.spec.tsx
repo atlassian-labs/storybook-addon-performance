@@ -10,6 +10,7 @@ import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
 import eventNames from '../../src/events';
 import allowAllGroups from '../../src/tasks/allow-all-groups';
+import getResultMap from '../../src/util/get-result-map';
 
 beforeAll(() => localStorage.clear());
 afterEach(() => localStorage.clear());
@@ -44,7 +45,9 @@ it('should prevent starting another task when running a task', () => {
   assertTopbar({ container, isEnabled: true });
 
   // 5: Run a single task
-  fireEvent.click(getByText('Render to string'));
+  const taskName: string = 'Render to string';
+
+  fireEvent.click(getByText(taskName));
   const runSingle: HTMLElement = getByText('Run task');
   expect(runSingle.matches(':enabled')).toBe(true);
   fireEvent.click(runSingle);
@@ -53,11 +56,10 @@ it('should prevent starting another task when running a task', () => {
   // top bar now disabled
   assertTopbar({ container, isEnabled: false });
   // emit a result
-  const taskId: string = 'preset::unique-id:6';
   act(() =>
     channel.emit(eventNames.FINISH_ONE, {
-      taskId,
-      result: mocks.groupResults.map['preset::unique-id:6'],
+      taskName,
+      result: mocks.groupResults[0].map[taskName],
     }),
   );
   // topbar and run button now enabled

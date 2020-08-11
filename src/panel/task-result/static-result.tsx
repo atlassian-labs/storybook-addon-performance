@@ -89,7 +89,6 @@ export default function StaticResultView({
 
   return (
     <ExpandingResult
-      taskId={task.taskId}
       name={task.name}
       result={resultNode}
       getExpanded={({ isExpanded }) =>

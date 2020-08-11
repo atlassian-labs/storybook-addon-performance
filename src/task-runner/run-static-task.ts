@@ -20,7 +20,7 @@ export async function getResultForStaticTask({
     const value: string = await runStaticTask({ task, getElement });
     const result: StaticResult = {
       type: 'static',
-      taskId: task.taskId,
+      taskName: task.name,
       value,
     };
     return result;

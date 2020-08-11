@@ -10,18 +10,19 @@ import {
   Nullable,
   AllowedGroup,
 } from '../../types';
-import { staticTask, timedTask } from './create';
 import { UnsupportedError } from '../../task-runner/custom-errors';
 
-const render: TimedTask = timedTask({
+const render: TimedTask = {
+  type: 'timed',
   name: 'Initial render',
   description: `This task records how long ReactDOM.render() takes with your component`,
   run: async ({ getElement, container }: RunTimedTaskArgs): Promise<void> => {
     ReactDOM.render(getElement(), container);
   },
-});
+};
 
-const hydrate: TimedTask = timedTask({
+const hydrate: TimedTask = {
+  type: 'timed',
   name: 'Hydrate',
   description: `
       This task records how long a ReactDOMServer.hydrate() call
@@ -39,9 +40,10 @@ const hydrate: TimedTask = timedTask({
       ReactDOM.hydrate(getElement(), container);
     });
   },
-});
+};
 
-const reRender: TimedTask = timedTask({
+const reRender: TimedTask = {
+  type: 'timed',
   name: 'Re render',
   description: `
       This task records how long it takes to re-render the component with no prop changes.
@@ -55,13 +57,14 @@ const reRender: TimedTask = timedTask({
       ReactDOM.render(getElement(), container);
     });
   },
-});
+};
 
 function getAllChildren(container: HTMLElement): Element[] {
   return Array.from(container.querySelectorAll('*'));
 }
 
-const domElementCount: StaticTask = staticTask({
+const domElementCount: StaticTask = {
+  type: 'static',
   name: 'DOM element count',
   description: `
     The more DOM element your component creates, the more work the browser needs to do
@@ -73,9 +76,10 @@ const domElementCount: StaticTask = staticTask({
 
     return String(allChildren.length);
   },
-});
+};
 
-const domElementCountWithoutSvg: StaticTask = staticTask({
+const domElementCountWithoutSvg: StaticTask = {
+  type: 'static',
   name: 'DOM element count (no nested inline svg elements)',
   description: `
     The count of DOM elements excluding inner SVG elements
@@ -102,9 +106,10 @@ const domElementCountWithoutSvg: StaticTask = staticTask({
 
     return String(allChildren.length);
   },
-});
+};
 
-const completeRender: TimedTask = timedTask({
+const completeRender: TimedTask = {
+  type: 'timed',
   name: 'Complete render (mount + layout + paint)',
   description: `
     Time taken for the CPU to become idle after starting ReactDOM.render.
@@ -123,7 +128,7 @@ const completeRender: TimedTask = timedTask({
       idle(() => resolve());
     });
   },
-});
+};
 
 interface Fiber {
   // Singly Linked List Tree Structure.
@@ -149,7 +154,8 @@ export function traverse(rootNode: Fiber, callback: (node: Fiber) => void) {
   walk(rootNode);
 }
 
-const reactFiberNodeCount: StaticTask = staticTask({
+const reactFiberNodeCount: StaticTask = {
+  type: 'static',
   name: 'React Fiber node count',
   description: `
     The number of React Elements or internal objects ("fibers") that hold information about the component tree state.
@@ -164,7 +170,7 @@ const reactFiberNodeCount: StaticTask = staticTask({
 
     return String(count);
   },
-});
+};
 
 const group: TaskGroup = {
   groupId: 'Client',

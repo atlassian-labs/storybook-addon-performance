@@ -89,7 +89,7 @@ export async function getResultForTimedTask({
 
     const result: TimedResult = {
       type: 'timed',
-      taskId: task.taskId,
+      taskName: task.name,
       averageMs: average,
       samples,
       variance: {

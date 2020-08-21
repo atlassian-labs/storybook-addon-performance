@@ -11,8 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["gzip-js", "jest", "react", "react-dom"]
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"]
 }

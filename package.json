@@ -10,7 +10,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
-  "sideEffects": false,
   "author": "Alex Reardon <areardon@atlassian.com>",
   "license": "Apache-2.0",
   "repository": {

@@ -14,8 +14,8 @@ export default async function withContainer<T>(
   const result: T = await fn(container);
 
   // Cleanup any usages of react in the container
-  // Note: react doesn't complain if there is nothing
-  // rendered by react in the element
+  // - React doesn't complain if there is nothing rendered by react in the element
+  // - React won't complain if the element is already detached (removed from the DOM)
   ReactDOM.unmountComponentAtNode(container);
 
   if (document.body.contains(container)) {

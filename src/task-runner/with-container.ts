@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import { addonKey, packageName } from './../addon-constants';
 export default async function withContainer<T>(
   fn: (container: HTMLElement) => Promise<T>,
@@ -11,6 +12,9 @@ export default async function withContainer<T>(
   document.body.appendChild(container);
 
   const result: T = await fn(container);
+
+  // Cleanup any usages of react in the container
+  ReactDOM.unmountComponentAtNode(container);
 
   if (document.body.contains(container)) {
     document.body.removeChild(container);

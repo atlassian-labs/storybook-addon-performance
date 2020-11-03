@@ -32,6 +32,7 @@ export const Note =
     font-size: small;
 
     &::before {
+      margin-right: 1ch;
       content: 'ℹ️';
     }
   ` as any;

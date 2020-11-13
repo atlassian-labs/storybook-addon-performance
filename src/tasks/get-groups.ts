@@ -31,7 +31,13 @@ export function getGroups({
     result.push(server);
   }
   if (allowedGroups.includes('client')) {
-    result.push(client);
+    const tasks = allowedGroups.includes('server')
+      ? client.tasks
+      : client.tasks.filter((task) => task.name !== 'Hydrate');
+    result.push({
+      ...client,
+      tasks,
+    });
   }
 
   result.push(getInteractionGroup(interactions));

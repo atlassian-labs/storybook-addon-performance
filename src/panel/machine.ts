@@ -9,6 +9,8 @@ export type MachineEvents =
   | { type: 'FINISH'; results: TaskGroupResult[] }
   | { type: 'PIN' }
   | { type: 'UNPIN' }
+  | { type: 'SAVE' }
+  | { type: 'LOAD_FROM_FILE'; storyName: string; pinned: Nullable<RunContext> }
   | { type: 'SET_VALUES'; copies: number; samples: number };
 
 export type RunContext = {
@@ -133,6 +135,38 @@ const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvent
                     message: 'Result pinned',
                   };
                 }),
+              },
+              SAVE: {
+                internal: true,
+                target: 'idle',
+                // Only allow saving when there are results
+                cond: (context): boolean => {
+                  return context.current.results != null;
+                },
+                actions: assign((context) => {
+                  return {
+                    ...context,
+                    message: 'Result saved',
+                  };
+                }),
+              },
+              LOAD_FROM_FILE: {
+                internal: true,
+                target: 'idle',
+                actions: assign(
+                  (context, event): MachineContext => {
+                    const message: Nullable<string> = event.pinned
+                      ? `Loaded pinned result: ${event.storyName}`
+                      : null;
+                    return {
+                      ...context,
+                      message,
+                      pinned: event.pinned,
+                      storyName: event.storyName,
+                      current: event.pinned || context.current,
+                    };
+                  },
+                ),
               },
               UNPIN: {
                 internal: true,

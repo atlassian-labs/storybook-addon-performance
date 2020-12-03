@@ -4,11 +4,12 @@ import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
 import ServiceContext from './service-context';
 import { useService } from '@xstate/react';
-import { RunContext, MachineEvents } from './machine';
+import { RunContext } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 import nextEventsInclude from './next-events-include';
 import * as selectors from '../selectors';
+import { readFile } from './file-system';
 
 const Container = styled.div`
   display: flex;
@@ -34,10 +35,25 @@ const Segment = styled.div`
   }
 `;
 
+const HiddenAnchor = styled.a`
+  display: none;
+`;
+
+const FileButtons = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  > * {
+    margin: var(--halfGrid) !important;
+    flex-shrink: 0;
+  }
+`;
+
 // Setting a width so we have a consistent wrap point
 // Setting a min-width so the message can collapse in tight scenarios
 const CollapseSegment = styled(Segment)`
-  width: 500px;
+  width: 400px;
   min-width: 0;
 `;
 
@@ -88,7 +104,7 @@ export default function Topbar() {
               send('SET_VALUES', values);
             }}
           >
-            {sizes.map((size: number) => (
+            {sizes.map((size) => (
               <option key={size} value={size}>
                 {size} {pluraliseCopies(size)}
               </option>
@@ -109,7 +125,7 @@ export default function Topbar() {
               send('SET_VALUES', values);
             }}
           >
-            {sizes.map((size: number) => (
+            {sizes.map((size) => (
               <option key={size} value={size}>
                 {size} {pluraliseSamples(size)}
               </option>
@@ -134,6 +150,47 @@ export default function Topbar() {
         }
         <Message>{state.context.message}</Message>
       </CollapseSegment>
+      <FileButtons>
+        {
+          // @ts-ignore
+          <Button
+            id={selectors.saveButtonId}
+            secondary
+            small
+            outline
+            disabled={current.results == null}
+            onClick={() => send({ type: 'SAVE' })}
+          >
+            <Icons icon="download" />
+            Save result
+          </Button>
+        }
+        {
+          // @ts-ignore
+          <Button
+            secondary
+            small
+            onClick={() => {
+              document.getElementById(selectors.loadButtonId)?.click();
+            }}
+          >
+            <Icons icon="upload" />
+            Load result
+          </Button>
+        }
+        <Form.Input
+          style={{ display: 'none' }}
+          id={selectors.loadButtonId}
+          type="file"
+          accept=".json"
+          onChange={(e) => {
+            readFile(e, (results, storyName) =>
+              send('LOAD_FROM_FILE', { pinned: results, storyName }),
+            );
+          }}
+        />
+      </FileButtons>
+      <HiddenAnchor id={selectors.hiddenFileAnchorId} />
     </Container>
   );
 }

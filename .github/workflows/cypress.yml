@@ -28,7 +28,7 @@ jobs:
       - run: yarn build
       # Okay, finally start cypress
       - name: Cypress run
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         with:
           browser: chrome
           headless: true

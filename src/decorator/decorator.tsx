@@ -16,11 +16,10 @@ export default makeDecorator({
     const allowedGroups: AllowedGroup[] =
       (parameters && parameters.allowedGroups) || allowAllGroups;
 
-    // Sadly need to add cast channel for storybook ts-loader
     return (
       <TaskHarness
         getNode={() => getStory(context)}
-        channel={addons.getChannel() as any}
+        channel={addons.getChannel()}
         interactions={interactions}
         allowedGroups={allowedGroups}
       />

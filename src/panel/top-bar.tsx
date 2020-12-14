@@ -78,106 +78,88 @@ export default function Topbar() {
   return (
     <Container>
       <Segment>
-        {
-          // @ts-ignore
-          <Button
-            primary
-            small
-            onClick={() => send({ type: 'START_ALL' })}
-            disabled={!enabled.start}
-            id={selectors.startAllButtonId}
-          >
-            START ALL
-          </Button>
-        }
-        {
-          // @ts-ignore
-          <Form.Select
-            id={selectors.copySelectId}
-            disabled={!enabled.change}
-            value={current.copies}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              const values = {
-                samples: current.samples,
-                copies: Number(event.target.value),
-              };
-              send('SET_VALUES', values);
-            }}
-          >
-            {sizes.map((size) => (
-              <option key={size} value={size}>
-                {size} {pluraliseCopies(size)}
-              </option>
-            ))}
-          </Form.Select>
-        }
-        {
-          // @ts-ignore
-          <Form.Select
-            id={selectors.sampleSelectId}
-            disabled={!enabled.change}
-            value={current.samples}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              const values = {
-                copies: current.copies,
-                samples: Number(event.target.value),
-              };
-              send('SET_VALUES', values);
-            }}
-          >
-            {sizes.map((size) => (
-              <option key={size} value={size}>
-                {size} {pluraliseSamples(size)}
-              </option>
-            ))}
-          </Form.Select>
-        }
+        <Button
+          primary
+          small
+          onClick={() => send({ type: 'START_ALL' })}
+          disabled={!enabled.start}
+          id={selectors.startAllButtonId}
+        >
+          START ALL
+        </Button>
+        <Form.Select
+          id={selectors.copySelectId}
+          disabled={!enabled.change}
+          value={current.copies}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+            const values = {
+              samples: current.samples,
+              copies: Number(event.target.value),
+            };
+            send('SET_VALUES', values);
+          }}
+        >
+          {sizes.map((size) => (
+            <option key={size} value={size}>
+              {size} {pluraliseCopies(size)}
+            </option>
+          ))}
+        </Form.Select>
+        <Form.Select
+          id={selectors.sampleSelectId}
+          disabled={!enabled.change}
+          value={current.samples}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+            const values = {
+              copies: current.copies,
+              samples: Number(event.target.value),
+            };
+            send('SET_VALUES', values);
+          }}
+        >
+          {sizes.map((size) => (
+            <option key={size} value={size}>
+              {size} {pluraliseSamples(size)}
+            </option>
+          ))}
+        </Form.Select>
       </Segment>
       <CollapseSegment>
-        {
-          // @ts-ignore
-          <Button
-            id={selectors.pinButtonId}
-            secondary
-            small
-            outline
-            disabled={pinned ? !enabled.unpin : !enabled.pin}
-            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-          >
-            <Icons icon={pinned ? 'unlock' : 'lock'} />
-            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-          </Button>
-        }
+        <Button
+          id={selectors.pinButtonId}
+          secondary
+          small
+          outline
+          disabled={pinned ? !enabled.unpin : !enabled.pin}
+          onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+        >
+          <Icons icon={pinned ? 'unlock' : 'lock'} />
+          {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
+        </Button>
         <Message>{state.context.message}</Message>
       </CollapseSegment>
       <FileButtons>
-        {
-          // @ts-ignore
-          <Button
-            id={selectors.saveButtonId}
-            secondary
-            small
-            outline
-            disabled={current.results == null}
-            onClick={() => send({ type: 'SAVE' })}
-          >
-            <Icons icon="download" />
-            Save result
-          </Button>
-        }
-        {
-          // @ts-ignore
-          <Button
-            secondary
-            small
-            onClick={() => {
-              document.getElementById(selectors.loadButtonId)?.click();
-            }}
-          >
-            <Icons icon="upload" />
-            Load result
-          </Button>
-        }
+        <Button
+          id={selectors.saveButtonId}
+          secondary
+          small
+          outline
+          disabled={current.results == null}
+          onClick={() => send({ type: 'SAVE' })}
+        >
+          <Icons icon="download" />
+          Save result
+        </Button>
+        <Button
+          secondary
+          small
+          onClick={() => {
+            document.getElementById(selectors.loadButtonId)?.click();
+          }}
+        >
+          <Icons icon="upload" />
+          Load result
+        </Button>
         <Form.Input
           style={{ display: 'none' }}
           id={selectors.loadButtonId}

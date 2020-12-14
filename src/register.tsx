@@ -27,8 +27,8 @@ function Env({ children }: EnvProps) {
   const allowedGroups: AllowedGroup[] = parameters.allowedGroups || allowAllGroups;
 
   // sadly need to add cast for storybook ts-loader
-  const channel: Channel = addons.getChannel() as any;
-  return children({ channel: channel as any, interactions, allowedGroups });
+  const channel: Channel = addons.getChannel();
+  return children({ channel: channel, interactions, allowedGroups });
 }
 
 addons.register(constants.addonKey, () => {
@@ -36,7 +36,7 @@ addons.register(constants.addonKey, () => {
     type: types.PANEL,
     title: constants.panelTitle,
     render: ({ active, key }) => (
-      <AddonPanel active={active} key={key}>
+      <AddonPanel active={!!active} key={key}>
         <Env>
           {({ interactions, channel, allowedGroups }) => (
             <Panel channel={channel} interactions={interactions} allowedGroups={allowedGroups} />

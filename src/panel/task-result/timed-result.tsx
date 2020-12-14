@@ -77,7 +77,10 @@ function Variance({ result }: { result: TimedResult }) {
           <tr>
             <Parts.TitleCell>Standard deviation</Parts.TitleCell>
             <Parts.ValueCell>
-              <Parts.ValueLozenge type={wasStable ? 'positive' : 'negative'}>
+              <Parts.ValueLozenge
+                hasWarningIcon={wasStable}
+                type={wasStable ? 'positive' : 'negative'}
+              >
                 {toFixed(result.variance.standardDeviation)}
               </Parts.ValueLozenge>
             </Parts.ValueCell>

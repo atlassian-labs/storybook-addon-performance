@@ -44,11 +44,12 @@ export const ResultScale = styled.code`
 `;
 
 export const ValueLozenge = styled.code<{
+  hasWarningIcon?: boolean;
   type: 'positive' | 'negative' | 'warning' | 'info' | 'faint' | 'raw';
   width?: 'fill' | 'inherit';
 }>`
-  ${({ type }) =>
-    type === 'negative' &&
+  ${({ hasWarningIcon = true }) =>
+    !hasWarningIcon &&
     `&:before {
       content: '⚠️';
       margin-right: 1ch;
@@ -58,18 +59,22 @@ export const ValueLozenge = styled.code<{
   color: ${(props) => props.theme.color.light};
   font-weight: bold;
   font-size: small;
-  background-color: ${({ type, theme }) =>
-    type === 'positive'
-      ? theme.color.positive
-      : type === 'negative'
-      ? theme.color.negative
-      : type === 'warning'
-      ? theme.color.warning
-      : type === 'info'
-      ? theme.color.seafoam
-      : type === 'faint'
-      ? theme.color.medium
-      : theme.color.purple};
+  background-color: ${({ type, theme }) => {
+    switch (type) {
+      case 'positive':
+        return theme.color.positive;
+      case 'negative':
+        return theme.color.negative;
+      case 'faint':
+        return theme.color.medium;
+      case 'warning':
+        return theme.color.warning;
+      case 'info':
+        return theme.color.seafoam;
+      default:
+        return theme.color.purple;
+    }
+  }};
 `;
 
 export const Table = styled.table`

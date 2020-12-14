@@ -83,7 +83,7 @@
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
     "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0",
     "validate": "yarn typescript:check && yarn prettier:check && yarn eslint:check",
-    "dev": "yarn typescript:watch & yarn storybook:dev",
+    "dev": "yarn storybook:dev",
     "test": "yarn jest",
     "build:clean": "rimraf dist",
     "build": "yarn build:clean && yarn typescript:build",

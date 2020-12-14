@@ -1,11 +1,14 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
   ],
   rules: {
+    'prettier/prettier': 'error',
     'no-async-promise-executor': 'error',
     'no-console': 'error',
     '@typescript-eslint/no-empty-function': 'off',

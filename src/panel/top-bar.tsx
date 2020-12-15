@@ -50,10 +50,37 @@ const FileButtons = styled.div`
   }
 `;
 
+const MetaSettings = styled.div`
+  flex: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+`;
+
+const ResponsiveIcon = styled(Icons)`
+  @media screen and (min-width: 968px) and (max-width: 1300px) {
+    margin-right: 0px !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0px !important;
+  }
+`;
+
+const ResponsiveText = styled.span`
+  @media screen and (min-width: 968px) and (max-width: 1300px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 // Setting a width so we have a consistent wrap point
 // Setting a min-width so the message can collapse in tight scenarios
 const CollapseSegment = styled(Segment)`
-  width: 400px;
+  width: 300px;
   min-width: 0;
 `;
 
@@ -133,64 +160,66 @@ export default function Topbar() {
           </Form.Select>
         }
       </Segment>
-      <CollapseSegment>
-        {
-          // @ts-ignore
-          <Button
-            id={selectors.pinButtonId}
-            secondary
-            small
-            outline
-            disabled={pinned ? !enabled.unpin : !enabled.pin}
-            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-          >
-            <Icons icon={pinned ? 'unlock' : 'lock'} />
-            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-          </Button>
-        }
-        <Message>{state.context.message}</Message>
-      </CollapseSegment>
-      <FileButtons>
-        {
-          // @ts-ignore
-          <Button
-            id={selectors.saveButtonId}
-            secondary
-            small
-            outline
-            disabled={current.results == null}
-            onClick={() => send({ type: 'SAVE' })}
-          >
-            <Icons icon="download" />
-            Save result
-          </Button>
-        }
-        {
-          // @ts-ignore
-          <Button
-            secondary
-            small
-            onClick={() => {
-              document.getElementById(selectors.loadButtonId)?.click();
+      <MetaSettings>
+        <CollapseSegment>
+          {
+            // @ts-ignore
+            <Button
+              id={selectors.pinButtonId}
+              secondary
+              small
+              outline
+              disabled={pinned ? !enabled.unpin : !enabled.pin}
+              onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+            >
+              <ResponsiveIcon icon={pinned ? 'unlock' : 'lock'} />
+              <ResponsiveText>{pinned ? 'Unpin baseline' : 'Pin as baseline'}</ResponsiveText>
+            </Button>
+          }
+          <Message>{state.context.message}</Message>
+        </CollapseSegment>
+        <FileButtons>
+          {
+            // @ts-ignore
+            <Button
+              id={selectors.saveButtonId}
+              secondary
+              small
+              outline
+              disabled={current.results == null}
+              onClick={() => send({ type: 'SAVE' })}
+            >
+              <ResponsiveIcon icon="download" />
+              <ResponsiveText>Save result</ResponsiveText>
+            </Button>
+          }
+          {
+            // @ts-ignore
+            <Button
+              secondary
+              small
+              onClick={() => {
+                document.getElementById(selectors.loadButtonId)?.click();
+              }}
+            >
+              <ResponsiveIcon icon="upload" />
+              <ResponsiveText>Load result</ResponsiveText>
+            </Button>
+          }
+          <Form.Input
+            style={{ display: 'none' }}
+            id={selectors.loadButtonId}
+            type="file"
+            accept=".json"
+            onChange={(e) => {
+              readFile(e, (results, storyName) =>
+                send('LOAD_FROM_FILE', { pinned: results, storyName }),
+              );
             }}
-          >
-            <Icons icon="upload" />
-            Load result
-          </Button>
-        }
-        <Form.Input
-          style={{ display: 'none' }}
-          id={selectors.loadButtonId}
-          type="file"
-          accept=".json"
-          onChange={(e) => {
-            readFile(e, (results, storyName) =>
-              send('LOAD_FROM_FILE', { pinned: results, storyName }),
-            );
-          }}
-        />
-      </FileButtons>
-      <HiddenAnchor id={selectors.hiddenFileAnchorId} />
+          />
+        </FileButtons>
+        <HiddenAnchor id={selectors.hiddenFileAnchorId} />
+      </MetaSettings>
     </Container>
   );
 }

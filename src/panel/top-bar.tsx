@@ -58,21 +58,13 @@ const MetaSettings = styled.div`
 `;
 
 const ResponsiveIcon = styled(Icons)`
-  @media screen and (min-width: 968px) and (max-width: 1300px) {
-    margin-right: 0px !important;
-  }
-
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-right: 0px !important;
   }
 `;
 
 const ResponsiveText = styled.span`
-  @media screen and (min-width: 968px) and (max-width: 1300px) {
-    display: none;
-  }
-
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -80,8 +72,12 @@ const ResponsiveText = styled.span`
 // Setting a width so we have a consistent wrap point
 // Setting a min-width so the message can collapse in tight scenarios
 const CollapseSegment = styled(Segment)`
-  width: 300px;
-  min-width: 0;
+  width: 350px;
+  min-width: 0px;
+
+  @media screen and (max-width: 768px) {
+    width: 100px;
+  }
 `;
 
 type BooleanMap = {
@@ -168,7 +164,6 @@ export default function Topbar() {
               id={selectors.pinButtonId}
               secondary
               small
-              outline
               disabled={pinned ? !enabled.unpin : !enabled.pin}
               onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
             >
@@ -198,6 +193,7 @@ export default function Topbar() {
             <Button
               secondary
               small
+              outline
               onClick={() => {
                 document.getElementById(selectors.loadButtonId)?.click();
               }}

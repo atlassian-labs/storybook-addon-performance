@@ -99,7 +99,11 @@ export default function Topbar() {
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
-  const pinCopy = pinned ? 'Unpin baseline' : 'Pin as baseline';
+  const icons = {
+    pin: pinned ? 'lock' : 'unlock',
+    save: 'download',
+    load: 'upload',
+  } as const;
 
   return (
     <Container>
@@ -107,13 +111,16 @@ export default function Topbar() {
         {
           // @ts-ignore
           <Button
+            css={{
+              textTransform: 'uppercase',
+            }}
             primary
             small
             onClick={() => send({ type: 'START_ALL' })}
             disabled={!enabled.start}
             id={selectors.startAllButtonId}
           >
-            START ALL
+            Start all
           </Button>
         }
         {
@@ -171,8 +178,8 @@ export default function Topbar() {
               disabled={pinned ? !enabled.unpin : !enabled.pin}
               onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
             >
-              <ResponsiveIcon icon={pinned ? 'unlock' : 'lock'} aria-label={pinCopy} />
-              <ResponsiveText>{pinCopy}</ResponsiveText>
+              <ResponsiveIcon icon={icons.pin} aria-label={icons.pin} />
+              <ResponsiveText>{pinned ? 'Unpin baseline' : 'Pin as baseline'}</ResponsiveText>
             </Button>
           }
           <Message>{state.context.message}</Message>
@@ -188,7 +195,7 @@ export default function Topbar() {
               disabled={current.results == null}
               onClick={() => send({ type: 'SAVE' })}
             >
-              <ResponsiveIcon icon="download" aria-label="Save result" />
+              <ResponsiveIcon icon={icons.save} aria-label={icons.save} />
               <ResponsiveText>Save result</ResponsiveText>
             </Button>
           }
@@ -202,7 +209,7 @@ export default function Topbar() {
                 document.getElementById(selectors.loadButtonId)?.click();
               }}
             >
-              <ResponsiveIcon icon="upload" aria-label="Load result" />
+              <ResponsiveIcon icon={icons.load} aria-label={icons.load} />
               <ResponsiveText>Load result</ResponsiveText>
             </Button>
           }

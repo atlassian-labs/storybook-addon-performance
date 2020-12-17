@@ -11,6 +11,8 @@ import nextEventsInclude from './next-events-include';
 import * as selectors from '../selectors';
 import { readFile } from './file-system';
 
+const TABLET_BREAKPOINT = 768;
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -58,26 +60,25 @@ const MetaSettings = styled.div`
 `;
 
 const ResponsiveIcon = styled(Icons)`
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
     margin-right: 0px !important;
   }
 `;
 
 const ResponsiveText = styled.span`
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
     display: none;
   }
 `;
 
 // Setting a width so we have a consistent wrap point
 // Setting a min-width so the message can collapse in tight scenarios
-const CollapseSegment = styled(Segment)`
-  width: 350px;
-  min-width: 0px;
-
-  @media screen and (max-width: 768px) {
-    width: 100px;
-  }
+const CollapseSegment = styled.div`
+  margin: var(--halfGrid);
+  align-items: center;
+  display: grid;
+  grid-template-columns: min-content minmax(100px, auto);
+  gap: var(--halfGrid);
 `;
 
 type BooleanMap = {
@@ -97,6 +98,8 @@ export default function Topbar() {
     pin: nextEventsInclude('PIN', state.nextEvents) && current.results != null,
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
+
+  const pinCopy = pinned ? 'Unpin baseline' : 'Pin as baseline';
 
   return (
     <Container>
@@ -163,12 +166,13 @@ export default function Topbar() {
             <Button
               id={selectors.pinButtonId}
               secondary
+              outline={!pinned}
               small
               disabled={pinned ? !enabled.unpin : !enabled.pin}
               onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
             >
-              <ResponsiveIcon icon={pinned ? 'unlock' : 'lock'} />
-              <ResponsiveText>{pinned ? 'Unpin baseline' : 'Pin as baseline'}</ResponsiveText>
+              <ResponsiveIcon icon={pinned ? 'unlock' : 'lock'} aria-label={pinCopy} />
+              <ResponsiveText>{pinCopy}</ResponsiveText>
             </Button>
           }
           <Message>{state.context.message}</Message>
@@ -184,7 +188,7 @@ export default function Topbar() {
               disabled={current.results == null}
               onClick={() => send({ type: 'SAVE' })}
             >
-              <ResponsiveIcon icon="download" />
+              <ResponsiveIcon icon="download" aria-label="Save result" />
               <ResponsiveText>Save result</ResponsiveText>
             </Button>
           }
@@ -198,7 +202,7 @@ export default function Topbar() {
                 document.getElementById(selectors.loadButtonId)?.click();
               }}
             >
-              <ResponsiveIcon icon="upload" />
+              <ResponsiveIcon icon="upload" aria-label="Load result" />
               <ResponsiveText>Load result</ResponsiveText>
             </Button>
           }

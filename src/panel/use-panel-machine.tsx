@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { StaticResult, TaskGroupResult, TimedResult } from '../types';
 import { bindAll } from '../util/bind-channel-events';
+import { saveFile } from './file-system';
 import { MachineEvents, MachineType, StateType } from './machine';
 import { clearPinned, getPinned, savePinned } from './pinned-storage';
 
@@ -78,6 +79,11 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
           return;
         }
         const { current, storyName } = state.context;
+
+        if (event.type === 'SAVE') {
+          saveFile(storyName, current);
+          return;
+        }
 
         if (event.type === 'PIN') {
           savePinned(storyName, current);

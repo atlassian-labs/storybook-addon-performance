@@ -5,8 +5,6 @@ import { ExpandingResult } from './expanding-result';
 import * as Parts from './parts';
 import getChange from '../../util/get-change';
 
-const warningIcon = <span>⚠️</span>;
-
 function getDiff({ result, pinned }: { result: TimedResult; pinned: Nullable<TimedResult> }) {
   if (!pinned) {
     return 0;
@@ -79,8 +77,10 @@ function Variance({ result }: { result: TimedResult }) {
           <tr>
             <Parts.TitleCell>Standard deviation</Parts.TitleCell>
             <Parts.ValueCell>
-              <Parts.ValueLozenge type={wasStable ? 'positive' : 'negative'}>
-                {wasStable ? null : warningIcon}
+              <Parts.ValueLozenge
+                hasWarningIcon={wasStable}
+                type={wasStable ? 'positive' : 'negative'}
+              >
                 {toFixed(result.variance.standardDeviation)}
               </Parts.ValueLozenge>
             </Parts.ValueCell>

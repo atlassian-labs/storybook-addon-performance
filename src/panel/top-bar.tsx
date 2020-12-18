@@ -4,11 +4,14 @@ import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
 import ServiceContext from './service-context';
 import { useService } from '@xstate/react';
-import { RunContext, MachineEvents } from './machine';
+import { RunContext } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
 import nextEventsInclude from './next-events-include';
 import * as selectors from '../selectors';
+import { readFile } from './file-system';
+
+const TABLET_BREAKPOINT = 768;
 
 const Container = styled.div`
   display: flex;
@@ -34,11 +37,48 @@ const Segment = styled.div`
   }
 `;
 
+const HiddenAnchor = styled.a`
+  display: none;
+`;
+
+const FileButtons = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  > * {
+    margin: var(--halfGrid) !important;
+    flex-shrink: 0;
+  }
+`;
+
+const MetaSettings = styled.div`
+  flex: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+`;
+
+const ResponsiveIcon = styled(Icons)`
+  @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
+    margin-right: 0px !important;
+  }
+`;
+
+const ResponsiveText = styled.span`
+  @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
+    display: none;
+  }
+`;
+
 // Setting a width so we have a consistent wrap point
 // Setting a min-width so the message can collapse in tight scenarios
-const CollapseSegment = styled(Segment)`
-  width: 500px;
-  min-width: 0;
+const CollapseSegment = styled.div`
+  margin: var(--halfGrid);
+  align-items: center;
+  display: grid;
+  grid-template-columns: min-content minmax(100px, auto);
+  gap: var(--halfGrid);
 `;
 
 type BooleanMap = {
@@ -59,19 +99,28 @@ export default function Topbar() {
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
+  const icons = {
+    pin: pinned ? 'lock' : 'unlock',
+    save: 'download',
+    load: 'upload',
+  } as const;
+
   return (
     <Container>
       <Segment>
         {
           // @ts-ignore
           <Button
+            css={{
+              textTransform: 'uppercase',
+            }}
             primary
             small
             onClick={() => send({ type: 'START_ALL' })}
             disabled={!enabled.start}
             id={selectors.startAllButtonId}
           >
-            START ALL
+            Start all
           </Button>
         }
         {
@@ -88,7 +137,7 @@ export default function Topbar() {
               send('SET_VALUES', values);
             }}
           >
-            {sizes.map((size: number) => (
+            {sizes.map((size) => (
               <option key={size} value={size}>
                 {size} {pluraliseCopies(size)}
               </option>
@@ -109,7 +158,7 @@ export default function Topbar() {
               send('SET_VALUES', values);
             }}
           >
-            {sizes.map((size: number) => (
+            {sizes.map((size) => (
               <option key={size} value={size}>
                 {size} {pluraliseSamples(size)}
               </option>
@@ -117,23 +166,67 @@ export default function Topbar() {
           </Form.Select>
         }
       </Segment>
-      <CollapseSegment>
-        {
-          // @ts-ignore
-          <Button
-            id={selectors.pinButtonId}
-            secondary
-            small
-            outline
-            disabled={pinned ? !enabled.unpin : !enabled.pin}
-            onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
-          >
-            <Icons icon={pinned ? 'unlock' : 'lock'} />
-            {pinned ? 'Unpin baseline result' : 'Pin result as baseline'}
-          </Button>
-        }
-        <Message>{state.context.message}</Message>
-      </CollapseSegment>
+      <MetaSettings>
+        <CollapseSegment>
+          {
+            // @ts-ignore
+            <Button
+              id={selectors.pinButtonId}
+              secondary
+              outline={!pinned}
+              small
+              disabled={pinned ? !enabled.unpin : !enabled.pin}
+              onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
+            >
+              <ResponsiveIcon icon={icons.pin} aria-label={icons.pin} />
+              <ResponsiveText>{pinned ? 'Unpin baseline' : 'Pin as baseline'}</ResponsiveText>
+            </Button>
+          }
+          <Message>{state.context.message}</Message>
+        </CollapseSegment>
+        <FileButtons>
+          {
+            // @ts-ignore
+            <Button
+              id={selectors.saveButtonId}
+              secondary
+              small
+              outline
+              disabled={current.results == null}
+              onClick={() => send({ type: 'SAVE' })}
+            >
+              <ResponsiveIcon icon={icons.save} aria-label={icons.save} />
+              <ResponsiveText>Save result</ResponsiveText>
+            </Button>
+          }
+          {
+            // @ts-ignore
+            <Button
+              secondary
+              small
+              outline
+              onClick={() => {
+                document.getElementById(selectors.loadButtonId)?.click();
+              }}
+            >
+              <ResponsiveIcon icon={icons.load} aria-label={icons.load} />
+              <ResponsiveText>Load result</ResponsiveText>
+            </Button>
+          }
+          <Form.Input
+            style={{ display: 'none' }}
+            id={selectors.loadButtonId}
+            type="file"
+            accept=".json"
+            onChange={(e) => {
+              readFile(e, (results, storyName) =>
+                send('LOAD_FROM_FILE', { pinned: results, storyName }),
+              );
+            }}
+          />
+        </FileButtons>
+        <HiddenAnchor id={selectors.hiddenFileAnchorId} />
+      </MetaSettings>
     </Container>
   );
 }

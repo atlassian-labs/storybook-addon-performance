@@ -1,7 +1,7 @@
 module.exports = {
   stories: ['../examples/**/*.stories.*'],
-  addons: ['./dist/register.js'],
-  webpackFinal: async config => {
+  addons: ['../dist/register.js'],
+  webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [

@@ -36,7 +36,7 @@ addons.register(constants.addonKey, () => {
     type: types.PANEL,
     title: constants.panelTitle,
     render: ({ active, key }) => (
-      <AddonPanel active={active} key={key}>
+      <AddonPanel active={active as boolean} key={key}>
         <Env>
           {({ interactions, channel, allowedGroups }) => (
             <Panel channel={channel} interactions={interactions} allowedGroups={allowedGroups} />

@@ -15,7 +15,6 @@ import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';
 import usePanelMachine from './use-panel-machine';
-import flatten from '../util/flatten';
 
 const Container = styled.div`
   --grid: 10px;

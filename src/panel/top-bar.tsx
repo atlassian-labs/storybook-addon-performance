@@ -218,7 +218,7 @@ export default function Topbar() {
             id={selectors.loadButtonId}
             type="file"
             accept=".json"
-            onChange={(e) => {
+            onChange={(e: any) => {
               readFile(e, (results, storyName) =>
                 send('LOAD_FROM_FILE', { pinned: results, storyName }),
               );

@@ -4,8 +4,11 @@ import { wait } from '../custom/guards';
 
 beforeEach(() => {
   cy.visit('/?path=/story/examples--select');
-  // wait for iframe to be on the page
-  cy.get('#storybook-preview-iframe');
+  // wait for iframe to be on the page and loaded
+  cy.get('#storybook-preview-iframe[data-is-loaded="true"]');
+  // After loading has completed, there's a 100ms css transition where the panel is revealed;
+  // until this transition completes the addon panel still registers as "hidden"
+  cy.wait(100);
 
   cy.get('body').then(($body) => {
     // Show the addon panel if it is currently not visible

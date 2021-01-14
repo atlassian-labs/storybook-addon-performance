@@ -31,6 +31,8 @@ export function getGroups({
     result.push(server);
   }
   if (allowedGroups.includes('client')) {
+    // Hydration, although run client-side, relies on renderToString and
+    // should not be run if the plugin is configured to be client-only
     const tasks = allowedGroups.includes('server')
       ? client.tasks
       : client.tasks.filter((task) => task.name !== 'Hydrate');

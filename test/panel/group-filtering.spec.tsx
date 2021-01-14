@@ -15,7 +15,7 @@ import server from '../../src/tasks/preset/server';
 it('should allow filtering of tasks (client only)', () => {
   // 1: Initial render
   const channel: Channel = new Channel({ async: false });
-  const { container, queryByText, debug } = render(
+  const { container, queryByText } = render(
     <WithStorybookTheme>
       <Panel interactions={[]} channel={channel} allowedGroups={['client']} />
     </WithStorybookTheme>,

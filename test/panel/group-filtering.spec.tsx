@@ -15,7 +15,7 @@ import server from '../../src/tasks/preset/server';
 it('should allow filtering of tasks (client only)', () => {
   // 1: Initial render
   const channel: Channel = new Channel({ async: false });
-  const { container, queryByText } = render(
+  const { container, queryByText, debug } = render(
     <WithStorybookTheme>
       <Panel interactions={[]} channel={channel} allowedGroups={['client']} />
     </WithStorybookTheme>,
@@ -37,6 +37,14 @@ it('should allow filtering of tasks (client only)', () => {
 
   expect(queryByText(client.name)).toBeTruthy();
   expect(queryByText(server.name)).toBeFalsy();
+
+  // All tasks should be rendered except Hydrate (see #57)
+  expect(queryByText('Hydrate')).toBeFalsy();
+  client.tasks.forEach((task) => {
+    if (task.name !== 'Hydrate') {
+      expect(queryByText(task.name)).toBeTruthy();
+    }
+  });
 });
 
 it('should allow filtering of tasks (server only)', () => {
@@ -64,4 +72,7 @@ it('should allow filtering of tasks (server only)', () => {
 
   expect(queryByText(client.name)).toBeFalsy();
   expect(queryByText(server.name)).toBeTruthy();
+  server.tasks.forEach((task) => {
+    expect(queryByText(task.name)).toBeTruthy();
+  });
 });

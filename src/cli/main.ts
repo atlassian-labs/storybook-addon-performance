@@ -50,7 +50,7 @@ const main = (...args: string[]) => {
             );
         } else {
           console.warn(
-            `cli: Directory '${fullPath}' is empty - did you specify a directory with storybook-addon-performance output files?`,
+            `cli: Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
           );
         }
       } catch (e) {

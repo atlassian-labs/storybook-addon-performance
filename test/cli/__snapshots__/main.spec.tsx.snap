@@ -12,22 +12,22 @@ Array [
     "type,#1,min,max,ave",
   ],
   Array [
-    "Render to string, 11.901000000761996,11.901000000761996, 11.901000000761996, 2.3802000001523993",
+    "Render to string, 11.901000000761996,11.901000000761996, 11.901000000761996, 11.901000000761996",
   ],
   Array [
-    "Render to static markup (cannot be hydrated), 10.560999999870546,10.560999999870546, 10.560999999870546, 2.1121999999741092",
+    "Render to static markup (cannot be hydrated), 10.560999999870546,10.560999999870546, 10.560999999870546, 10.560999999870546",
   ],
   Array [
-    "String output size, 184.64,184.64, 184.64, 36.928",
+    "String output size, 184.64,184.64, 184.64, 184.64",
   ],
   Array [
-    "String output size (gzip), 41.16,41.16, 41.16, 8.232",
+    "String output size (gzip), 41.16,41.16, 41.16, 41.16",
   ],
   Array [
-    "Static markup output size, 184.64,184.64, 184.64, 36.928",
+    "Static markup output size, 184.64,184.64, 184.64, 184.64",
   ],
   Array [
-    "Static markup output size (gzip), 41.16,41.16, 41.16, 8.232",
+    "Static markup output size (gzip), 41.16,41.16, 41.16, 41.16",
   ],
   Array [
     "Clientside",
@@ -36,25 +36,25 @@ Array [
     "type,#1,min,max,ave",
   ],
   Array [
-    "Initial render, 23.0890000000727,23.0890000000727, 23.0890000000727, 4.61780000001454",
+    "Initial render, 23.0890000000727,23.0890000000727, 23.0890000000727, 23.0890000000727",
   ],
   Array [
-    "Re render, 1.6849999996338738,1.6849999996338738, 1.6849999996338738, 0.33699999992677476",
+    "Re render, 1.6849999996338738,1.6849999996338738, 1.6849999996338738, 1.6849999996338738",
   ],
   Array [
-    "Hydrate, 8.303500000329223,8.303500000329223, 8.303500000329223, 1.6607000000658445",
+    "Hydrate, 8.303500000329223,8.303500000329223, 8.303500000329223, 8.303500000329223",
   ],
   Array [
-    "Complete render (mount + layout + paint), 55.235999999968044,55.235999999968044, 55.235999999968044, 11.047199999993609",
+    "Complete render (mount + layout + paint), 55.235999999968044,55.235999999968044, 55.235999999968044, 55.235999999968044",
   ],
   Array [
-    "DOM element count, 1475,1475, 1475, 295",
+    "DOM element count, 1475,1475, 1475, 1475",
   ],
   Array [
-    "DOM element count (no nested inline svg elements), 706,706, 706, 141.2",
+    "DOM element count (no nested inline svg elements), 706,706, 706, 706",
   ],
   Array [
-    "React Fiber node count, 3886,3886, 3886, 777.2",
+    "React Fiber node count, 3886,3886, 3886, 3886",
   ],
 ]
 `;

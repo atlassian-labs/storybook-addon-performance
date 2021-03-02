@@ -28,7 +28,7 @@ export const rowify = (data: Results, numResults: number) => {
   Object.entries(data).forEach(([key, values]) => {
     console.info(
       `${key}, ${values.join(',')},${Math.min(...values)}, ${Math.max(...values)}, ${
-        values.reduce((acc, curr) => acc + curr, 0) / 5
+        values.reduce((acc, curr) => acc + curr, 0) / numResults
       }`,
     );
   });

@@ -64,7 +64,7 @@ const main = (...args: string[]) => {
     .filter(({ name }) => name);
 
   resultSetsFromDirs.forEach(({ name, server, client }) => {
-    console.info(name);
+    console.info(path.basename(name));
     console.info('Serverside');
     rowify(server, resultSetsFromDirs.length);
 

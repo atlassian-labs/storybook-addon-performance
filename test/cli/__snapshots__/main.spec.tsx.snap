@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cli should match snapshot 1`] = `
+Array [
+  Array [
+    "/Users/ahinds/repos/storybook-addon-performance/test/cli/fixtures",
+  ],
+  Array [
+    "Serverside",
+  ],
+  Array [
+    "type,#1,min,max,ave",
+  ],
+  Array [
+    "Render to string, 11.901000000761996,11.901000000761996, 11.901000000761996, 2.3802000001523993",
+  ],
+  Array [
+    "Render to static markup (cannot be hydrated), 10.560999999870546,10.560999999870546, 10.560999999870546, 2.1121999999741092",
+  ],
+  Array [
+    "String output size, 184.64,184.64, 184.64, 36.928",
+  ],
+  Array [
+    "String output size (gzip), 41.16,41.16, 41.16, 8.232",
+  ],
+  Array [
+    "Static markup output size, 184.64,184.64, 184.64, 36.928",
+  ],
+  Array [
+    "Static markup output size (gzip), 41.16,41.16, 41.16, 8.232",
+  ],
+  Array [
+    "Clientside",
+  ],
+  Array [
+    "type,#1,min,max,ave",
+  ],
+  Array [
+    "Initial render, 23.0890000000727,23.0890000000727, 23.0890000000727, 4.61780000001454",
+  ],
+  Array [
+    "Re render, 1.6849999996338738,1.6849999996338738, 1.6849999996338738, 0.33699999992677476",
+  ],
+  Array [
+    "Hydrate, 8.303500000329223,8.303500000329223, 8.303500000329223, 1.6607000000658445",
+  ],
+  Array [
+    "Complete render (mount + layout + paint), 55.235999999968044,55.235999999968044, 55.235999999968044, 11.047199999993609",
+  ],
+  Array [
+    "DOM element count, 1475,1475, 1475, 295",
+  ],
+  Array [
+    "DOM element count (no nested inline svg elements), 706,706, 706, 141.2",
+  ],
+  Array [
+    "React Fiber node count, 3886,3886, 3886, 777.2",
+  ],
+]
+`;

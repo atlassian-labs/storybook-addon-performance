@@ -11,6 +11,8 @@ export type ResultSet = {
   client: Results;
   // server specific results
   server: Results;
+  // interactions specific results
+  interactions: Results;
   // number of result files in the directory
   results: number;
 };

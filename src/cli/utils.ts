@@ -7,7 +7,7 @@ export const stdout = (...args: string[]) => console.log(...args);
 
 export const usage = () =>
   debug(`Usage:
-sb-perf <directory> [...<directory>] 
+sb-perf <directory> [...<directory>]
 
 Example
 sb-perf results-directory > output-file.csv
@@ -24,7 +24,7 @@ export const processResult = (result: TaskGroupResult) => {
     const { taskName, averageMs, value } = result.map[key];
     return {
       taskName,
-      value: averageMs || Number(value),
+      value: averageMs !== undefined ? averageMs : Number(value),
     };
   });
 };

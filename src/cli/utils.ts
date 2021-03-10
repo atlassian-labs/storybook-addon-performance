@@ -19,7 +19,9 @@ export const processResult = (result: TaskGroupResult) => {
 /**
  * Turns the row output into a csv
  */
-export const rowify = (data: Results, numResults: number) => {
+export const rowify = (data: Results) => {
+  // extracts the number of samples the dataset
+  const numResults = Object.values(data)[0].length;
   console.info(
     `type,${Array.from({ length: numResults })
       .map((_, i) => `#${i + 1}`)
@@ -39,7 +41,7 @@ export const usage = () =>
 storybook-addon-performance <directory> [...<directory>] 
 
 Example
-storybook-addon-performance results-directory > outputfile.csv
+storybook-addon-performance results-directory > output-file.csv
 # OR
-storybook-addon-performance ABTestDirectory OtherDirectory > outputfile.csv
+storybook-addon-performance ABTestDirectory OtherDirectory > output-file.csv
 `);

@@ -6,14 +6,13 @@ import type { ResultSet } from './types';
 import { processResult, rowify, usage } from './utils';
 
 const main = (...args: string[]) => {
-  const cliArgs = args || process.argv;
-
+  const cliArgs = args.length ? args : process.argv;
   if (cliArgs.length <= 2) {
     return usage();
   }
 
   // first up grab the CLI arguments
-  const resultSetsFromDirs = cliArgs
+  const directoryResultSets = cliArgs
     .slice(2)
     .map((pathName) => {
       try {
@@ -24,8 +23,7 @@ const main = (...args: string[]) => {
               const json = fs.readFileSync(path.join(pathName, dataFile));
               return JSON.parse(json as any);
             })
-            .map(({ results }) => results as TaskGroupResult[])
-            .map((results) => results.map(processResult))
+            .map(({ results }) => (results as TaskGroupResult[]).map(processResult))
             .reduce(
               (acc, [serverside, clientside]) => {
                 serverside.forEach((serverResult) => {
@@ -63,13 +61,13 @@ const main = (...args: string[]) => {
     })
     .filter(({ name }) => name);
 
-  resultSetsFromDirs.forEach(({ name, server, client }) => {
+  directoryResultSets.forEach(({ name, server, client }) => {
     console.info(path.basename(name));
     console.info('Serverside');
-    rowify(server, resultSetsFromDirs.length);
+    rowify(server);
 
     console.info('Clientside');
-    rowify(client, resultSetsFromDirs.length);
+    rowify(client);
   });
 };
 

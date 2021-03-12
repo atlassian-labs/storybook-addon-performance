@@ -71,6 +71,9 @@
   "config": {
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
   },
+  "bin": {
+    "sb-perf": "dist/cli"
+  },
   "scripts": {
     "cypress:open": "yarn cypress open",
     "cypress:run": "yarn cypress run",
@@ -78,7 +81,7 @@
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:watch": "tsc --watch",
-    "typescript:build": "tsc",
+    "typescript:build": "tsc && tsc --build tsconfig.cli.json && chmod +x dist/cli/index.js",
     "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
     "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0",

@@ -5,7 +5,6 @@ import React from 'react';
 import Panel from '../../src/panel/panel';
 import * as selectors from '../../src/selectors';
 import { getById } from '../../test-util/get-by';
-import { assertTopbar } from '../../test-util/topbar';
 import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
 import eventNames from '../../src/events';

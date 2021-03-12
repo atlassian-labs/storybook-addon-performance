@@ -3,7 +3,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type { TaskGroupResult } from '../types';
 import type { ResultSet } from './types';
-import { processResult, rowify, usage } from './utils';
+import {
+  debug,
+  prepRows,
+  printCSV,
+  processResult,
+  stdout,
+  usage,
+  Row,
+  printCSVSummary,
+} from './utils';
 
 const main = (...args: string[]) => {
   const cliArgs = args.length ? args : process.argv;
@@ -47,12 +56,13 @@ const main = (...args: string[]) => {
               { name: pathName, server: {}, client: {} } as ResultSet,
             );
         } else {
-          console.warn(
+          debug(
             `cli: Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
           );
         }
       } catch (e) {
-        console.warn(
+        console.info(e);
+        debug(
           `cli: Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance?`,
         );
       }
@@ -61,14 +71,30 @@ const main = (...args: string[]) => {
     })
     .filter(({ name }) => name);
 
-  directoryResultSets.forEach(({ name, server, client }) => {
-    console.info(path.basename(name));
-    console.info('Serverside');
-    rowify(server);
+  const resultNames: string[] = [];
+  const resultSets: Row[][] = [];
 
-    console.info('Clientside');
-    rowify(client);
+  directoryResultSets.forEach(({ name, server, client }) => {
+    const resultName = path.basename(name);
+    stdout(resultName);
+
+    const serverResults = prepRows(server);
+    const clientResults = prepRows(client);
+
+    stdout('Serverside');
+    printCSV(serverResults);
+
+    stdout('Clientside');
+    printCSV(clientResults);
+
+    stdout();
+
+    // used in summary
+    resultNames.push(resultName);
+    resultSets.push(serverResults.concat(clientResults));
   });
+
+  printCSVSummary(resultNames, resultSets);
 };
 
 export default main;

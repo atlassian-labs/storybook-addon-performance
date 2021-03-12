@@ -6,23 +6,23 @@ describe('cli', () => {
   const infoMock = jest.fn();
   const warnMock = jest.fn();
   //@ts-ignore
-  global.console = { info: infoMock, warn: warnMock };
+  global.console = { log: infoMock, warn: warnMock };
   it('should show message if not provided correct args', () => {
     cli();
     expect(warnMock).toHaveBeenCalledWith(`Usage:
-storybook-addon-performance <directory> [...<directory>] 
+sb-perf <directory> [...<directory>] 
 
 Example
-storybook-addon-performance results-directory > outputfile.csv
+sb-perf results-directory > output-file.csv
 # OR
-storybook-addon-performance ABTestDirectory OtherDirectory > outputfile.csv
+sb-perf ABTestDirectory OtherDirectory > output-file.csv
 `);
   });
 
   it('should match snapshot', () => {
     cli('node', 'cli', __dirname + '/fixtures');
-    expect(warnMock).not.toHaveBeenCalled();
     expect(infoMock).toHaveBeenCalled();
     expect(infoMock.mock.calls).toMatchSnapshot();
+    expect(warnMock.mock.calls).toMatchSnapshot();
   });
 });

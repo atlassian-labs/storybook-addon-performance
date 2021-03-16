@@ -6,7 +6,7 @@ Array [
     "menu",
   ],
   Array [
-    "Serverside",
+    "Server",
   ],
   Array [
     "type,#1,min,max,mean,median",
@@ -30,7 +30,7 @@ Array [
     "Static markup output size (gzip),0.15,0.15,0.15,0.15,0.15",
   ],
   Array [
-    "Clientside",
+    "Client",
   ],
   Array [
     "type,#1,min,max,mean,median",
@@ -200,7 +200,7 @@ Array [
     "icon",
   ],
   Array [
-    "Serverside",
+    "Server",
   ],
   Array [
     "type,#1,min,max,mean,median",
@@ -224,7 +224,7 @@ Array [
     "Static markup output size (gzip),41.16,41.16,41.16,41.16,41.16",
   ],
   Array [
-    "Clientside",
+    "Client",
   ],
   Array [
     "type,#1,min,max,mean,median",

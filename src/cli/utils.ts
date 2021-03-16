@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { TaskGroupResult } from '../types';
+import type { ResultMap, TaskGroupResult } from '../types';
 import { Results } from './types';
 
 export const debug = (...args: string[]) => console.warn(...args);
@@ -15,18 +15,16 @@ sb-perf results-directory > output-file.csv
 sb-perf ABTestDirectory OtherDirectory > output-file.csv
 `);
 
-/**
- * Flattens out the result to a form we can consume
- */
-export const processResult = (result: TaskGroupResult) => {
-  return Object.keys(result.map).map((key) => {
+const getTaskValue = (averageMs?: number, value?: number) => {
+  return averageMs !== undefined ? averageMs : Number(value);
+};
+
+export const convertToTaskValueMap = (resultMap: ResultMap) => {
+  return Object.values(resultMap).reduce((acc, result) => {
     // @ts-ignore
-    const { taskName, averageMs, value } = result.map[key];
-    return {
-      taskName,
-      value: averageMs !== undefined ? averageMs : Number(value),
-    };
-  });
+    const { taskName, averageMs, value } = result;
+    return { ...acc, [taskName]: [getTaskValue(averageMs, value)] };
+  }, {});
 };
 
 export const median = (numbers: number[]) => {

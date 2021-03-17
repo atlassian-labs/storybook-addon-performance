@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import type { TaskGroupResult } from '../types';
-import type { ResultByGroupId } from './types';
+import type { ResultMap, TaskGroupResult } from '../types';
+import type { ResultsByGroupId, Results } from './types';
 import {
   debug,
-  prepRows,
+  performCalculations,
   printCSV,
   stdout,
   usage,
   Row,
   printCSVSummary,
   convertToTaskValueMap,
+  combineTaskResultsByGroupId,
 } from './utils';
 
 const main = (...args: string[]) => {
@@ -34,29 +35,9 @@ const main = (...args: string[]) => {
               return JSON.parse(json as any);
             })
             .map(({ results }) => results as TaskGroupResult[])
-            .reduce((resultSets, taskGroupResults) => {
-              const resultsByGroupId = taskGroupResults.reduce(
-                (resultsByGroupId, { groupId, map }: TaskGroupResult) => ({
-                  ...resultsByGroupId,
-                  [groupId]: convertToTaskValueMap(map),
-                }),
-                {} as ResultByGroupId,
-              );
-
-              Object.entries(resultsByGroupId).forEach(([groupId, taskValueMap]) => {
-                Object.entries(taskValueMap).forEach(([taskName, value]) => {
-                  resultSets[groupId] = {
-                    ...resultSets[groupId],
-                    [taskName]:
-                      resultSets[groupId] && resultSets[groupId][taskName]
-                        ? resultSets[groupId][taskName].concat(value)
-                        : value,
-                  };
-                });
-              });
-
-              return resultSets;
-            }, {} as ResultByGroupId);
+            .flatMap((taskGroupResults) => taskGroupResults)
+            .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
+            .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
           return { name: pathName, ...resultSetsByGroupId };
         } else {
@@ -78,16 +59,16 @@ const main = (...args: string[]) => {
   const resultNames: string[] = [];
   const resultSets: Row[][] = [];
 
-  directoryResultSets.forEach(({ name, ...rawResults }) => {
+  directoryResultSets.forEach(({ name, ...resultsByGroupId }) => {
     const resultName = path.basename(name);
     stdout(resultName);
 
-    Object.entries(rawResults).forEach(([groupId, result]) => {
-      const preparedResults = prepRows(result);
+    Object.entries(resultsByGroupId).forEach(([groupId, result]) => {
+      const finalResults = performCalculations(result);
 
       stdout(groupId);
-      printCSV(preparedResults);
-      resultSets.push(preparedResults);
+      printCSV(finalResults);
+      resultSets.push(finalResults);
     });
 
     stdout();

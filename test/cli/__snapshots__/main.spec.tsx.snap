@@ -1,12 +1,206 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cli should match snapshot 1`] = `
+exports[`cli should match snapshot with interactions test results 1`] = `
 Array [
   Array [
-    "fixtures",
+    "menu",
   ],
   Array [
-    "Serverside",
+    "Server",
+  ],
+  Array [
+    "type,#1,min,max,mean,median",
+  ],
+  Array [
+    "Render to string,2.9,2.9,2.9,2.9,2.9",
+  ],
+  Array [
+    "Render to static markup (cannot be hydrated),2.2,2.2,2.2,2.2,2.2",
+  ],
+  Array [
+    "String output size,1.9,1.9,1.9,1.9,1.9",
+  ],
+  Array [
+    "String output size (gzip),0.15,0.15,0.15,0.15,0.15",
+  ],
+  Array [
+    "Static markup output size,1.9,1.9,1.9,1.9,1.9",
+  ],
+  Array [
+    "Static markup output size (gzip),0.15,0.15,0.15,0.15,0.15",
+  ],
+  Array [
+    "Client",
+  ],
+  Array [
+    "type,#1,min,max,mean,median",
+  ],
+  Array [
+    "Initial render,2.8,2.8,2.8,2.8,2.8",
+  ],
+  Array [
+    "Re render,0.3,0.3,0.3,0.3,0.3",
+  ],
+  Array [
+    "Hydrate,1.8,1.8,1.8,1.8,1.8",
+  ],
+  Array [
+    "Complete render (mount + layout + paint),4.8,4.8,4.8,4.8,4.8",
+  ],
+  Array [
+    "DOM element count,40,40,40,40,40",
+  ],
+  Array [
+    "DOM element count (no nested inline svg elements),40,40,40,40,40",
+  ],
+  Array [
+    "React Fiber node count,181,181,181,181,181",
+  ],
+  Array [
+    "Interactions",
+  ],
+  Array [
+    "type,#1,min,max,mean,median",
+  ],
+  Array [
+    "Click a menu item,0.7,0.7,0.7,0.7,0.7",
+  ],
+  Array [
+    "Focus on a menu item,0,0,0,0,0",
+  ],
+  Array [
+    "Select a menu item,0.7,0.7,0.7,0.7,0.7",
+  ],
+  Array [
+    "Disable a menu item,0.5,0.5,0.5,0.5,0.5",
+  ],
+  Array [],
+  Array [
+    "Type,menu",
+  ],
+  Array [
+    "Render to string,2.9",
+  ],
+  Array [
+    "Render to static markup (cannot be hydrated),2.2",
+  ],
+  Array [
+    "String output size,1.9",
+  ],
+  Array [
+    "String output size (gzip),0.15",
+  ],
+  Array [
+    "Static markup output size,1.9",
+  ],
+  Array [
+    "Static markup output size (gzip),0.15",
+  ],
+  Array [
+    "Initial render,2.8",
+  ],
+  Array [
+    "Re render,0.3",
+  ],
+  Array [
+    "Hydrate,1.8",
+  ],
+  Array [
+    "Complete render (mount + layout + paint),4.8",
+  ],
+  Array [
+    "DOM element count,40",
+  ],
+  Array [
+    "DOM element count (no nested inline svg elements),40",
+  ],
+  Array [
+    "React Fiber node count,181",
+  ],
+  Array [
+    "Click a menu item,0.7",
+  ],
+  Array [
+    "Focus on a menu item,0",
+  ],
+  Array [
+    "Select a menu item,0.7",
+  ],
+  Array [
+    "Disable a menu item,0.5",
+  ],
+]
+`;
+
+exports[`cli should match snapshot with interactions test results 2`] = `
+Array [
+  Array [
+    "Type | menu",
+  ],
+  Array [
+    "===========================================",
+  ],
+  Array [
+    "Render to string | 2.9",
+  ],
+  Array [
+    "Render to static markup (cannot be hydrated) | 2.2",
+  ],
+  Array [
+    "String output size | 1.9",
+  ],
+  Array [
+    "String output size (gzip) | 0.15",
+  ],
+  Array [
+    "Static markup output size | 1.9",
+  ],
+  Array [
+    "Static markup output size (gzip) | 0.15",
+  ],
+  Array [
+    "Initial render | 2.8",
+  ],
+  Array [
+    "Re render | 0.3",
+  ],
+  Array [
+    "Hydrate | 1.8",
+  ],
+  Array [
+    "Complete render (mount + layout + paint) | 4.8",
+  ],
+  Array [
+    "DOM element count | 40",
+  ],
+  Array [
+    "DOM element count (no nested inline svg elements) | 40",
+  ],
+  Array [
+    "React Fiber node count | 181",
+  ],
+  Array [
+    "Click a menu item | 0.7",
+  ],
+  Array [
+    "Focus on a menu item | 0",
+  ],
+  Array [
+    "Select a menu item | 0.7",
+  ],
+  Array [
+    "Disable a menu item | 0.5",
+  ],
+]
+`;
+
+exports[`cli should match snapshot without interactions test results 1`] = `
+Array [
+  Array [
+    "icon",
+  ],
+  Array [
+    "Server",
   ],
   Array [
     "type,#1,min,max,mean,median",
@@ -30,7 +224,7 @@ Array [
     "Static markup output size (gzip),41.16,41.16,41.16,41.16,41.16",
   ],
   Array [
-    "Clientside",
+    "Client",
   ],
   Array [
     "type,#1,min,max,mean,median",
@@ -58,7 +252,7 @@ Array [
   ],
   Array [],
   Array [
-    "Type,fixtures",
+    "Type,icon",
   ],
   Array [
     "Render to string,11.901000000761996",
@@ -102,10 +296,10 @@ Array [
 ]
 `;
 
-exports[`cli should match snapshot 2`] = `
+exports[`cli should match snapshot without interactions test results 2`] = `
 Array [
   Array [
-    "Type | fixtures",
+    "Type | icon",
   ],
   Array [
     "===========================================",

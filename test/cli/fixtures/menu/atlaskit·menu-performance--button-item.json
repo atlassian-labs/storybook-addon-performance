@@ -1,0 +1,167 @@
+{
+  "results": [
+    {
+      "groupId": "Server",
+      "map": {
+        "Render to string": {
+          "type": "timed",
+          "taskName": "Render to string",
+          "averageMs": 2.9,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 72.41379310344827,
+            "lowerPercentage": 31.034482758620683,
+            "standardDeviation": 0.9433981132056604
+          }
+        },
+        "Render to static markup (cannot be hydrated)": {
+          "type": "timed",
+          "taskName": "Render to static markup (cannot be hydrated)",
+          "averageMs": 2.2,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 36.36363636363635,
+            "lowerPercentage": 54.545454545454554,
+            "standardDeviation": 0.7483314773547882
+          }
+        },
+        "String output size": {
+          "type": "static",
+          "taskName": "String output size",
+          "value": "1.90"
+        },
+        "String output size (gzip)": {
+          "type": "static",
+          "taskName": "String output size (gzip)",
+          "value": "0.15"
+        },
+        "Static markup output size": {
+          "type": "static",
+          "taskName": "Static markup output size",
+          "value": "1.90"
+        },
+        "Static markup output size (gzip)": {
+          "type": "static",
+          "taskName": "Static markup output size (gzip)",
+          "value": "0.15"
+        }
+      }
+    },
+    {
+      "groupId": "Client",
+      "map": {
+        "Initial render": {
+          "type": "timed",
+          "taskName": "Initial render",
+          "averageMs": 2.8,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 78.57142857142858,
+            "lowerPercentage": 28.571428571428566,
+            "standardDeviation": 0.9797958971132713
+          }
+        },
+        "Re render": {
+          "type": "timed",
+          "taskName": "Re render",
+          "averageMs": 0.3,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 233.33333333333334,
+            "lowerPercentage": 100,
+            "standardDeviation": 0.45825756949558405
+          }
+        },
+        "Hydrate": {
+          "type": "timed",
+          "taskName": "Hydrate",
+          "averageMs": 1.8,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 66.66666666666666,
+            "lowerPercentage": 44.44444444444445,
+            "standardDeviation": 0.8717797887081348
+          }
+        },
+        "Complete render (mount + layout + paint)": {
+          "type": "timed",
+          "taskName": "Complete render (mount + layout + paint)",
+          "averageMs": 4.8,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 25.000000000000007,
+            "lowerPercentage": 37.5,
+            "standardDeviation": 0.9797958971132713
+          }
+        },
+        "DOM element count": {
+          "type": "static",
+          "taskName": "DOM element count",
+          "value": "40"
+        },
+        "DOM element count (no nested inline svg elements)": {
+          "type": "static",
+          "taskName": "DOM element count (no nested inline svg elements)",
+          "value": "40"
+        },
+        "React Fiber node count": {
+          "type": "static",
+          "taskName": "React Fiber node count",
+          "value": "181"
+        }
+      }
+    },
+    {
+      "groupId": "Interactions",
+      "map": {
+        "Click a menu item": {
+          "type": "timed",
+          "taskName": "Click a menu item",
+          "averageMs": 0.7,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 328.57142857142856,
+            "lowerPercentage": 100,
+            "standardDeviation": 0.9
+          }
+        },
+        "Focus on a menu item": {
+          "type": "timed",
+          "taskName": "Focus on a menu item",
+          "averageMs": 0,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": null,
+            "lowerPercentage": null,
+            "standardDeviation": 0
+          }
+        },
+        "Select a menu item": {
+          "type": "timed",
+          "taskName": "Select a menu item",
+          "averageMs": 0.7,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 185.71428571428575,
+            "lowerPercentage": 100,
+            "standardDeviation": 0.6403124237432848
+          }
+        },
+        "Disable a menu item": {
+          "type": "timed",
+          "taskName": "Disable a menu item",
+          "averageMs": 0.5,
+          "samples": 10,
+          "variance": {
+            "upperPercentage": 300,
+            "lowerPercentage": 100,
+            "standardDeviation": 0.806225774829855
+          }
+        }
+      }
+    }
+  ],
+  "storyName": "atlaskit·menu-performance--button-item",
+  "samples": 10,
+  "copies": 10
+}

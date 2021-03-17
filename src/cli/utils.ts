@@ -1,13 +1,13 @@
-/* eslint-disable no-console */
-import type { TaskGroupResult } from '../types';
-import { Results } from './types';
+import type { Result, ResultMap } from '../types';
+import { ResultsByGroupId, Results } from './types';
 
+/* eslint-disable no-console */
 export const debug = (...args: string[]) => console.warn(...args);
 export const stdout = (...args: string[]) => console.log(...args);
 
 export const usage = () =>
   debug(`Usage:
-sb-perf <directory> [...<directory>] 
+sb-perf <directory> [...<directory>]
 
 Example
 sb-perf results-directory > output-file.csv
@@ -15,18 +15,39 @@ sb-perf results-directory > output-file.csv
 sb-perf ABTestDirectory OtherDirectory > output-file.csv
 `);
 
-/**
- * Flattens out the result to a form we can consume
- */
-export const processResult = (result: TaskGroupResult) => {
-  return Object.keys(result.map).map((key) => {
-    // @ts-ignore
-    const { taskName, averageMs, value } = result.map[key];
-    return {
-      taskName,
-      value: averageMs || Number(value),
+const getTaskValue = (result: Result) => {
+  if ('averageMs' in result) {
+    return result.averageMs;
+  }
+
+  if ('value' in result) {
+    return Number(result.value);
+  }
+
+  return null;
+};
+
+export const convertToTaskValueMap = (resultMap: ResultMap) => {
+  return Object.values(resultMap).reduce((acc, result) => {
+    return { ...acc, [result.taskName]: [getTaskValue(result)] };
+  }, {});
+};
+
+export const combineTaskResultsByGroupId = (
+  results: ResultsByGroupId,
+  [groupId, taskValueMap]: [string, Results],
+) => {
+  Object.entries(taskValueMap).forEach(([taskName, value]) => {
+    results[groupId] = {
+      ...results[groupId],
+      [taskName]:
+        results[groupId] && results[groupId][taskName]
+          ? results[groupId][taskName].concat(value)
+          : value,
     };
   });
+
+  return results;
 };
 
 export const median = (numbers: number[]) => {
@@ -40,7 +61,7 @@ export const median = (numbers: number[]) => {
   return sorted[middle];
 };
 
-export const prepRows = (data: Results) => {
+export const performCalculations = (data: Results) => {
   // extracts the number of samples the dataset
   const numResults = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({
@@ -54,7 +75,7 @@ export const prepRows = (data: Results) => {
   }));
 };
 
-export type Row = ReturnType<typeof prepRows>[number];
+export type Row = ReturnType<typeof performCalculations>[number];
 
 /**
  * Turns the row output into a csv

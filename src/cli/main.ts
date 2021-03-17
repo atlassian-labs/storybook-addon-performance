@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import type { TaskGroupResult } from '../types';
-import type { ResultSet } from './types';
+import type { ResultMap, TaskGroupResult } from '../types';
+import type { ResultsByGroupId, Results } from './types';
 import {
   debug,
-  prepRows,
+  performCalculations,
   printCSV,
-  processResult,
   stdout,
   usage,
   Row,
   printCSVSummary,
+  convertToTaskValueMap,
+  combineTaskResultsByGroupId,
 } from './utils';
 
 const main = (...args: string[]) => {
@@ -26,35 +27,19 @@ const main = (...args: string[]) => {
     .map((pathName) => {
       try {
         const dataFiles = fs.readdirSync(pathName);
+
         if (dataFiles) {
-          return dataFiles
+          const resultSetsByGroupId = dataFiles
             .map((dataFile) => {
               const json = fs.readFileSync(path.join(pathName, dataFile));
               return JSON.parse(json as any);
             })
-            .map(({ results }) => (results as TaskGroupResult[]).map(processResult))
-            .reduce(
-              (acc, [serverside, clientside]) => {
-                serverside.forEach((serverResult) => {
-                  const data = acc.server[serverResult.taskName];
-                  // eslint-disable-next-line no-unused-expressions
-                  data
-                    ? data.push(serverResult.value)
-                    : (acc.server[serverResult.taskName] = [serverResult.value]);
-                });
+            .map(({ results }) => results as TaskGroupResult[])
+            .flatMap((taskGroupResults) => taskGroupResults)
+            .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
+            .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
-                clientside.forEach((clientResult) => {
-                  const data = acc.client[clientResult.taskName];
-                  // eslint-disable-next-line no-unused-expressions
-                  data
-                    ? data.push(clientResult.value)
-                    : (acc.client[clientResult.taskName] = [clientResult.value]);
-                });
-
-                return acc;
-              },
-              { name: pathName, server: {}, client: {} } as ResultSet,
-            );
+          return { name: pathName, ...resultSetsByGroupId };
         } else {
           debug(
             `cli: Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
@@ -67,31 +52,27 @@ const main = (...args: string[]) => {
         );
       }
 
-      return { name: '', server: {}, client: {} } as ResultSet;
+      return { name: '' };
     })
     .filter(({ name }) => name);
 
   const resultNames: string[] = [];
   const resultSets: Row[][] = [];
 
-  directoryResultSets.forEach(({ name, server, client }) => {
+  directoryResultSets.forEach(({ name, ...resultsByGroupId }) => {
     const resultName = path.basename(name);
     stdout(resultName);
 
-    const serverResults = prepRows(server);
-    const clientResults = prepRows(client);
+    Object.entries(resultsByGroupId).forEach(([groupId, result]) => {
+      const finalResults = performCalculations(result);
 
-    stdout('Serverside');
-    printCSV(serverResults);
-
-    stdout('Clientside');
-    printCSV(clientResults);
+      stdout(groupId);
+      printCSV(finalResults);
+      resultSets.push(finalResults);
+    });
 
     stdout();
-
-    // used in summary
     resultNames.push(resultName);
-    resultSets.push(serverResults.concat(clientResults));
   });
 
   printCSVSummary(resultNames, resultSets);

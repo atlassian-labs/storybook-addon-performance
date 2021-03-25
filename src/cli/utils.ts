@@ -93,9 +93,13 @@ export const printCSV = (rows: Row[]) => {
   });
 };
 
+const padded = (padding: number) => (str: string | number) => `${str}`.padEnd(padding);
+const paddedKey = padded(50);
+const paddedValue = padded(20);
+
 export const printCSVSummary = (resultNames: string[], results: Row[][]) => {
-  debug(`Type | ${resultNames.join(' | ')}`);
-  debug(`===========================================`);
+  debug(`${paddedKey('Type')} | ${resultNames.map(paddedValue).join('| ')}`);
+  debug('-'.padEnd(45 + 20 * resultNames.length, '-'));
   stdout(`Type,${resultNames.join(',')}`);
   const toPrint = {} as any;
   results.forEach((rows) => {
@@ -108,7 +112,7 @@ export const printCSVSummary = (resultNames: string[], results: Row[][]) => {
     });
   });
   Object.entries(toPrint).forEach(([key, values]) => {
-    debug(`${key} | ${(values as string[]).join(' | ')}`);
+    debug(`${paddedKey(key)} | ${(values as string[]).map(paddedValue).join('| ')}`);
     stdout(`${key},${(values as string[]).join(',')}`);
   });
 };

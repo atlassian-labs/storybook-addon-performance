@@ -75,7 +75,7 @@
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
   },
   "bin": {
-    "sb-perf": "dist/cli"
+    "sb-perf": "dist/cli/index.js"
   },
   "scripts": {
     "cypress:open": "yarn cypress open",

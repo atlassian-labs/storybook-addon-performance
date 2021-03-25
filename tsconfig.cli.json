@@ -1,11 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "removeComments": true,
+    "listEmittedFiles": true,
     "target": "ES2019",
     "module": "CommonJS",
     "moduleResolution": "node",
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false
+    "allowSyntheticDefaultImports": false,
   },
   "include": [
     "src/cli"

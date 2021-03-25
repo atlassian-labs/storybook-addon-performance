@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import * as fs from 'fs';
 import * as path from 'path';
-import type { ResultMap, TaskGroupResult } from '../types';
+import type { TaskGroupResult } from '../types';
 import type { ResultsByGroupId, Results } from './types';
 import {
   debug,
@@ -46,9 +45,9 @@ const main = (...args: string[]) => {
           );
         }
       } catch (e) {
-        console.info(e);
         debug(
           `cli: Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance?`,
+          e,
         );
       }
 

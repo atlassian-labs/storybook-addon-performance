@@ -1,11 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES2019",
+    "outDir": "dist",
     "module": "CommonJS",
-    "moduleResolution": "node",
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false
+    "allowSyntheticDefaultImports": false,
   },
   "include": [
     "src/cli"

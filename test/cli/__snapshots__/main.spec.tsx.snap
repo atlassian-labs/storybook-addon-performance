@@ -135,61 +135,61 @@ Array [
 exports[`cli should match snapshot with interactions test results 2`] = `
 Array [
   Array [
-    "Type | menu",
+    "Type                                               | menu                ",
   ],
   Array [
-    "===========================================",
+    "----------------------------------------------------------------------",
   ],
   Array [
-    "Render to string | 2.9",
+    "Render to string                                   | 2.9                 ",
   ],
   Array [
-    "Render to static markup (cannot be hydrated) | 2.2",
+    "Render to static markup (cannot be hydrated)       | 2.2                 ",
   ],
   Array [
-    "String output size | 1.9",
+    "String output size                                 | 1.9                 ",
   ],
   Array [
-    "String output size (gzip) | 0.15",
+    "String output size (gzip)                          | 0.15                ",
   ],
   Array [
-    "Static markup output size | 1.9",
+    "Static markup output size                          | 1.9                 ",
   ],
   Array [
-    "Static markup output size (gzip) | 0.15",
+    "Static markup output size (gzip)                   | 0.15                ",
   ],
   Array [
-    "Initial render | 2.8",
+    "Initial render                                     | 2.8                 ",
   ],
   Array [
-    "Re render | 0.3",
+    "Re render                                          | 0.3                 ",
   ],
   Array [
-    "Hydrate | 1.8",
+    "Hydrate                                            | 1.8                 ",
   ],
   Array [
-    "Complete render (mount + layout + paint) | 4.8",
+    "Complete render (mount + layout + paint)           | 4.8                 ",
   ],
   Array [
-    "DOM element count | 40",
+    "DOM element count                                  | 40                  ",
   ],
   Array [
-    "DOM element count (no nested inline svg elements) | 40",
+    "DOM element count (no nested inline svg elements)  | 40                  ",
   ],
   Array [
-    "React Fiber node count | 181",
+    "React Fiber node count                             | 181                 ",
   ],
   Array [
-    "Click a menu item | 0.7",
+    "Click a menu item                                  | 0.7                 ",
   ],
   Array [
-    "Focus on a menu item | 0",
+    "Focus on a menu item                               | 0                   ",
   ],
   Array [
-    "Select a menu item | 0.7",
+    "Select a menu item                                 | 0.7                 ",
   ],
   Array [
-    "Disable a menu item | 0.5",
+    "Disable a menu item                                | 0.5                 ",
   ],
 ]
 `;
@@ -299,49 +299,49 @@ Array [
 exports[`cli should match snapshot without interactions test results 2`] = `
 Array [
   Array [
-    "Type | icon",
+    "Type                                               | icon                ",
   ],
   Array [
-    "===========================================",
+    "----------------------------------------------------------------------",
   ],
   Array [
-    "Render to string | 11.901000000761996",
+    "Render to string                                   | 11.901000000761996  ",
   ],
   Array [
-    "Render to static markup (cannot be hydrated) | 10.560999999870546",
+    "Render to static markup (cannot be hydrated)       | 10.560999999870546  ",
   ],
   Array [
-    "String output size | 184.64",
+    "String output size                                 | 184.64              ",
   ],
   Array [
-    "String output size (gzip) | 41.16",
+    "String output size (gzip)                          | 41.16               ",
   ],
   Array [
-    "Static markup output size | 184.64",
+    "Static markup output size                          | 184.64              ",
   ],
   Array [
-    "Static markup output size (gzip) | 41.16",
+    "Static markup output size (gzip)                   | 41.16               ",
   ],
   Array [
-    "Initial render | 23.0890000000727",
+    "Initial render                                     | 23.0890000000727    ",
   ],
   Array [
-    "Re render | 1.6849999996338738",
+    "Re render                                          | 1.6849999996338738  ",
   ],
   Array [
-    "Hydrate | 8.303500000329223",
+    "Hydrate                                            | 8.303500000329223   ",
   ],
   Array [
-    "Complete render (mount + layout + paint) | 55.235999999968044",
+    "Complete render (mount + layout + paint)           | 55.235999999968044  ",
   ],
   Array [
-    "DOM element count | 1475",
+    "DOM element count                                  | 1475                ",
   ],
   Array [
-    "DOM element count (no nested inline svg elements) | 706",
+    "DOM element count (no nested inline svg elements)  | 706                 ",
   ],
   Array [
-    "React Fiber node count | 3886",
+    "React Fiber node count                             | 3886                ",
   ],
 ]
 `;

@@ -1,7 +1,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "target": "ES2019",
     "module": "ESNext",
     "moduleResolution": "node",

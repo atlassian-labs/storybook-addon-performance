@@ -62,7 +62,7 @@ export const median = (numbers: number[]) => {
 };
 
 export const performCalculations = (data: Results) => {
-  // extracts the number of samples the dataset
+  // extracts the number of samples in the dataset
   const numResults = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({
     key,
@@ -99,7 +99,7 @@ const paddedValue = padded(20);
 
 export const printCSVSummary = (resultNames: string[], results: Row[][]) => {
   debug(`${paddedKey('Type')} | ${resultNames.map(paddedValue).join('| ')}`);
-  debug('-'.padEnd(45 + 20 * resultNames.length, '-'));
+  debug('-'.padEnd(50 + 20 * resultNames.length, '-'));
   stdout(`Type,${resultNames.join(',')}`);
   const toPrint = {} as any;
   results.forEach((rows) => {

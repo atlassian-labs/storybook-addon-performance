@@ -4,5 +4,8 @@
     "outDir": "dist/cjs",
     "module": "CommonJS",
     "target": "ES5",
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "lib": ["dom", "es5", "es2015.collection", "es2015.iterable", "es2019"]
   }
 }

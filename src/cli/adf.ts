@@ -4,13 +4,12 @@ import { buildTable, buildNameCell, buildResultCell, buildAdf, Content } from '.
 import { Calculation, CalculationsByGroupId } from './types';
 import { debug, stdout } from './utils';
 
-const adf = (...args: string[]) => {
-  const cliArgs = args.length ? args : process.argv;
-  if (cliArgs.length <= 2) {
+const adf = () => {
+  if (process.argv.length <= 2) {
     return stdout('💔 Oh no! Please provide a path to the input file.');
   }
 
-  const [inputPath] = cliArgs.slice(2);
+  const [inputPath] = process.argv.slice(2);
   const [inputFileName] = inputPath.split('.');
 
   const data = fs.readFileSync(`${inputFileName}.json`, 'utf-8');

@@ -6,6 +6,15 @@ export type Results = {
 };
 
 export type ResultsByGroupId = { [groupId: string]: Results };
+export interface Calculation {
+  key: string;
+  numberOfSamples: number;
+  samples: number[];
+  minValue: number;
+  maxValue: number;
+  meanValue: number;
+  medianValue: number;
+}
 
-export type CalculationsByGroupId = { [groupId: string]: ReturnType<typeof performCalculations> };
+export type CalculationsByGroupId = { [groupId: string]: Calculation[] };
 export type CalculationsByDirectory = { [name: string]: CalculationsByGroupId };

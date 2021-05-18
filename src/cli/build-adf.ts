@@ -1,10 +1,27 @@
-export const buildAdf = (content: any) => ({
+interface Attributes {
+  title?: string;
+  background?: string;
+  isNumberColumnEnabled?: boolean;
+  layout?: string;
+}
+
+export interface Content {
+  type: string;
+  attrs?: Attributes;
+  text?: string;
+  content?: Content[];
+  marks?: {
+    type: string;
+  }[];
+}
+
+export const buildAdf = (content: Content[]) => ({
   version: 1,
   type: 'doc',
   content,
 });
 
-export const buildTable = (heading: string, rows: any[]) => [
+export const buildTable = (heading: string, tableRows: Content[]) => [
   {
     type: 'heading',
     attrs: {
@@ -13,7 +30,7 @@ export const buildTable = (heading: string, rows: any[]) => [
     content: [
       {
         type: 'text',
-        text: heading + ' ',
+        text: heading,
       },
     ],
   },
@@ -110,12 +127,12 @@ export const buildTable = (heading: string, rows: any[]) => [
           },
         ],
       },
-      ...rows,
+      ...tableRows,
     ],
   },
 ];
 
-export const buildNameCell = (key: string) => {
+export const buildNameCell = (key: string): Content => {
   return {
     type: 'tableCell',
     attrs: {
@@ -144,7 +161,7 @@ export const buildResultCell = (
   medianValue: number,
   numberOfSamples: number,
   samples: number[],
-) => {
+): Content => {
   return {
     type: 'tableCell',
     content: [

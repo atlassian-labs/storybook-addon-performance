@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
-import { buildTable, buildNameCell, buildResultCell, buildAdf } from './build-adf';
-import { CalculationsByGroupId } from './types';
+import { buildTable, buildNameCell, buildResultCell, buildAdf, Content } from './build-adf';
+import { Calculation, CalculationsByGroupId } from './types';
 import { debug, stdout } from './utils';
 
 const adf = (...args: string[]) => {
@@ -13,49 +13,43 @@ const adf = (...args: string[]) => {
   const [inputPath] = cliArgs.slice(2);
   const [inputFileName] = inputPath.split('.');
 
-  fs.readFile(`${inputFileName}.json`, 'utf-8', (e, data) => {
-    if (e) {
-      return stdout('💔 An error occurred – ', e);
-    }
+  const data = fs.readFileSync(`${inputFileName}.json`, 'utf-8');
 
-    try {
-      const calculationsByGroupId = JSON.parse(data) as CalculationsByGroupId;
-      const outputTables = Object.entries(calculationsByGroupId)
-        .map(([key, results]) => {
-          const rows = results.map(({ key, numberOfSamples, samples, medianValue }) => {
-            const name = buildNameCell(key);
-            const baseline = buildResultCell(medianValue, numberOfSamples, samples);
-            const lite = buildResultCell(medianValue, numberOfSamples, samples);
+  try {
+    const calculationsByGroupId = JSON.parse(data) as CalculationsByGroupId;
+    const outputTables = Object.entries(calculationsByGroupId)
+      .map(([key, results]) => buildTable(key, results.map(buildTableRows)))
+      .flatMap((table) => table);
 
-            return {
-              type: 'tableRow',
-              content: [name, baseline, lite],
-            };
-          });
+    const adf = buildAdf(outputTables);
 
-          return buildTable(key, rows);
-        })
-        .flatMap((table) => table);
+    const outputPath = `${inputFileName}-adf.json`;
+    const content = JSON.stringify(adf);
 
-      const adf = buildAdf(outputTables);
+    fs.writeFile(outputPath, content, 'utf8', (e) => {
+      if (e) {
+        return debug('💔 An error occurred – ', e);
+      }
 
-      const outputPath = `${inputFileName}-adf.json`;
-      const content = JSON.stringify(adf);
+      stdout(`✨ Generated ADF is saved to ${outputPath}!`);
+    });
+  } catch (e) {
+    debug(
+      `💔 Problem parsing a file in '${inputPath}' - was this created by the storybook-addon-performance? \n`,
+      e,
+    );
+  }
+};
 
-      fs.writeFile(outputPath, content, 'utf8', (e) => {
-        if (e) {
-          return debug('💔 An error occurred – ', e);
-        }
+const buildTableRows = ({ key, numberOfSamples, samples, medianValue }: Calculation): Content => {
+  const name = buildNameCell(key);
+  const baseline = buildResultCell(medianValue, numberOfSamples, samples);
+  const lite = buildResultCell(medianValue, numberOfSamples, samples);
 
-        stdout(`✨ Generated ADF is saved to ${outputPath}!`);
-      });
-    } catch (e) {
-      debug(
-        `💔 Problem parsing a file in '${inputPath}' - was this created by the storybook-addon-performance? \n`,
-        e,
-      );
-    }
-  });
+  return {
+    type: 'tableRow',
+    content: [name, baseline, lite],
+  };
 };
 
 adf();

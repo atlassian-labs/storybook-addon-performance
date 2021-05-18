@@ -1,5 +1,5 @@
 import type { Result, ResultMap } from '../types';
-import { ResultsByGroupId, Results } from './types';
+import { ResultsByGroupId, Results, Calculation } from './types';
 
 /* eslint-disable no-console */
 export const debug = (...args: any[]) => console.warn(...args);
@@ -61,7 +61,7 @@ export const median = (numbers: number[]) => {
   return sorted[middle];
 };
 
-export const performCalculations = (data: Results) => {
+export const performCalculations = (data: Results): Calculation[] => {
   // extracts the number of samples in the dataset
   const numberOfSamples = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({

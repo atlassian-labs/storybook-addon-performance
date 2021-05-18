@@ -1,7 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import type { TaskGroupResult } from '../types';
-import type { ResultsByGroupId, Results } from './types';
+import type {
+  ResultsByGroupId,
+  Results,
+  CalculationByGroupId,
+  CalculationByDirectory,
+} from './types';
 import {
   debug,
   performCalculations,
@@ -55,26 +60,34 @@ const main = (...args: string[]) => {
     })
     .filter(({ name }) => name);
 
-  const resultNames: string[] = [];
-  const resultSets: Row[][] = [];
-
-  directoryResultSets.forEach(({ name, ...resultsByGroupId }) => {
-    const resultName = path.basename(name);
-    stdout(resultName);
-
-    Object.entries(resultsByGroupId).forEach(([groupId, result]) => {
-      const finalResults = performCalculations(result);
-
-      stdout(groupId);
-      printCSV(finalResults);
-      resultSets.push(finalResults);
-    });
-
-    stdout();
-    resultNames.push(resultName);
+  const performAllCalculations = (
+    calculationsByGroupId: CalculationByGroupId,
+    [groupId, result]: [string, Results],
+  ): CalculationByGroupId => ({
+    ...calculationsByGroupId,
+    [groupId]: performCalculations(result),
   });
 
-  printCSVSummary(resultNames, resultSets);
+  const output = directoryResultSets.reduce(
+    (calculationsByDirectory, { name, ...resultsByGroupId }) => ({
+      ...calculationsByDirectory,
+      [path.basename(name)]: Object.entries(resultsByGroupId).reduce(
+        performAllCalculations,
+        {} as CalculationByGroupId,
+      ),
+    }),
+    {} as CalculationByDirectory,
+  );
+
+  const outputPath = 'results.json';
+  const content = JSON.stringify(output);
+  fs.writeFile(outputPath, content, 'utf8', (e) => {
+    if (e) {
+      stdout('💔 An error occurred – ', e);
+    }
+
+    stdout(`✨ Output is saved to ${outputPath}!`);
+  });
 };
 
 export default main;

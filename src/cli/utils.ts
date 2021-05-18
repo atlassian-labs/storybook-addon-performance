@@ -2,8 +2,8 @@ import type { Result, ResultMap } from '../types';
 import { ResultsByGroupId, Results } from './types';
 
 /* eslint-disable no-console */
-export const debug = (...args: string[]) => console.warn(...args);
-export const stdout = (...args: string[]) => console.log(...args);
+export const debug = (...args: any[]) => console.warn(...args);
+export const stdout = (...args: any[]) => console.log(...args);
 
 export const usage = () =>
   debug(`Usage:
@@ -63,14 +63,14 @@ export const median = (numbers: number[]) => {
 
 export const performCalculations = (data: Results) => {
   // extracts the number of samples in the dataset
-  const numResults = Object.values(data)[0].length;
+  const numberOfSamples = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({
     key,
-    numResults,
-    samples: values.join(','),
+    numberOfSamples,
+    samples: values,
     minValue: Math.min(...values),
     maxValue: Math.max(...values),
-    meanValue: values.reduce((acc, curr) => acc + curr, 0) / numResults,
+    meanValue: values.reduce((acc, curr) => acc + curr, 0) / numberOfSamples,
     medianValue: median(values),
   }));
 };
@@ -82,9 +82,9 @@ export type Row = ReturnType<typeof performCalculations>[number];
  */
 export const printCSV = (rows: Row[]) => {
   // extracts the number of samples the dataset
-  const numResults = rows[0].numResults;
+  const numberOfSamples = rows[0].numberOfSamples;
   stdout(
-    `type,${Array.from({ length: numResults })
+    `type,${Array.from({ length: numberOfSamples })
       .map((_, i) => `#${i + 1}`)
       .join(',')},min,max,mean,median`,
   );

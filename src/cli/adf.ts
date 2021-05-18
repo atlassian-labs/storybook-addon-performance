@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 import { buildTable, buildNameCell, buildResultCell, buildAdf, Content } from './build-adf';
-import { Calculation, CalculationsByGroupId } from './types';
+import { Calculation, CalculationsByGroupId, CalculationWithDiff } from './types';
 import { debug, stdout } from './utils';
 
 const adf = () => {
@@ -40,14 +40,29 @@ const adf = () => {
   }
 };
 
-const buildTableRows = ({ key, numberOfSamples, samples, medianValue }: Calculation): Content => {
-  const name = buildNameCell(key);
-  const baseline = buildResultCell(medianValue, numberOfSamples, samples);
-  const lite = buildResultCell(medianValue, numberOfSamples, samples);
+const buildTableRows = (result: CalculationWithDiff | Calculation): Content => {
+  const name = buildNameCell(result.key);
+
+  if ('diffPercentage' in result) {
+    const { baseline, lite, diffPercentage } = result;
+    return {
+      type: 'tableRow',
+      content: [name, buildResultCell(baseline), buildResultCell(lite, diffPercentage)],
+    };
+  }
+
+  const missingBaseline = {
+    medianValue: 0,
+    numberOfSamples: 0,
+    samples: [0],
+    minValue: 0,
+    maxValue: 0,
+    meanValue: 0,
+  };
 
   return {
     type: 'tableRow',
-    content: [name, baseline, lite],
+    content: [name, buildResultCell(missingBaseline), buildResultCell(result)],
   };
 };
 

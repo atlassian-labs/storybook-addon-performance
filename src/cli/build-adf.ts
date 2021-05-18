@@ -1,5 +1,10 @@
+import { Calculation } from './types';
+
 interface Attributes {
   title?: string;
+  text?: string;
+  color?: string;
+  style?: string;
   background?: string;
   isNumberColumnEnabled?: boolean;
   layout?: string;
@@ -158,9 +163,8 @@ export const buildNameCell = (key: string): Content => {
 };
 
 export const buildResultCell = (
-  medianValue: number,
-  numberOfSamples: number,
-  samples: number[],
+  { medianValue, numberOfSamples, samples }: Omit<Calculation, 'key'>,
+  diff?: number,
 ): Content => {
   return {
     type: 'tableCell',
@@ -172,6 +176,7 @@ export const buildResultCell = (
             type: 'text',
             text: medianValue.toFixed(2),
           },
+          ...buildDiffStatus(diff),
         ],
       },
       {
@@ -193,4 +198,29 @@ export const buildResultCell = (
       },
     ],
   };
+};
+
+const buildDiffStatus = (diff?: number) => {
+  if (!diff) {
+    return [];
+  }
+
+  return [
+    {
+      type: 'text',
+      text: ' ',
+    },
+    {
+      type: 'status',
+      attrs: {
+        text: String(diff.toFixed(2)) + '%',
+        color: 'neutral',
+        style: 'bold',
+      },
+    },
+    {
+      type: 'text',
+      text: ' ',
+    },
+  ];
 };

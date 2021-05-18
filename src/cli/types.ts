@@ -1,5 +1,4 @@
 import { ResultMap } from '../types';
-import { performCalculations } from './utils';
 
 export type Results = {
   [key in keyof ResultMap]: number[];
@@ -15,6 +14,12 @@ export interface Calculation {
   meanValue: number;
   medianValue: number;
 }
+export interface CalculationWithDiff {
+  key: string;
+  diffPercentage: number;
+  lite: Omit<Calculation, 'key'>;
+  baseline: Omit<Calculation, 'key'>;
+}
 
-export type CalculationsByGroupId = { [groupId: string]: Calculation[] };
+export type CalculationsByGroupId = { [groupId: string]: (Calculation | CalculationWithDiff)[] };
 export type CalculationsByDirectory = { [name: string]: CalculationsByGroupId };

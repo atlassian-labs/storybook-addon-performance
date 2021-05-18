@@ -4,17 +4,14 @@ import type { TaskGroupResult } from '../types';
 import type {
   ResultsByGroupId,
   Results,
-  CalculationByGroupId,
-  CalculationByDirectory,
+  CalculationsByGroupId,
+  CalculationsByDirectory,
 } from './types';
 import {
   debug,
   performCalculations,
-  printCSV,
   stdout,
   usage,
-  Row,
-  printCSVSummary,
   convertToTaskValueMap,
   combineTaskResultsByGroupId,
 } from './utils';
@@ -46,12 +43,12 @@ const main = (...args: string[]) => {
           return { name: pathName, ...resultSetsByGroupId };
         } else {
           debug(
-            `cli: Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
+            `💔 Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
           );
         }
       } catch (e) {
         debug(
-          `cli: Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance?`,
+          `💔 Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance? \n`,
           e,
         );
       }
@@ -61,32 +58,35 @@ const main = (...args: string[]) => {
     .filter(({ name }) => name);
 
   const performAllCalculations = (
-    calculationsByGroupId: CalculationByGroupId,
+    calculationsByGroupId: CalculationsByGroupId,
     [groupId, result]: [string, Results],
-  ): CalculationByGroupId => ({
+  ): CalculationsByGroupId => ({
     ...calculationsByGroupId,
     [groupId]: performCalculations(result),
   });
 
-  const output = directoryResultSets.reduce(
+  const directoryOutputs = directoryResultSets.reduce(
     (calculationsByDirectory, { name, ...resultsByGroupId }) => ({
       ...calculationsByDirectory,
       [path.basename(name)]: Object.entries(resultsByGroupId).reduce(
         performAllCalculations,
-        {} as CalculationByGroupId,
+        {} as CalculationsByGroupId,
       ),
     }),
-    {} as CalculationByDirectory,
+    {} as CalculationsByDirectory,
   );
 
-  const outputPath = 'results.json';
-  const content = JSON.stringify(output);
-  fs.writeFile(outputPath, content, 'utf8', (e) => {
-    if (e) {
-      stdout('💔 An error occurred – ', e);
-    }
+  Object.entries(directoryOutputs).forEach(([directoryName, output]) => {
+    const outputPath = `${directoryName}.json`;
+    const content = JSON.stringify(output);
 
-    stdout(`✨ Output is saved to ${outputPath}!`);
+    fs.writeFile(outputPath, content, 'utf8', (e) => {
+      if (e) {
+        return debug('💔 An error occurred – ', e);
+      }
+
+      stdout(`✨ Output is saved to ${outputPath}!`);
+    });
   });
 };
 

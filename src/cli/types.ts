@@ -7,5 +7,5 @@ export type Results = {
 
 export type ResultsByGroupId = { [groupId: string]: Results };
 
-export type CalculationByGroupId = { [groupId: string]: ReturnType<typeof performCalculations> };
-export type CalculationByDirectory = { [name: string]: CalculationByGroupId };
+export type CalculationsByGroupId = { [groupId: string]: ReturnType<typeof performCalculations> };
+export type CalculationsByDirectory = { [name: string]: CalculationsByGroupId };

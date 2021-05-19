@@ -8,13 +8,12 @@ import type {
   CalculationsByDirectory,
 } from './types';
 import {
-  debug,
-  performCalculations,
-  stdout,
-  usage,
   convertToTaskValueMap,
   combineTaskResultsByGroupId,
-} from './utils';
+  performAllCalculations,
+} from './util/calculate';
+import { debug, usage } from './util/print';
+import { writeFile } from './util/write';
 
 const main = (...args: string[]) => {
   const cliArgs = args.length ? args : process.argv;
@@ -22,49 +21,46 @@ const main = (...args: string[]) => {
     return usage();
   }
 
-  // first up grab the CLI arguments
-  const directoryResultSets = cliArgs
-    .slice(2)
-    .map((pathName) => {
-      try {
-        const dataFiles = fs.readdirSync(pathName);
-
-        if (dataFiles) {
-          const resultSetsByGroupId = dataFiles
-            .map((dataFile) => {
-              const json = fs.readFileSync(path.join(pathName, dataFile));
-              return JSON.parse(json as any);
-            })
-            .map(({ results }) => results as TaskGroupResult[])
-            .flatMap((taskGroupResults) => taskGroupResults)
-            .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
-            .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
-
-          return { name: pathName, ...resultSetsByGroupId };
-        } else {
-          debug(
-            `💔 Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
-          );
-        }
-      } catch (e) {
-        debug(
-          `💔 Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance? \n`,
-          e,
+  /**
+   * Get storybook-addon-performance output files
+   * in the specified directories. Format and group the outputs
+   * per directory.
+   */
+  const directoryResultSets = cliArgs.slice(2).map((pathName) => {
+    try {
+      const dataFiles = fs.readdirSync(pathName);
+      if (!dataFiles) {
+        return debug(
+          `💔 Directory '${pathName}' is empty - ` +
+            'did you specify a directory with storybook-addon-performance output files?',
         );
       }
 
-      return { name: '' };
-    })
-    .filter(({ name }) => name);
+      const resultSetsByGroupId = dataFiles
+        .map((dataFile) => {
+          const json = fs.readFileSync(path.join(pathName, dataFile));
+          return JSON.parse(json as any);
+        })
+        .map(({ results }) => results as TaskGroupResult[])
+        .flatMap((taskGroupResults) => taskGroupResults)
+        .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
+        .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
-  const performAllCalculations = (
-    calculationsByGroupId: CalculationsByGroupId,
-    [groupId, result]: [string, Results],
-  ): CalculationsByGroupId => ({
-    ...calculationsByGroupId,
-    [groupId]: performCalculations(result),
-  });
+      return { name: pathName, ...resultSetsByGroupId };
+    } catch (e) {
+      return debug(
+        `💔 Problem parsing a file in '${pathName}' - ` +
+          'was this created by the storybook-addon-performance? \n',
+        e,
+      );
+    }
+  }) as (ResultsByGroupId & { name: string })[];
 
+  /**
+   * Calculate the max, min, median, and mean values
+   * of the previously formatted outputs, and group the results
+   * per directory.
+   */
   const directoryOutputs = directoryResultSets.reduce(
     (calculationsByDirectory, { name, ...resultsByGroupId }) => ({
       ...calculationsByDirectory,
@@ -76,17 +72,15 @@ const main = (...args: string[]) => {
     {} as CalculationsByDirectory,
   );
 
+  /**
+   * Write the results into files –
+   * one file summarises one input directory.
+   */
   Object.entries(directoryOutputs).forEach(([directoryName, output]) => {
     const outputPath = `${directoryName}.json`;
     const content = JSON.stringify(output);
 
-    fs.writeFile(outputPath, content, 'utf8', (e) => {
-      if (e) {
-        return debug('💔 An error occurred – ', e);
-      }
-
-      stdout(`✨ Output is saved to ${outputPath}!`);
-    });
+    writeFile(outputPath, content, `Output is saved to ${outputPath}!`);
   });
 };
 

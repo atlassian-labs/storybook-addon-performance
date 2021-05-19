@@ -1,19 +1,5 @@
-import type { Result, ResultMap } from '../types';
-import { ResultsByGroupId, Results, Calculation } from './types';
-
-/* eslint-disable no-console */
-export const debug = (...args: any[]) => console.warn(...args);
-export const stdout = (...args: any[]) => console.log(...args);
-
-export const usage = () =>
-  debug(`Usage:
-sb-perf <directory> [...<directory>]
-
-Example
-sb-perf results-directory > output-file.csv
-# OR
-sb-perf ABTestDirectory OtherDirectory > output-file.csv
-`);
+import type { Result, ResultMap } from '../../types';
+import { ResultsByGroupId, Results, Calculation, CalculationsByGroupId } from '../types';
 
 const getTaskValue = (result: Result) => {
   if ('averageMs' in result) {
@@ -61,7 +47,7 @@ export const median = (numbers: number[]) => {
   return sorted[middle];
 };
 
-export const performCalculations = (data: Results): Calculation[] => {
+const performCalculations = (data: Results): Calculation[] => {
   // extracts the number of samples in the dataset
   const numberOfSamples = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({
@@ -74,3 +60,11 @@ export const performCalculations = (data: Results): Calculation[] => {
     medianValue: median(values),
   }));
 };
+
+export const performAllCalculations = (
+  calculationsByGroupId: CalculationsByGroupId,
+  [groupId, result]: [string, Results],
+): CalculationsByGroupId => ({
+  ...calculationsByGroupId,
+  [groupId]: performCalculations(result),
+});

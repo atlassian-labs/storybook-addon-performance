@@ -1,4 +1,4 @@
-import { Calculation } from './types';
+import { Calculation, CalculationWithDiff } from '../types';
 
 interface Attributes {
   title?: string;
@@ -136,6 +136,32 @@ export const buildTable = (heading: string, tableRows: Content[]) => [
     ],
   },
 ];
+
+export const buildTableRows = (result: CalculationWithDiff | Calculation): Content => {
+  const name = buildNameCell(result.key);
+
+  if ('diffPercentage' in result) {
+    const { baseline, lite, diffPercentage } = result;
+    return {
+      type: 'tableRow',
+      content: [name, buildResultCell(baseline), buildResultCell(lite, diffPercentage)],
+    };
+  }
+
+  const missingBaseline = {
+    medianValue: 0,
+    numberOfSamples: 0,
+    samples: [0],
+    minValue: 0,
+    maxValue: 0,
+    meanValue: 0,
+  };
+
+  return {
+    type: 'tableRow',
+    content: [name, buildResultCell(missingBaseline), buildResultCell(result)],
+  };
+};
 
 export const buildNameCell = (key: string): Content => {
   return {

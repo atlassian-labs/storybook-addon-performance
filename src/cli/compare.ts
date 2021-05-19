@@ -2,22 +2,22 @@ import { Calculation, CalculationsByGroupId } from './types';
 import { calculateDifference } from './util/compare';
 import { writeFile } from './util/write';
 
-const compare = (baseline: CalculationsByGroupId, lite: CalculationsByGroupId) => {
+const compare = (baseline: CalculationsByGroupId, current: CalculationsByGroupId) => {
   /**
-   * Calculate the difference between the median values of lite mode vs. baseline,
+   * Calculate the difference between the median values of current state vs. baseline,
    * and aggregate the results per test group ("Server", "Client", "Interactions").
    */
-  const allDiffs = Object.entries(lite)
+  const allDiffs = Object.entries(current)
     .map(
-      ([groupId, lite]) =>
-        [groupId, lite, baseline[groupId]] as [string, Calculation[], Calculation[]],
+      ([groupId, current]) =>
+        [groupId, current, baseline[groupId]] as [string, Calculation[], Calculation[]],
     )
-    .map(([groupId, lite, baseline]) => ({
-      [groupId]: lite.map(calculateDifference(baseline)),
+    .map(([groupId, current, baseline]) => ({
+      [groupId]: current.map(calculateDifference(baseline)),
     }))
     .reduce((acc, val) => ({ ...acc, ...val }));
 
-  const outputPath = 'p-lite-vs-baseline.json';
+  const outputPath = 'p-current-vs-baseline.json';
   const content = JSON.stringify(allDiffs);
 
   /**

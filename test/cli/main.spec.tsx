@@ -25,20 +25,23 @@ describe('cli', () => {
   it('should show message if not provided correct args', () => {
     cli();
     expect(warnMock).toHaveBeenCalledWith(`
+  Please input two directories – one containing the current test results,
+  and one containing the baseline to compare it against.
+
   Usage
-    $ sb-perf <flag> <[path]>
+    $ sb-perf -c <[current-results-path]> -b <[baseline-path]>
 
     Arguments
-      -l        Directory of performance test results of current state
+      -c        Directory of performance test results of current state
       -b        Directory of baseline test results
 
     Example
-      $ sb-perf -l lite -b baseline
+      $ sb-perf -c current -b baseline
 `);
   });
 
   it('should save the formatted output to a summary file', () => {
-    cli('node', 'cli', '-l', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       1,
@@ -58,11 +61,11 @@ describe('cli', () => {
   });
 
   it('should save the diff calculations to a summary file', () => {
-    cli('node', 'cli', '-l', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       3,
-      'p-lite-vs-baseline.json',
+      'p-current-vs-baseline.json',
       JSON.stringify(expectedDiffOutput),
       'utf-8',
       expect.any(Function),
@@ -70,7 +73,7 @@ describe('cli', () => {
   });
 
   it('should generate an Editor ADF and save it to a file', () => {
-    cli('node', 'cli', '-l', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       4,

@@ -17,7 +17,7 @@ export interface Calculation {
 export interface CalculationWithDiff {
   key: string;
   diffPercentage: number;
-  lite: Omit<Calculation, 'key'>;
+  current: Omit<Calculation, 'key'>;
   baseline: Omit<Calculation, 'key'>;
 }
 

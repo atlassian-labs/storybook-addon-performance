@@ -2,7 +2,7 @@ module.exports = {
   Server: [
     {
       key: 'Render to string',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [11.901000000761996],
         minValue: 11.901000000761996,
@@ -23,7 +23,7 @@ module.exports = {
     },
     {
       key: 'Render to static markup (cannot be hydrated)',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [10.560999999870546],
         minValue: 10.560999999870546,
@@ -44,7 +44,7 @@ module.exports = {
     },
     {
       key: 'String output size',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [184.64],
         minValue: 184.64,
@@ -65,7 +65,7 @@ module.exports = {
     },
     {
       key: 'String output size (gzip)',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [41.16],
         minValue: 41.16,
@@ -86,7 +86,7 @@ module.exports = {
     },
     {
       key: 'Static markup output size',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [184.64],
         minValue: 184.64,
@@ -107,7 +107,7 @@ module.exports = {
     },
     {
       key: 'Static markup output size (gzip)',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [41.16],
         minValue: 41.16,
@@ -130,7 +130,7 @@ module.exports = {
   Client: [
     {
       key: 'Initial render',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [23.0890000000727],
         minValue: 23.0890000000727,
@@ -151,7 +151,7 @@ module.exports = {
     },
     {
       key: 'Re render',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [1.6849999996338738],
         minValue: 1.6849999996338738,
@@ -172,7 +172,7 @@ module.exports = {
     },
     {
       key: 'Hydrate',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [8.303500000329223],
         minValue: 8.303500000329223,
@@ -193,7 +193,7 @@ module.exports = {
     },
     {
       key: 'Complete render (mount + layout + paint)',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [55.235999999968044],
         minValue: 55.235999999968044,
@@ -214,7 +214,7 @@ module.exports = {
     },
     {
       key: 'DOM element count',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [1475],
         minValue: 1475,
@@ -235,7 +235,7 @@ module.exports = {
     },
     {
       key: 'DOM element count (no nested inline svg elements)',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [706],
         minValue: 706,
@@ -256,7 +256,7 @@ module.exports = {
     },
     {
       key: 'React Fiber node count',
-      lite: {
+      current: {
         numberOfSamples: 1,
         samples: [3886],
         minValue: 3886,

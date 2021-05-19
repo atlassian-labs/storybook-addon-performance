@@ -77,7 +77,7 @@ module.exports = {
                   content: [
                     {
                       type: 'text',
-                      text: 'Lite mode',
+                      text: 'Current state',
                       marks: [
                         {
                           type: 'strong',
@@ -814,7 +814,7 @@ module.exports = {
                   content: [
                     {
                       type: 'text',
-                      text: 'Lite mode',
+                      text: 'Current state',
                       marks: [
                         {
                           type: 'strong',

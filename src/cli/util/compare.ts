@@ -1,11 +1,11 @@
 import { Calculation, CalculationWithDiff } from '../types';
 
 export const calculateDifference = (baseline: Calculation[]) => (
-  { key, ...lite }: Calculation,
+  { key, ...current }: Calculation,
   index: number,
 ): CalculationWithDiff => ({
   key,
-  lite,
+  current,
   baseline: baseline[index],
-  diffPercentage: (lite.medianValue / baseline[index].medianValue) * 100 - 100,
+  diffPercentage: (current.medianValue / baseline[index].medianValue) * 100 - 100,
 });

@@ -5,7 +5,7 @@ import { writeFile } from './util/write';
 const adf = (calculationsByGroupId: CalculationsByGroupId) => {
   /**
    * Build one table + heading for each test group ("Server", "Client", "Interactions"),
-   * containing measurements for lite mode + its baseline, and
+   * containing measurements for current state + its baseline, and
    * the difference as a percent.
    */
   const outputTables = Object.entries(calculationsByGroupId)

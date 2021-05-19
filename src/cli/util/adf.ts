@@ -102,7 +102,7 @@ export const buildTable = (heading: string, tableRows: Content[]) => [
                 content: [
                   {
                     type: 'text',
-                    text: 'Lite mode',
+                    text: 'Current state',
                     marks: [
                       {
                         type: 'strong',
@@ -141,10 +141,10 @@ export const buildTableRows = (result: CalculationWithDiff | Calculation): Conte
   const name = buildNameCell(result.key);
 
   if ('diffPercentage' in result) {
-    const { baseline, lite, diffPercentage } = result;
+    const { baseline, current, diffPercentage } = result;
     return {
       type: 'tableRow',
-      content: [name, buildResultCell(baseline), buildResultCell(lite, diffPercentage)],
+      content: [name, buildResultCell(baseline), buildResultCell(current, diffPercentage)],
     };
   }
 

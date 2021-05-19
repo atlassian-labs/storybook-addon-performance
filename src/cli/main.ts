@@ -22,8 +22,8 @@ const main = (...args: string[]) => {
   }
 
   const input = cliArgs.slice(2);
-  const categories = { '-l': 'Lite mode', '-b': 'Baseline' };
-  const flags = Object.keys(categories);
+  const categories = { current: '-c', baseline: '-b' };
+  const flags = Object.values(categories);
 
   const inputPaths = input
     .map((arg, i) => (flags.includes(arg) ? { [arg]: input[i + 1] } : {}))
@@ -33,7 +33,7 @@ const main = (...args: string[]) => {
     return usage();
   }
 
-  const dirPaths = [inputPaths['-b'], inputPaths['-l']];
+  const dirPaths = [inputPaths[categories.baseline], inputPaths[categories.current]];
   const resultsByDirectory = dirPaths.map((pathName) => {
     const files = fs.readdirSync(pathName, 'utf-8');
     if (!files) {
@@ -69,8 +69,8 @@ const main = (...args: string[]) => {
 
   const calculationsByDirectory = calculate(resultsByDirectory);
 
-  const [baseline, lite] = Object.values(calculationsByDirectory);
-  const calculationsWithDiff = compare(baseline, lite);
+  const [baseline, current] = Object.values(calculationsByDirectory);
+  const calculationsWithDiff = compare(baseline, current);
 
   generateAdf(calculationsWithDiff);
 };

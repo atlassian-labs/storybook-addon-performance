@@ -10,6 +10,8 @@ import expectedADFOutput from './expected/adf';
 jest.mock('fs', () => ({
   readdirSync: jest.requireActual('fs').readdirSync,
   readFileSync: jest.requireActual('fs').readFileSync,
+  existsSync: jest.fn(),
+  mkdirSync: jest.fn(),
   writeFile: jest.fn(),
 }));
 
@@ -45,7 +47,7 @@ describe('cli', () => {
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       1,
-      'p-menu.json',
+      'sb-perf/menu.json',
       JSON.stringify(expectedMenuOutput),
       'utf-8',
       expect.any(Function),
@@ -53,7 +55,7 @@ describe('cli', () => {
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       2,
-      'p-icon.json',
+      'sb-perf/icon.json',
       JSON.stringify(expectedIconOutput),
       'utf-8',
       expect.any(Function),
@@ -65,7 +67,7 @@ describe('cli', () => {
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       3,
-      'p-current-vs-baseline.json',
+      'sb-perf/current-vs-baseline.json',
       JSON.stringify(expectedDiffOutput),
       'utf-8',
       expect.any(Function),
@@ -77,7 +79,7 @@ describe('cli', () => {
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       4,
-      'p-adf.json',
+      'sb-perf/adf.json',
       JSON.stringify(expectedADFOutput),
       'utf-8',
       expect.any(Function),

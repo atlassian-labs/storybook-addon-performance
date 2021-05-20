@@ -1,5 +1,5 @@
 import { buildTable, buildAdf, buildTableRows } from './util/adf';
-import { CalculationsByGroupId } from './types';
+import { CalculationsByGroupId, ProcessDescription } from './types';
 import { writeFile } from './util/write';
 
 const adf = (calculationsByGroupId: CalculationsByGroupId) => {
@@ -14,13 +14,10 @@ const adf = (calculationsByGroupId: CalculationsByGroupId) => {
 
   const adf = buildAdf(outputTables);
 
-  const outputPath = 'p-adf.json';
-  const content = JSON.stringify(adf);
-
   /**
    * Write the generated ADF into file.
    */
-  writeFile(outputPath, content, `Generated ADF is saved to ${outputPath}!`);
+  writeFile(ProcessDescription.ADF, 'adf', JSON.stringify(adf));
 };
 
 export default adf;

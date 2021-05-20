@@ -1,6 +1,11 @@
 import * as path from 'path';
 
-import { CalculationsByDirectory, CalculationsByGroupId, ResultsByGroupId } from './types';
+import {
+  CalculationsByDirectory,
+  CalculationsByGroupId,
+  ProcessDescription,
+  ResultsByGroupId,
+} from './types';
 import { performAllCalculations } from './util/calculate';
 import { writeFile } from './util/write';
 
@@ -26,10 +31,7 @@ const calculate = (resultsByDirectory: (ResultsByGroupId & { name: string })[]) 
    * one file summarises one input directory.
    */
   Object.entries(calculationsByDirectory).forEach(([directoryName, output]) => {
-    const outputPath = `p-${directoryName}.json`;
-    const content = JSON.stringify(output);
-
-    writeFile(outputPath, content, `Output is saved to ${outputPath}!`);
+    writeFile(ProcessDescription.Calculate, directoryName, JSON.stringify(output));
   });
 
   /**

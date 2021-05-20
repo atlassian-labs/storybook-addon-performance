@@ -67,11 +67,22 @@ const main = (...args: string[]) => {
     }
   }) as (ResultsByGroupId & { name: string })[];
 
+  /**
+   * Calculate the mean, median, and max values of the inputs,
+   * grouped by directory.
+   */
   const calculationsByDirectory = calculate(resultsByDirectory);
 
+  /**
+   * Compare the median values of the current state
+   * vs. the baseline.
+   */
   const [baseline, current] = Object.values(calculationsByDirectory);
   const calculationsWithDiff = compare(baseline, current);
 
+  /**
+   * Format the results as ADF.
+   */
   generateAdf(calculationsWithDiff);
 };
 

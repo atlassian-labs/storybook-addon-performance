@@ -1,4 +1,4 @@
-import { Calculation, CalculationsByGroupId } from './types';
+import { Calculation, CalculationsByGroupId, ProcessDescription } from './types';
 import { calculateDifference } from './util/compare';
 import { writeFile } from './util/write';
 
@@ -17,13 +17,10 @@ const compare = (baseline: CalculationsByGroupId, current: CalculationsByGroupId
     }))
     .reduce((acc, val) => ({ ...acc, ...val }));
 
-  const outputPath = 'p-current-vs-baseline.json';
-  const content = JSON.stringify(allDiffs);
-
   /**
    * Write the result into file.
    */
-  writeFile(outputPath, content, `Difference is calculated and saved to ${outputPath}!`);
+  writeFile(ProcessDescription.Compare, 'current-vs-baseline', JSON.stringify(allDiffs));
 
   /**
    * Return the result to be passed into the ADF generator.

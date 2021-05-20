@@ -23,3 +23,9 @@ export interface CalculationWithDiff {
 
 export type CalculationsByGroupId = { [groupId: string]: (Calculation | CalculationWithDiff)[] };
 export type CalculationsByDirectory = { [name: string]: CalculationsByGroupId };
+
+export enum ProcessDescription {
+  Calculate = 'Mean, median, max calculation',
+  Compare = 'Current state vs. baseline comparison',
+  ADF = 'Performance results in ADF',
+}

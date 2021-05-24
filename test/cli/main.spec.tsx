@@ -47,16 +47,16 @@ describe('cli', () => {
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       1,
-      'sb-perf/menu.json',
-      JSON.stringify(expectedMenuOutput),
+      'sb-perf/current.json',
+      JSON.stringify(expectedIconOutput),
       'utf-8',
       expect.any(Function),
     );
 
     expect(fs.writeFile).toHaveBeenNthCalledWith(
       2,
-      'sb-perf/icon.json',
-      JSON.stringify(expectedIconOutput),
+      'sb-perf/baseline.json',
+      JSON.stringify(expectedMenuOutput),
       'utf-8',
       expect.any(Function),
     );

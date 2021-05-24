@@ -22,7 +22,12 @@ export interface CalculationWithDiff {
 }
 
 export type CalculationsByGroupId = { [groupId: string]: (Calculation | CalculationWithDiff)[] };
-export type CalculationsByDirectory = { [name: string]: CalculationsByGroupId };
+
+export type ResultType = 'baseline' | 'current';
+export type CalculationsByResultType = {
+  current: CalculationsByGroupId;
+  baseline: CalculationsByGroupId;
+};
 
 export enum ProcessDescription {
   Calculate = 'Mean, median, max calculation',

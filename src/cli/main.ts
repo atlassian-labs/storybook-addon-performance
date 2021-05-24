@@ -7,7 +7,7 @@ import calculate from './calculate';
 import compare from './compare';
 import generateAdf from './adf';
 
-import type { ResultsByGroupId, Results } from './types';
+import type { ResultsByGroupId, Results, ResultType } from './types';
 import { convertToTaskValueMap, combineTaskResultsByGroupId } from './util/calculate';
 import { debug, usage } from './util/print';
 
@@ -22,19 +22,18 @@ const main = (...args: string[]) => {
   }
 
   const input = cliArgs.slice(2);
-  const categories = { current: '-c', baseline: '-b' };
-  const flags = Object.values(categories);
+  const resultTypes = { '-b': 'baseline', '-c': 'current' } as { [flag: string]: ResultType };
+  const flags = Object.keys(resultTypes);
 
   const inputPaths = input
-    .map((arg, i) => (flags.includes(arg) ? { [arg]: input[i + 1] } : {}))
+    .map((arg, i) => (flags.includes(arg) ? { [resultTypes[arg]]: input[i + 1] } : {}))
     .reduce((acc, val) => ({ ...acc, ...val }));
 
   if (Object.entries(inputPaths).length < 2) {
     return usage();
   }
 
-  const dirPaths = [inputPaths[categories.baseline], inputPaths[categories.current]];
-  const resultsByDirectory = dirPaths.map((pathName) => {
+  const resultsByType = Object.entries(inputPaths).map(([type, pathName]) => {
     const files = fs.readdirSync(pathName, 'utf-8');
     if (!files) {
       return debug(
@@ -57,7 +56,7 @@ const main = (...args: string[]) => {
         .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
         .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
-      return { name: pathName, ...resultsByGroupId };
+      return { type, ...resultsByGroupId };
     } catch (e) {
       return debug(
         `💔 Problem parsing a file in '${pathName}' - ` +
@@ -65,19 +64,19 @@ const main = (...args: string[]) => {
         e,
       );
     }
-  }) as (ResultsByGroupId & { name: string })[];
+  }) as (ResultsByGroupId & { type: ResultType })[];
 
   /**
    * Calculate the mean, median, and max values of the inputs,
-   * grouped by directory.
+   * grouped by result type (baseline vs. current).
    */
-  const calculationsByDirectory = calculate(resultsByDirectory);
+  const calulationsByResultType = calculate(resultsByType);
 
   /**
    * Compare the median values of the current state
    * vs. the baseline.
    */
-  const [baseline, current] = Object.values(calculationsByDirectory);
+  const { baseline, current } = calulationsByResultType;
   const calculationsWithDiff = compare(baseline, current);
 
   /**

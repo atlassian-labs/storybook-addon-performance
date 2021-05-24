@@ -1,43 +1,42 @@
-import * as path from 'path';
-
 import {
-  CalculationsByDirectory,
+  CalculationsByResultType,
   CalculationsByGroupId,
   ProcessDescription,
   ResultsByGroupId,
+  ResultType,
 } from './types';
 import { performAllCalculations } from './util/calculate';
 import { writeFile } from './util/write';
 
-const calculate = (resultsByDirectory: (ResultsByGroupId & { name: string })[]) => {
+const calculate = (resultsByType: (ResultsByGroupId & { type: ResultType })[]) => {
   /**
    * Calculate the max, min, median, and mean values
    * of the previously formatted outputs, and group the results
-   * per directory.
+   * per result type (baseline vs. current).
    */
-  const calculationsByDirectory = resultsByDirectory.reduce(
-    (calculationsByDirectory, { name, ...resultsByGroupId }) => ({
-      ...calculationsByDirectory,
-      [path.basename(name)]: Object.entries(resultsByGroupId).reduce(
+  const calculationsByResultType = resultsByType.reduce(
+    (calculationsByResultType, { type, ...resultsByGroupId }) => ({
+      ...calculationsByResultType,
+      [type]: Object.entries(resultsByGroupId).reduce(
         performAllCalculations,
         {} as CalculationsByGroupId,
       ),
     }),
-    {} as CalculationsByDirectory,
+    {} as CalculationsByResultType,
   );
 
   /**
    * Write the results into files –
    * one file summarises one input directory.
    */
-  Object.entries(calculationsByDirectory).forEach(([directoryName, output]) => {
+  Object.entries(calculationsByResultType).forEach(([directoryName, output]) => {
     writeFile(ProcessDescription.Calculate, directoryName, JSON.stringify(output));
   });
 
   /**
    * Return the results to be compared against each other.
    */
-  return calculationsByDirectory;
+  return calculationsByResultType;
 };
 
 export default calculate;

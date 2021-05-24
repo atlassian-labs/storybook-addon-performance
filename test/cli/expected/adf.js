@@ -181,7 +181,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '310.38%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -286,7 +286,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '380.05%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -391,7 +391,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '9617.89%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -496,7 +496,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '27340.00%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -601,7 +601,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '9617.89%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -706,7 +706,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '27340.00%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -918,7 +918,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '724.61%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1023,7 +1023,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '461.67%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1128,7 +1128,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '361.31%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1233,7 +1233,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '1050.75%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1338,7 +1338,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '3587.50%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1443,7 +1443,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '1665.00%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },
@@ -1548,7 +1548,7 @@ module.exports = {
                       type: 'status',
                       attrs: {
                         text: '2046.96%',
-                        color: 'neutral',
+                        color: 'red',
                         style: 'bold',
                       },
                     },

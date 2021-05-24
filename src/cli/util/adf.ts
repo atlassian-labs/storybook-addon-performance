@@ -226,6 +226,16 @@ export const buildResultCell = (
   };
 };
 
+const getStatusColor = (diff: number) => {
+  if (diff < 0) {
+    return 'green';
+  } else if (diff > 0) {
+    return 'red';
+  }
+
+  return 'neutral';
+};
+
 const buildDiffStatus = (diff?: number) => {
   if (!diff) {
     return [];
@@ -240,7 +250,7 @@ const buildDiffStatus = (diff?: number) => {
       type: 'status',
       attrs: {
         text: String(diff.toFixed(2)) + '%',
-        color: 'neutral',
+        color: getStatusColor(diff),
         style: 'bold',
       },
     },

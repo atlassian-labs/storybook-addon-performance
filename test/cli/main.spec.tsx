@@ -1,35 +1,88 @@
+import * as fs from 'fs';
+
 import cli from '../../src/cli/main';
+
+import expectedMenuOutput from './expected/menu';
+import expectedIconOutput from './expected/icon';
+import expectedDiffOutput from './expected/icon-vs-menu';
+import expectedADFOutput from './expected/adf';
+
+jest.mock('fs', () => ({
+  readdirSync: jest.requireActual('fs').readdirSync,
+  readFileSync: jest.requireActual('fs').readFileSync,
+  existsSync: jest.fn(),
+  mkdirSync: jest.fn(),
+  writeFile: jest.fn(),
+}));
 
 describe('cli', () => {
   afterAll(jest.restoreAllMocks);
   afterEach(jest.resetAllMocks);
-  const infoMock = jest.fn();
+
   const warnMock = jest.fn();
+
   //@ts-ignore
-  global.console = { log: infoMock, warn: warnMock };
+  global.console = { warn: warnMock };
+
   it('should show message if not provided correct args', () => {
     cli();
-    expect(warnMock).toHaveBeenCalledWith(`Usage:
-sb-perf <directory> [...<directory>]
+    expect(warnMock).toHaveBeenCalledWith(`
+  Please input two directories – one containing the current test results,
+  and one containing the baseline to compare it against.
 
-Example
-sb-perf results-directory > output-file.csv
-# OR
-sb-perf ABTestDirectory OtherDirectory > output-file.csv
+  Usage
+    $ sb-perf -c <[current-results-path]> -b <[baseline-path]>
+
+    Arguments
+      -c        Directory of performance test results of current state
+      -b        Directory of baseline test results
+
+    Example
+      $ sb-perf -c current -b baseline
 `);
   });
 
-  it('should match snapshot without interactions test results', () => {
-    cli('node', 'cli', __dirname + '/fixtures/icon');
-    expect(infoMock).toHaveBeenCalled();
-    expect(infoMock.mock.calls).toMatchSnapshot();
-    expect(warnMock.mock.calls).toMatchSnapshot();
+  it('should save the formatted output to a summary file', () => {
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+
+    expect(fs.writeFile).toHaveBeenNthCalledWith(
+      1,
+      'sb-perf/current.json',
+      JSON.stringify(expectedIconOutput),
+      'utf-8',
+      expect.any(Function),
+    );
+
+    expect(fs.writeFile).toHaveBeenNthCalledWith(
+      2,
+      'sb-perf/baseline.json',
+      JSON.stringify(expectedMenuOutput),
+      'utf-8',
+      expect.any(Function),
+    );
   });
 
-  it('should match snapshot with interactions test results', () => {
-    cli('node', 'cli', __dirname + '/fixtures/menu');
-    expect(infoMock).toHaveBeenCalled();
-    expect(infoMock.mock.calls).toMatchSnapshot();
-    expect(warnMock.mock.calls).toMatchSnapshot();
+  it('should save the diff calculations to a summary file', () => {
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+
+    expect(fs.writeFile).toHaveBeenNthCalledWith(
+      3,
+      'sb-perf/current-vs-baseline.json',
+      JSON.stringify(expectedDiffOutput),
+      'utf-8',
+      expect.any(Function),
+    );
+  });
+
+  it('should generate an Editor ADF and save it to a file', () => {
+    cli('node', 'cli', '-c', __dirname + '/fixtures/icon', '-b', __dirname + '/fixtures/menu');
+
+    expect(fs.writeFile).toHaveBeenNthCalledWith(
+      4,
+      'sb-perf/adf.json',
+      JSON.stringify(expectedADFOutput),
+      'utf-8',
+      expect.any(Function),
+    );
   });
 });

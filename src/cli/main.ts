@@ -1,80 +1,88 @@
 import * as fs from 'fs';
 import * as path from 'path';
+
 import type { TaskGroupResult } from '../types';
-import type { ResultsByGroupId, Results } from './types';
-import {
-  debug,
-  performCalculations,
-  printCSV,
-  stdout,
-  usage,
-  Row,
-  printCSVSummary,
-  convertToTaskValueMap,
-  combineTaskResultsByGroupId,
-} from './utils';
+
+import calculate from './calculate';
+import compare from './compare';
+import generateAdf from './adf';
+
+import type { ResultsByGroupId, Results, ResultType } from './types';
+import { convertToTaskValueMap, combineTaskResultsByGroupId } from './util/calculate';
+import { debug, usage } from './util/print';
 
 const main = (...args: string[]) => {
+  /**
+   * Get storybook-addon-performance result files
+   * in the specified directories.
+   */
   const cliArgs = args.length ? args : process.argv;
   if (cliArgs.length <= 2) {
     return usage();
   }
 
-  // first up grab the CLI arguments
-  const directoryResultSets = cliArgs
-    .slice(2)
-    .map((pathName) => {
-      try {
-        const dataFiles = fs.readdirSync(pathName);
+  const input = cliArgs.slice(2);
+  const resultTypes = { '-b': 'baseline', '-c': 'current' } as { [flag: string]: ResultType };
+  const flags = Object.keys(resultTypes);
 
-        if (dataFiles) {
-          const resultSetsByGroupId = dataFiles
-            .map((dataFile) => {
-              const json = fs.readFileSync(path.join(pathName, dataFile));
-              return JSON.parse(json as any);
-            })
-            .map(({ results }) => results as TaskGroupResult[])
-            .flatMap((taskGroupResults) => taskGroupResults)
-            .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
-            .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
+  const inputPaths = input
+    .map((arg, i) => (flags.includes(arg) ? { [resultTypes[arg]]: input[i + 1] } : {}))
+    .reduce((acc, val) => ({ ...acc, ...val }));
 
-          return { name: pathName, ...resultSetsByGroupId };
-        } else {
-          debug(
-            `cli: Directory '${pathName}' is empty - did you specify a directory with storybook-addon-performance output files?`,
-          );
-        }
-      } catch (e) {
-        debug(
-          `cli: Problem parsing a file in '${pathName}' - was this created by the storybook-addon-performance?`,
-          e,
-        );
-      }
+  if (Object.entries(inputPaths).length < 2) {
+    return usage();
+  }
 
-      return { name: '' };
-    })
-    .filter(({ name }) => name);
+  const resultsByType = Object.entries(inputPaths).map(([type, pathName]) => {
+    const files = fs.readdirSync(pathName, 'utf-8');
+    if (!files) {
+      return debug(
+        `💔 Directory '${pathName}' is empty - ` +
+          'did you specify a directory with storybook-addon-performance output files?',
+      );
+    }
 
-  const resultNames: string[] = [];
-  const resultSets: Row[][] = [];
+    try {
+      /**
+       *  Format and group the inputs per directory.
+       */
+      const resultsByGroupId = files
+        .map((dataFile) => {
+          const json = fs.readFileSync(path.join(pathName, dataFile));
+          return JSON.parse(json as any);
+        })
+        .map(({ results }) => results as TaskGroupResult[])
+        .flatMap((taskGroupResults) => taskGroupResults)
+        .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
+        .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
-  directoryResultSets.forEach(({ name, ...resultsByGroupId }) => {
-    const resultName = path.basename(name);
-    stdout(resultName);
+      return { type, ...resultsByGroupId };
+    } catch (e) {
+      return debug(
+        `💔 Problem parsing a file in '${pathName}' - ` +
+          'was this created by the storybook-addon-performance? \n',
+        e,
+      );
+    }
+  }) as (ResultsByGroupId & { type: ResultType })[];
 
-    Object.entries(resultsByGroupId).forEach(([groupId, result]) => {
-      const finalResults = performCalculations(result);
+  /**
+   * Calculate the mean, median, and max values of the inputs,
+   * grouped by result type (baseline vs. current).
+   */
+  const calulationsByResultType = calculate(resultsByType);
 
-      stdout(groupId);
-      printCSV(finalResults);
-      resultSets.push(finalResults);
-    });
+  /**
+   * Compare the median values of the current state
+   * vs. the baseline.
+   */
+  const { baseline, current } = calulationsByResultType;
+  const calculationsWithDiff = compare(baseline, current);
 
-    stdout();
-    resultNames.push(resultName);
-  });
-
-  printCSVSummary(resultNames, resultSets);
+  /**
+   * Format the results as ADF.
+   */
+  generateAdf(calculationsWithDiff);
 };
 
 export default main;

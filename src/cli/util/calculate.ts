@@ -47,7 +47,7 @@ export const median = (numbers: number[]) => {
   return sorted[middle];
 };
 
-const performCalculations = (data: Results): Calculation[] => {
+export const performCalculations = (data: Results): Calculation[] => {
   // extracts the number of samples in the dataset
   const numberOfSamples = Object.values(data)[0].length;
   return Object.entries(data).map(([key, values]) => ({
@@ -60,11 +60,3 @@ const performCalculations = (data: Results): Calculation[] => {
     medianValue: median(values),
   }));
 };
-
-export const performAllCalculations = (
-  calculationsByGroupId: CalculationsByGroupId,
-  [groupId, result]: [string, Results],
-): CalculationsByGroupId => ({
-  ...calculationsByGroupId,
-  [groupId]: performCalculations(result),
-});

@@ -216,7 +216,7 @@ export const buildResultCell = (
             content: [
               {
                 type: 'text',
-                text: samples.map((num: number) => num.toFixed(2)).join('\t'),
+                text: samples.map((num: number) => num && num.toFixed(2)).join('\t'),
               },
             ],
           },

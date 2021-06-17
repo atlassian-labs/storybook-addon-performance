@@ -1,4 +1,4 @@
-import { ResultMap } from '../types';
+import type { ResultMap } from 'storybook-addon-performance/dist/types';
 
 export type Results = {
   [key in keyof ResultMap]: number[];

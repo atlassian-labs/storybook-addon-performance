@@ -25,6 +25,9 @@
     "/dist",
     "/src"
   ],
+  "config": {
+    "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json}"
+  },
   "devDependencies": {
     "@testing-library/react": "^10.4.8",
     "@types/jest": "^26.0.9",

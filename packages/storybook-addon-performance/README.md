@@ -200,8 +200,6 @@ onlyServer.story = {
 
 ## Local addon development
 
-In the storybook-addon-performance folder (`packages/storybook-addon-performance`)
-
 ```bash
 # Start the typescript watcher and a local storybook:
 yarn dev

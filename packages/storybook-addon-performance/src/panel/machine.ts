@@ -69,20 +69,18 @@ const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvent
         on: {
           LOADED: {
             target: 'active',
-            actions: assign(
-              (context, event): MachineContext => {
-                const message: Nullable<string> = event.pinned
-                  ? `Loaded pinned result for story: ${event.storyName}`
-                  : null;
-                return {
-                  ...context,
-                  message,
-                  pinned: event.pinned,
-                  storyName: event.storyName,
-                  current: event.pinned || context.current,
-                };
-              },
-            ),
+            actions: assign((context, event): MachineContext => {
+              const message: Nullable<string> = event.pinned
+                ? `Loaded pinned result for story: ${event.storyName}`
+                : null;
+              return {
+                ...context,
+                message,
+                pinned: event.pinned,
+                storyName: event.storyName,
+                current: event.pinned || context.current,
+              };
+            }),
           },
         },
       },
@@ -153,20 +151,18 @@ const machine: MachineType = Machine<MachineContext, MachineSchema, MachineEvent
               LOAD_FROM_FILE: {
                 internal: true,
                 target: 'idle',
-                actions: assign(
-                  (context, event): MachineContext => {
-                    const message: Nullable<string> = event.pinned
-                      ? `Loaded pinned result: ${event.storyName}`
-                      : null;
-                    return {
-                      ...context,
-                      message,
-                      pinned: event.pinned,
-                      storyName: event.storyName,
-                      current: event.pinned || context.current,
-                    };
-                  },
-                ),
+                actions: assign((context, event): MachineContext => {
+                  const message: Nullable<string> = event.pinned
+                    ? `Loaded pinned result: ${event.storyName}`
+                    : null;
+                  return {
+                    ...context,
+                    message,
+                    pinned: event.pinned,
+                    storyName: event.storyName,
+                    current: event.pinned || context.current,
+                  };
+                }),
               },
               UNPIN: {
                 internal: true,

@@ -1,5 +1,5 @@
-import type { Result, ResultMap } from '../../types';
-import { ResultsByGroupId, Results, Calculation, CalculationsByGroupId } from '../types';
+import type { Result, ResultMap } from 'storybook-addon-performance';
+import { ResultsByGroupId, Results, Calculation } from '../types';
 
 const getTaskValue = (result: Result) => {
   if ('averageMs' in result) {

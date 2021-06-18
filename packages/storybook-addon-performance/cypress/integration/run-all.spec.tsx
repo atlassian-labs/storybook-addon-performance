@@ -1,4 +1,3 @@
-import { startAllButtonId } from '../../src/selectors';
 import preset from '../../src/tasks/preset';
 import { Task, TaskGroup } from '../../src/types';
 import flatten from '../../src/util/flatten';

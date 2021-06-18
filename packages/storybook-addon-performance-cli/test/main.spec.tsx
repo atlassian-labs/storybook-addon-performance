@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import cli from '../../src/cli/main';
+import cli from '../src/main';
 
 import expectedMenuOutput from './expected/menu';
 import expectedIconOutput from './expected/icon';

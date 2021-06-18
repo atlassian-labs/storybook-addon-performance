@@ -1,7 +1,6 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "outDir": "dist/esm",
     "target": "ES2019",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -12,8 +11,5 @@
     "removeComments": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
-  },
-  "include": [
-    "src/**/*"
-  ]
+  }
 }

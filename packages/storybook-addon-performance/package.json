@@ -49,8 +49,6 @@
     "@testing-library/react": "^10.4.8",
     "@types/gzip-js": "^0.3.1",
     "@types/jest": "^26.0.9",
-    "@types/react": "^16.9.44",
-    "@types/react-dom": "^16.9.8",
     "@types/react-select": "^3.0.16",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
@@ -74,9 +72,6 @@
   "config": {
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
   },
-  "bin": {
-    "sb-perf": "dist/cli/index.js"
-  },
   "scripts": {
     "cypress:open": "yarn cypress open",
     "cypress:run": "yarn cypress run",
@@ -84,7 +79,7 @@
     "storybook:build": "yarn build && yarn build-storybook",
     "typescript:check": "yarn tsc --noEmit",
     "typescript:watch": "tsc --watch",
-    "typescript:build": "tsc && tsc --build tsconfig.cjs.json && tsc --build tsconfig.cli.json && chmod +x dist/cli/index.js",
+    "typescript:build": "tsc && tsc --build tsconfig.cjs.json",
     "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
     "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
     "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0",

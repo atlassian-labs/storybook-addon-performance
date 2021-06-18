@@ -25,14 +25,14 @@ jobs:
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
       # Build the addon so it can be used
-      - run: yarn build
+      - run: yarn workspaces run build
       # Okay, finally start cypress
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
           headless: true
-          start: yarn storybook:dev
+          start: yarn workspace storybook-addon-performance run storybook:dev
           wait-on: 'http://localhost:9003'
           wait-on-timeout: 120
       # Upload the videos and screenshots

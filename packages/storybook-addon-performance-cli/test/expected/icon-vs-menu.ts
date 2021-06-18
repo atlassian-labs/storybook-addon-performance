@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Server: [
     {
       key: 'Render to string',

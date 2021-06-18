@@ -1,6 +1,7 @@
 {
   "name": "storybook-addon-performance-cli",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "dependencies": {
     "storybook-addon-performance": "*"
   },
@@ -10,6 +11,9 @@
     "build": "tsc",
     "prepublishOnly": "yarn build",
     "test": "yarn jest"
+  },
+  "bin": {
+    "sb-perf": "dist/index.js"
   },
   "devDependencies": {
     "@testing-library/react": "^10.4.8",

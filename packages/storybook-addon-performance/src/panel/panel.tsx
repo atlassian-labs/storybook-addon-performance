@@ -54,10 +54,10 @@ export default function Panel({
 }) {
   const { state, service } = usePanelMachine(machine, channel);
 
-  const groups: TaskGroup[] = useMemo(() => getGroups({ allowedGroups, interactions }), [
-    interactions,
-    allowedGroups,
-  ]);
+  const groups: TaskGroup[] = useMemo(
+    () => getGroups({ allowedGroups, interactions }),
+    [interactions, allowedGroups],
+  );
 
   return (
     <ServiceContext.Provider value={service}>

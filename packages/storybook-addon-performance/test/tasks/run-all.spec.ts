@@ -12,43 +12,37 @@ it('should run all the standard tests', async () => {
     copies: 4,
   });
 
-  const expected: TaskGroupResult[] = preset.map(
-    (group: TaskGroup): TaskGroupResult => {
-      const staticResults: StaticResult[] = group.tasks
-        .filter((t) => t.type === 'static')
-        .map(
-          (task: Task): StaticResult => {
-            return {
-              type: 'static',
-              taskName: task.name,
-              value: expect.any(String) as string,
-            };
+  const expected: TaskGroupResult[] = preset.map((group: TaskGroup): TaskGroupResult => {
+    const staticResults: StaticResult[] = group.tasks
+      .filter((t) => t.type === 'static')
+      .map((task: Task): StaticResult => {
+        return {
+          type: 'static',
+          taskName: task.name,
+          value: expect.any(String) as string,
+        };
+      });
+    const timedResults: TimedResult[] = group.tasks
+      .filter((t) => t.type === 'timed')
+      .map((task: Task): TimedResult => {
+        return {
+          type: 'timed',
+          taskName: task.name,
+          averageMs: expect.any(Number) as number,
+          samples: 3,
+          variance: {
+            standardDeviation: expect.any(Number) as number,
+            upperPercentage: expect.any(Number) as number,
+            lowerPercentage: expect.any(Number) as number,
           },
-        );
-      const timedResults: TimedResult[] = group.tasks
-        .filter((t) => t.type === 'timed')
-        .map(
-          (task: Task): TimedResult => {
-            return {
-              type: 'timed',
-              taskName: task.name,
-              averageMs: expect.any(Number) as number,
-              samples: 3,
-              variance: {
-                standardDeviation: expect.any(Number) as number,
-                upperPercentage: expect.any(Number) as number,
-                lowerPercentage: expect.any(Number) as number,
-              },
-            };
-          },
-        );
+        };
+      });
 
-      return {
-        groupId: group.groupId,
-        map: getResultMap([...staticResults, ...timedResults]),
-      };
-    },
-  );
+    return {
+      groupId: group.groupId,
+      map: getResultMap([...staticResults, ...timedResults]),
+    };
+  });
 
   expect(result).toEqual(expected);
 });

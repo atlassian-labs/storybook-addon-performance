@@ -32,7 +32,8 @@ jobs:
         with:
           browser: chrome
           headless: true
-          start: yarn workspace storybook-addon-performance run storybook:dev
+          working-directory: packages/storybook-addon-performance
+          start: yarn run storybook:dev
           wait-on: 'http://localhost:9003'
           wait-on-timeout: 120
       # Upload the videos and screenshots

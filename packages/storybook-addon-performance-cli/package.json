@@ -21,6 +21,10 @@
   "bin": {
     "sb-perf": "dist/index.js"
   },
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "devDependencies": {
     "@testing-library/react": "^10.4.8",
     "@types/jest": "^26.0.9",

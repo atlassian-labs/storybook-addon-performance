@@ -1,0 +1,18 @@
+{
+  "name": "react-16-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "An example using React 16.8",
+  "dependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-select": "^4.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^7.22.0",
+    "storybook-addon-performance": "*"
+  },
+  "scripts": {
+    "start": "yarn start-storybook --port 9003"
+  }
+}

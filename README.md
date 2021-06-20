@@ -221,6 +221,7 @@ Made with ❤️ by your friends at [Atlassian](https://www.atlassian.com/)
 - Alex Reardon [@alexandereardon](https://twitter.com/alexandereardon)
 - Andrew Campbell [@andrewcampb_ll](https://twitter.com/andrewcampb_ll)
 - Daniel Del Core [@danieldelcore](https://twitter.com/danieldelcore)
+- Alex Hinds [@DarkPurple141](https://twitter.com/al_hinds)
 
 <br/>
 

@@ -38,10 +38,10 @@ jobs:
           wait-on-timeout: 120
       # Upload the videos and screenshots
       - name: Upload artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         # We want to upload the recording even if the last step failed
         # https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
         if: always()
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: /packages/storybook-addon-performance/cypress/videos

@@ -89,7 +89,7 @@
     "build:clean": "rimraf dist",
     "build": "yarn build:clean && yarn typescript:build",
     "preversion": "yarn test",
-    "postversion": "git add -A && git commit -m \"chore: publishing new version\" && git push && git push --tags",
+    "postversion": "git add -A && git commit -m \"chore: publishing new version\" && git push --tags",
     "prepublishOnly": "yarn build"
   },
   "storybook": {

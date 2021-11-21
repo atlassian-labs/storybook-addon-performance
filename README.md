@@ -17,6 +17,8 @@ A [storybook](https://storybook.js.org/) addon to help better understand and deb
 
 - **Zero config** (except for interactions): Generate performance information relating to server-side rendering and client-side mounting without any configuration
 - **Pin results**: You can run some tasks, pin the result, make some changes, rerun the tasks and see what changed
+- **Save/Load results**: You can run some tasks, save the results as a local artifact, and run
+  them again later by loading the artifact back into the addon.
 - **Interactions**: Add your own custom user interactions to run as a parameter to your story. This lets you time how long interactions take. The API for this is super flexible and powerful!
 - **Control**: Run all tasks for an overview, or run individual tasks to drill down on specific problems
 - **Marked**: All tasks are marked with the [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API/Using_the_User_Timing_API) to allow for easy debugging of individual tasks in your browser's performance profiler
@@ -168,6 +170,19 @@ As seen above, the plugin exports two type definitions to assist with creating y
 
 - `PublicInteractionTask`: defines the object structure for an interaction task; pass an array of these tasks as a parameter to storybook, as shown above.
 - `InteractionTaskArgs`: the arguments for an interaction task's `run` function
+
+### Usage: Saving and loading results
+
+You can save the result of a performance task as a local artifact by using the Save API. The Save API creates a story-specific artifact which can be then be loaded at a later time to be used as a benchmark. This can be useful for CI or testing a change in branch vs the trunk. You can
+use this API via the Save result / Load result buttons in the UI.
+
+Some caveats with this API:
+
+- Storybook run performance results are variable, and can change depending on CPU utilisation / memory when the tests are run. If you intend to save an
+  artifact, ensure you're re-running / comparing your results in an environment that is as similar as possible to the environment it was originally run.
+- For this API to work correctly the task artifact should be based on the same number of samples / copies as the original test.
+
+For more consistent results we suggest recording artifacts using 10 copies / 10 samples.
 
 ## Usage: Filtering task groups
 

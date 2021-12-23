@@ -66,6 +66,25 @@ sb-perf/
   - current.json
 ```
 
+### Usage in CI at Atlassian
+
+At Atlassian we run the `storybook-addon-performance` in CI to compare branch performance. We do this in the following way:
+
+We store a baseline branch story artifact in object storage. For example, the story for `@atlaskit/button` would be the `amazon.s3` key `/master/button/<story>`.
+
+We then:
+
+1. Deploy a story with/without interactions to a CDN - ensure this is a production build of storybook.
+2. In a pipeline run puppeteer to vist and interact with the built CDN page. To control for memory/CPU flucutations of puppeteer we run this multiple times.
+3. Each run is downloaded and saved as an artifact.
+4. Artifacts are compared to the baseline branch using the `storybook-addon-performance-cli` - the schema and file format are built to be compatible.
+5. The final results are then parsed and shown in the CI status.
+
+This approach only works where the container being used to run the storybook is kept as consistent as possible (eg fixed memory / CPU allocation) and a 
+consistent environment. As soon as any of the test-runner software is updated you'd need to regenerate any baseline branch artifact.
+
+Additionally this flow is only considered _indicative_ not scientific. If we see large fluctuations this can trigger further manual investigation.
+
 ## Thanks
 
 Made with ❤️ by your friends at [Atlassian](https://www.atlassian.com/)

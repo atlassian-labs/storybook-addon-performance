@@ -171,7 +171,7 @@ As seen above, the plugin exports two type definitions to assist with creating y
 - `PublicInteractionTask`: defines the object structure for an interaction task; pass an array of these tasks as a parameter to storybook, as shown above.
 - `InteractionTaskArgs`: the arguments for an interaction task's `run` function
 
-### Usage: Saving and loading results
+## Usage: Saving and loading results
 
 You can save the result of a performance task as a local artifact by using the Save API. The Save API creates a story-specific artifact which can be then be loaded at a later time to be used as a benchmark. This can be useful for CI or testing a change in branch vs the trunk. You can
 use this API via the Save result / Load result buttons in the UI.

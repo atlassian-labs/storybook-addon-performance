@@ -213,6 +213,12 @@ onlyServer.story = {
 };
 ```
 
+## A Note on Performance Metrics 💡
+
+In order to get the most accurate performance metrics possible, you should use a [production build of Storybook](https://storybook.js.org/docs/react/sharing/publish-storybook#build-storybook-as-a-static-web-application). For more background, see the React [optimizing performance documentation](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build).
+
+While this add-on does work with a dev build, you'll see more variability in results.
+
 ## Local addon development
 
 In the storybook-addon-performance folder (`packages/storybook-addon-performance`)

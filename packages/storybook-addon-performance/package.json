@@ -35,6 +35,7 @@
     "@testing-library/jest-dom": "^5.11.2",
     "@xstate/react": "^1.5.1",
     "gzip-js": "^0.3.2",
+    "react-is": "16.8.0",
     "styled-components": "^5.1.1",
     "tiny-invariant": "^1.1.0",
     "xstate": "^4.22.0"

@@ -90,7 +90,9 @@
     "build": "yarn build:clean && yarn typescript:build",
     "preversion": "yarn test",
     "postversion": "git add -A && git commit -m \"chore: publishing new version\" && git push --tags",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "prepublish:github": "yarn build",
+    "publish:github": "./scripts/publishGithub.sh"
   },
   "storybook": {
     "icon": "https://pbs.twimg.com/profile_images/1118574145724399616/oIyuo8uz_400x400.png",

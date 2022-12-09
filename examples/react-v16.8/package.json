@@ -16,6 +16,7 @@
     "@storybook/react": "7.0.0-beta.2",
     "@storybook/react-webpack5": "7.0.0-beta.2",
     "babel-loader": "^9.1.0",
+    "http-server": "^14.1.1",
     "storybook": "7.0.0-beta.2",
     "storybook-addon-performance": "workspace:packages/storybook-addon-performance",
     "webpack": "^5.75.0"
@@ -26,6 +27,6 @@
   "scripts": {
     "storybook:dev": "yarn storybook dev --port 9003",
     "storybook:build": "yarn build && yarn storybook build",
-    "start-server": "npx http-server storybook-static --port 9003 --silent"
+    "start-server": "yarn http-server storybook-static --port 9003 --silent"
   }
 }

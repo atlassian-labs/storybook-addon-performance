@@ -6,7 +6,7 @@
   "dependencies": {
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-select": "^4.3.1"
+    "react-select": "^5.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

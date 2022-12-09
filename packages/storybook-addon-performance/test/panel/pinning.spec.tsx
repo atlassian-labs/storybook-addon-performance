@@ -26,9 +26,9 @@ it('should prevent modifiers being changed when a result is pinned', () => {
   act(() => channel.emit(eventNames.FINISH_ALL, { results: mocks.groupResults }));
 
   const pinButton: HTMLElement = getById(container, selectors.pinButtonId);
-  expect(pinButton.textContent.toLowerCase().includes('unpin')).toBe(false);
+  expect(pinButton.textContent?.toLowerCase().includes('unpin')).toBe(false);
   fireEvent.click(pinButton);
-  expect(pinButton.textContent.toLowerCase().includes('unpin')).toBe(true);
+  expect(pinButton.textContent?.toLowerCase().includes('unpin')).toBe(true);
 
   // modifiers disabled
   expect(getById(container, selectors.sampleSelectId).matches(':enabled')).toBe(false);
@@ -38,7 +38,7 @@ it('should prevent modifiers being changed when a result is pinned', () => {
 
   // unpinning re-enables the modifiers
   fireEvent.click(pinButton);
-  expect(pinButton.textContent.toLowerCase().includes('unpin')).toBe(false);
+  expect(pinButton.textContent?.toLowerCase().includes('unpin')).toBe(false);
   expect(getById(container, selectors.sampleSelectId).matches(':enabled')).toBe(true);
   expect(getById(container, selectors.copySelectId).matches(':enabled')).toBe(true);
 });

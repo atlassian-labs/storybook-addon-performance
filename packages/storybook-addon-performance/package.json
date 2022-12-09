@@ -37,6 +37,7 @@
     "gzip-js": "^0.3.2",
     "styled-components": "^5.1.1",
     "tiny-invariant": "^1.1.0",
+    "tslib": "^2.0.1",
     "xstate": "^4.22.0"
   },
   "peerDependencies": {
@@ -66,7 +67,6 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.4",
     "ts-loader": "^8.0.2",
-    "tslib": "^2.0.1",
     "typescript": "^3.9.7"
   },
   "config": {

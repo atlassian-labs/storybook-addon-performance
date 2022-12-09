@@ -21,18 +21,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      # Install yarn + our dependencies
-      - run: yarn install --immutable
-      # Build the addon so it can be used
-      - run: yarn workspace storybook-addon-performance run build
-      # Okay, finally start cypress
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
           install-command: yarn install --immutable
+          build: yarn workspace storybook-addon-performance run build
           working-directory: packages/storybook-addon-performance
-          start: yarn workspaces foreach -p run storybook:dev
+          start: yarn workspaces foreach -piv run storybook:dev
           wait-on: 'http://localhost:9003, http://localhost:9004, http://localhost:9005'
           wait-on-timeout: 180
       # Upload the videos and screenshots

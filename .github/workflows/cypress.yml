@@ -28,10 +28,10 @@ jobs:
         with:
           browser: chrome
           install-command: yarn install --immutable
-          build: yarn workspace storybook-addon-performance run build && yarn workspaces foreach -piv run storybook:build
+          build: yarn workspace storybook-addon-performance run build
           working-directory: packages/storybook-addon-performance
-          start: yarn workspaces foreach -piv run start-server
-          wait-on: 'http://localhost:9003, http://localhost:9004, http://localhost:9005'
+          start: yarn workspaces foreach -piv run storybook:dev
+          wait-on: 'http://127.0.0.1:9003, http://127.0.0.1:9004, http://127.0.0.1:9005'
           wait-on-timeout: 120
       # Upload the videos and screenshots
       - name: Upload artifacts

@@ -23,17 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --immutable
       - run: yarn workspace storybook-addon-performance run build
-      - run: yarn workspaces foreach -piv run storybook:dev
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        env:
-          DEBUG: '@cypress/github-action'
-        with:
-          browser: chrome
-          install: false
-          working-directory: packages/storybook-addon-performance
-          wait-on: 'http://127.0.0.1:9003, http://127.0.0.1:9004, http://127.0.0.1:9005'
-          wait-on-timeout: 120
+      - run: yarn workspaces foreach -piv run storybook:dev & yarn workspace storybook-addon-performance cypress:run
       # Upload the videos and screenshots
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

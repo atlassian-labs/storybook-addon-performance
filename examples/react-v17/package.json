@@ -22,6 +22,7 @@
   },
   "scripts": {
     "storybook:dev": "yarn storybook dev --port 9004",
-    "storybook:build": "yarn build && yarn storybook build"
+    "storybook:build": "yarn build && yarn storybook build",
+    "start-server": "npx http-server storybook-static --port 9004 --silent"
   }
 }

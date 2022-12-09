@@ -30,7 +30,7 @@ jobs:
           install-command: yarn install --immutable
           build: yarn workspace storybook-addon-performance run build
           working-directory: packages/storybook-addon-performance
-          start: yarn workspaces foreach -piv run storybook:dev
+          start: yarn workspaces foreach -piv run storybook:build && yarn workspaces foreach -piv run start-server
           wait-on: 'http://localhost:9003, http://localhost:9004, http://localhost:9005'
           wait-on-timeout: 120
       # Upload the videos and screenshots

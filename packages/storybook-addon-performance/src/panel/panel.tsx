@@ -10,7 +10,7 @@ import {
   TaskGroup,
   TaskGroupResult,
 } from '../types';
-import machine, { RunContext } from './machine';
+import machine, { RunContext, ServiceType } from './machine';
 import ServiceContext from './service-context';
 import TaskGroupPanel from './task-group';
 import Topbar from './top-bar';

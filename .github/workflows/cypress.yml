@@ -30,6 +30,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
+          install-command: yarn install --immutable
           working-directory: packages/storybook-addon-performance
           start: yarn workspaces foreach -p run storybook:dev
           wait-on: 'http://localhost:9003, http://localhost:9004, http://localhost:9005'

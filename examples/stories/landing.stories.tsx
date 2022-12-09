@@ -5,7 +5,7 @@ import invariant from 'tiny-invariant';
 import {
   InteractionTaskArgs,
   PublicInteractionTask,
-} from 'storybook-addon-performance/src';
+} from '../../packages/storybook-addon-performance/src';
 
 export default {
   title: 'Examples',

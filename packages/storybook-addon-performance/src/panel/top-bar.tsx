@@ -109,8 +109,8 @@ export default function Topbar() {
     <Container>
       <Segment>
         {
-          // @ts-ignore
           <Button
+            // @ts-ignore
             css={{
               textTransform: 'uppercase',
             }}

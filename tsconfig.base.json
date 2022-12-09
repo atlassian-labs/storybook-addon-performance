@@ -11,5 +11,6 @@
     "removeComments": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
   },
 }

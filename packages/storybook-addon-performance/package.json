@@ -10,9 +10,9 @@
     "test",
     "popular"
   ],
-  "main": "dist/cjs/index.js",
-  "types": "dist/esm/index.d.ts",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "distindex.mjs",
   "author": "Alex Reardon <areardon@atlassian.com>",
   "license": "Apache-2.0",
   "repository": {
@@ -20,10 +20,7 @@
     "url": "https://github.com/atlassian-labs/storybook-addon-performance.git"
   },
   "files": [
-    "/dist",
-    "/src",
-    "register.js",
-    "register.mjs"
+    "/dist"
   ],
   "dependencies": {
     "@storybook/addons": "^7.0.0-beta.2",
@@ -38,6 +35,7 @@
     "gzip-js": "^0.3.2",
     "styled-components": "^5.1.1",
     "tiny-invariant": "^1.1.0",
+    "tsup": "^6.5.0",
     "xstate": "^4.22.0"
   },
   "peerDependencies": {
@@ -45,11 +43,11 @@
     "react-dom": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@types/gzip-js": "^0.3.1",
+    "@types/gzip-js": "^0.3.3",
     "@types/jest": "^26.0.9",
     "@types/react-select": "^3.0.16",
-    "@typescript-eslint/eslint-plugin": "^3.8.0",
-    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.0",
     "cypress": "^4.12.1",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.15.0",
@@ -60,10 +58,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-select": "^3.1.0",
-    "rimraf": "^3.0.2",
     "ts-jest": "^26.1.4",
-    "tslib": "^2.0.1",
-    "typescript": "^3.9.7"
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
   },
   "config": {
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
@@ -74,16 +71,14 @@
     "storybook:dev": "yarn storybook dev --port 9003",
     "storybook:build": "yarn build && yarn storybook build",
     "typescript:check": "yarn tsc --noEmit",
-    "typescript:watch": "tsc --watch",
-    "typescript:build": "tsc && tsc --build tsconfig.cjs.json",
     "prettier:check": "yarn prettier src --debug-check --config ../../.prettierrc",
     "prettier:write": "yarn prettier src --write --config ../../.prettierrc",
     "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0",
     "validate": "yarn typescript:check && yarn prettier:check && yarn eslint:check",
     "dev": "yarn typescript:watch & yarn storybook:dev",
     "test": "yarn jest",
-    "build:clean": "rimraf dist",
-    "build": "yarn build:clean && yarn typescript:build",
+    "watch": "tsup src --watch",
+    "build": "tsup",
     "preversion": "yarn test",
     "postversion": "git add -A && git commit -m \"chore: publishing new version\" && git push --tags",
     "prepublishOnly": "yarn build"
@@ -94,14 +89,14 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.d.ts",
-      "types": "./dist/esm/index.d.ts"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
     "./register": {
-      "require": "./register.js",
-      "import": "./register.mjs",
-      "types": "./dist/esm/index.d.ts"
+      "require": "./dist/register.js",
+      "import": "./dist/register.mjs",
+      "types": "./dist/index.d.ts"
     }
   }
 }

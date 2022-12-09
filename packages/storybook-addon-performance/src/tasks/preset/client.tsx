@@ -124,7 +124,7 @@ const completeRender: TimedTask = {
     }
 
     ReactDOM.render(getElement(), container);
-    await new Promise((resolve) => {
+    await new Promise<void>((resolve) => {
       idle(() => resolve());
     });
   },

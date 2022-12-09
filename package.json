@@ -5,5 +5,5 @@
     "packages/storybook-addon-performance-cli",
     "examples/*"
   ],
-  "packageManager": "yarn@2.4.3"
+  "packageManager": "yarn@3.3.0"
 }

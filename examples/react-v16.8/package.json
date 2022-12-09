@@ -15,8 +15,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@storybook/react": "7.0.0-beta.2",
     "@storybook/react-webpack5": "7.0.0-beta.2",
-    "@testing-library/dom": "^7.22.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^9.1.0",
     "storybook": "7.0.0-beta.2",
     "storybook-addon-performance": "workspace:packages/storybook-addon-performance",
     "webpack": "^5.75.0"

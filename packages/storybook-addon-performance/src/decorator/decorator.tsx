@@ -18,7 +18,7 @@ export default makeDecorator({
 
     return (
       <TaskHarness
-        getNode={() => getStory(context)}
+        getNode={() => getStory(context) as any}
         channel={addons.getChannel()}
         interactions={interactions}
         allowedGroups={allowedGroups}

@@ -38,4 +38,4 @@ jobs:
         if: always()
         with:
           name: cypress-videos
-          path: /packages/storybook-addon-performance/cypress/videos
+          path: packages/storybook-addon-performance/cypress/videos

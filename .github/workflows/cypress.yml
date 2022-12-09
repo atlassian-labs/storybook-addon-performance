@@ -30,11 +30,10 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          headless: true
           working-directory: packages/storybook-addon-performance
           start: yarn workspaces foreach -p run storybook:dev
           wait-on: 'http://localhost:9003, http://localhost:9004, http://localhost:9005'
-          wait-on-timeout: 120
+          wait-on-timeout: 180
       # Upload the videos and screenshots
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --immutable
       - run: yarn workspace storybook-addon-performance run build
-      - run: yarn workspaces foreach -piv run storybook:dev & yarn workspace storybook-addon-performance cypress:run
+      - run: yarn workspaces foreach -piv run storybook:dev & sleep 120 & yarn workspace storybook-addon-performance cypress:run
       # Upload the videos and screenshots
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

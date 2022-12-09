@@ -48,7 +48,7 @@
     "@types/react-select": "^3.0.16",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
-    "cypress": "^4.12.1",
+    "cypress": "^12.0.2",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -68,8 +68,6 @@
   "scripts": {
     "cypress:open": "yarn cypress open",
     "cypress:run": "yarn cypress run",
-    "storybook:dev": "yarn storybook dev --port 9003",
-    "storybook:build": "yarn build && yarn storybook build",
     "typescript:check": "yarn tsc --noEmit",
     "prettier:check": "yarn prettier src --debug-check --config ../../.prettierrc",
     "prettier:write": "yarn prettier src --write --config ../../.prettierrc",

@@ -1,5 +1,5 @@
 import React from 'react';
-import addons, { makeDecorator } from '@storybook/addons';
+import { addons, makeDecorator } from '@storybook/addons';
 import TaskHarness from './task-harness';
 import { PublicInteractionTask, AllowedGroup } from '../types';
 import * as constants from '../addon-constants';

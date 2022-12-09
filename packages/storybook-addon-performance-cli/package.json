@@ -18,9 +18,9 @@
     "validate": "yarn prettier:check && yarn eslint:check",
     "typescript:check": "tsc --noEmit",
     "typescript:watch": "tsc --watch",
-    "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
-    "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
-    "eslint:check": "eslint $npm_package_config_prettier_target --max-warnings=0"
+    "prettier:check": "yarn prettier src --debug-check --config ../../.prettierrc",
+    "prettier:write": "yarn prettier src -write --config ../../.prettierrc",
+    "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0"
   },
   "bin": {
     "sb-perf": "dist/index.js"

@@ -153,12 +153,10 @@ const interactionTasks: PublicInteractionTask[] = [
   },
 ];
 
-select.story = {
-  name: 'React select',
-  parameters: {
-    performance: {
-      interactions: interactionTasks,
-    },
+select.storyName = 'React Select';
+select.parameters = {
+  performance: {
+    interactions: interactionTasks,
   },
 };
 ```
@@ -193,21 +191,17 @@ Some components are not designed to work in server side rendering, or on the cli
 // Using [Component Story Format (CSF)](https://storybook.js.org/docs/formats/component-story-format/)
 export const onlyClient = () => <p>A story only measuring client-side performance 👩‍💻</p>;
 
-onlyClient.story = {
-  parameters: {
-    performance: {
-      allowedGroups: ['client'],
-    },
+onlyClient.parameters = {
+  performance: {
+    allowedGroups: ['client'],
   },
 };
 
 export const onlyServer = () => <p>A story only measuring server-side performance ‍☁️</p>;
 
-onlyServer.story = {
-  parameters: {
-    performance: {
-      allowedGroups: ['server'],
-    },
+onlyServer.parameters = {
+  performance: {
+    allowedGroups: ['server'],
   },
 };
 ```

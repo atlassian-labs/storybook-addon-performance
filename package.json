@@ -3,5 +3,6 @@
   "workspaces": [
     "packages/storybook-addon-performance",
     "packages/storybook-addon-performance-cli"
-  ]
+  ],
+  "packageManager": "yarn@2.4.3"
 }

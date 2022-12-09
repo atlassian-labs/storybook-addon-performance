@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "allowSyntheticDefaultImports": true,
+  },
 }

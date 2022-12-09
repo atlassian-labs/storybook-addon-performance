@@ -36,12 +36,10 @@ const interactionTasks = [
   },
 ];
 
-select.story = {
-  name: 'React Select',
-  parameters: {
-    performance: {
-      interactions: interactionTasks,
-    },
+select.storyName = 'React Select';
+select.parameters = {
+  performance: {
+    interactions: interactionTasks,
   },
 };
 
@@ -66,12 +64,10 @@ export const slow = () => <Slow />;
 
 export const onlyClientPerformance = () => <p>A story only measuring client-side performance 👩‍💻</p>;
 
-onlyClientPerformance.story = {
-  name: 'Only Client',
-  parameters: {
-    performance: {
-      allowedGroups: ['client'],
-    },
+onlyClientPerformance.storyName = 'Only Client';
+onlyClientPerformance.parameters = {
+  performance: {
+    allowedGroups: ['client'],
   },
 };
 
@@ -79,11 +75,9 @@ export const onlyServerPerformance = () => (
   <p>A story only measuring server-side performance ‍☁️</p>
 );
 
-onlyServerPerformance.story = {
-  name: 'Only Server',
-  parameters: {
-    performance: {
-      allowedGroups: ['server'],
-    },
+onlyServerPerformance.storyName = 'Only Server';
+onlyServerPerformance.parameters = {
+  performance: {
+    allowedGroups: ['server'],
   },
 };

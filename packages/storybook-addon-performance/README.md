@@ -50,10 +50,9 @@ module.exports = {
 You can either add the decorator globally to every story in `.storybook/preview.js` **(recommended)**
 
 ```js
-import { addDecorator } from '@storybook/react';
 import { withPerformance } from 'storybook-addon-performance';
 
-addDecorator(withPerformance);
+export const decorators = [withPerformance];
 ```
 
 Or you can add it to individual stories:

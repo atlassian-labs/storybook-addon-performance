@@ -26,9 +26,8 @@ function Env({ children }: EnvProps) {
   const interactions: PublicInteractionTask[] = parameters.interactions || [];
   const allowedGroups: AllowedGroup[] = parameters.allowedGroups || allowAllGroups;
 
-  // sadly need to add cast for storybook ts-loader
-  const channel: Channel = addons.getChannel() as any;
-  return children({ channel: channel as any, interactions, allowedGroups });
+  const channel: Channel = addons.getChannel();
+  return children({ channel: channel, interactions, allowedGroups });
 }
 
 addons.register(constants.addonKey, () => {

@@ -1,13 +1,13 @@
 import { Channel } from '@storybook/channels';
 import { STORY_RENDERED } from '@storybook/core-events';
 import React, { useEffect, useMemo } from 'react';
-import eventNames from '../src/events';
-import Panel from '../src/panel/panel';
-import { savePinned } from '../src/panel/pinned-storage';
-import { bindAll } from '../src/util/bind-channel-events';
-import WithStorybookTheme from '../test-util/with-storybook-theme';
-import * as mocks from '../test-util/mocks';
-import allowAllGroups from '../src/tasks/allow-all-groups';
+import eventNames from '../../packages/storybook-addon-performance/src/events';
+import Panel from '../../packages/storybook-addon-performance/src/panel/panel';
+import { savePinned } from '../../packages/storybook-addon-performance/src/panel/pinned-storage';
+import { bindAll } from '../../packages/storybook-addon-performance/src/util/bind-channel-events';
+import WithStorybookTheme from '../../packages/storybook-addon-performance/test-util/with-storybook-theme';
+import * as mocks from '../../packages/storybook-addon-performance/test-util/mocks';
+import allowAllGroups from '../../packages/storybook-addon-performance/src/tasks/allow-all-groups';
 
 export default {
   title: 'Panel',

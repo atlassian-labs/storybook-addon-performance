@@ -1,11 +1,12 @@
 {
-  "name": "react-16-example",
-  "version": "0.0.0",
   "private": true,
-  "description": "An example using React 16.8",
+  "name": "react-esm-example",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "An example using React 17",
   "dependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-select": "^4.0.0"
   },
   "devDependencies": {
@@ -21,11 +22,8 @@
     "storybook-addon-performance": "workspace:packages/storybook-addon-performance",
     "webpack": "^5.75.0"
   },
-  "babel": {
-    "extends": "../babel.config.json"
-  },
   "scripts": {
-    "storybook:dev": "yarn storybook dev --port 9003",
+    "storybook:dev": "yarn storybook dev --port 9005",
     "storybook:build": "yarn build && yarn storybook build"
   }
 }

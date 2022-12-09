@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   stories: ['../../stories/**/*.stories.*'],
   addons: ['storybook-addon-performance'],
   framework: {
@@ -9,3 +9,5 @@ module.exports = {
     docsPage: 'automatic'
   }
 };
+
+export default config;

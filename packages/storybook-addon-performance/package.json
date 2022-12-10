@@ -37,10 +37,7 @@
     "react-dom": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^10.4.9",
-    "@types/gzip-js": "^0.3.3",
-    "@types/jest": "^29.2.4",
     "@types/react-dom": "16.9.17",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",

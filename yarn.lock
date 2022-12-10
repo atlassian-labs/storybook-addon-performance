@@ -2244,7 +2244,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/api@npm:7.0.0-beta.2, @storybook/api@npm:^7.0.0-beta.2":
+"@storybook/api@npm:7.0.0-beta.2":
   version: 7.0.0-beta.2
   resolution: "@storybook/api@npm:7.0.0-beta.2"
   dependencies:
@@ -2634,7 +2634,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:7.0.0-beta.2":
+"@storybook/manager-api@npm:7.0.0-beta.2, @storybook/manager-api@npm:^7.0.0-beta.2":
   version: 7.0.0-beta.2
   resolution: "@storybook/manager-api@npm:7.0.0-beta.2"
   dependencies:
@@ -2712,7 +2712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:7.0.0-beta.2":
+"@storybook/preview-api@npm:7.0.0-beta.2, @storybook/preview-api@npm:^7.0.0-beta.2":
   version: 7.0.0-beta.2
   resolution: "@storybook/preview-api@npm:7.0.0-beta.2"
   dependencies:
@@ -12835,10 +12835,11 @@ __metadata:
   resolution: "storybook-addon-performance@workspace:packages/storybook-addon-performance"
   dependencies:
     "@storybook/addons": ^7.0.0-beta.2
-    "@storybook/api": ^7.0.0-beta.2
     "@storybook/channels": ^7.0.0-beta.2
     "@storybook/components": ^7.0.0-beta.2
     "@storybook/core-events": ^7.0.0-beta.2
+    "@storybook/manager-api": ^7.0.0-beta.2
+    "@storybook/preview-api": ^7.0.0-beta.2
     "@storybook/theming": ^7.0.0-beta.2
     "@testing-library/dom": ^8.19.0
     "@testing-library/jest-dom": ^5.16.5

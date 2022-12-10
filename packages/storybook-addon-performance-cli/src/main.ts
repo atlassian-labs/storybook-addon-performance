@@ -22,7 +22,7 @@ const main = (...args: string[]) => {
   }
 
   const input = cliArgs.slice(2);
-  const resultTypes = { '-b': 'baseline', '-c': 'current' } as { [flag: string]: ResultType };
+  const resultTypes: { [flag: string]: ResultType } = { '-b': 'baseline', '-c': 'current' };
   const flags = Object.keys(resultTypes);
 
   const inputPaths = input
@@ -49,11 +49,11 @@ const main = (...args: string[]) => {
       const resultsByGroupId = files
         .map((dataFile) => {
           const json = fs.readFileSync(path.join(pathName, dataFile));
-          return JSON.parse(json as any);
+          return JSON.parse(json.toString());
         })
-        .map(({ results }) => results as TaskGroupResult[])
+        .map(({ results }): TaskGroupResult[] => results)
         .flatMap((taskGroupResults) => taskGroupResults)
-        .map(({ groupId, map }) => [groupId, convertToTaskValueMap(map)] as [string, Results])
+        .map(({ groupId, map }): [string, Results] => [groupId, convertToTaskValueMap(map)])
         .reduce(combineTaskResultsByGroupId, {} as ResultsByGroupId);
 
       return { type, ...resultsByGroupId };

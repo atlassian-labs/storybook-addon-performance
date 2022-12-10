@@ -1,5 +1,5 @@
-import React from 'react';
-import { addons, makeDecorator } from '@storybook/addons';
+import React, { ReactNode } from 'react';
+import { addons, makeDecorator } from '@storybook/preview-api';
 import TaskHarness from './task-harness';
 import { PublicInteractionTask, AllowedGroup } from '../types';
 import * as constants from '../addon-constants';
@@ -18,7 +18,7 @@ export default makeDecorator({
 
     return (
       <TaskHarness
-        getNode={() => getStory(context) as any}
+        getNode={() => getStory(context) as ReactNode}
         channel={addons.getChannel()}
         interactions={interactions}
         allowedGroups={allowedGroups}

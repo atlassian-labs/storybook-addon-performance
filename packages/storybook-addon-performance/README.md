@@ -41,7 +41,7 @@ npm install storybook-addon-performance --save-dev
 
 ```js
 module.exports = {
-  addons: ['storybook-addon-performance/register'],
+  addons: ['storybook-addon-performance'],
 };
 ```
 

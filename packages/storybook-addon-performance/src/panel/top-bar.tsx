@@ -1,4 +1,4 @@
-import { Button, Form, Icons } from '@storybook/components';
+import { Button, Form, Icons, IconsProps } from '@storybook/components';
 import { styled } from '@storybook/theming';
 import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
@@ -99,11 +99,11 @@ export default function Topbar() {
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
-  const icons = {
+  const icons: { pin: IconsProps['icon']; save: IconsProps['icon']; load: IconsProps['icon'] } = {
     pin: pinned ? 'lock' : 'unlock',
     save: 'download',
     load: 'upload',
-  } as const;
+  };
 
   return (
     <Container>
@@ -124,7 +124,6 @@ export default function Topbar() {
           </Button>
         }
         {
-          // @ts-ignore
           <Form.Select
             id={selectors.copySelectId}
             disabled={!enabled.change}
@@ -145,7 +144,6 @@ export default function Topbar() {
           </Form.Select>
         }
         {
-          // @ts-ignore
           <Form.Select
             id={selectors.sampleSelectId}
             disabled={!enabled.change}
@@ -169,7 +167,6 @@ export default function Topbar() {
       <MetaSettings>
         <CollapseSegment>
           {
-            // @ts-ignore
             <Button
               id={selectors.pinButtonId}
               secondary
@@ -186,7 +183,6 @@ export default function Topbar() {
         </CollapseSegment>
         <FileButtons>
           {
-            // @ts-ignore
             <Button
               id={selectors.saveButtonId}
               secondary
@@ -200,7 +196,6 @@ export default function Topbar() {
             </Button>
           }
           {
-            // @ts-ignore
             <Button
               secondary
               small

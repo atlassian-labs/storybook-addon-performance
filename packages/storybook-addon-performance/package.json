@@ -12,7 +12,7 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "module": "distindex.mjs",
+  "module": "dist/index.mjs",
   "author": "Alex Reardon <areardon@atlassian.com>",
   "license": "Apache-2.0",
   "repository": {
@@ -24,10 +24,11 @@
   ],
   "dependencies": {
     "@storybook/addons": "^7.0.0-beta.2",
-    "@storybook/api": "^7.0.0-beta.2",
     "@storybook/channels": "^7.0.0-beta.2",
     "@storybook/components": "^7.0.0-beta.2",
     "@storybook/core-events": "^7.0.0-beta.2",
+    "@storybook/manager-api": "^7.0.0-beta.2",
+    "@storybook/preview-api": "^7.0.0-beta.2",
     "@storybook/theming": "^7.0.0-beta.2",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -92,9 +93,9 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./register": {
-      "require": "./dist/register.js",
-      "import": "./dist/register.mjs",
+    "./manager": {
+      "require": "./dist/manager.js",
+      "import": "./dist/manager.mjs",
       "types": "./dist/index.d.ts"
     }
   },

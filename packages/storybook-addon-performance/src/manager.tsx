@@ -1,5 +1,6 @@
+// TODO: Migrate to @storybook/preview-api
 import { addons, types } from '@storybook/addons';
-import { useParameter } from '@storybook/api';
+import { useParameter } from '@storybook/manager-api';
 import { Channel } from '@storybook/channels';
 import { AddonPanel } from '@storybook/components';
 import React from 'react';
@@ -35,7 +36,7 @@ addons.register(constants.addonKey, () => {
     type: types.PANEL,
     title: constants.panelTitle,
     render: ({ active, key }) => (
-      <AddonPanel active={active as boolean} key={key}>
+      <AddonPanel active={active ?? true} key={key}>
         <Env>
           {({ interactions, channel, allowedGroups }) => (
             <Panel channel={channel} interactions={interactions} allowedGroups={allowedGroups} />

@@ -21,9 +21,6 @@
     "storybook-addon-performance": "workspace:packages/storybook-addon-performance",
     "webpack": "^5.75.0"
   },
-  "babel": {
-    "extends": "../babel.config.json"
-  },
   "scripts": {
     "storybook:dev": "yarn storybook dev --port 9003",
     "storybook:build": "yarn build && yarn storybook build",

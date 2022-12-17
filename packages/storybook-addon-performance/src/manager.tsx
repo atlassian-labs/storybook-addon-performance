@@ -1,6 +1,4 @@
-// TODO: Migrate to @storybook/preview-api
-import { addons, types } from '@storybook/addons';
-import { useParameter } from '@storybook/manager-api';
+import { useParameter, addons, types } from '@storybook/manager-api';
 import { Channel } from '@storybook/channels';
 import { AddonPanel } from '@storybook/components';
 import React from 'react';

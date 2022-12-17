@@ -2200,7 +2200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addons@npm:7.0.0-beta.2, @storybook/addons@npm:^7.0.0-beta.2":
+"@storybook/addons@npm:7.0.0-beta.2":
   version: 7.0.0-beta.2
   resolution: "@storybook/addons@npm:7.0.0-beta.2"
   dependencies:
@@ -12412,7 +12412,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "storybook-addon-performance@workspace:packages/storybook-addon-performance"
   dependencies:
-    "@storybook/addons": ^7.0.0-beta.2
     "@storybook/channels": ^7.0.0-beta.2
     "@storybook/components": ^7.0.0-beta.2
     "@storybook/core-events": ^7.0.0-beta.2

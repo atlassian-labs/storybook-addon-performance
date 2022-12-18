@@ -66,6 +66,8 @@ const IconContainer = styled.span`
   margin-left: 0;
   width: var(--grid);
   height: var(--grid);
+  display: flex;
+  align-items: center;
 `;
 
 function ExpandIcon({ isExpanded }: ExpandedArgs) {

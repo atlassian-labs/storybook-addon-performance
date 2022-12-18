@@ -23,8 +23,8 @@
     "/dist"
   ],
   "dependencies": {
-    "@storybook/manager-api": "^7.0.0-beta.2",
-    "@storybook/theming": "^7.0.0-beta.2",
+    "@storybook/manager-api": "^7.0.0-beta.12",
+    "@storybook/theming": "^7.0.0-beta.12",
     "@xstate/react": "^3.0.1",
     "xstate": "^4.35.0"
   },
@@ -33,10 +33,10 @@
     "react-dom": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@storybook/channels": "^7.0.0-beta.2",
-    "@storybook/components": "^7.0.0-beta.2",
-    "@storybook/core-events": "^7.0.0-beta.2",
-    "@storybook/preview-api": "^7.0.0-beta.2",
+    "@storybook/channels": "^7.0.0-beta.12",
+    "@storybook/components": "^7.0.0-beta.12",
+    "@storybook/core-events": "^7.0.0-beta.12",
+    "@storybook/preview-api": "^7.0.0-beta.12",
     "@testing-library/react": "^10.4.9",
     "@types/react-dom": "16.9.17",
     "@typescript-eslint/eslint-plugin": "^5.46.0",

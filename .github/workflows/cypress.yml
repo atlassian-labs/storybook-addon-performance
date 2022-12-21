@@ -25,10 +25,11 @@ jobs:
       - run: yarn workspace storybook-addon-performance run build
       - run: yarn workspaces foreach -piv run storybook build
       - run: >
-          npx concurrently -k -s first -n "SBESM,SB16,SB17,TEST" -c "magenta,blue,red,cyan"
+          npx concurrently -k -s first -n "SBESM,SB16,SB17,SB18,TEST" -c "magenta,blue,red,cyan,green"
           "yarn workspace react-esm-example run start-server"
           "yarn workspace react-16-example run start-server"
           "yarn workspace react-17-example run start-server"
+          "yarn workspace react-18-example run start-server"
           "yarn workspace storybook-addon-performance cypress:run"
       # Upload the videos and screenshots
       - name: Upload artifacts

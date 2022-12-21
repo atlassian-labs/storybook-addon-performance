@@ -31,4 +31,9 @@ const getReady = (url: string) => {
 
 export default getReady;
 
-export const urls = ['http://localhost:9003', 'http://localhost:9004', 'http://localhost:9005'];
+export const urls = [
+  'http://localhost:9003',
+  'http://localhost:9004',
+  'http://localhost:9005',
+  'http://localhost:9006',
+];

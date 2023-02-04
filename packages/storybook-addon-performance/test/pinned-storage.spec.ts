@@ -29,7 +29,7 @@ it('should load supported pinned values', () => {
 it('should not load unsupported pinned values', () => {
   const first: Nullable<RunContext> = getPinned(mock.storyName);
 
-  savePinned(mock.storyName, { foo: 'bar' } as any);
+  savePinned(mock.storyName, { foo: 'bar' } as never);
   const second: Nullable<RunContext> = getPinned(mock.storyName);
 
   expect(second).toBe(null);

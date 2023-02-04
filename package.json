@@ -2,6 +2,8 @@
   "private": true,
   "workspaces": [
     "packages/storybook-addon-performance",
-    "packages/storybook-addon-performance-cli"
-  ]
+    "packages/storybook-addon-performance-cli",
+    "examples/*"
+  ],
+  "packageManager": "yarn@3.3.0"
 }

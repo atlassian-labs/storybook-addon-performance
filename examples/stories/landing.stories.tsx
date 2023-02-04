@@ -2,7 +2,10 @@ import { findByText, fireEvent } from '@testing-library/dom';
 import React from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
-import { InteractionTaskArgs, PublicInteractionTask } from '../src';
+import {
+  InteractionTaskArgs,
+  PublicInteractionTask,
+} from '../../packages/storybook-addon-performance/src';
 
 export default {
   title: 'Examples',
@@ -39,12 +42,10 @@ const interactionTasks: PublicInteractionTask[] = [
   },
 ];
 
-select.story = {
-  name: 'React Select',
-  parameters: {
-    performance: {
-      interactions: interactionTasks,
-    },
+select.storyName = 'React Select';
+select.parameters = {
+  performance: {
+    interactions: interactionTasks,
   },
 };
 
@@ -69,12 +70,10 @@ export const slow = () => <Slow />;
 
 export const onlyClientPerformance = () => <p>A story only measuring client-side performance 👩‍💻</p>;
 
-onlyClientPerformance.story = {
-  name: 'Only Client',
-  parameters: {
-    performance: {
-      allowedGroups: ['client'],
-    },
+onlyClientPerformance.storyName = 'Only Client';
+onlyClientPerformance.parameters = {
+  performance: {
+    allowedGroups: ['client'],
   },
 };
 
@@ -82,11 +81,9 @@ export const onlyServerPerformance = () => (
   <p>A story only measuring server-side performance ‍☁️</p>
 );
 
-onlyServerPerformance.story = {
-  name: 'Only Server',
-  parameters: {
-    performance: {
-      allowedGroups: ['server'],
-    },
+onlyServerPerformance.storyName = 'Only Server';
+onlyServerPerformance.parameters = {
+  performance: {
+    allowedGroups: ['server'],
   },
 };

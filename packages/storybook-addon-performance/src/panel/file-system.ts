@@ -25,7 +25,7 @@ export function readFile(
     reader.readAsText(files[0]);
     reader.onload = ({ target }) => {
       if (target) {
-        const context: RunContext = JSON.parse(target.result as string);
+        const context: RunContext = JSON.parse(target.result?.toString() ?? '');
         const [storyName] = files[0].name.split('.json');
         callback(context, storyName);
       }

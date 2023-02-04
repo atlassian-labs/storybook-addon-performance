@@ -1,0 +1,4 @@
+{
+  "baseUrl": "http://localhost:9005",
+  "supportFile": "../../packages/storybook-addon-performance/cypress/support/index.ts"
+}

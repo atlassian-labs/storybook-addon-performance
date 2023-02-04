@@ -1,5 +1,5 @@
-import React from 'react';
-import addons, { makeDecorator } from '@storybook/addons';
+import React, { ReactNode } from 'react';
+import { addons, makeDecorator } from '@storybook/preview-api';
 import TaskHarness from './task-harness';
 import { PublicInteractionTask, AllowedGroup } from '../types';
 import * as constants from '../addon-constants';
@@ -16,11 +16,10 @@ export default makeDecorator({
     const allowedGroups: AllowedGroup[] =
       (parameters && parameters.allowedGroups) || allowAllGroups;
 
-    // Sadly need to add cast channel for storybook ts-loader
     return (
       <TaskHarness
-        getNode={() => getStory(context)}
-        channel={addons.getChannel() as any}
+        getNode={() => getStory(context) as ReactNode}
+        channel={addons.getChannel()}
         interactions={interactions}
         allowedGroups={allowedGroups}
       />

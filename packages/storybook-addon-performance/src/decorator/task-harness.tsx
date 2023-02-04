@@ -1,9 +1,7 @@
-import { addons } from '@storybook/addons';
 import { Channel } from '@storybook/channels';
 import React, { useMemo, useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
 import { runAll, runOneStatic, runOneTimed } from '../task-runner';
-import { getInteractionGroup } from '../tasks/get-interaction-group';
 import {
   StaticResult,
   TaskGroupResult,
@@ -16,7 +14,6 @@ import {
 } from '../types';
 import getElement from '../task-runner/get-element';
 import { bindAll } from '../util/bind-channel-events';
-import preset from '../tasks/preset';
 import getTaskMap from '../tasks/get-tasks-map';
 import { getGroups } from '../tasks/get-groups';
 

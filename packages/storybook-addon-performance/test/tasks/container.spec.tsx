@@ -58,7 +58,7 @@ it('should not error if the container was already removed from the DOM', async (
 });
 
 it('should unmount any mounted react applications in the container', async () => {
-  const actions = [];
+  const actions: Array<string> = [];
   function App() {
     useEffect(() => {
       actions.push('mounted');
@@ -93,7 +93,7 @@ it('should unmount any mounted react applications in the container', async () =>
 });
 
 it('should unmount any detached applications', async () => {
-  const actions = [];
+  const actions: Array<string> = [];
   function App() {
     useEffect(() => {
       actions.push('mounted');

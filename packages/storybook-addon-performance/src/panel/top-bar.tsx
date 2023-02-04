@@ -1,9 +1,9 @@
-import { Button, Form, Icons } from '@storybook/components';
+import { Button, Form, Icons, IconsProps } from '@storybook/components';
 import { styled } from '@storybook/theming';
 import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
 import ServiceContext from './service-context';
-import { useService } from '@xstate/react';
+import { useActor } from '@xstate/react';
 import { RunContext } from './machine';
 import { Nullable } from '../types';
 import { pluraliseCopies, pluraliseSamples } from '../util/pluralise';
@@ -87,7 +87,7 @@ type BooleanMap = {
 
 export default function Topbar() {
   const service = useRequiredContext(ServiceContext);
-  const [state, send] = useService(service);
+  const [state, send] = useActor(service);
   const current: RunContext = state.context.current;
   const pinned: Nullable<RunContext> = state.context.pinned;
   const sizes: number[] = state.context.sizes;
@@ -99,18 +99,18 @@ export default function Topbar() {
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
-  const icons = {
+  const icons: { pin: IconsProps['icon']; save: IconsProps['icon']; load: IconsProps['icon'] } = {
     pin: pinned ? 'lock' : 'unlock',
     save: 'download',
     load: 'upload',
-  } as const;
+  };
 
   return (
     <Container>
       <Segment>
         {
-          // @ts-ignore
           <Button
+            // @ts-ignore
             css={{
               textTransform: 'uppercase',
             }}
@@ -124,7 +124,6 @@ export default function Topbar() {
           </Button>
         }
         {
-          // @ts-ignore
           <Form.Select
             id={selectors.copySelectId}
             disabled={!enabled.change}
@@ -134,7 +133,7 @@ export default function Topbar() {
                 samples: current.samples,
                 copies: Number(event.target.value),
               };
-              send('SET_VALUES', values);
+              send({ type: 'SET_VALUES', ...values });
             }}
           >
             {sizes.map((size) => (
@@ -145,7 +144,6 @@ export default function Topbar() {
           </Form.Select>
         }
         {
-          // @ts-ignore
           <Form.Select
             id={selectors.sampleSelectId}
             disabled={!enabled.change}
@@ -155,7 +153,7 @@ export default function Topbar() {
                 copies: current.copies,
                 samples: Number(event.target.value),
               };
-              send('SET_VALUES', values);
+              send({ type: 'SET_VALUES', ...values });
             }}
           >
             {sizes.map((size) => (
@@ -169,7 +167,6 @@ export default function Topbar() {
       <MetaSettings>
         <CollapseSegment>
           {
-            // @ts-ignore
             <Button
               id={selectors.pinButtonId}
               secondary
@@ -186,7 +183,6 @@ export default function Topbar() {
         </CollapseSegment>
         <FileButtons>
           {
-            // @ts-ignore
             <Button
               id={selectors.saveButtonId}
               secondary
@@ -200,7 +196,6 @@ export default function Topbar() {
             </Button>
           }
           {
-            // @ts-ignore
             <Button
               secondary
               small
@@ -220,7 +215,7 @@ export default function Topbar() {
             accept=".json"
             onChange={(e: any) => {
               readFile(e, (results, storyName) =>
-                send('LOAD_FROM_FILE', { pinned: results, storyName }),
+                send({ type: 'LOAD_FROM_FILE', pinned: results, storyName }),
               );
             }}
           />

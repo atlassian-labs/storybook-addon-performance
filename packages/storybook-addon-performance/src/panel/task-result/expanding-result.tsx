@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { styled } from '@storybook/theming';
 import * as Expand from './parts';
 import { Button, Icons } from '@storybook/components';
-import { useService } from '@xstate/react';
+import { useActor } from '@xstate/react';
 import useRequiredContext from '../../use-required-context';
 import ServiceContext from '../service-context';
 import { pluraliseCopies, pluraliseSamples } from '../../util/pluralise';
@@ -66,6 +66,8 @@ const IconContainer = styled.span`
   margin-left: 0;
   width: var(--grid);
   height: var(--grid);
+  display: flex;
+  align-items: center;
 `;
 
 function ExpandIcon({ isExpanded }: ExpandedArgs) {
@@ -80,7 +82,7 @@ export function ExpandingResult({ name, result, getExpanded }: Props) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const toggle = useCallback(() => setIsExpanded((value) => !value), [setIsExpanded]);
   const service = useRequiredContext(ServiceContext);
-  const [state, send] = useService(service);
+  const [state, send] = useActor(service);
 
   const expanded: React.ReactNode = getExpanded({ isExpanded });
   const { copies, samples } = state.context.current;

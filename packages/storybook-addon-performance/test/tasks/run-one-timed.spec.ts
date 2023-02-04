@@ -23,12 +23,12 @@ it('should run one timed task', async () => {
   const expected: TimedResult = {
     taskName: task.name,
     type: 'timed',
-    averageMs: expect.any(Number) as number,
+    averageMs: expect.any(Number),
     samples,
     variance: {
-      standardDeviation: expect.any(Number) as number,
-      upperPercentage: expect.any(Number) as number,
-      lowerPercentage: expect.any(Number) as number,
+      standardDeviation: expect.any(Number),
+      upperPercentage: expect.any(Number),
+      lowerPercentage: expect.any(Number),
     },
   };
   expect(results).toEqual(expected);

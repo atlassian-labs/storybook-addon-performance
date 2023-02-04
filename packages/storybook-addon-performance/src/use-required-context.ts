@@ -6,6 +6,5 @@ export default function useRequiredContext<T>(Context: Context<Nullable<T>>): T 
   const value: Nullable<T> = useContext(Context);
   invariant(value, 'Could not find context value');
 
-  // Hack for TypeScript < 8.4
-  return value as T;
+  return value;
 }

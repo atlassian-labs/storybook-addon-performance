@@ -1,4 +1,14 @@
-import { Machine, assign, Interpreter, StateMachine, State } from 'xstate';
+import {
+  Machine,
+  assign,
+  Interpreter,
+  StateMachine,
+  State,
+  BaseActionObject,
+  ResolveTypegenMeta,
+  ServiceMap,
+  TypegenDisabled,
+} from 'xstate';
 import { Nullable, TaskGroupResult } from './../types';
 
 export type MachineEvents =
@@ -41,7 +51,13 @@ export type MachineSchema = {
 
 export type StateType = State<MachineContext, MachineEvents, MachineSchema>;
 
-export type ServiceType = Interpreter<MachineContext, MachineSchema, MachineEvents>;
+export type ServiceType = Interpreter<
+  MachineContext,
+  MachineSchema,
+  MachineEvents,
+  { value: any; context: MachineContext },
+  ResolveTypegenMeta<TypegenDisabled, MachineEvents, BaseActionObject, ServiceMap>
+>;
 
 export type MachineType = StateMachine<MachineContext, MachineSchema, MachineEvents>;
 

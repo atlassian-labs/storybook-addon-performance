@@ -19,7 +19,7 @@ it('should run all the standard tests', async () => {
         return {
           type: 'static',
           taskName: task.name,
-          value: expect.any(String),
+          value: expect.any(String) as string,
         };
       });
     const timedResults: TimedResult[] = group.tasks
@@ -28,12 +28,12 @@ it('should run all the standard tests', async () => {
         return {
           type: 'timed',
           taskName: task.name,
-          averageMs: expect.any(Number),
+          averageMs: expect.any(Number) as number,
           samples: 3,
           variance: {
-            standardDeviation: expect.any(Number),
-            upperPercentage: expect.any(Number),
-            lowerPercentage: expect.any(Number),
+            standardDeviation: expect.any(Number) as number,
+            upperPercentage: expect.any(Number) as number,
+            lowerPercentage: expect.any(Number) as number,
           },
         };
       });

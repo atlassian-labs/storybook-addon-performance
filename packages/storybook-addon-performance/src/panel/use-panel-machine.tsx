@@ -1,5 +1,5 @@
 import { Channel } from '@storybook/channels';
-import { STORY_RENDERED, STORY_CHANGED } from '@storybook/core-events';
+import * as coreEvents from '@storybook/core-events';
 import { useMachine } from '@xstate/react';
 import { useEffect } from 'react';
 import eventNames, { RunAll, RunOne } from '../events';
@@ -33,13 +33,13 @@ export default function usePanelMachine(machine: MachineType, channel: Channel) 
     function bindChannelEvents() {
       const unsubscribe = bindAll(channel, [
         {
-          eventName: STORY_RENDERED,
+          eventName: coreEvents.STORY_RENDERED,
           fn: (storyName: string) => {
             service.send('LOADED', { storyName, pinned: getPinned(storyName) });
           },
         },
         {
-          eventName: STORY_CHANGED,
+          eventName: coreEvents.STORY_CHANGED,
           fn: () => service.send('WAIT'),
         },
       ]);

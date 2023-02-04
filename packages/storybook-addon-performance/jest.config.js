@@ -5,12 +5,10 @@ module.exports = {
   // node_modules is default.
   testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   modulePathIgnorePatterns: ['/dist/'],
-  transform: {
-    '^.+.[tj]sx?$': [
-      'ts-jest',
-      {
-        diagnostics: false,
-      },
-    ],
+
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+    },
   },
 };

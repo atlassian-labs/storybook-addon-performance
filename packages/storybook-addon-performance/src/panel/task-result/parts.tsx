@@ -21,6 +21,7 @@ export const Heading = styled.h4`
 
 export const Content = styled.div``;
 
+// @ts-ignore
 export const Note = styled.div`
   padding: calc(var(--grid) / 2);
   background-color: ${(props) => props.theme.background.hoverable};

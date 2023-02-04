@@ -1,5 +1,5 @@
 import ReactDOMServer from 'react-dom/server';
-import { strToU8, gzipSync } from 'fflate';
+import gzip from 'gzip-js';
 import { StaticTask, TimedTask, TaskGroup, RunStaticTaskArgs, RunTimedTaskArgs } from '../../types';
 import { bytesToKiloBytes } from '../../util/convert-bytes-to';
 
@@ -47,12 +47,11 @@ const getGzipStringSizeInKB: StaticTask = {
   scale: 'kb',
   run: async ({ getElement }: RunStaticTaskArgs): Promise<string> => {
     const output: string = ReactDOMServer.renderToString(getElement());
-    const buf = strToU8(output);
     // Using max level of compression.
     // This is what Jira currently uses
-    const bytes = gzipSync(buf, { level: 9 });
+    const bytes: number = gzip.zip(output, { level: 9 }).length;
 
-    return bytesToKiloBytes(bytes.length);
+    return bytesToKiloBytes(bytes);
   },
 };
 
@@ -79,12 +78,11 @@ const getGzipStaticMarkupSizeInKB: StaticTask = {
   scale: 'kb',
   run: async ({ getElement }: RunStaticTaskArgs): Promise<string> => {
     const output: string = ReactDOMServer.renderToStaticMarkup(getElement());
-    const buf = strToU8(output);
     // Using max level of compression.
     // This is what Jira currently uses
-    const bytes = gzipSync(buf, { level: 9 });
+    const bytes: number = gzip.zip(output, { level: 9 }).length;
 
-    return bytesToKiloBytes(bytes.length);
+    return bytesToKiloBytes(bytes);
   },
 };
 

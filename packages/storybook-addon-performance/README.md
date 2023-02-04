@@ -41,7 +41,7 @@ npm install storybook-addon-performance --save-dev
 
 ```js
 module.exports = {
-  addons: ['storybook-addon-performance'],
+  addons: ['storybook-addon-performance/register'],
 };
 ```
 
@@ -50,9 +50,10 @@ module.exports = {
 You can either add the decorator globally to every story in `.storybook/preview.js` **(recommended)**
 
 ```js
+import { addDecorator } from '@storybook/react';
 import { withPerformance } from 'storybook-addon-performance';
 
-export const decorators = [withPerformance];
+addDecorator(withPerformance);
 ```
 
 Or you can add it to individual stories:
@@ -153,10 +154,12 @@ const interactionTasks: PublicInteractionTask[] = [
   },
 ];
 
-select.storyName = 'React Select';
-select.parameters = {
-  performance: {
-    interactions: interactionTasks,
+select.story = {
+  name: 'React select',
+  parameters: {
+    performance: {
+      interactions: interactionTasks,
+    },
   },
 };
 ```
@@ -191,17 +194,21 @@ Some components are not designed to work in server side rendering, or on the cli
 // Using [Component Story Format (CSF)](https://storybook.js.org/docs/formats/component-story-format/)
 export const onlyClient = () => <p>A story only measuring client-side performance 👩‍💻</p>;
 
-onlyClient.parameters = {
-  performance: {
-    allowedGroups: ['client'],
+onlyClient.story = {
+  parameters: {
+    performance: {
+      allowedGroups: ['client'],
+    },
   },
 };
 
 export const onlyServer = () => <p>A story only measuring server-side performance ‍☁️</p>;
 
-onlyServer.parameters = {
-  performance: {
-    allowedGroups: ['server'],
+onlyServer.story = {
+  parameters: {
+    performance: {
+      allowedGroups: ['server'],
+    },
   },
 };
 ```

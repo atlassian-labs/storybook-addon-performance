@@ -2,8 +2,8 @@ import { startAllButtonId, copySelectId, sampleSelectId, pinButtonId } from './.
 import { panelId } from '../../src/selectors';
 import { wait } from '../custom/guards';
 
-const getReady = (url: string) => {
-  cy.visit(`${url}/?path=/story/examples--select`);
+beforeEach(() => {
+  cy.visit('/?path=/story/examples--select');
   // wait for iframe to be on the page and loaded
   cy.get('#storybook-preview-iframe[data-is-loaded="true"]');
   // After loading has completed, there's a 100ms css transition where the panel is revealed;
@@ -27,13 +27,4 @@ const getReady = (url: string) => {
   cy.get(`#${pinButtonId}`).as('pinButton');
 
   wait.topbarEnabled();
-};
-
-export default getReady;
-
-export const urls = [
-  'http://localhost:9003',
-  'http://localhost:9004',
-  'http://localhost:9005',
-  'http://localhost:9006',
-];
+});

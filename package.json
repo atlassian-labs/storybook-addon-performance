@@ -5,7 +5,9 @@
     "pnpm": ">=6"
   },
   "scripts": {
-    "build": "turbo build"
+    "build": "turbo build",
+    "test": "turbo test",
+    "validate": "turbo validate"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

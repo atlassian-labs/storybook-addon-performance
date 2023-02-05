@@ -25,7 +25,7 @@ importers:
       react-select: ^5.7.0
       storybook: 7.0.0-beta.2
       storybook-addon-performance: workspace:*
-      typescript: '*'
+      typescript: ^4.9.4
       webpack: ^5.75.0
     dependencies:
       react: 16.14.0
@@ -60,7 +60,7 @@ importers:
       react-select: ^5.7.0
       storybook: 7.0.0-beta.2
       storybook-addon-performance: workspace:*
-      typescript: '*'
+      typescript: ^4.9.4
       webpack: ^5.75.0
     dependencies:
       react: 16.14.0
@@ -95,7 +95,7 @@ importers:
       react-select: ^5.7.0
       storybook: 7.0.0-beta.2
       storybook-addon-performance: workspace:*
-      typescript: '*'
+      typescript: ^4.9.4
       webpack: ^5.75.0
     dependencies:
       react: 17.0.2
@@ -130,7 +130,7 @@ importers:
       react-select: ^5.7.0
       storybook: 7.0.0-beta.2
       storybook-addon-performance: workspace:*
-      typescript: '*'
+      typescript: ^4.9.4
       webpack: ^5.75.0
     dependencies:
       react: 18.2.0
@@ -159,6 +159,7 @@ importers:
       '@storybook/preview-api': ^7.0.0-beta.12
       '@storybook/theming': ^7.0.0-beta.12
       '@testing-library/react': ^10.4.9
+      '@types/react': 16.9.17
       '@types/react-dom': 16.9.17
       '@typescript-eslint/eslint-plugin': ^5.46.0
       '@typescript-eslint/parser': ^5.46.0
@@ -182,7 +183,7 @@ importers:
     dependencies:
       '@storybook/manager-api': 7.0.0-beta.43_wcqkhtmu7mswc6yz4uyexck3ty
       '@storybook/theming': 7.0.0-beta.43_wcqkhtmu7mswc6yz4uyexck3ty
-      '@xstate/react': 3.1.2_vgax6vllksjwcfku4apj4gqq5y
+      '@xstate/react': 3.1.2_alofgmxjhgusaurcmok26mvc5q
       xstate: 4.35.4
     devDependencies:
       '@storybook/channels': 7.0.0-beta.43
@@ -190,6 +191,7 @@ importers:
       '@storybook/core-events': 7.0.0-beta.43
       '@storybook/preview-api': 7.0.0-beta.43
       '@testing-library/react': 10.4.9_wcqkhtmu7mswc6yz4uyexck3ty
+      '@types/react': 16.9.17
       '@types/react-dom': 16.9.17
       '@typescript-eslint/eslint-plugin': 5.50.0_go4drrxstycfikanvu45pi4vgq
       '@typescript-eslint/parser': 5.50.0_4vsywjlpuriuw3tl5oq6zy5a64
@@ -4277,6 +4279,12 @@ packages:
       csstype: 3.1.1
     dev: true
 
+  /@types/react/16.9.17:
+    resolution: {integrity: sha512-UP27In4fp4sWF5JgyV6pwVPAQM83Fj76JOcg02X5BZcpSu5Wx+fP9RMqc2v0ssBoQIFvD5JdKY41gjJJKmw6Bg==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/react/-/react-16.9.17.tgz}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      csstype: 2.6.21
+
   /@types/react/18.0.27:
     resolution: {integrity: sha512-3vtRKHgVxu3Jp9t718R9BuzoD4NcQ8YJ5XRzsSKxNDiDonD2MXIT1TmSkenxuCycZJoQT5d2vE8LwWJxBC1gmA==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/react/-/react-18.0.27.tgz}
     dependencies:
@@ -4578,7 +4586,7 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@xstate/react/3.1.2_vgax6vllksjwcfku4apj4gqq5y:
+  /@xstate/react/3.1.2_alofgmxjhgusaurcmok26mvc5q:
     resolution: {integrity: sha512-nMpYuBFieWoHaImAtsguwmQHY3WnRpfRFYtInn5zRKsfGkC2JILKfnH58fODUubwhSqq0qMiUqrlaklP7ZBUCw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@xstate/react/-/react-3.1.2.tgz}
     peerDependencies:
       '@xstate/fsm': ^2.0.0
@@ -4591,7 +4599,7 @@ packages:
         optional: true
     dependencies:
       react: 16.14.0
-      use-isomorphic-layout-effect: 1.1.2_react@16.14.0
+      use-isomorphic-layout-effect: 1.1.2_t4j47yb7cc4ceicwp57behb2o4
       use-sync-external-store: 1.2.0_react@16.14.0
       xstate: 4.35.4
     transitivePeerDependencies:
@@ -5954,6 +5962,9 @@ packages:
     dependencies:
       cssom: 0.3.8
     dev: true
+
+  /csstype/2.6.21:
+    resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csstype/-/csstype-2.6.21.tgz}
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csstype/-/csstype-3.1.1.tgz}
@@ -12588,6 +12599,19 @@ packages:
         optional: true
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /use-isomorphic-layout-effect/1.1.2_t4j47yb7cc4ceicwp57behb2o4:
+    resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==, tarball: https://packages.atlassian.com/api/npm/npm-remote/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 16.9.17
+      react: 16.14.0
     dev: false
 
   /use-resize-observer/9.1.0_wcqkhtmu7mswc6yz4uyexck3ty:

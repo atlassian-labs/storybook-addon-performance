@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 16, 18]
+        node-version: [16, 18]
 
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: pnpm i --frozen-lockfile
-      - run: yarn workspace storybook-addon-performance run build
-      - run: yarn workspaces foreach -piv run test
+      - run: pnpm build
+      - run: pnpm test
         env:
           CI: true

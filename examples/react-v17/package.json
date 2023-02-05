@@ -24,7 +24,7 @@
   },
   "scripts": {
     "storybook:dev": "pnpm storybook dev --port 9004",
-    "build": "pnpm storybook build",
+    "build": "pnpm build-storybook",
     "start-server": "pnpm http-server storybook-static --port 9004 --silent"
   }
 }

@@ -31,7 +31,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i --frozen-lockfile
       - name: Publish to npm
         id: changesets
         uses: changesets/action@v1

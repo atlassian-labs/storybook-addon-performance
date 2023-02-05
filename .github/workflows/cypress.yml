@@ -21,8 +21,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pnpm install
-      - run: pnpm turbo build
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm build
       - run: >
           npx concurrently -k -s first -n "SBESM,SB16,SB17,SB18,TEST" -c "magenta,blue,red,cyan,green"
           "pnpm --filter 'react-esm-example' start-server"

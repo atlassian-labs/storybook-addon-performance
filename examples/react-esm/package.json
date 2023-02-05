@@ -19,12 +19,13 @@
     "babel-loader": "^9.1.0",
     "http-server": "^14.1.1",
     "storybook": "7.0.0-beta.2",
-    "storybook-addon-performance": "workspace:packages/storybook-addon-performance",
+    "storybook-addon-performance": "workspace:*",
+    "typescript": "*",
     "webpack": "^5.75.0"
   },
   "scripts": {
-    "storybook:dev": "yarn storybook dev --port 9005",
-    "storybook:build": "yarn build && yarn storybook build",
-    "start-server": "yarn http-server storybook-static --port 9005 --silent"
+    "storybook:dev": "pnpm storybook dev --port 9005",
+    "build": "pnpm storybook build",
+    "start-server": "pnpm http-server storybook-static --port 9005 --silent"
   }
 }

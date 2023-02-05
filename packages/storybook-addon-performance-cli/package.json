@@ -7,19 +7,19 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "storybook-addon-performance": "workspace:^"
+    "storybook-addon-performance": "workspace:*"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "pnpm build",
     "test": "jest",
-    "validate": "yarn prettier:check && yarn eslint:check",
+    "validate": "pnpm prettier:check && eslint:check",
     "typescript:check": "tsc --noEmit",
     "typescript:watch": "tsc --watch",
-    "prettier:check": "yarn prettier src --debug-check --config ../../.prettierrc",
-    "prettier:write": "yarn prettier src -write --config ../../.prettierrc",
+    "prettier:check": "prettier src --debug-check --config ../../.prettierrc",
+    "prettier:write": "prettier src -write --config ../../.prettierrc",
     "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0"
   },
   "bin": {
@@ -46,5 +46,8 @@
     "ts-jest": "^29.0.3",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

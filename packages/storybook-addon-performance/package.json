@@ -61,20 +61,20 @@
     "prettier_target": "src/**/*.{ts,tsx,js,jsx,md,json} test/**/*.{ts,tsx,js,jsx,md,json} examples/**/*.{ts,tsx,js,jsx,md,json}"
   },
   "scripts": {
-    "cypress:open": "yarn cypress open",
-    "cypress:run": "yarn cypress run",
-    "typescript:check": "yarn tsc --noEmit",
-    "prettier:check": "yarn prettier src --debug-check --config ../../.prettierrc",
-    "prettier:write": "yarn prettier src --write --config ../../.prettierrc",
+    "cypress:open": "pnpm cypress open",
+    "cypress:run": "pnpm cypress run",
+    "typescript:check": "pnpm tsc --noEmit",
+    "prettier:check": "pnpm prettier src --debug-check --config ../../.prettierrc",
+    "prettier:write": "pnpm prettier src --write --config ../../.prettierrc",
     "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0",
-    "validate": "yarn typescript:check && yarn prettier:check && yarn eslint:check",
-    "dev": "yarn typescript:watch & yarn storybook:dev",
-    "test": "yarn jest",
+    "validate": "pnpm typescript:check && pnpm prettier:check && pnpm eslint:check",
+    "dev": "pnpm typescript:watch & pnpm storybook:dev",
+    "test": "pnpm jest",
     "watch": "tsup src --watch",
     "build": "tsup",
-    "preversion": "yarn test",
+    "preversion": "pnpm test",
     "postversion": "git add -A && git commit -m \"chore: publishing new version\" && git push --tags",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "pnpm build"
   },
   "storybook": {
     "icon": "https://pbs.twimg.com/profile_images/1118574145724399616/oIyuo8uz_400x400.png",
@@ -93,6 +93,6 @@
     }
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }

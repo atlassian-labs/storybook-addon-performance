@@ -1,9 +1,15 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/storybook-addon-performance",
-    "packages/storybook-addon-performance-cli",
-    "examples/*"
-  ],
-  "packageManager": "yarn@3.3.0"
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=6"
+  },
+  "scripts": {
+    "build": "turbo build"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "turbo": "^1.7.3"
+  },
+  "packageManager": "pnpm@7.5.0"
 }

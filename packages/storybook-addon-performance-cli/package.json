@@ -15,7 +15,7 @@
     "build": "tsc && chmod +x dist/index.js",
     "prepublishOnly": "pnpm build",
     "test": "jest",
-    "validate": "pnpm prettier:check && eslint:check",
+    "validate": "pnpm prettier:check && pnpm eslint:check",
     "typescript:check": "tsc --noEmit",
     "typescript:watch": "tsc --watch",
     "prettier:check": "prettier src --debug-check --config ../../.prettierrc",

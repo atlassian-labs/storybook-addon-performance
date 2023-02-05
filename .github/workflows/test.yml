@@ -10,11 +10,9 @@ jobs:
   validate:
     name: testing code
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [14, 16, 18]
-
+        node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
@@ -25,8 +23,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pnpm i --frozen-lockfile
-      - run: yarn workspace storybook-addon-performance run build
-      - run: yarn workspaces foreach -piv run test
+      - run: pnpm i
+      - run: pnpm build
+      - run: pnpm test
         env:
           CI: true

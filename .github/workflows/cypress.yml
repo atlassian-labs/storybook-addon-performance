@@ -13,15 +13,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 16, 18]
+        node-version: [16, 18]
 
     steps:
       - uses: actions/checkout@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pnpm i --frozen-lockfile
+      - run: pnpm i
       - run: pnpm build
       - run: >
           npx concurrently -k -s first -n "SBESM,SB16,SB17,SB18,TEST" -c "magenta,blue,red,cyan,green"

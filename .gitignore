@@ -20,3 +20,6 @@ cypress/videos/
 
 # turbo repo
 .turbo
+
+# pnpm
+.pnpm-debug.log

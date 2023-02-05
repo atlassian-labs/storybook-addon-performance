@@ -38,6 +38,7 @@
     "@storybook/core-events": "^7.0.0-beta.12",
     "@storybook/preview-api": "^7.0.0-beta.12",
     "@testing-library/react": "^10.4.9",
+    "@types/react": "16.9.17",
     "@types/react-dom": "16.9.17",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",

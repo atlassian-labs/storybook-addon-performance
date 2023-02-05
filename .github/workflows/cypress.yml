@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14, 16, 18 ]
+        node-version: [14, 16, 18]
 
     steps:
       - uses: actions/checkout@v3
@@ -21,16 +21,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install --immutable
-      - run: yarn workspace storybook-addon-performance run build
-      - run: yarn workspaces foreach -piv run storybook build
+      - run: pnpm install
+      - run: pnpm turbo build
       - run: >
           npx concurrently -k -s first -n "SBESM,SB16,SB17,SB18,TEST" -c "magenta,blue,red,cyan,green"
-          "yarn workspace react-esm-example run start-server"
-          "yarn workspace react-16-example run start-server"
-          "yarn workspace react-17-example run start-server"
-          "yarn workspace react-18-example run start-server"
-          "yarn workspace storybook-addon-performance cypress:run"
+          "pnpm --filter 'react-esm-example' start-server"
+          "pnpm --filter 'react-16-example' start-server"
+          "pnpm --filter 'react-17-example' start-server"
+          "pnpm --filter 'react-18-example' start-server"
+          "pnpm --filter 'storybook-addon-performance' cypress:run"
       # Upload the videos and screenshots
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

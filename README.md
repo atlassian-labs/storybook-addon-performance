@@ -6,8 +6,6 @@ A [storybook](https://storybook.js.org/) addon to help better understand and deb
 <img src="https://user-images.githubusercontent.com/2182637/78786875-c904d000-79ec-11ea-9d49-1e253129f450.gif"
   alt="storybook-addon-performance demo"  />
 
-🚧 This addon is **experimental** and a **work in progress**. We are not on stable versions yet 🚧
-
 [📺 Project overview](https://www.youtube.com/watch?v=AknVkHeYqqg&feature=youtu.be&t=283) by
 [Jack Herrington](https://twitter.com/jherr)
 
@@ -30,6 +28,9 @@ A [storybook](https://storybook.js.org/) addon to help better understand and deb
 1. Install `storybook-addon-performance`
 
 ```bash
+# pnpm
+pnpm add storybook-addon-performance --dev
+
 # yarn
 yarn add storybook-addon-performance --dev
 
@@ -218,14 +219,14 @@ In the storybook-addon-performance folder (`packages/storybook-addon-performance
 
 ```bash
 # Start the typescript watcher and a local storybook:
-yarn dev
+pnpm dev
 
 # Start just the typescript watcher
 # This is needed as storybook does not compile addons
-yarn typescript:watch
+pnpm typescript:watch
 
 # Start the local storybook
-yarn storybook:dev
+pnpm storybook:dev
 ```
 
 ## Thanks

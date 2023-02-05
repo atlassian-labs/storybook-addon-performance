@@ -3,6 +3,9 @@
 ## Installation
 
 ```bash
+# pnpm
+pnpm add storybook-addon-performance-cli --dev
+
 # yarn
 yarn add storybook-addon-performance-cli --dev
 
@@ -80,7 +83,7 @@ We then:
 4. Artifacts are compared to the baseline branch using the `storybook-addon-performance-cli` - the schema and file format are built to be compatible.
 5. The final results are then parsed and shown in the CI status.
 
-This approach only works where the container being used to run the storybook is kept as consistent as possible (eg fixed memory / CPU allocation) and a 
+This approach only works where the container being used to run the storybook is kept as consistent as possible (eg fixed memory / CPU allocation) and a
 consistent environment. As soon as any of the test-runner software is updated you'd need to regenerate any baseline branch artifact.
 
 Additionally this flow is only considered _indicative_ not scientific. If we see large fluctuations this can trigger further manual investigation.

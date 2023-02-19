@@ -147,18 +147,18 @@ importers:
   examples/stories:
     specifiers:
       '@babel/core': ^7.0.0
-      '@testing-library/react': ^14.0.0
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      '@testing-library/react': ^12.0.0
+      react: ^17.0.0
+      react-dom: ^17.0.0
       react-select: ^5.7.0
       storybook-addon-performance: workspace:*
       tiny-invariant: ^1.3.1
     devDependencies:
       '@babel/core': 7.20.12
-      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-select: 5.7.0_pjwopsidmaokadturxaafygjp4
+      '@testing-library/react': 12.1.5_sfoxds7t5ydpegc3knd667wn6m
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-select: 5.7.0_jiuppbrrdpqsioctsbaxdlfu4e
       storybook-addon-performance: link:../../packages/storybook-addon-performance
       tiny-invariant: 1.3.1
 
@@ -172,9 +172,9 @@ importers:
       '@storybook/react': 7.0.0-beta.50
       '@storybook/react-vite': ^7.0.0-beta.50
       '@storybook/theming': ^7.0.0-beta.50
-      '@testing-library/react': ^14.0.0
-      '@types/react': 16.9.17
-      '@types/react-dom': 16.9.17
+      '@testing-library/react': ^12.0.0
+      '@types/react': ^17.0.0
+      '@types/react-dom': ^17.0.0
       '@typescript-eslint/eslint-plugin': ^5.46.0
       '@typescript-eslint/parser': ^5.46.0
       '@xstate/react': ^3.0.1
@@ -187,8 +187,8 @@ importers:
       jest: ^29.3.1
       jest-environment-jsdom: ^29.3.1
       prettier: ^2.8.1
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^17.0.0
+      react-dom: ^17.0.0
       storybook: 7.0.0-beta.50
       tiny-invariant: ^1.3.1
       ts-jest: ^29.0.3
@@ -197,20 +197,20 @@ importers:
       vite: ^4.0.0
       xstate: ^4.35.0
     dependencies:
-      '@storybook/manager-api': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
-      '@storybook/theming': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
-      '@xstate/react': 3.1.2_sgimpzj6nls35op3yrw2svbb7u
+      '@storybook/manager-api': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/theming': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
+      '@xstate/react': 3.1.2_6gav5jjhc6iro5dklwz2w2orca
       xstate: 4.35.4
     devDependencies:
       '@storybook/channels': 7.0.0-beta.50
-      '@storybook/components': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
+      '@storybook/components': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/core-events': 7.0.0-beta.50
       '@storybook/preview-api': 7.0.0-beta.50
-      '@storybook/react': 7.0.0-beta.50_ygqkwb4gg3aean7xjfdauovyqq
-      '@storybook/react-vite': 7.0.0-beta.50_li3mi7l5obvr3srmivssltef2i
-      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/react': 16.9.17
-      '@types/react-dom': 16.9.17
+      '@storybook/react': 7.0.0-beta.50_jgxnvbe4faw3ohf4h6p42qq6oy
+      '@storybook/react-vite': 7.0.0-beta.50_ztc7mtjmkhttpvmaoogmtuhefy
+      '@testing-library/react': 12.1.5_sfoxds7t5ydpegc3knd667wn6m
+      '@types/react': 17.0.0
+      '@types/react-dom': 17.0.0
       '@typescript-eslint/eslint-plugin': 5.50.0_go4drrxstycfikanvu45pi4vgq
       '@typescript-eslint/parser': 5.50.0_4vsywjlpuriuw3tl5oq6zy5a64
       cypress: 12.5.1
@@ -222,8 +222,8 @@ importers:
       jest: 29.4.1
       jest-environment-jsdom: 29.4.1
       prettier: 2.8.3
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
       storybook: 7.0.0-beta.50
       tiny-invariant: 1.3.1
       ts-jest: 29.0.5_wrz2f4catxnbofknv5bs36jgqa
@@ -1883,6 +1883,7 @@ packages:
       '@emotion/weak-memoize': 0.3.0
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
+    dev: false
 
   /@emotion/react/11.10.5_64k6h7xsf5jw26ymy7ush5uuyi:
     resolution: {integrity: sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@emotion/react/-/react-11.10.5.tgz}
@@ -1906,7 +1907,6 @@ packages:
       '@emotion/weak-memoize': 0.3.0
       hoist-non-react-statics: 3.3.2
       react: 17.0.2
-    dev: false
 
   /@emotion/react/11.10.5_6ppozjj7ve2zrsy5dwx4etvjce:
     resolution: {integrity: sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@emotion/react/-/react-11.10.5.tgz}
@@ -1961,7 +1961,6 @@ packages:
       react: '>=16.8.0'
     dependencies:
       react: 17.0.2
-    dev: false
 
   /@emotion/use-insertion-effect-with-fallbacks/1.0.0_react@18.2.0:
     resolution: {integrity: sha512-1eEgUGmkaljiBnRMTdksDV1W4kUnmwgp7X9G8B++9GYwl1lUdqSndSriIrTJ0N7LQaoauY9JJ2yhiOYK5+NI4A==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@emotion/use-insertion-effect-with-fallbacks/-/use-insertion-effect-with-fallbacks-1.0.0.tgz}
@@ -1969,6 +1968,7 @@ packages:
       react: '>=16.8.0'
     dependencies:
       react: 18.2.0
+    dev: false
 
   /@emotion/utils/1.2.0:
     resolution: {integrity: sha512-sn3WH53Kzpw8oQ5mgMmIzzyAaH2ZqFEbozVVBSYp538E06OSE6ytOp7pRAjNQR+Q/orwqdQYJSe2m3hCOeznkw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@emotion/utils/-/utils-1.2.0.tgz}
@@ -2757,7 +2757,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/components/7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y:
+  /@storybook/components/7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-/ru6DmN5fnWPMwDkWvijzY41RKhnM24UvbWQxrDCZ+AmLK4VeopumYFLBACbpZ0cxtDqrvw9zwZH3kwArl7flw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2766,12 +2766,12 @@ packages:
       '@storybook/client-logger': 7.0.0-beta.50
       '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
-      '@storybook/theming': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
+      '@storybook/theming': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/types': 7.0.0-beta.50
       memoizerific: 1.11.3
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      use-resize-observer: 9.1.0_biqbaboplfbrettd7655fr4n2y
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      use-resize-observer: 9.1.0_sfoxds7t5ydpegc3knd667wn6m
       util-deprecate: 1.0.2
     dev: true
 
@@ -2909,7 +2909,7 @@ packages:
   /@storybook/global/5.0.0:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@storybook/global/-/global-5.0.0.tgz}
 
-  /@storybook/manager-api/7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y:
+  /@storybook/manager-api/7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-9SqVaEjpLmCQJinbZ6a4VtLhWC7HPAtdKVJQ7MVbrM+ImX4g5tfcZfsdtx5Ibxh4+4MrcLgH6qIqflHoF0JZSg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2920,14 +2920,14 @@ packages:
       '@storybook/core-events': 7.0.0-beta.50
       '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
-      '@storybook/router': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
-      '@storybook/theming': 7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y
+      '@storybook/router': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
+      '@storybook/theming': 7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/types': 7.0.0-beta.50
       dequal: 2.0.3
       lodash: 4.17.21
       memoizerific: 1.11.3
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
       semver: 7.3.8
       store2: 2.14.2
       telejson: 7.0.4
@@ -3171,7 +3171,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/router/7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y:
+  /@storybook/router/7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-FUomH7SYmC6js2DpohCwhIa51tdXCzuYMK1+8T0uDkeW7m6ln/8CfJ5FGNcTK41kOfHhypXSMtPPh0kd13E+pg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3180,8 +3180,8 @@ packages:
       '@storybook/client-logger': 7.0.0-beta.50
       memoizerific: 1.11.3
       qs: 6.11.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /@storybook/telemetry/7.0.0-beta.50:
@@ -3201,18 +3201,18 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/theming/7.0.0-beta.50_biqbaboplfbrettd7655fr4n2y:
+  /@storybook/theming/7.0.0-beta.50_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-4GrAbFvDCyvIRTv5DwHxCIM09W+MF+iLSawC2iPFU6RVw50XedMIH36UR1eAFoNQMAGPod478x0EF1C2LRIQdg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@18.2.0
+      '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@17.0.2
       '@storybook/client-logger': 7.0.0-beta.50
       '@storybook/global': 5.0.0
       memoizerific: 1.11.3
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
 
   /@storybook/types/7.0.0-beta.50:
     resolution: {integrity: sha512-c8X1VI/BmzxbnORMJZ0DzMaiikNJ5/o1nvWvpcxP+QCz8SV49DGGE5w8euBiccvzl6EQ8wp8AmAQaoCmsOR7WA==}
@@ -3222,9 +3222,9 @@ packages:
       '@types/express': 4.17.17
       file-system-cache: 2.0.2
 
-  /@testing-library/dom/9.0.0:
-    resolution: {integrity: sha512-+/TLgKNFsYUshOY/zXsQOk+PlFQK+eyJ9T13IDVNJEi+M+Un7xlJK+FZKkbGSnf0+7E1G6PlDhkSYQ/GFiruBQ==}
-    engines: {node: '>=14'}
+  /@testing-library/dom/8.20.0:
+    resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
+    engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.18.6
       '@babel/runtime': 7.20.13
@@ -3236,18 +3236,18 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/react/14.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-S04gSNJbYE30TlIMLTzv6QCTzt9AqIF5y6s6SzVFILNcNvbV/jU96GeiTPillGQo+Ny64M/5PV7klNYYgv5Dfg==}
-    engines: {node: '>=14'}
+  /@testing-library/react/12.1.5_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-OfTXCJUFgjd/digLUuPxa0+/3ZxsQmE7ub9kcbW/wi96Bh3o/p5vrETcBGfP17NWPGqeYYl5LTRpwyGoMC4ysg==}
+    engines: {node: '>=12'}
     peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: <18.0.0
+      react-dom: <18.0.0
     dependencies:
       '@babel/runtime': 7.20.13
-      '@testing-library/dom': 9.0.0
-      '@types/react-dom': 18.0.11
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      '@testing-library/dom': 8.20.0
+      '@types/react-dom': 17.0.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: true
 
   /@tootallnate/once/2.0.0:
@@ -3458,7 +3458,7 @@ packages:
     dev: true
 
   /@types/prop-types/15.7.5:
-    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/prop-types/-/prop-types-15.7.5.tgz}
+    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/qs/-/qs-6.9.7.tgz}
@@ -3466,14 +3466,8 @@ packages:
   /@types/range-parser/1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
 
-  /@types/react-dom/16.9.17:
-    resolution: {integrity: sha512-qSRyxEsrm5btPXnowDOs5jSkgT8ldAA0j6Qp+otHUh+xHzy3sXmgNfyhucZjAjkgpdAUw9rJe0QRtX/l+yaS4g==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/react-dom/-/react-dom-16.9.17.tgz}
-    dependencies:
-      '@types/react': 16.14.35
-    dev: true
-
-  /@types/react-dom/18.0.11:
-    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
+  /@types/react-dom/17.0.0:
+    resolution: {integrity: sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==}
     dependencies:
       '@types/react': 18.0.27
     dev: true
@@ -3483,19 +3477,11 @@ packages:
     dependencies:
       '@types/react': 18.0.27
 
-  /@types/react/16.14.35:
-    resolution: {integrity: sha512-NUEiwmSS1XXtmBcsm1NyRRPYjoZF2YTE89/5QiLt5mlGffYK9FQqOKuOLuXNrjPQV04oQgaZG+Yq02ZfHoFyyg==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/react/-/react-16.14.35.tgz}
+  /@types/react/17.0.0:
+    resolution: {integrity: sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==}
     dependencies:
       '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
       csstype: 3.1.1
-    dev: true
-
-  /@types/react/16.9.17:
-    resolution: {integrity: sha512-UP27In4fp4sWF5JgyV6pwVPAQM83Fj76JOcg02X5BZcpSu5Wx+fP9RMqc2v0ssBoQIFvD5JdKY41gjJJKmw6Bg==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/react/-/react-16.9.17.tgz}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      csstype: 2.6.21
 
   /@types/react/18.0.27:
     resolution: {integrity: sha512-3vtRKHgVxu3Jp9t718R9BuzoD4NcQ8YJ5XRzsSKxNDiDonD2MXIT1TmSkenxuCycZJoQT5d2vE8LwWJxBC1gmA==}
@@ -3511,7 +3497,7 @@ packages:
     dev: true
 
   /@types/scheduler/0.16.2:
-    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/scheduler/-/scheduler-0.16.2.tgz}
+    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
   /@types/semver/6.2.3:
     resolution: {integrity: sha512-KQf+QAMWKMrtBMsB8/24w53tEsxllMj6TuA80TT/5igJalLI/zm0L3oXRbIAl4Ohfc85gyHX/jhMwsVkmhLU4A==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@types/semver/-/semver-6.2.3.tgz}
@@ -3707,7 +3693,7 @@ packages:
       - supports-color
     dev: true
 
-  /@xstate/react/3.1.2_sgimpzj6nls35op3yrw2svbb7u:
+  /@xstate/react/3.1.2_6gav5jjhc6iro5dklwz2w2orca:
     resolution: {integrity: sha512-nMpYuBFieWoHaImAtsguwmQHY3WnRpfRFYtInn5zRKsfGkC2JILKfnH58fODUubwhSqq0qMiUqrlaklP7ZBUCw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/@xstate/react/-/react-3.1.2.tgz}
     peerDependencies:
       '@xstate/fsm': ^2.0.0
@@ -3719,9 +3705,9 @@ packages:
       xstate:
         optional: true
     dependencies:
-      react: 18.2.0
-      use-isomorphic-layout-effect: 1.1.2_ii4t3fjk7jl4os4mt4smsdbolm
-      use-sync-external-store: 1.2.0_react@18.2.0
+      react: 17.0.2
+      use-isomorphic-layout-effect: 1.1.2_gclozy222p2rl3vb2mw53tjfmm
+      use-sync-external-store: 1.2.0_react@17.0.2
       xstate: 4.35.4
     transitivePeerDependencies:
       - '@types/react'
@@ -4784,11 +4770,8 @@ packages:
       cssom: 0.3.8
     dev: true
 
-  /csstype/2.6.21:
-    resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csstype/-/csstype-2.6.21.tgz}
-
   /csstype/3.1.1:
-    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csstype/-/csstype-3.1.1.tgz}
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
 
   /csv-generate/3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csv-generate/-/csv-generate-3.4.3.tgz}
@@ -9081,7 +9064,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
-    dev: false
 
   /react-select/5.7.0_pjwopsidmaokadturxaafygjp4:
     resolution: {integrity: sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==, tarball: https://packages.atlassian.com/api/npm/npm-remote/react-select/-/react-select-5.7.0.tgz}
@@ -9103,6 +9085,7 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
+    dev: false
 
   /react-select/5.7.0_wvw2jvfp4as2tyq4njzvtr7om4:
     resolution: {integrity: sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==, tarball: https://packages.atlassian.com/api/npm/npm-remote/react-select/-/react-select-5.7.0.tgz}
@@ -9138,6 +9121,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /react-transition-group/4.4.5_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==, tarball: https://packages.atlassian.com/api/npm/npm-remote/react-transition-group/-/react-transition-group-4.4.5.tgz}
@@ -9151,7 +9135,6 @@ packages:
       prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-    dev: false
 
   /react-transition-group/4.4.5_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==, tarball: https://packages.atlassian.com/api/npm/npm-remote/react-transition-group/-/react-transition-group-4.4.5.tgz}
@@ -10531,7 +10514,7 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /use-isomorphic-layout-effect/1.1.2_ii4t3fjk7jl4os4mt4smsdbolm:
+  /use-isomorphic-layout-effect/1.1.2_gclozy222p2rl3vb2mw53tjfmm:
     resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==, tarball: https://packages.atlassian.com/api/npm/npm-remote/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz}
     peerDependencies:
       '@types/react': '*'
@@ -10540,8 +10523,8 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 16.9.17
-      react: 18.2.0
+      '@types/react': 17.0.0
+      react: 17.0.2
     dev: false
 
   /use-isomorphic-layout-effect/1.1.2_react@16.14.0:
@@ -10566,7 +10549,6 @@ packages:
         optional: true
     dependencies:
       react: 17.0.2
-    dev: false
 
   /use-isomorphic-layout-effect/1.1.2_react@18.2.0:
     resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==, tarball: https://packages.atlassian.com/api/npm/npm-remote/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz}
@@ -10578,24 +10560,25 @@ packages:
         optional: true
     dependencies:
       react: 18.2.0
+    dev: false
 
-  /use-resize-observer/9.1.0_biqbaboplfbrettd7655fr4n2y:
+  /use-resize-observer/9.1.0_sfoxds7t5ydpegc3knd667wn6m:
     resolution: {integrity: sha512-R25VqO9Wb3asSD4eqtcxk8sJalvIOYBqS8MNZlpDSQ4l4xMQxC/J7Id9HoTqPq8FwULIn0PVW+OAqF2dyYbjow==}
     peerDependencies:
       react: 16.8.0 - 18
       react-dom: 16.8.0 - 18
     dependencies:
       '@juggle/resize-observer': 3.4.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: true
 
-  /use-sync-external-store/1.2.0_react@18.2.0:
+  /use-sync-external-store/1.2.0_react@17.0.2:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==, tarball: https://packages.atlassian.com/api/npm/npm-remote/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: 18.2.0
+      react: 17.0.2
     dev: false
 
   /util-deprecate/1.0.2:

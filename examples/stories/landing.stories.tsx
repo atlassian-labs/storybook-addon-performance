@@ -1,11 +1,8 @@
-import { findByText, fireEvent } from '@testing-library/dom';
+import { findByText, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Select from 'react-select';
 import invariant from 'tiny-invariant';
-import {
-  InteractionTaskArgs,
-  PublicInteractionTask,
-} from '../../packages/storybook-addon-performance/src';
+import { InteractionTaskArgs, PublicInteractionTask } from 'storybook-addon-performance';
 
 export default {
   title: 'Examples',

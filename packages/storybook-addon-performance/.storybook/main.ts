@@ -1,8 +1,7 @@
-/**
- * @type {import('@storybook/react-vite').StorybookConfig}
- */
-const config = {
-  stories: ['../../stories/**/*.stories.*'],
+import { StorybookConfig } from '@storybook/react-vite';
+
+const conifg: StorybookConfig = {
+  stories: ['../stories/*.stories.*'],
   addons: ['storybook-addon-performance'],
   framework: {
     name: '@storybook/react-vite',
@@ -13,4 +12,4 @@ const config = {
   },
 };
 
-export default config;
+export default conifg;

@@ -4,7 +4,8 @@
     "outDir": "dist/esm",
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "test/**/*"
   ],
   "exclude": [
     "node_modules",

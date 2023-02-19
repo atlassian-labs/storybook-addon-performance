@@ -10,6 +10,7 @@
     "test",
     "popular"
   ],
+  "source": "src/index.ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
@@ -40,6 +41,7 @@
     "@storybook/react-vite": "^7.0.0-beta.50",
     "@storybook/react": "7.0.0-beta.50",
     "@testing-library/react": "^11.0.0",
+    "@types/jest": "^29.2.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.46.0",

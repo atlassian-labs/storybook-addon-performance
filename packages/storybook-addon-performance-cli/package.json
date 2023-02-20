@@ -20,7 +20,7 @@
     "typescript:watch": "tsc --watch",
     "prettier:check": "prettier src --debug-check --config ../../.prettierrc",
     "prettier:write": "prettier src -write --config ../../.prettierrc",
-    "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0"
+    "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0 src"
   },
   "bin": {
     "sb-perf": "dist/index.js"

@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { addonKey, packageName } from './../addon-constants';
+import { packageName } from './../addon-constants';
 export default async function withContainer<T>(
   fn: (container: HTMLElement) => Promise<T>,
 ): Promise<T> {

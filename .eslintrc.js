@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
-  ignorePaths: ['dist/**'],
+  ignorePatterns: ['dist/**'],
   rules: {
     'prettier/prettier': 'error',
     'no-async-promise-executor': 'error',

@@ -73,7 +73,7 @@
     "typescript:check": "pnpm tsc --noEmit",
     "prettier:check": "pnpm prettier src --debug-check --config ../../.prettierrc",
     "prettier:write": "pnpm prettier src --write --config ../../.prettierrc",
-    "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0",
+    "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0 src test",
     "validate": "pnpm typescript:check && pnpm prettier:check && pnpm eslint:check",
     "dev": "pnpm storybook dev",
     "test": "pnpm jest",

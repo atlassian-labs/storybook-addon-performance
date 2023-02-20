@@ -249,6 +249,7 @@ importers:
       storybook-addon-performance: workspace:*
       ts-jest: ^29.0.3
       tslib: ^2.4.1
+      tsup: ^6.5.0
       typescript: ^4.9.4
     dependencies:
       storybook-addon-performance: link:../storybook-addon-performance
@@ -266,6 +267,7 @@ importers:
       rimraf: 3.0.2
       ts-jest: 29.0.5_wrz2f4catxnbofknv5bs36jgqa
       tslib: 2.5.0
+      tsup: 6.5.0_typescript@4.9.5
       typescript: 4.9.5
 
 packages:

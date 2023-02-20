@@ -70,11 +70,11 @@
   "scripts": {
     "cypress:open": "pnpm cypress open",
     "cypress:run": "pnpm cypress run",
-    "typescript:check": "pnpm tsc --noEmit",
+    "typecheck": "pnpm tsc --noEmit",
     "prettier:check": "pnpm prettier src --debug-check --config ../../.prettierrc",
     "prettier:write": "pnpm prettier src --write --config ../../.prettierrc",
     "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0 src test",
-    "validate": "pnpm typescript:check && pnpm prettier:check && pnpm eslint:check",
+    "validate": "pnpm prettier:check && pnpm eslint:check",
     "dev": "pnpm storybook dev",
     "test": "pnpm jest",
     "watch": "tsup src --watch",

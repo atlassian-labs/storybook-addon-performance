@@ -7,7 +7,8 @@
   "scripts": {
     "build": "turbo build",
     "test": "turbo test",
-    "validate": "turbo validate"
+    "validate": "turbo validate",
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

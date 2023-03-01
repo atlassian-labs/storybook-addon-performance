@@ -1,13 +1,16 @@
 {
+  "name": "root",
   "private": true,
   "engines": {
     "node": ">=16",
-    "pnpm": ">=6"
+    "pnpm": ">=7"
   },
   "scripts": {
     "build": "turbo build",
     "test": "turbo test",
-    "validate": "turbo validate"
+    "validate": "turbo validate",
+    "typecheck": "turbo typecheck",
+    "cut:version": "pnpm changeset version && pnpm changeset tag"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

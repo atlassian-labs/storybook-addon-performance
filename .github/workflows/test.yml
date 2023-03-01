@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  validate:
+  test:
     name: testing code
     runs-on: ubuntu-latest
     strategy:

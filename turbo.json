@@ -10,6 +10,11 @@
         "storybook-static/**"
       ]
     },
+    "typecheck": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "validate": {},
     "test": {}
   }

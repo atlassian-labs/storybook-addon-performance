@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+// has
 import type { TaskGroupResult } from 'storybook-addon-performance';
 
 import calculate from './calculate';

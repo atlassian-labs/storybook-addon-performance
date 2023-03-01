@@ -1,6 +1,6 @@
 import { runAll } from '../../src/task-runner';
 import preset from '../../src/tasks/preset';
-import { Task, TaskGroup, TaskGroupResult, TimedResult, AllowedGroup } from '../../src/types';
+import { Task, TaskGroup, TaskGroupResult, TimedResult } from '../../src/types';
 import getResultMap from '../../src/util/get-result-map';
 import { StaticResult } from '../../src/types';
 

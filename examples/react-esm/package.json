@@ -14,14 +14,13 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
-    "@storybook/react": "7.0.0-beta.2",
-    "@storybook/react-webpack5": "7.0.0-beta.2",
-    "babel-loader": "^9.1.0",
+    "@storybook/react": "7.0.0-beta.50",
+    "@storybook/react-vite": "7.0.0-beta.50",
     "http-server": "^14.1.1",
-    "storybook": "7.0.0-beta.2",
+    "storybook": "7.0.0-beta.50",
     "storybook-addon-performance": "workspace:*",
     "typescript": "^4.9.4",
-    "webpack": "^5.75.0"
+    "vite": "^4.0.0"
   },
   "scripts": {
     "storybook:dev": "pnpm storybook dev --port 9005",

@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 export type Nullable<T> = T | null;
 // Similar to {...A, ...B}
 // 1. Remove all overlapping types from First
@@ -14,11 +16,11 @@ interface Container extends HTMLElement {
 }
 
 export type RunStaticTaskArgs = {
-  getElement: () => React.ReactElement;
+  getElement: () => ReactElement;
   container: HTMLElement;
 };
 export type RunStaticTaskArgsWithReactRoot = {
-  getElement: () => React.ReactElement;
+  getElement: () => ReactElement;
   container: Container;
 };
 export type StaticTask = BaseTask & {
@@ -31,7 +33,7 @@ export type TimedControls = {
 };
 
 export type RunTimedTaskArgs = {
-  getElement: () => React.ReactElement;
+  getElement: () => ReactElement;
   controls: TimedControls;
   container: HTMLElement;
 };

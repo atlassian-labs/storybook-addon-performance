@@ -4,7 +4,7 @@ export const interactionGroupId: string = 'Interactions';
 
 export function getInteractionGroup(interactions: PublicInteractionTask[]): TaskGroup {
   const tasks: InteractionTask[] = interactions.map(
-    (item: PublicInteractionTask, index: number): InteractionTask => {
+    (item: PublicInteractionTask): InteractionTask => {
       return {
         ...item,
         type: 'interaction',

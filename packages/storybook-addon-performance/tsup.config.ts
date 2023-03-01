@@ -7,4 +7,5 @@ export default defineConfig({
   clean: true,
   minify: false,
   platform: 'browser',
+  sourcemap: true,
 });

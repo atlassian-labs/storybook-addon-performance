@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import {
+import type {
   RunStaticTaskArgs,
   RunStaticTaskArgsWithReactRoot,
   RunTimedTaskArgs,
@@ -8,7 +8,6 @@ import {
   TaskGroup,
   TimedTask,
   Nullable,
-  AllowedGroup,
 } from '../../types';
 import { UnsupportedError } from '../../task-runner/custom-errors';
 

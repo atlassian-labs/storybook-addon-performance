@@ -1,4 +1,5 @@
 {
+  "name": "root",
   "private": true,
   "engines": {
     "node": ">=16",
@@ -8,7 +9,8 @@
     "build": "turbo build",
     "test": "turbo test",
     "validate": "turbo validate",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "cut:version": "pnpm changeset version && pnpm changeset tag"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

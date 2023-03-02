@@ -1,6 +1,5 @@
-import { UnsupportedError } from '../../src/task-runner/custom-errors';
-import { runOneStatic, runOneTimed } from '../../src/task-runner';
-import { ErrorResult, StaticResult, StaticTask, TimedTask, TimedResult } from '../../src/types';
+import { runOneStatic } from '../../src/task-runner';
+import type { ErrorResult, StaticResult, StaticTask } from '../../src/types';
 
 beforeEach(() => {
   performance.mark = jest.fn();

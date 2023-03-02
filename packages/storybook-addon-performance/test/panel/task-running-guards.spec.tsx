@@ -10,7 +10,6 @@ import WithStorybookTheme from '../../test-util/with-storybook-theme';
 import * as mocks from '../../test-util/mocks';
 import eventNames from '../../src/events';
 import allowAllGroups from '../../src/tasks/allow-all-groups';
-import getResultMap from '../../src/util/get-result-map';
 
 beforeAll(() => localStorage.clear());
 afterEach(() => localStorage.clear());

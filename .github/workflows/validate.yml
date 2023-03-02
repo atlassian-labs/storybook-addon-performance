@@ -27,3 +27,4 @@ jobs:
       - run: pnpm validate
         env:
           CI: true
+      - run: pnpm typecheck

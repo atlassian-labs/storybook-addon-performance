@@ -1,4 +1,4 @@
-import { runOneTimed, RunOneTimedTaskArgs } from '../../src/task-runner';
+import { runOneTimed } from '../../src/task-runner';
 import { ErrorResult, TimedResult, TimedTask } from '../../src/types';
 
 it('should not repeat a timed task if an error occurred in one', async () => {

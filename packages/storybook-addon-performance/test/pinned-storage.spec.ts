@@ -27,8 +27,6 @@ it('should load supported pinned values', () => {
 });
 
 it('should not load unsupported pinned values', () => {
-  const first: Nullable<RunContext> = getPinned(mock.storyName);
-
   savePinned(mock.storyName, { foo: 'bar' } as never);
   const second: Nullable<RunContext> = getPinned(mock.storyName);
 
@@ -37,8 +35,6 @@ it('should not load unsupported pinned values', () => {
 });
 
 it('should not load unsupported pinned values: old value', () => {
-  const first: Nullable<RunContext> = getPinned(mock.storyName);
-
   const clone: RunContext = JSON.parse(JSON.stringify(mock.runContext));
   // @ts-ignore
   clone.results[0].map['Render to string'].taskId = 'unsupported old taskId';

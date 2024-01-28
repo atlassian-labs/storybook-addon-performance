@@ -2,7 +2,7 @@
   "private": true,
   "name": "react-esm-example",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An example using React 17",
   "dependencies": {
     "react": "^16.14.0",

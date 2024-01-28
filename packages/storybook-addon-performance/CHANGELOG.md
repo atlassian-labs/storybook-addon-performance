@@ -1,5 +1,11 @@
 # storybook-addon-performance
 
+## 0.17.2
+
+### Patch Changes
+
+- 8c9b5d6: Bump dependencies.
+
 ## 0.17.1
 
 ### Patch Changes

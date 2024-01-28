@@ -1,5 +1,6 @@
-import { useParameter, addons, types } from '@storybook/manager-api';
+import { useParameter, addons } from '@storybook/manager-api';
 import { Channel } from '@storybook/channels';
+import { Addon_TypesEnum } from '@storybook/types';
 import { AddonPanel } from '@storybook/components';
 import React from 'react';
 import * as constants from './addon-constants';
@@ -31,10 +32,10 @@ function Env({ children }: EnvProps) {
 
 addons.register(constants.addonKey, () => {
   addons.add(constants.panelKey, {
-    type: types.PANEL,
+    type: Addon_TypesEnum.PANEL,
     title: constants.panelTitle,
-    render: ({ active, key }) => (
-      <AddonPanel active={active ?? true} key={key}>
+    render: ({ active }) => (
+      <AddonPanel active={active ?? true}>
         <Env>
           {({ interactions, channel, allowedGroups }) => (
             <Panel channel={channel} interactions={interactions} allowedGroups={allowedGroups} />

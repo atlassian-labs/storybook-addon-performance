@@ -24,7 +24,7 @@
     "webpack": "^5.90.0"
   },
   "scripts": {
-    "storybook:dev": "pnpm storybook dev --port 9005",
+    "dev": "pnpm storybook dev --port 9005",
     "build": "pnpm storybook build",
     "start-server": "pnpm http-server storybook-static --port 9005 --silent"
   }

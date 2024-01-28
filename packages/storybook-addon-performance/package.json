@@ -25,6 +25,7 @@
   "dependencies": {
     "@storybook/manager-api": "^7.6.10",
     "@storybook/theming": "^7.6.10",
+    "@storybook/types": "^7.6.10",
     "@xstate/react": "^3.2.2",
     "xstate": "^4.38.3"
   },
@@ -70,7 +71,6 @@
     "prettier:write": "pnpm prettier src --write --config ../../.prettierrc",
     "eslint:check": "eslint -c ../../.eslintrc.js --max-warnings=0",
     "validate": "pnpm typescript:check && pnpm prettier:check && pnpm eslint:check",
-    "dev": "pnpm typescript:watch & pnpm storybook:dev",
     "test": "pnpm jest",
     "watch": "tsup src --watch",
     "build": "tsup",

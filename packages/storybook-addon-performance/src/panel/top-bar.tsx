@@ -208,6 +208,7 @@ export default function Topbar() {
               <ResponsiveText>Load result</ResponsiveText>
             </Button>
           }
+          {/* @ts-expect-error */}
           <Form.Input
             style={{ display: 'none' }}
             id={selectors.loadButtonId}

@@ -13,17 +13,17 @@
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@storybook/react": "7.0.0-beta.2",
-    "@storybook/react-webpack5": "7.0.0-beta.2",
+    "@storybook/react": "^7.0.0",
+    "@storybook/react-webpack5": "^7.0.0",
     "babel-loader": "^9.1.3",
     "http-server": "^14.1.1",
-    "storybook": "7.0.0-beta.2",
+    "storybook": "^7.0.0",
     "storybook-addon-performance": "workspace:*",
     "typescript": "^4.9.5",
     "webpack": "^5.90.0"
   },
   "scripts": {
-    "storybook:dev": "pnpm storybook dev --port 9003",
+    "dev": "pnpm storybook dev --port 9003",
     "build": "pnpm storybook build",
     "start-server": "pnpm http-server storybook-static --port 9003 --silent"
   }

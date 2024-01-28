@@ -92,7 +92,8 @@
       "require": "./dist/manager.js",
       "import": "./dist/manager.mjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=16.0.0"

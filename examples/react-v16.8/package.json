@@ -1,6 +1,6 @@
 {
   "name": "react-16-example",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "An example using React 16.8",
   "dependencies": {

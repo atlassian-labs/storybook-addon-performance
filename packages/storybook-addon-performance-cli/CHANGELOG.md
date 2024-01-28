@@ -1,5 +1,12 @@
 # storybook-addon-performance-cli
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [74a1c90]
+  - storybook-addon-performance@0.17.3
+
 ## 1.0.3
 
 ### Patch Changes

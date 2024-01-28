@@ -1,5 +1,11 @@
 # storybook-addon-performance
 
+## 0.17.3
+
+### Patch Changes
+
+- 74a1c90: Fix type error for bumped deps
+
 ## 0.17.2
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-performance",
-  "version": "0.17.2",
+  "version": "0.17.3",
   "description": "A storybook addon to help better understand and debug performance for React components",
   "keywords": [
     "addon",

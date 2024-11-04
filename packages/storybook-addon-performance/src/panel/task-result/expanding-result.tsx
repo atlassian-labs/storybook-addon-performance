@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { styled } from '@storybook/theming';
 import * as Expand from './parts';
-import { Button, Icons } from '@storybook/components';
+import { Button } from '@storybook/components';
+import { ArrowDownIcon, ArrowRightIcon } from '@storybook/icons';
 import { useActor } from '@xstate/react';
 import useRequiredContext from '../../use-required-context';
 import ServiceContext from '../service-context';
@@ -71,11 +72,7 @@ const IconContainer = styled.span`
 `;
 
 function ExpandIcon({ isExpanded }: ExpandedArgs) {
-  return (
-    <IconContainer>
-      <Icons icon={isExpanded ? 'arrowdown' : 'arrowright'} />
-    </IconContainer>
-  );
+  return <IconContainer>{isExpanded ? <ArrowDownIcon /> : <ArrowRightIcon />}</IconContainer>;
 }
 
 export function ExpandingResult({ name, result, getExpanded }: Props) {
@@ -97,10 +94,8 @@ export function ExpandingResult({ name, result, getExpanded }: Props) {
       {isExpanded ? (
         <Expand.Section>
           {
-            // @ts-ignore
             <Button
-              secondary
-              small
+              size="small"
               disabled={!nextEventsInclude('START_ONE', state.nextEvents)}
               onClick={() => send({ type: 'START_ONE', taskName: name })}
             >

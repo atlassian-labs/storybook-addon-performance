@@ -1,4 +1,5 @@
-import { Button, Form, Icons, IconsProps } from '@storybook/components';
+import { Button, Form } from '@storybook/components';
+import { DownloadIcon, LockIcon, UnlockIcon, UploadIcon } from '@storybook/icons';
 import { styled } from '@storybook/theming';
 import React, { ChangeEvent } from 'react';
 import useRequiredContext from '../use-required-context';
@@ -59,12 +60,6 @@ const MetaSettings = styled.div`
   flex-direction: row;
 `;
 
-const ResponsiveIcon = styled(Icons)`
-  @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
-    margin-right: 0px !important;
-  }
-`;
-
 const ResponsiveText = styled.span`
   @media screen and (max-width: ${TABLET_BREAKPOINT}px) {
     display: none;
@@ -99,12 +94,6 @@ export default function Topbar() {
     unpin: nextEventsInclude('UNPIN', state.nextEvents) && current.results != null,
   };
 
-  const icons: { pin: IconsProps['icon']; save: IconsProps['icon']; load: IconsProps['icon'] } = {
-    pin: pinned ? 'lock' : 'unlock',
-    save: 'download',
-    load: 'upload',
-  };
-
   return (
     <Container>
       <Segment>
@@ -114,8 +103,8 @@ export default function Topbar() {
             css={{
               textTransform: 'uppercase',
             }}
-            primary
-            small
+            variant="solid"
+            size="small"
             onClick={() => send({ type: 'START_ALL' })}
             disabled={!enabled.start}
             id={selectors.startAllButtonId}
@@ -169,13 +158,12 @@ export default function Topbar() {
           {
             <Button
               id={selectors.pinButtonId}
-              secondary
-              outline={!pinned}
-              small
+              variant={!pinned ? 'outline' : undefined}
+              size="small"
               disabled={pinned ? !enabled.unpin : !enabled.pin}
               onClick={() => send({ type: pinned ? 'UNPIN' : 'PIN' })}
             >
-              <ResponsiveIcon icon={icons.pin} aria-label={icons.pin} />
+              {pinned ? <LockIcon aria-label="lock" /> : <UnlockIcon aria-label="unlock" />}
               <ResponsiveText>{pinned ? 'Unpin baseline' : 'Pin as baseline'}</ResponsiveText>
             </Button>
           }
@@ -185,30 +173,27 @@ export default function Topbar() {
           {
             <Button
               id={selectors.saveButtonId}
-              secondary
-              small
-              outline
+              size="small"
+              variant="outline"
               disabled={current.results == null}
               onClick={() => send({ type: 'SAVE' })}
             >
-              <ResponsiveIcon icon={icons.save} aria-label={icons.save} />
+              <DownloadIcon aria-label="save" />
               <ResponsiveText>Save result</ResponsiveText>
             </Button>
           }
           {
             <Button
-              secondary
-              small
-              outline
+              size="small"
+              variant="outline"
               onClick={() => {
                 document.getElementById(selectors.loadButtonId)?.click();
               }}
             >
-              <ResponsiveIcon icon={icons.load} aria-label={icons.load} />
+              <UploadIcon aria-label="load" />
               <ResponsiveText>Load result</ResponsiveText>
             </Button>
           }
-          {/* @ts-expect-error */}
           <Form.Input
             style={{ display: 'none' }}
             id={selectors.loadButtonId}

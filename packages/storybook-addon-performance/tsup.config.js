@@ -1,3 +1,4 @@
+import { globalPackages } from '@storybook/manager/globals';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -7,4 +8,5 @@ export default defineConfig({
   clean: true,
   minify: false,
   platform: 'browser',
+  external: globalPackages,
 });

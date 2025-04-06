@@ -1,6 +1,8 @@
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 
+<img src="assets/logo-full.svg" alt="Storybook Performance Addon" width="300" />
+
 A [storybook](https://storybook.js.org/) addon to help better understand and debug performance for `React` components
 
 <img src="https://user-images.githubusercontent.com/2182637/78786875-c904d000-79ec-11ea-9d49-1e253129f450.gif"
@@ -228,6 +230,14 @@ pnpm typescript:watch
 # Start the local storybook
 pnpm storybook:dev
 ```
+
+## Assets
+
+The following logo variations are available in the `assets` directory:
+
+- `logo-full.svg`: Full logo with text and icon
+- `logo-icon.svg`: Icon-only version
+- `logo-text.svg`: Text-only version
 
 ## Thanks
 

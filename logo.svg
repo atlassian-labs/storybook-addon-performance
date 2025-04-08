@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="120" cy="120" r="110" fill="#FF4785" opacity="0.1"/>
+  
+  <!-- Speedometer base -->
+  <path d="M40 120a80 80 0 1 1 160 0" fill="none" stroke="#FF4785" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Speedometer needle -->
+  <path d="M120 120L175 75" stroke="#FF4785" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="120" cy="120" r="12" fill="#FF4785"/>
+  
+  <!-- Book pages -->
+  <path d="M70 140c0 0 20-10 50-10s50 10 50 10v40c0 0-20-10-50-10s-50 10-50 10z" fill="#1EA7FD"/>
+  <path d="M70 140c0 0 20-10 50-10s50 10 50 10" fill="none" stroke="#1EA7FD" stroke-width="4"/>
+  
+  <!-- Measurement lines -->
+  <path d="M50 110l10 5M60 90l10 5M85 70l5 10M115 65l2 12M145 70l-5 10M170 90l-10 5M180 110l-10 5" stroke="#FF4785" stroke-width="4" stroke-linecap="round"/>
+</svg>

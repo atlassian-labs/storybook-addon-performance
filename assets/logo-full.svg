@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="120" cy="120" r="110" fill="#FF4785" fill-opacity="0.1"/>
+  
+  <!-- Storybook-inspired Book Shape -->
+  <path d="M80 60 L160 60 C180 60 190 70 190 90 L190 170 C190 190 180 200 160 200 L80 200 C60 200 50 190 50 170 L50 90 C50 70 60 60 80 60" 
+        fill="#FF4785" stroke="#FF4785" stroke-width="4"/>
+  
+  <!-- Speedometer Dial -->
+  <circle cx="120" cy="130" r="45" fill="none" stroke="#1EA7FD" stroke-width="6"/>
+  <path d="M120 130 L150 100" stroke="#1EA7FD" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="120" cy="130" r="5" fill="#1EA7FD"/>
+  
+  <!-- Text -->
+  <text x="120" y="220" font-family="Arial, sans-serif" font-size="16" fill="#2E3438" text-anchor="middle">Performance Addon</text>
+</svg>

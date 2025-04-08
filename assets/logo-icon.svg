@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimal Icon Version - Just the core elements -->
+  
+  <!-- Storybook-inspired Book Shape (Simplified) -->
+  <path d="M90 70 L150 70 C165 70 170 75 170 90 L170 150 C170 165 165 170 150 170 L90 170 C75 170 70 165 70 150 L70 90 C70 75 75 70 90 70" 
+        fill="#FF4785"/>
+  
+  <!-- Speedometer Dial (Larger and Centered) -->
+  <circle cx="120" cy="120" r="35" fill="none" stroke="#1EA7FD" stroke-width="8"/>
+  <path d="M120 120 L145 95" stroke="#1EA7FD" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="120" cy="120" r="4" fill="#1EA7FD"/>
+</svg>

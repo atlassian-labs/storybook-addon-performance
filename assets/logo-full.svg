@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Performance gauge -->
+  <circle cx="30" cy="30" r="25" fill="none" stroke="#FF4785" stroke-width="3"/>
+  <path d="M30 30 L30 12" stroke="#FF4785" stroke-width="3" stroke-linecap="round">
+    <animateTransform 
+      attributeName="transform"
+      type="rotate"
+      from="0 30 30"
+      to="180 30 30"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </path>
+  <!-- Storybook "S" stylized -->
+  <path d="M75 15 C85 15 90 20 90 27 C90 34 85 37 80 38 C85 39 92 42 92 49 C92 56 85 60 75 60" 
+        fill="none" stroke="#1EA7FD" stroke-width="3"/>
+  <!-- Text -->
+  <text x="100" y="35" font-family="Arial, sans-serif" font-size="16" fill="#2E3438">
+    Performance
+  </text>
+</svg>

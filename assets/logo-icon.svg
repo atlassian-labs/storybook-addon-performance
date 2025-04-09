@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Combined performance gauge and Storybook "S" -->
+  <circle cx="30" cy="30" r="25" fill="none" stroke="#FF4785" stroke-width="3"/>
+  <path d="M30 30 L30 12" stroke="#FF4785" stroke-width="3" stroke-linecap="round">
+    <animateTransform 
+      attributeName="transform"
+      type="rotate"
+      from="0 30 30"
+      to="180 30 30"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </path>
+  <path d="M25 20 C35 20 40 25 40 30 C40 35 35 37 30 38 C35 39 42 41 42 46 C42 51 35 55 25 55" 
+        fill="none" stroke="#1EA7FD" stroke-width="2"/>
+</svg>

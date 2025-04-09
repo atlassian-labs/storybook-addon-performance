@@ -1,3 +1,6 @@
+<div align="center">
+<img src="performance-timer-logo.svg" alt="Storybook Performance Addon Logo" width="200" height="200" />
+
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 

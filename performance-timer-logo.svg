@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle (timer body) -->
+  <circle cx="100" cy="100" r="90" stroke="#FF4785" stroke-width="12" fill="white"/>
+  
+  <!-- Inner circle (face) -->
+  <circle cx="100" cy="100" r="75" fill="#FF4785" fill-opacity="0.1"/>
+  
+  <!-- Timer hand -->
+  <path d="M100 40 L100 100 L150 100" stroke="#4630EB" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Start/stop button -->
+  <circle cx="100" cy="25" r="8" fill="#FF4785"/>
+</svg>

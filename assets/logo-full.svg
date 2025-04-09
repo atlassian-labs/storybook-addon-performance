@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="60" viewBox="0 0 240 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stopwatch body -->
+    <circle cx="30" cy="30" r="28" fill="#FF4785" stroke="#1EA7FD" stroke-width="2"/>
+    <circle cx="30" cy="30" r="25" fill="white"/>
+    <!-- Stopwatch button -->
+    <rect x="28" y="5" width="4" height="8" rx="1" fill="#2A0481"/>
+    <!-- Stopwatch hand -->
+    <line x1="30" y1="30" x2="30" y2="15" stroke="#2A0481" stroke-width="2" stroke-linecap="round"/>
+    <!-- Speed lines -->
+    <path d="M45,30 Q60,30 65,30" stroke="#FF4785" stroke-width="2" stroke-linecap="round"/>
+    <path d="M45,35 Q60,35 65,35" stroke="#1EA7FD" stroke-width="2" stroke-linecap="round"/>
+    <!-- Text -->
+    <text x="75" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2A0481">Storybook</text>
+    <text x="75" y="50" font-family="Arial, sans-serif" font-size="14" fill="#666666">Performance</text>
+</svg>

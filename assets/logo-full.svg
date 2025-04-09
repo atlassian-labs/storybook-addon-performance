@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Book Shape -->
+  <path d="M20 10 L200 10 Q210 10 210 20 L210 40 Q210 50 200 50 L20 50 Q10 50 10 40 L10 20 Q10 10 20 10" fill="#FF4785"/>
+  
+  <!-- Speedometer Arc -->
+  <path d="M40 35 A15 15 0 0 1 70 35" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+  <circle cx="55" cy="35" r="2" fill="#FFFFFF"/>
+  <line x1="55" y1="35" x2="65" y2="30" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Text -->
+  <text x="85" y="35" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">Performance</text>
+  
+  <!-- Graph Lines -->
+  <polyline points="180,40 190,25 200,35" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+</svg>

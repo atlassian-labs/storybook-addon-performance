@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle Background -->
+  <circle cx="30" cy="30" r="25" fill="#FF4785"/>
+  
+  <!-- Speedometer Design -->
+  <path d="M20 35 A15 15 0 0 1 40 35" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+  <circle cx="30" cy="35" r="2" fill="#FFFFFF"/>
+  <line x1="30" y1="35" x2="38" y2="30" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Mini Graph -->
+  <polyline points="15,25 30,15 45,25" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+</svg>

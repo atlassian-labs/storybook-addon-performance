@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="performance-speedometer-logo.svg" alt="Performance Speedometer Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="performance-analytics-logo.svg" alt="Performance Analytics Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="performance-pulse-logo.svg" alt="Performance Pulse Logo" width="80" height="80" style="margin: 0 10px;">
+</div>
+
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 

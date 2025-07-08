@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#f1f5f9" opacity="0.5"/>
+  
+  <!-- Performance bars representing metrics -->
+  <rect x="16" y="40" width="6" height="16" fill="#3b82f6" rx="3"/>
+  <rect x="26" y="32" width="6" height="24" fill="#06b6d4" rx="3"/>
+  <rect x="36" y="24" width="6" height="32" fill="#f97316" rx="3"/>
+  <rect x="46" y="36" width="6" height="20" fill="#3b82f6" rx="3"/>
+  
+  <!-- Trend line overlay -->
+  <path d="M14 44 Q24 36 34 28 Q44 32 54 40" stroke="#1e40af" stroke-width="2" fill="none" opacity="0.7"/>
+  
+  <!-- Performance indicator dots -->
+  <circle cx="19" cy="44" r="2" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="29" cy="36" r="2" fill="#ffffff" stroke="#06b6d4" stroke-width="2"/>
+  <circle cx="39" cy="28" r="2" fill="#ffffff" stroke="#f97316" stroke-width="2"/>
+  <circle cx="49" cy="40" r="2" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+</svg>

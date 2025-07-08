@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer container -->
+  <rect x="8" y="8" width="48" height="48" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Performance pulse wave -->
+  <path d="M12 32 L18 32 L22 20 L26 44 L30 16 L34 40 L38 24 L42 36 L46 28 L52 32" 
+        stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Monitoring dots -->
+  <circle cx="22" cy="20" r="2" fill="#f97316" opacity="0.8"/>
+  <circle cx="30" cy="16" r="2" fill="#f97316" opacity="0.8"/>
+  <circle cx="38" cy="24" r="2" fill="#f97316" opacity="0.8"/>
+  
+  <!-- Performance indicator -->
+  <circle cx="32" cy="12" r="3" fill="#10b981" opacity="0.9"/>
+  
+  <!-- Connection points suggesting addon integration -->
+  <rect x="2" y="30" width="6" height="4" fill="#6366f1" rx="2"/>
+  <rect x="56" y="30" width="6" height="4" fill="#6366f1" rx="2"/>
+  <rect x="30" y="2" width="4" height="6" fill="#6366f1" rx="2"/>
+  <rect x="30" y="56" width="4" height="6" fill="#6366f1" rx="2"/>
+</svg>

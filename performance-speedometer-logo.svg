@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer ring representing measurement scale -->
+  <circle cx="32" cy="32" r="28" stroke="#2563eb" stroke-width="3" fill="none" opacity="0.3"/>
+  
+  <!-- Inner performance indicator -->
+  <circle cx="32" cy="32" r="18" fill="#3b82f6" opacity="0.1"/>
+  
+  <!-- Speed indicator needle -->
+  <path d="M32 14 L38 32 L32 30 L26 32 Z" fill="#f97316" />
+  
+  <!-- Center dot -->
+  <circle cx="32" cy="32" r="3" fill="#1e40af"/>
+  
+  <!-- Performance marks -->
+  <rect x="30" y="8" width="4" height="8" fill="#2563eb" opacity="0.6"/>
+  <rect x="52" y="30" width="8" height="4" fill="#2563eb" opacity="0.6"/>
+  <rect x="30" y="52" width="4" height="8" fill="#2563eb" opacity="0.6"/>
+  <rect x="4" y="30" width="8" height="4" fill="#2563eb" opacity="0.6"/>
+</svg>

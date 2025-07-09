@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Performance arc (suggesting speed/progress) -->
+  <path d="M 20 60 A 40 40 0 0 1 100 60" fill="none" stroke="#3B82F6" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Speed indicator triangles -->
+  <polygon points="45,45 65,55 45,65" fill="#F59E0B"/>
+  <polygon points="55,35 75,45 55,55" fill="#F59E0B" opacity="0.7"/>
+  <polygon points="65,25 85,35 65,45" fill="#F59E0B" opacity="0.4"/>
+  
+  <!-- Central measurement dot -->
+  <circle cx="60" cy="60" r="4" fill="#1F2937"/>
+</svg>

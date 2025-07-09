@@ -1,5 +1,10 @@
 <h1 align="center">storybook-addon-performance 🚀</h1>
+
 <div align="center">
+
+<img src="performance-speed-logo.svg" alt="Performance Speed Logo" width="100" height="100" />
+<img src="analytics-metrics-logo.svg" alt="Analytics Metrics Logo" width="100" height="100" />
+<img src="integration-addon-logo.svg" alt="Integration Addon Logo" width="100" height="100" />
 
 A [storybook](https://storybook.js.org/) addon to help better understand and debug performance for `React` components
 

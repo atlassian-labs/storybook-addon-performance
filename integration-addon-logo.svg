@@ -1,0 +1,28 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main container (representing Storybook) -->
+  <rect x="20" y="30" width="60" height="60" rx="8" fill="none" stroke="#6B7280" stroke-width="2"/>
+  
+  <!-- Addon connection -->
+  <rect x="85" y="45" width="20" height="30" rx="4" fill="#3B82F6"/>
+  
+  <!-- Connection line -->
+  <line x1="80" y1="60" x2="85" y2="60" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Performance monitoring elements inside -->
+  <circle cx="40" cy="50" r="3" fill="#10B981"/>
+  <circle cx="50" cy="45" r="3" fill="#F59E0B"/>
+  <circle cx="60" cy="55" r="3" fill="#EF4444"/>
+  
+  <!-- Performance wave -->
+  <path d="M 30 70 Q 40 65 50 70 T 70 70" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Speed indicator -->
+  <polygon points="85,52 95,57 85,62" fill="#FFFFFF"/>
+  
+  <!-- Measurement tick marks -->
+  <line x1="25" y1="40" x2="27" y2="40" stroke="#9CA3AF" stroke-width="1"/>
+  <line x1="25" y1="50" x2="27" y2="50" stroke="#9CA3AF" stroke-width="1"/>
+  <line x1="25" y1="60" x2="27" y2="60" stroke="#9CA3AF" stroke-width="1"/>
+  <line x1="25" y1="70" x2="27" y2="70" stroke="#9CA3AF" stroke-width="1"/>
+  <line x1="25" y1="80" x2="27" y2="80" stroke="#9CA3AF" stroke-width="1"/>
+</svg>

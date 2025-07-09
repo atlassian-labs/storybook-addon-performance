@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="15" y="15" width="90" height="90" rx="12" fill="none" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Performance bars (suggesting metrics/analytics) -->
+  <rect x="25" y="70" width="12" height="25" rx="2" fill="#10B981"/>
+  <rect x="42" y="55" width="12" height="40" rx="2" fill="#3B82F6"/>
+  <rect x="59" y="40" width="12" height="55" rx="2" fill="#8B5CF6"/>
+  <rect x="76" y="60" width="12" height="35" rx="2" fill="#F59E0B"/>
+  <rect x="93" y="45" width="12" height="50" rx="2" fill="#EF4444"/>
+  
+  <!-- Trend line overlay -->
+  <path d="M 31 76 L 48 62 L 65 47 L 82 67 L 99 52" fill="none" stroke="#1F2937" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Performance indicator dots -->
+  <circle cx="31" cy="76" r="3" fill="#1F2937"/>
+  <circle cx="48" cy="62" r="3" fill="#1F2937"/>
+  <circle cx="65" cy="47" r="3" fill="#1F2937"/>
+  <circle cx="82" cy="67" r="3" fill="#1F2937"/>
+  <circle cx="99" cy="52" r="3" fill="#1F2937"/>
+</svg>

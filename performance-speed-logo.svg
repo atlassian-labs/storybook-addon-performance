@@ -1,0 +1,20 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main speed indicator shape -->
+  <path d="M8 32 C8 18 18 8 32 8 C46 8 56 18 56 32 L48 32 C48 22.5 40.5 15 32 15 C23.5 15 16 22.5 16 32 Z" fill="#1E40AF"/>
+  
+  <!-- Speed lines indicating motion -->
+  <rect x="12" y="30" width="8" height="2" fill="#10B981" rx="1"/>
+  <rect x="14" y="26" width="6" height="2" fill="#10B981" opacity="0.7" rx="1"/>
+  <rect x="16" y="22" width="4" height="2" fill="#10B981" opacity="0.5" rx="1"/>
+  
+  <!-- Central performance indicator -->
+  <circle cx="32" cy="32" r="8" fill="#FF6A00"/>
+  <circle cx="32" cy="32" r="4" fill="white"/>
+  
+  <!-- Performance needle -->
+  <line x1="32" y1="32" x2="42" y2="26" stroke="#1E40AF" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Optimization indicators -->
+  <circle cx="42" cy="26" r="2" fill="#10B981"/>
+  <path d="M44 32 L52 28 L52 36 Z" fill="#10B981" opacity="0.8"/>
+</svg>

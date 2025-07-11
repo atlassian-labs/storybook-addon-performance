@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="performance-timer-logo.svg" alt="Performance Timer Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="performance-analytics-logo.svg" alt="Performance Analytics Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="performance-speed-logo.svg" alt="Performance Speed Logo" width="80" height="80" style="margin: 0 10px;">
+</div>
+
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 

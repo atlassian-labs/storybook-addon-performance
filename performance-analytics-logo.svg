@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#F8FAFC" stroke="#1E40AF" stroke-width="1"/>
+  
+  <!-- Performance bars representing metrics -->
+  <rect x="16" y="40" width="4" height="16" fill="#10B981" rx="2"/>
+  <rect x="24" y="32" width="4" height="24" fill="#10B981" rx="2"/>
+  <rect x="32" y="24" width="4" height="32" fill="#FF6A00" rx="2"/>
+  <rect x="40" y="28" width="4" height="28" fill="#10B981" rx="2"/>
+  <rect x="48" y="36" width="4" height="20" fill="#10B981" opacity="0.7" rx="2"/>
+  
+  <!-- Trend line showing performance improvement -->
+  <path d="M14 48 L26 40 L34 32 L42 36 L50 28" stroke="#1E40AF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Performance indicator circle -->
+  <circle cx="50" cy="28" r="3" fill="#10B981"/>
+  <circle cx="50" cy="28" r="1.5" fill="white"/>
+</svg>

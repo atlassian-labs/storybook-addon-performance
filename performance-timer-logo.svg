@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle representing timer/stopwatch -->
+  <circle cx="32" cy="32" r="28" fill="#1E40AF" stroke="#10B981" stroke-width="2"/>
+  
+  <!-- Inner circle with negative space -->
+  <circle cx="32" cy="32" r="20" fill="white"/>
+  
+  <!-- Timer hand pointing to performance -->
+  <line x1="32" y1="32" x2="32" y2="18" stroke="#FF6A00" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Performance indicator dots -->
+  <circle cx="32" cy="16" r="2" fill="#10B981"/>
+  <circle cx="44" cy="24" r="1.5" fill="#10B981" opacity="0.7"/>
+  <circle cx="44" cy="40" r="1.5" fill="#10B981" opacity="0.5"/>
+  
+  <!-- Center dot -->
+  <circle cx="32" cy="32" r="2" fill="#1E40AF"/>
+</svg>

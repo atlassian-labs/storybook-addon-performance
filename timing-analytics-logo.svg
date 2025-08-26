@@ -1,0 +1,24 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background container -->
+  <rect x="20" y="20" width="80" height="80" rx="12" fill="none" stroke="#E5E7EB" stroke-width="3"/>
+  
+  <!-- Performance chart lines -->
+  <polyline points="30,80 40,60 50,45 60,35 70,40 80,25 90,30" 
+            fill="none" stroke="#1E40AF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Secondary performance line -->
+  <polyline points="30,85 40,75 50,65 60,55 70,60 80,45 90,50" 
+            fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Data points -->
+  <circle cx="40" cy="60" r="3" fill="#1E40AF"/>
+  <circle cx="60" cy="35" r="3" fill="#1E40AF"/>
+  <circle cx="80" cy="25" r="3" fill="#1E40AF"/>
+  
+  <!-- Timing indicators -->
+  <rect x="25" y="90" width="8" height="3" fill="#E5E7EB"/>
+  <rect x="40" y="90" width="8" height="3" fill="#E5E7EB"/>
+  <rect x="55" y="90" width="8" height="3" fill="#E5E7EB"/>
+  <rect x="70" y="90" width="8" height="3" fill="#E5E7EB"/>
+  <rect x="85" y="90" width="8" height="3" fill="#E5E7EB"/>
+</svg>

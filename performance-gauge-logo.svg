@@ -1,0 +1,19 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+  
+  <!-- Performance arc (3/4 circle) -->
+  <path d="M 25 75 A 35 35 0 1 1 95 75" fill="none" stroke="#1E40AF" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Performance indicator needle -->
+  <line x1="60" y1="60" x2="85" y2="45" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="60" cy="60" r="6" fill="#F97316"/>
+  
+  <!-- Performance markers -->
+  <circle cx="30" cy="80" r="3" fill="#1E40AF"/>
+  <circle cx="45" cy="25" r="3" fill="#1E40AF"/>
+  <circle cx="75" cy="25" r="3" fill="#1E40AF"/>
+  <circle cx="90" cy="80" r="3" fill="#1E40AF"/>
+</svg>

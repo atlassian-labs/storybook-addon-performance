@@ -1,0 +1,23 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer ring -->
+  <circle cx="60" cy="60" r="45" fill="none" stroke="#E5E7EB" stroke-width="6" opacity="0.6"/>
+  
+  <!-- Middle ring with motion -->
+  <circle cx="60" cy="60" r="32" fill="none" stroke="#1E40AF" stroke-width="8" 
+          stroke-dasharray="20 10" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" 
+                      values="0 60 60;360 60 60" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Inner ring -->
+  <circle cx="60" cy="60" r="20" fill="none" stroke="#F97316" stroke-width="6"/>
+  
+  <!-- Center performance indicator -->
+  <circle cx="60" cy="60" r="8" fill="#F97316"/>
+  
+  <!-- Speed indicators -->
+  <path d="M 60 15 L 65 25 L 55 25 Z" fill="#1E40AF"/>
+  <path d="M 105 60 L 95 55 L 95 65 Z" fill="#1E40AF"/>
+  <path d="M 60 105 L 55 95 L 65 95 Z" fill="#1E40AF"/>
+  <path d="M 15 60 L 25 65 L 25 55 Z" fill="#1E40AF"/>
+</svg>

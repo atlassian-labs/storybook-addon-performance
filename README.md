@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="performance-gauge-logo.svg" alt="Performance Gauge Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="timing-analytics-logo.svg" alt="Timing Analytics Logo" width="80" height="80" style="margin: 0 10px;">
+  <img src="speed-rings-logo.svg" alt="Speed Rings Logo" width="80" height="80" style="margin: 0 10px;">
+</div>
+
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 

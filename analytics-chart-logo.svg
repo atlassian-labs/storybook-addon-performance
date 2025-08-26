@@ -1,0 +1,23 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background container -->
+  <rect x="15" y="15" width="90" height="90" rx="8" fill="none" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Performance chart lines -->
+  <polyline points="25,85 35,70 45,75 55,50 65,55 75,35 85,40 95,25" 
+            fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Secondary performance line -->
+  <polyline points="25,90 35,80 45,85 55,65 65,70 75,55 85,60 95,45" 
+            fill="none" stroke="#1E40AF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Data points -->
+  <circle cx="55" cy="50" r="3" fill="#F97316"/>
+  <circle cx="75" cy="35" r="3" fill="#F97316"/>
+  <circle cx="95" cy="25" r="3" fill="#F97316"/>
+  
+  <!-- Grid lines (subtle) -->
+  <line x1="25" y1="95" x2="95" y2="95" stroke="#E5E7EB" stroke-width="1"/>
+  <line x1="25" y1="75" x2="95" y2="75" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
+  <line x1="25" y1="55" x2="95" y2="55" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
+  <line x1="25" y1="35" x2="95" y2="35" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
+</svg>

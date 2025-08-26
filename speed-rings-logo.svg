@@ -1,0 +1,27 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer ring -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#E5E7EB" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Middle ring with motion -->
+  <circle cx="60" cy="60" r="35" fill="none" stroke="#1E40AF" stroke-width="4" 
+          stroke-dasharray="20 10" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" 
+                      values="0 60 60;360 60 60" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Inner ring with faster motion -->
+  <circle cx="60" cy="60" r="20" fill="none" stroke="#F97316" stroke-width="6" 
+          stroke-dasharray="15 8" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" 
+                      values="0 60 60;-360 60 60" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Center core -->
+  <circle cx="60" cy="60" r="8" fill="#1E40AF"/>
+  
+  <!-- Performance indicators -->
+  <circle cx="60" cy="10" r="3" fill="#F97316"/>
+  <circle cx="110" cy="60" r="3" fill="#F97316"/>
+  <circle cx="60" cy="110" r="3" fill="#F97316"/>
+  <circle cx="10" cy="60" r="3" fill="#E5E7EB"/>
+</svg>

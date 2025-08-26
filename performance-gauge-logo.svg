@@ -1,0 +1,22 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#E5E7EB" stroke-width="3"/>
+  
+  <!-- Performance arc (gauge background) -->
+  <path d="M 20 60 A 40 40 0 1 1 100 60" fill="none" stroke="#E5E7EB" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Active performance arc -->
+  <path d="M 20 60 A 40 40 0 0 1 85 35" fill="none" stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="60" cy="60" r="4" fill="#1E40AF"/>
+  
+  <!-- Performance indicator needle -->
+  <line x1="60" y1="60" x2="85" y2="35" stroke="#1E40AF" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Speed marks -->
+  <circle cx="30" cy="45" r="2" fill="#E5E7EB"/>
+  <circle cx="45" cy="30" r="2" fill="#E5E7EB"/>
+  <circle cx="75" cy="30" r="2" fill="#F97316"/>
+  <circle cx="90" cy="45" r="2" fill="#F97316"/>
+</svg>

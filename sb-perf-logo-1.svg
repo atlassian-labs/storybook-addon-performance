@@ -1,0 +1,11 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Performance dial logo">
+  <title>Performance dial</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer dial arc -->
+    <circle cx="64" cy="64" r="48" stroke="#2684FF" stroke-width="10" stroke-dasharray="200 140" transform="rotate(-120 64 64)"/>
+    <!-- Needle -->
+    <line x1="64" y1="64" x2="100" y2="56" stroke="#00B8D9" stroke-width="8"/>
+    <!-- Center pivot -->
+    <circle cx="64" cy="64" r="6" fill="#00B8D9" stroke="#00B8D9"/>
+  </g>
+</svg>

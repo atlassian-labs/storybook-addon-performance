@@ -1,0 +1,11 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline wave logo">
+  <title>Interaction timeline</title>
+  <!-- Panel outline -->
+  <rect x="16" y="24" width="96" height="80" rx="14" ry="14" fill="none" stroke="#2684FF" stroke-width="8"/>
+  <!-- Smooth performance timeline -->
+  <path d="M28 84 C 44 60, 60 68, 76 52 S 108 40, 116 56" fill="none" stroke="#2684FF" stroke-width="8" stroke-linecap="round"/>
+  <!-- User timing marks -->
+  <circle cx="52" cy="66" r="6" fill="#00B8D9"/>
+  <circle cx="76" cy="52" r="6" fill="#00B8D9"/>
+  <circle cx="100" cy="56" r="6" fill="#00B8D9"/>
+</svg>

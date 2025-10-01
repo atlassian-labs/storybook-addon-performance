@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="./sb-perf-logo-1.svg" width="120" height="120" alt="storybook addon performance logo variation 1" />
+  <img src="./sb-perf-logo-2.svg" width="120" height="120" alt="storybook addon performance logo variation 2" />
+  <img src="./sb-perf-logo-3.svg" width="120" height="120" alt="storybook addon performance logo variation 3" />
+</div>
+
 <h1 align="center">storybook-addon-performance 🚀</h1>
 <div align="center">
 

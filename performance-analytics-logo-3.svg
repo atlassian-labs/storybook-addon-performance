@@ -1,0 +1,24 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer ring representing continuous monitoring -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#7B68EE" stroke-width="4"/>
+  
+  <!-- Inner filled circle -->
+  <circle cx="60" cy="60" r="35" fill="#7B68EE"/>
+  
+  <!-- Performance bars/metrics -->
+  <rect x="45" y="50" width="4" height="20" fill="#FFFFFF" rx="2"/>
+  <rect x="52" y="45" width="4" height="25" fill="#FFFFFF" rx="2"/>
+  <rect x="59" y="40" width="4" height="30" fill="#FFFFFF" rx="2"/>
+  <rect x="66" y="47" width="4" height="23" fill="#FFFFFF" rx="2"/>
+  <rect x="73" y="52" width="4" height="18" fill="#FFFFFF" rx="2"/>
+  
+  <!-- Storybook connection - small story dots -->
+  <circle cx="35" cy="35" r="3" fill="#FF6B35"/>
+  <circle cx="85" cy="35" r="3" fill="#FF6B35"/>
+  <circle cx="35" cy="85" r="3" fill="#FF6B35"/>
+  <circle cx="85" cy="85" r="3" fill="#FF6B35"/>
+  
+  <!-- Connection lines -->
+  <line x1="35" y1="35" x2="45" y2="45" stroke="#7B68EE" stroke-width="1" opacity="0.6"/>
+  <line x1="85" y1="35" x2="75" y2="45" stroke="#7B68EE" stroke-width="1" opacity="0.6"/>
+</svg>

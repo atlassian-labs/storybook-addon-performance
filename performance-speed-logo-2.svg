@@ -1,0 +1,27 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="50" fill="#4A90E2" stroke="none"/>
+  
+  <!-- Speedometer arc -->
+  <path d="M30 60 A 30 30 0 0 1 90 60" 
+        stroke="#FFFFFF" 
+        stroke-width="4" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Speed indicator needle -->
+  <line x1="60" y1="60" x2="75" y2="45" 
+        stroke="#FFFFFF" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="60" cy="60" r="4" fill="#FFFFFF"/>
+  
+  <!-- Performance measurement marks -->
+  <line x1="30" y1="60" x2="35" y2="60" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="45" y1="40" x2="47" y2="43" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="60" y1="30" x2="60" y2="35" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="75" y1="40" x2="73" y2="43" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="90" y1="60" x2="85" y2="60" stroke="#FFFFFF" stroke-width="2"/>
+</svg>

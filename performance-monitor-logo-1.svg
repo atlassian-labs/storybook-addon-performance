@@ -1,0 +1,19 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main circular container representing monitoring -->
+  <circle cx="60" cy="60" r="50" fill="#FF6B35" stroke="none"/>
+  
+  <!-- Performance graph/chart lines -->
+  <path d="M25 70 L35 55 L45 65 L55 45 L65 50 L75 35 L85 40 L95 30" 
+        stroke="#FFFFFF" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Rocket icon integrated into the design -->
+  <path d="M60 25 L65 35 L60 45 L55 35 Z" fill="#FFFFFF"/>
+  <circle cx="60" cy="32" r="2" fill="#FF6B35"/>
+  
+  <!-- Subtle accent circle -->
+  <circle cx="60" cy="60" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.3"/>
+</svg>

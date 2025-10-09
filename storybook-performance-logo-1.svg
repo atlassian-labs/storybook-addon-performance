@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular progress ring representing performance measurement -->
+  <circle cx="32" cy="32" r="28" stroke="#E5E7EB" stroke-width="6" fill="none"/>
+  <circle cx="32" cy="32" r="28" stroke="#10B981" stroke-width="6" fill="none" 
+          stroke-dasharray="175.9" stroke-dashoffset="44" 
+          stroke-linecap="round" transform="rotate(-90 32 32)"/>
+  
+  <!-- Central speedometer needle -->
+  <line x1="32" y1="32" x2="32" y2="16" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="32" cy="32" r="3" fill="#059669"/>
+  
+  <!-- Performance indicators (small dots) -->
+  <circle cx="18" cy="32" r="2" fill="#34D399" opacity="0.6"/>
+  <circle cx="46" cy="32" r="2" fill="#34D399" opacity="0.8"/>
+  <circle cx="32" cy="18" r="2" fill="#10B981"/>
+</svg>

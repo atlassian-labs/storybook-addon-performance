@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rocket/speed icon representing performance boost -->
+  <path d="M32 8 L42 24 L32 20 L22 24 Z" fill="#F59E0B" stroke="#F59E0B" stroke-width="2" stroke-linejoin="round"/>
+  
+  <!-- Rocket body -->
+  <ellipse cx="32" cy="38" rx="8" ry="18" fill="#EF4444" stroke="#DC2626" stroke-width="2"/>
+  
+  <!-- Rocket fins -->
+  <path d="M24 44 L20 52 L28 48 Z" fill="#DC2626"/>
+  <path d="M40 44 L44 52 L36 48 Z" fill="#DC2626"/>
+  
+  <!-- Performance trail/exhaust -->
+  <circle cx="32" cy="56" r="2" fill="#FCA5A5" opacity="0.8"/>
+  <circle cx="30" cy="60" r="1.5" fill="#FCA5A5" opacity="0.6"/>
+  <circle cx="34" cy="60" r="1.5" fill="#FCA5A5" opacity="0.6"/>
+  
+  <!-- Window -->
+  <circle cx="32" cy="32" r="3" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1"/>
+</svg>
